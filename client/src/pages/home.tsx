@@ -240,92 +240,88 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Beleggen & Planning Section */}
+      {/* Beleggen Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-2 gap-16">
-          
-          {/* Beleggen */}
-          <div>
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">
-                <i className="fas fa-chart-line mr-4 text-primary"></i>
-                Beleggen
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Bereken verwachte rendementen en optimaliseer uw beleggingsportefeuille.
-              </p>
-            </div>
-            
-            <div className="space-y-6">
-              {calculatorCategories.beleggen.map((calc, index) => (
-                <Card key={index} className={`${calc.color} hover:shadow-lg transition-all duration-300`}>
-                  <CardHeader>
-                    <CardTitle className="flex items-center text-xl">
-                      <i className={`${calc.icon} mr-3 text-2xl ${calc.iconColor}`}></i>
-                      {calc.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground">{calc.description}</p>
-                    <div className="space-y-2">
-                      {calc.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm">
-                          <i className="fas fa-check mr-2 text-green-600"></i>
-                          {feature}
-                        </div>
-                      ))}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center">
+            <i className="fas fa-chart-line mr-4 text-primary"></i>
+            Beleggen
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Bereken verwachte rendementen en optimaliseer uw beleggingsportefeuille met onze professionele tools.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {calculatorCategories.beleggen.map((calc, index) => (
+            <Card key={index} className={`${calc.color} hover:shadow-xl transition-all duration-300 hover:scale-105`}>
+              <CardHeader>
+                <CardTitle className="flex items-center text-xl">
+                  <i className={`${calc.icon} mr-3 text-2xl ${calc.iconColor}`}></i>
+                  {calc.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">{calc.description}</p>
+                <div className="space-y-2">
+                  {calc.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center text-sm">
+                      <i className="fas fa-check mr-2 text-green-600"></i>
+                      {feature}
                     </div>
-                    <Button asChild className="w-full">
-                      <a href={calc.link}>Rendement Berekenen</a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
+                  ))}
+                </div>
+                <Button asChild className="w-full">
+                  <a href={calc.link}>Rendement Berekenen</a>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
 
-          {/* Planning */}
-          <div>
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">
-                <i className="fas fa-calculator mr-4 text-primary"></i>
-                Planning
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Plan uw financiële toekomst met pensioen- en inflatieberekeningen.
-              </p>
-            </div>
+      {/* Planning Section */}
+      <section className="bg-muted py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center">
+              <i className="fas fa-calculator mr-4 text-primary"></i>
+              Planning
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Plan uw financiële toekomst met pensioen- en inflatieberekeningen voor optimale zekerheid.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {calculatorCategories.planning.map((calc, index) => (
+              <Card key={index} className={`${calc.color} hover:shadow-xl transition-all duration-300 hover:scale-105`}>
+                <CardHeader>
+                  <CardTitle className="flex items-center text-xl">
+                    <i className={`${calc.icon} mr-3 text-2xl ${calc.iconColor}`}></i>
+                    {calc.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">{calc.description}</p>
+                  <div className="space-y-2">
+                    {calc.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center text-sm">
+                        <i className="fas fa-check mr-2 text-green-600"></i>
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                  <Button asChild className="w-full">
+                    <a href={calc.link}>Planning Starten</a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
             
-            <div className="grid lg:grid-cols-3 gap-6">
-              {calculatorCategories.planning.map((calc, index) => (
-                <Card key={index} className={`${calc.color} hover:shadow-lg transition-all duration-300`}>
-                  <CardHeader>
-                    <CardTitle className="flex items-center text-xl">
-                      <i className={`${calc.icon} mr-3 text-2xl ${calc.iconColor}`}></i>
-                      {calc.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground">{calc.description}</p>
-                    <div className="space-y-2">
-                      {calc.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm">
-                          <i className="fas fa-check mr-2 text-green-600"></i>
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                    <Button asChild className="w-full">
-                      <a href={calc.link}>Planning Starten</a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-              
-              {/* Google Ad als derde kaart */}
-              <div className="hidden lg:block">
-                <AdPlaceholder size="rectangle" />
-              </div>
+            {/* Google Ad als derde kaart */}
+            <div className="hidden lg:block">
+              <AdPlaceholder size="rectangle" />
             </div>
           </div>
         </div>
