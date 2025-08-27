@@ -14,6 +14,7 @@ import PensioenspaarCalculatorPage from "@/pages/pensioensparen-calculator";
 import BeleggingsrenteCalculatorPage from "@/pages/beleggingsrente-calculator";
 import DepositoCalculatorPage from "@/pages/deposito-calculator";
 import KredietvergelijkerBelgie from "@/pages/kredietvergelijker-belgie";
+import Sitemap from "@/pages/sitemap";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/beleggingsrente-calculator" component={BeleggingsrenteCalculatorPage} />
       <Route path="/deposito-calculator" component={DepositoCalculatorPage} />
       <Route path="/kredietvergelijker-belgie" component={KredietvergelijkerBelgie} />
+      <Route path="/sitemap" component={Sitemap} />
       <Route component={NotFound} />
     </Switch>
   );
