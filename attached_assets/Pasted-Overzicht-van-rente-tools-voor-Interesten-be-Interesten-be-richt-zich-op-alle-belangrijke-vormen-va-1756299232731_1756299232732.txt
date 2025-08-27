@@ -1,0 +1,332 @@
+Overzicht van rente-tools voor Interesten.be
+
+Interesten.be richt zich op alle belangrijke vormen van rente. Hieronder volgt een reeks rekentools (calculators) die deze verschillende rentevormen behandelen, gericht op Belgische gebruikers. Per tool beschrijven we het doel, benodigde invoer, berekeningslogica, verwachte output, extra functies (incl. mogelijke premium-opties) en het onderhoudsniveau.
+
+Spaarrente-Calculator (Spaarrekening)
+
+Doel: Bereken hoeveel uw spaargeld aangroeit over een bepaalde periode op een spaarrekening. Deze tool toont hoeveel rente u krijgt op uw spaargeld (inclusief samengestelde rente als de interest op de rekening blijft staan) en hoeveel uw eindbedrag zal zijn.
+
+Invoervelden:
+
+Startbedrag: het beginbedrag op de spaarrekening (in euro).
+
+Periodieke storting (optioneel): bedrag dat u bijvoorbeeld maandelijks of jaarlijks extra spaart. Dit laat toe om groeiscenario’s met regelmatige bijstortingen te berekenen.
+
+Rentepercentage: de jaarlijkse spaarrente (nominale rentevoet) van de spaarrekening, uitgedrukt in %. (Eventueel kan de tool onderscheid maken tussen basisrente en getrouwheidspremie voor Belgische gereglementeerde spaarrekeningen, maar standaard wordt één gecombineerd rentepercentage gebruikt.)
+
+Looptijd: de spaarperiode, in jaren (of precieze start- en einddatum voor meer detail).
+
+Kapitalisatiekeuze: optie om rente te kapitaliseren (rente op rente toepassen) of uit te keren (en dus niet mee te sparen). Bij kapitalisatie wordt de rente jaarlijks toegevoegd aan het saldo (samengestelde interest); bij uitkering blijft het saldo gelijk behalve voor nieuwe stortingen.
+
+Berekeningslogica: Op basis van het startbedrag en de periodieke stortingen wordt voor elke periode (bijvoorbeeld per maand of per jaar) de rente berekend en bijgeschreven indien gekozen voor kapitalisatie. Als de rente gekapitaliseerd wordt, groeit het saldo exponentieel door het rente-op-rente effect
+raisin.nl
+ – elke periode krijgt u rente op het oorspronkelijke bedrag én op reeds verdiende rente. Als de rente niet wordt gekapitaliseerd (en bijvoorbeeld jaarlijks wordt uitgekeerd), ontvangt u elk jaar dezelfde rente over het startbedrag (plus eventueel over tussentijdse stortingen) – dat is enkelvoudige rente zonder groeiversnelling. Met periodieke stortingen zal de tool per periode het nieuwe saldo verhogen met de storting en daarover rente berekenen. Formule in eenvoudige termen: eindbedrag = alle gestorte bedragen + bijgeschreven interest. Indien de rente gekapitaliseerd wordt, hanteert de tool de samengestelde renteformule. Bijvoorbeeld, voor een enkel startbedrag berekent de calculator: Eindbedrag = Startbedrag × (1 + rente)^periode (uitgaande van jaarlijkse rente-uitkering). Bij regelmatige stortingen wordt de berekening uitgebreid met rente op elk van die stortingen vanaf het moment van inleggen.
+
+Resultaat voor de gebruiker: De gebruiker ziet het eindbedrag op de spaarrekening na de gekozen periode, evenals de totale verdiende rente (winst). Er wordt bijvoorbeeld getoond: “Uw saldo na 5 jaar is €X, waarvan €Y aan interest.” Standaard wordt aangenomen dat er geen belasting of kosten worden afgehouden, zodat het eindbedrag gelijk is aan het gestorte kapitaal plus de opgebouwde intresten
+wikifin.be
+. De output kan een tabel per jaar tonen, waarin voor elk jaar het beginsaldo, ontvangen rente en eindsaldo staan. Vaak is ook een grafiek voorzien die de groei van het saldo over de tijd visualiseert, zodat de gebruiker ziet hoe het spaargeld aangroeit en versnelt door rente-op-rente. Bijvoorbeeld een stijgende curve die sneller oploopt naarmate de jaren verstrijken bij samengestelde rente.
+
+Extra functies:
+
+Grafiek van saldo-groei: Een lijngrafiek die het saldo doorheen de jaren toont, zodat gebruikers het rente-opbouwproces visueel begrijpen. Ook kan een grafiek het aandeel van eigen stortingen vs. ontvangen rente tonen.
+
+Scenariovergelijking: Mogelijkheid om meerdere scenario’s naast elkaar te vergelijken, bv. verschillende rentepercentages of looptijden. Een gebruiker kan bijvoorbeeld een scenario met 2% rente vs. 3% rente vergelijken, of 5 jaar sparen vs. 10 jaar, en de resultaten (eindbedrag, totale interest) naast elkaar zien. (Premium) – Deze vergelijkingstool kan als premium-functie aangeboden worden, omdat het complexere berekeningen en weergaven vereist.
+
+Spaarrekening-vergelijker: Als extra optie kan de tool meerdere spaarrekeningen van verschillende banken vergelijken. De gebruiker voert éénmaal zijn bedrag en periode in, en de tool toont een lijst van rekeningen en hun verwachte eindbedrag, gesorteerd van hoog naar laag rendement
+wikifin.be
+. Zo ziet men direct welke rekening het meest oplevert. Opmerking: Dit vereist up-to-date rentetarieven van banken en is dus onderhoudsintensief (zie verder). Dit onderdeel zou eventueel als premium beschikbaar kunnen zijn, gezien de nood aan actuele data.
+
+Resultaten exporteren of opslaan: Mogelijkheid om de berekening te exporteren als PDF/Excel of op te slaan in een gebruikersprofiel. Bijvoorbeeld om een overzicht van de spaarplanning te bewaren. (Premium) – Export en opslaan als premium-feature voor geregistreerde gebruikers.
+
+Notificaties bij rentewijziging: Eventueel kan een premiumfunctie zijn dat gebruikers een seintje krijgen als spaarrentes veranderen significant, zodat zij hun berekening kunnen updaten. (Hiervoor zou koppeling met rente-updates nodig zijn, wat extra onderhoud vergt.)
+
+Onderhoud: Laag, zolang de gebruiker zelf het rentepercentage invoert en de berekening wiskundig gebeurt. De formules voor rente wijzigen niet en vereisen geen constante updates. Eventuele wijzigingen in fiscale regelgeving (zoals spaarrentevrijstelling of roerende voorheffing) zijn niet in de basisberekening opgenomen – als men die wil integreren, vergt dat wel onderhoud. Hoog onderhoud als men kiest voor een geïntegreerde spaarrekening-vergelijker met actuele bankrentes: dan moeten de rentetarieven van diverse banken regelmatig bijgewerkt worden (of via een API opgehaald worden). Aangezien spaarrentes vaak wijzigen, zou dit een doorlopende taak zijn. Zonder die vergelijkingsfunctie beperkt het onderhoud zich tot het af en toe controleren of de berekeningen correct blijven naarmate de tijd vordert (bijv. of de jaarindeling correct blijft bij schrikkeljaren als men met data werkt).
+
+Samengestelde Interest-Calculator (Rente-op-Rente)
+
+Doel: Illustreer en bereken het effect van samengestelde rente (rente op rente) over een langere termijn. Deze tool richt zich op het groeipotentieel van een eenmalige investering of periodieke stortingen wanneer de interest steeds herbelegd wordt. Het is nuttig om gebruikers te tonen hoeveel sneller kapitaal groeit met rente-op-rente vergeleken met enkelvoudige rente. Bijvoorbeeld voor spaardeposito’s, beleggingen of langetermijnsparen.
+
+Invoervelden:
+
+Startkapitaal: het initiële bedrag dat u investeert of opzij zet.
+
+Rentepercentage (jaarlijks): het jaarlijkse rendement of interestvoet in %. (Bij beleggingen kan men hier een gemiddeld verwacht rendement invullen.)
+
+Looptijd: de periode waarover u de groei wil berekenen, in jaren.
+
+Compounding-frequentie: hoe vaak de interest wordt bijgeschreven per jaar. Keuzes bijvoorbeeld: jaarlijks (1× per jaar), per kwartaal (4×), maandelijks (12×). Vaker bijschrijven resulteert in iets hoger eindbedrag door sneller rente-op-rente effect. Standaard kan dit op jaarlijks staan, maar de gebruiker kan variëren om het effect te zien.
+
+Extra periodieke inleg (optioneel): hoewel deze tool vooral het principe van éénmalige inleg plus samengestelde rente benadrukt, kan men optioneel toelaten om een vast bedrag per periode bij te storten (bv. jaarlijks €1000 extra). Dit is vergelijkbaar met de spaarrente-tool, maar hier ligt de nadruk op exponentiële groei, dus deze input is extra.
+
+Berekeningslogica: De calculator gebruikt de formule van samengestelde interest. In eenvoudige vorm voor jaarlijkse kapitalisatie: Eindwaarde = Beginbedrag × (1 + r)^n, waarbij r het rentepercentage (decimaal) is en n het aantal jaar. Bij andere kapitalisatiefrequenties wordt de formule: Eindwaarde = Beginbedrag × (1 + r/f)^(f×n), met f aantal bijschrijvingen per jaar. De tool berekent eerst de groeifactor door rente-op-rente en past dit toe op het startkapitaal. Indien er periodieke inleggen zijn, worden deze telkens op het juiste moment toegevoegd en groeit ook elk van die inleggen verder aan de resterende jaren. Het verschil met enkelvoudige rente kan de tool ook inzichtelijk maken: bij enkelvoudige rente zou het eindbedrag = beginbedrag + (beginbedrag × r × n) (zonder herbeleggen blijft de rentetoename lineair). Met samengestelde rente groeit het vermogen echter exponentieel in de tijd
+raisin.nl
+. Bijvoorbeeld, €10.000 tegen 5% enkelvoudig 10 jaar lang geeft €15.000 eindwaarde, terwijl samengesteld 5% 10 jaar ~ €16.289 eindwaarde – dit verschil komt puur door rente-op-rente. De tool kan intern beide scenario’s berekenen voor educatieve doeleinden.
+
+Resultaat voor de gebruiker: Het eindkapitaal na de opgegeven periode wordt getoond, evenals de totale rente opbrengst. Bijvoorbeeld: “Na 20 jaar groeit €5.000 aan tot €13.266, waarvan €8.266 interest.” Daarnaast wordt vaak expliciet vermeld hoeveel extra rendement samengestelde rente opleverde t.o.v. enkelvoudige rente. De gebruiker ziet bijvoorbeeld: “Met rente-op-rente heb je €X meer dan zonder herinvestering van rente.” Er kan een jaar-op-jaar tabel getoond worden die per jaar laat zien: het beginbedrag van dat jaar, de ontvangen rente van dat jaar en het eindbedrag van dat jaar. Deze tabel maakt duidelijk dat de rente ieder jaar toeneemt doordat het kapitaal groter wordt. Verder is een grafiek zeer geschikt: een curve die het verloop van het kapitaal laat zien. Vaak wordt hierbij de exponentiële groei getoond samen met een stippellijn of tweede lijn voor lineaire groei ter vergelijking. Zo ziet de gebruiker hoe de lijn met samengestelde rente steeds steiler omhoog loopt naarmate de jaren vorderen, terwijl enkelvoudige rente een rechte lijn zou zijn.
+
+Extra functies:
+
+Vergelijking met enkelvoudige rente: Standaard kan de tool naast het resultaat met samengestelde rente ook het resultaat tonen als er geen rente-op-rente zou zijn. Dit vergroot het inzicht. Bijvoorbeeld twee eindbedragen of een extra kolom in de tabel die de lineaire groei toont. (Deze functie kan gratis zijn, als educatief element.)
+
+Aanpassen van frequentie: De gebruiker kan experimenteren met verschillende renteuitkeer-frequenties (jaarlijks, maandelijks, etc.) en de tool laat zien hoeveel verschil dit maakt (in de praktijk relatief klein verschil bij dezelfde nominale rente, maar interessant om te zien). Bijvoorbeeld kan in de output een “effectieve jaarlijkse rente” getoond worden als gevolg van maandelijkse kapitalisatie.
+
+Meerdere scenario’s vergelijken: Een premium-functie kan zijn om bijvoorbeeld meerdere rentepercentages of looptijden tegelijk te vergelijken. Zo kan men zien hoe €5.000 groeit aan 3% vs. 5% over 30 jaar, in één grafiek of tabel. (Premium)
+
+Doelbedrag berekenen: In plaats van de eindwaarde te berekenen, kan een gebruiker ook een doelbedrag ingeven (bv. €100.000) en de tool laten uitrekenen hoeveel startkapitaal of hoelang sparen nodig is bij een bepaald rendement om dat doel te bereiken. Dit is een iets andere gebruikswijze van de samengestelde renteformule (omgekeerde berekening). (Premium) – Dit vereist het oplossen van de formule naar het startbedrag of de looptijd, wat een extra laagje logica is.
+
+Opslaan & exporteren: Net als bij de spaartool kan de gebruiker de resultaten opslaan of als PDF exporteren voor later. (Premium) voor het opslaan onder een account; een eenvoudige exportknop kan eventueel voor iedereen beschikbaar zijn.
+
+Visualisaties: Extra grafieken zoals een staafdiagram dat per jaar de ontvangen rente toont (stijgende balkjes), of een pie-chart aan het einde die laat zien welk deel van het eindbedrag oorspronkelijk kapitaal vs. interest is. Deze kunnen de ervaring verrijken (mogelijk premium als interactieve extra).
+
+Onderhoud: Laag. De berekeningen berusten op wiskundige formules die niet veranderen. Er is geen externe data nodig tenzij men standaardwaarden of inflatiecorrigering wil toevoegen. Zolang de tool goed getest is, vergt hij weinig onderhoud. Eventuele premium-functies zoals scenariovergelijking of doelberekeningen zijn eenmalig te ontwikkelen maar daarna stabiel. Let op dat men gebruikers duidelijke limieten geeft (bij zeer lange looptijden of hoge rentes kunnen getallen extreem groot worden). Als men deze tool uitbreidt met historische gemiddelde rentes of iets dergelijks, zou dat onderhoud vergen om actueel te houden, maar dat is niet per se nodig. Over het algemeen blijft de onderhoudslast hier beperkt tot af en toe optimalisaties of cosmetische updates.
+
+Hypothecaire Lening Simulator (Woonlening)
+
+Doel: Een uitgebreide hypotheekcalculator voor woningkredieten. Deze tool berekent de maandelijkse afbetaling voor een hypothecaire lening en geeft inzicht in de opsplitsing tussen interesten en kapitaalaflossing. Ze is bruikbaar voor mensen die een huis willen kopen of verbouwen in België. Belangrijke aspecten zijn de keuze tussen een vaste rente of variabele rente, en het visualiseren van een aflossingsplan (amortisatieschema). De simulator helpt de gebruiker vragen te beantwoorden als: “Hoeveel zal ik maandelijks moeten aflossen voor een lening van X euro over Y jaar aan Z% rente?” en “Wat is het verschil tussen een vaste en variabele rentevoet voor mijn lening?”
+spaargids.be
+.
+
+Invoervelden:
+
+Leningsbedrag: het bedrag dat u wil lenen (hoofdsom van de hypotheek). Bijvoorbeeld de prijs van de woning minus eigen inbreng.
+
+Looptijd: de duur van de lening, in jaren. Hypothecaire leningen zijn typisch 10 tot 30 jaar. (De tool kan op de achtergrond het aantal maandelijkse termijnen = jaren × 12 berekenen.)
+
+Rentevoet: de jaarlijkse rentevoet van de lening. Als vaste rente is dit één percentage dat gedurende de hele looptijd geldt. Indien variabele rente, zijn extra velden beschikbaar:
+
+Initieel rentepercentage: de start-rente bij aangaan van de lening.
+
+Herzieningsfrequentie: om de hoeveel jaar de rente kan aangepast worden (typische opties in België: 1/1/1, 5/5/5, 10/5/5, etc., wat betekent bijvoorbeeld elke jaar, of elke 5 jaar herziening). De tool kan hier een keuzelijst aanbieden.
+
+Maximale renteverandering (cap): optioneel veld om de maximale stijging per herziening of in totaal te simuleren. Bij variabele leningen is er vaak een cap/floor, bv. max +2% of +5% ten opzichte van de start. De gebruiker kan bijvoorbeeld invullen “+3% / -3%” als cap en floor, of een standaard worst-case scenario laten toepassen.
+
+Type aflossing: standaard is annuïtair (gelijke maandelijkse betalingen). Geavanceerd kan de gebruiker ook lineaire aflossing kiezen (vast kapitaalbedrag per maand + dalende interest). Dit verandert de berekening en resultaten (lineair geeft hogere eerste aflossingen en geleidelijk lagere, met minder totale rente). Als de gebruiker dit niet begrijpt kan het weggelaten of als extra optie (met uitleg) gegeven worden.
+
+Startdatum (optioneel): indien men een specifiek startmoment opgeeft, kan de aflossingstabel concrete kalenderdata tonen. Standaard hoeft dit niet; men kan uitgaan van maand 1 tot maand N.
+
+Berekeningslogica:
+
+Vaste rente: De simulator berekent de maandelijkse annuïteit zodanig dat de lening in de opgegeven looptijd volledig is terugbetaald. Hiervoor wordt de klassieke annuïteitenformule gebruikt: er wordt een maandbedrag gevonden waarbij de huidige waarde van alle toekomstige betalingen gelijk is aan het geleende bedrag. In mensentaal: elke maand betaalt u een vast bedrag dat deels interest dekt en deels de lening aflost. In het begin is het interestdeel groot (omdat het uitstaande kapitaal hoog is) en het aflossingsdeel klein; gaandeweg verschuift dit – interest neemt af en aflossing neemt toe, terwijl het totaal gelijk blijft. De tool berekent per maand de verschuldigde rente (huidig kapitaalsaldo × maandrente) en de rest van de maandbetaling gaat naar kapitaalaflossing. Dit gaat door tot saldo nul is na de laatste maand. Er wordt ook de totale interest over de hele looptijd opgeteld.
+
+Variabele rente: Hier wordt het ingewikkelder. De tool moet simuleren dat de rentevoet op bepaalde intervallen verandert. Een eenvoudige aanpak is een worst-case scenario rekenen volgens de wettelijke of gebruikelijke maxima: doorgaans wordt aangenomen dat bij elke herziening de rente stijgt tot het maximum (cap) voor het worst case beeld
+spaargids.be
+. Bijvoorbeeld: start 1,5%, bij eerste herziening stijgt naar 2,5%, etc., tot de cap is bereikt. De simulator berekent dan voor elke periode tussen herzieningen opnieuw de aflossingen. In een worst-case variabel scenario zal de maandlast toenemen zodra de rente stijgt. De tool kan daarnaast ook het best case tonen (rente blijft gelijk of daalt tot floor). Spaargids.be’s simulator hanteert deze logica: standaard worst case tonen, maar gebruiker laten aanpassen voor andere scenario’s
+spaargids.be
+. Dus de gebruiker kan bijvoorbeeld invullen dat de rente na 5 jaar stijgt naar een bepaald percentage, en de tool rekent dan dat scenario uit. In elk geval berekent de tool bij een variabele rente verschillende maandbedragen: bij start, en bij elke renteaanpassing een nieuw bedrag, of toont een bandbreedte. Vaak wordt gepresenteerd: minimale maandelijkse aflossing (als rente ongewijzigd of daalt) en maximale maandelijkse aflossing (als rente stijgt tot cap)
+spaargids.be
+. Zo krijgt de gebruiker een idee van de beste en slechtste case. Eventueel kunnen ook tussenscenario’s (zoals een gematigde stijging) doorgerekend worden.
+
+Lineaire aflossing: Indien deze optie gebruikt wordt, verandert de berekening: elke maand wordt een vast kapitaalbedrag afgelost (hoofdsom gedeeld door totaal aantal termijnen), plus de verschuldigde rente over het nog openstaande saldo. Dit geeft een afnemend totaalbedrag per maand. De tool kan dit berekenen en in de tabel laten zien als alternatief scenario.
+
+Resultaat voor de gebruiker: De belangrijkste output is het te betalen bedrag per maand. Bij een vaste rente is dit één bedrag (bijv. “€944,22 per maand” zoals in het voorbeeld)
+spaargids.be
+. Bij een variabele rente kan het een range zijn: “€800 in het eerste jaar, oplopend tot max €950 per maand in worst-case scenario”. Daarnaast toont de tool het totaalbedrag aan interesten dat over de hele looptijd betaald zal worden (“Aan totale interesten: €83.265,24” in het voorbeeld)
+spaargids.be
+, alsook het totaal terug te betalen bedrag (hoofdsom + interest samen). Dit laatste is handig om te beseffen hoeveel de lening in totaal kost. Een kernonderdeel is de aflossingstabel (amortisatieschema): een tabel per maand of per jaar die voor elke periode laat zien: resterend kapitaal aan begin, betaalde interest, gedane kapitaalaflossing, en nieuw resterend kapitaal na die betaling
+spaargids.be
+. In de tabel ziet de gebruiker bijvoorbeeld per jaar hoeveel interest er dat jaar betaald wordt en hoeveel kapitaal er is afgelost, cumulatief en per periode. Bij variabele rente zal de tabel rekening houden met de nieuwe rentevoeten op de herzieningspunten, wat te zien is aan stijgende/dalende interestbedragen. Vaak biedt men zowel een jaarlijks overzicht als de mogelijkheid om het maandelijks detail te bekijken
+spaargids.be
+. Daarnaast wordt een grafiek getoond, bijvoorbeeld: een lijngrafiek van het uitstaande kapitaalsaldo over de jaren (dalend van het beginbedrag naar 0 aan het einde). Dit laat duidelijk zien hoe snel (of traag) de schuld daalt in het begin (bij annuïtair daalt het langzaam in het begin, versneld op het einde). Een andere mogelijke grafiek is een area chart die interest versus kapitaalbetalingen stapelt per jaar, of een vergelijking tussen scenario’s. De combinatie van cijfers en visuals geeft de gebruiker een compleet beeld van de lening. Bovendien kan de tool bij variabel aangeven: “Minimale maandlast: €X, Maximale maandlast: €Y” om de range duidelijk te maken
+spaargids.be
+.
+
+Extra functies:
+
+Scenariovergelijking (vast vs variabel): De gebruiker kan twee scenario’s naast elkaar zetten, bijvoorbeeld een vaste rente van X% versus een variabele startend lager maar met mogelijke stijging. De tool toont dan twee sets resultaten, zodat men kan zien bij welk scenario men na bv. 5 jaar meer heeft betaald. (Premium) – omdat dit feitelijk twee berekeningen tegelijk en een extra UI vereist.
+
+Vergelijking verschillende looptijden: Evenzo kan men uitproberen wat een kortere looptijd (met hogere maandlast maar lagere totale interest) versus langere looptijd (lagere maandlast, meer interest totaal) betekent. Dit zou de tool interactief kunnen laten zien of via twee tabs/scenario’s. Dit zou ook als premium kunnen gelden, of als basisfeature aangezien het educatief is.
+
+Lineair vs annuïtair vergelijken: Indien lineaire aflossing als optie is ingebouwd, kan een extra vergelijking getoond worden (voor dezelfde lening twee tabellen/grafieken, één annuïtair, één lineair). De gebruiker ziet zo dat lineair in het begin veel meer betaalt per maand maar uiteindelijk minder interest betaalt. (Premium) – omdat dit dubbele berekening en complexere uitleg betekent.
+
+Eigen inbreng & kosten: Een geavanceerde functie kan zijn om eigen kapitaal en kosten mee te nemen. Bijvoorbeeld de gebruiker vult de aankoopprijs €250k in, eigen inbreng €50k, dan rekent de tool automatisch een leningsbedrag €200k uit. Ook kan men bijkomende kosten laten schatten (zoals notariskosten, registratierechten) en desgewenst meefinancieren. Dit maakt de tool uitgebreider. Waarschijnlijk als extra (wellicht premium omdat het projectberekeningen zijn naast de kern leningberekening).
+
+Woonbonus/fiscale simulatie: Aangezien dit België betreft: indien relevant (woonbonus bestaat niet meer in meeste gewesten sinds enkele jaren), maar voor oudere leningen of info zou men een indicatie van belastingvoordeel kunnen geven. Dit is echter erg complex en veranderlijk, wellicht buiten scope of enkel als content vermelden. Waarschijnlijk beter weglaten of als optionele module voor experts (premium).
+
+Actuele rentetarieven: Net als bij spaarrentes kan men overwegen de gebruiker te helpen met actuele rentevoeten. Bijvoorbeeld gemiddelde marktrente of een lijst van bankoffertes. Men zou een koppeling kunnen maken om de beste rentevoeten van het moment te tonen (zoals Spaargids user-submitted rates)
+spaargids.be
+. De gebruiker kan dan een rente selecteren om in te vullen. Dit vereist wel onderhoud (rentetabel bijhouden of API). Indien geïmplementeerd, zou dit een premium feature kunnen zijn, of doorverwijzen naar een partner/affiliate.
+
+Aflossingstabel downloaden: De mogelijkheid om de volledige aflossingstabel te exporteren (CSV/PDF) is erg nuttig. Gebruikers kunnen dan hun aflossingsschema bewaren of afdrukken. Dit kan gratis worden aangeboden omdat het core informatie is, of als premium als men prints als extra ziet.
+
+Opslaan van simulaties: Geregistreerde gebruikers kunnen hun lening-scenario’s opslaan in hun account om later terug te kijken of om meerdere scenario’s op te slaan (bijv. “Scenario Huis A” vs “Scenario Huis B”). (Premium).
+
+Onderhoud: Laag tot matig. De berekeningsformules zijn standaard en veranderen niet. Zolang de tool correct is geprogrammeerd, hoeft de logica niet steeds aangepast. Echter, variabele rente scenario’s kunnen wat updates vergen als marktpraktijken veranderen (stel er komen nieuwe formules of caps). Ook als men actuele renteinfo integreert, wordt het onderhoud zwaarder: rentestanden moeten dan regelmatig geüpdatet worden. Zonder koppeling naar externe data blijft het onderhoud beperkt tot jaarlijkse controles of het toevoegen van nieuwe opties. Het technische onderhoud (gezien de site op Replit draait) moet wel rekening houden met beveiliging van premium functies – omdat de code open is, mogen API keys of gevoelig materiaal niet publiek staan. Maar functioneel gezien is de tool vrij stabiel in onderhoud. Samengevat: laag indien statisch; hoog indien met live rente-updates en fiscale regels.
+
+Autolening-Calculator
+
+Doel: Bereken de maandelijkse afbetaling en totale kosten van een autolening (lening voor een voertuig). Veel mensen in België financieren de aankoop van een auto via een lening op afbetaling. Deze tool helpt hen te begrijpen welke maandlast bij een bepaald geleend bedrag hoort en hoeveel interest ze in totaal betalen. In wezen is dit een specifieke toepassing van een persoonlijke lening, maar vaak tegen iets andere rentevoeten en termijnen specifiek voor auto’s. De autolening-calculator kan ook scenario’s tonen zoals de impact van een eigen inbreng of een slottermijn (ballonlening).
+
+Invoervelden:
+
+Aankoopbedrag auto: de prijs van de wagen. (Optioneel, want de lening zelf kan minder zijn als er een voorschot/eigen inbreng is.)
+
+Voorschot (eigen inbreng): eventueel bedrag dat u zelf onmiddellijk betaalt. De leningssom wordt dan aankoopprijs – voorschot. (De tool kan dit automatisch berekenen en tonen.)
+
+Leningsbedrag: het bedrag dat gefinancierd wordt via de lening. (Wordt ingevuld door aankoopbedrag minus voorschot, of direct door de gebruiker als ze dat liever ingeven.)
+
+Looptijd: termijn van de lening in jaren of maanden. Autoleningen zijn doorgaans korter dan hypotheken; men kan hier bv. 1 tot 7 jaar toestaan. De invoer kan in jaren of direct in aantal maanden (bv. 60 maanden) gebeuren.
+
+Jaarlijkse rentevoet (JKP): de interestvoet op jaarbasis. Vaak wordt bij consumentenkredieten de JKP (Jaarlijkse Kostenvoet) opgegeven, die alle kosten incl. dossierkosten verwerkt. Onze tool kan vereenvoudigen door uit te gaan van een vast rentepercentage als invoer. (Desgewenst kan een apart veld voor dossierkosten worden gegeven om netto JKP te berekenen – advanced.)
+
+Slottermijn (optioneel): voor bepaalde autoleningen of leasing is er een ballon of restwaarde aan het einde (bijvoorbeeld u leent niet het volledige bedrag af, maar houdt €5.000 over die u op het einde in één keer betaalt of door inruil van de wagen). Indien de gebruiker deze optie aanvinkt en invult, dan berekent de tool de maandaflossing op basis van een lening die niet helemaal tot €0 wordt afgelost maar tot dat restbedrag. (Standaard niet ingevuld betekent geen slottermijn, dus volledige afbetaling tot 0.)
+
+Berekeningslogica: De autolening wordt beschouwd als een annuïteitenlening met vaste rente (meestal is het rentepercentage vast voor de duur). Dus de formule is gelijk aan die van een hypotheek, maar nu voor een kortere looptijd. De tool berekent het vaste maandbedrag zodanig dat, vermits elke maand interest over het openstaande bedrag wordt betaald en de rest als aflossing, na de laatste maand het geleende bedrag is terugbetaald (minus eventuele slottermijn). Concreet: maandelijkse interest = huidig saldo × (JKP/12). In het begin is dat wat hoger; maandelijkse aflossing = vast bedrag – interest. Zonder slottermijn gaat het saldo naar nul aan het einde. Met slottermijn: de formule past aan zodat na de laatste reguliere betaling het saldo gelijk is aan de opgegeven restwaarde (die dan in één keer betaald wordt). Daardoor zijn de maandbedragen lager, maar blijft er op het eind nog een som te betalen. De totale interest is in dat geval hoger (omdat er langer een restschuld openstaat). De tool rekent dit uit door de annuïteit zodanig te bepalen dat de contante waarde van alle maandelijkse betalingen plus de eindbalon gelijk is aan het geleende bedrag.
+Voor de meeste gebruikers zal slottermijn niet van toepassing zijn, dus de standaardberekening is: vaste maandelijkse aflossing berekend op basis van de looptijd en rente. De tool berekent ook de totale betaalde interest door (maandbedrag × aantal maanden) – leningsbedrag te doen (bij volledige aflossing). Bij een slottermijn wordt de totale interest = (som van alle maandbetalingen + slot) – leningsbedrag.
+
+Resultaat voor de gebruiker: De gebruiker ziet het maandelijkse bedrag dat hij moet afbetalen. Bijvoorbeeld: “Je maandelijkse afbetaling bedraagt €300, gedurende 5 jaar.” Daarnaast toont de tool de totale interestkosten over de hele looptijd, bijvoorbeeld “Totaal betaal je €1.000 aan interesten over de lening, bovenop de €10.000 kapitaal, zodat je in totaal €11.000 terugbetaalt.” Dit geeft inzicht in de prijs van het krediet. Indien er een slottermijn is ingevuld, zal het resultaat dat expliciet vermelden, bv: “Maandelijkse afbetaling €250, plus een laatste betaling van €5.000 aan het einde.” Er wordt meestal ook een aflossingstabel aangeboden (hoewel bij korte leningen gebruikers dat minder opvragen, het kan toch nuttig zijn). Die tabel kan per maand laten zien: restant kapitaal begin maand, interest die maand, aflossing die maand, en restant kapitaal einde maand. Hieruit blijkt bijvoorbeeld dat na half de termijn al een groot deel is afbetaald of hoeveel er nog openstaat als men eventueel vroegtijdig wilt aflossen. Een grafiek kan ook getoond worden, bijvoorbeeld een lijn of staafdiagram van het saldo dat daalt over de looptijd, of een pie chart die opsplitst “% kapitaal vs % interest” in de totale terugbetaling. Dit laatste maakt duidelijk hoeveel van de totale betaalde som interest is (voor een korte lening vaak een klein deel). Als extra kan een grafiek het verschil tonen tussen een scenario met en zonder slottermijn, of tussen verschillende looptijden (bijv. 3 jaar vs 5 jaar, waar 5 jaar lagere maandlast maar hogere totale interest geeft).
+
+Extra functies:
+
+Vergelijk verschillende scenario’s: De tool kan de mogelijkheid bieden om twee leningen naast elkaar te vergelijken. Bijvoorbeeld lening A: €10.000 op 3 jaar aan 4%, vs lening B: €10.000 op 5 jaar aan 4%. Dan ziet de gebruiker meteen het verschil in maandlast en totale kost. Of scenario met en zonder voorschot (leningbedrag verschillend). (Premium) – vergelijkingstools kunnen voor premium zijn.
+
+Terugrekenen op maandbudget: In plaats van “bedrag -> maandlast” kan de gebruiker ook invoeren “Ik kan €X per maand betalen” en de tool rekent uit welk bedrag je daarmee kunt lenen of hoe lang je moet lenen. Dit is een omgekeerde berekening die handig is voor budgetplanning. (Premium) – omdat dit een extra interactievorm is.
+
+Huidige rentevoeten/aanbiedingen: Een extra (misschien premium of affiliate-gebaseerde) feature is om actuele aanbiedingen te tonen. Bijvoorbeeld: na berekening kan een lijst verschijnen met enkele banken of kredietgevers en hun rente voor dat profiel, of een link “Vraag een offerte aan”. Dit vereist echter up-to-date info of een partenership met een vergelijkingssite, dus onderhoud intensief.
+
+Vervroegd aflossen simulatie: Een geavanceerde functie is om te zien wat er gebeurt bij extra aflossingen. De gebruiker kan bv. invullen “Ik los na 2 jaar €1000 extra af” en de tool herrekent de nieuwe looptijd of nieuwe maandlast. Dit laat gebruikers zien hoeveel interest ze besparen door vervroegd af te lossen. Dit is tamelijk complex qua input (meerdere aflossingsmomenten mogelijk) en uitleg, dus wellicht enkel als premium advanced tool.
+
+Opslaan/exporteren: Net zoals bij de hypotheek: mogelijkheid om de resultaten op te slaan in een profiel of de tabel te exporteren als PDF. (Premium voor opslaan).
+
+Onderhoud: Laag. De basisberekening is stabiel (analoog aan hypotheek). Omdat men doorgaans zelf de rente invult, hoeft de tool niet constant geüpdatet te worden. Als men echter actuele promoties of wettelijke wijzigingen (bv. max JKP regelgeving) wil bijhouden, wordt het meer werk. Zonder externe data blijft onderhoud beperkt tot het bijhouden van juiste werking. Let wel: als er een wettelijke verandering komt in bv. hoe JKP berekend moet worden of consumenteninfo die getoond moet worden, moet dat manueel aangepast. Over het algemeen echter is dit een vrij statische tool. Gebruiksvriendelijkheid (bv. lijst van standaard looptijden 12,24,... maanden) kan op basis van gebruikersfeedback af en toe worden aangepast. Maar er is geen periodieke update vereist. Kortom, zonder koppeling aan offertes: laag onderhoud.
+
+Persoonlijke Lening-Calculator
+
+Doel: Berekent de afbetaling en kosten van een persoonlijke lening (consumentenkrediet niet verbonden aan een specifiek doel als een auto). Denk aan een lening voor verbouwingen, reizen, huwelijkskosten, enz. Deze tool lijkt sterk op de autolening-calculator, maar dan algemeen. Het doel is de gebruiker inzicht te geven in wat een bepaalde leensom kost per maand en totaal, en eventueel het maximum te lenen bedrag voor een gegeven maandbudget.
+
+Invoervelden:
+
+Leningsbedrag: het gewenste leenbedrag in €. (Hier is meestal geen aankoopprijs/voorschot verhaal, de gebruiker leent gewoon een bedrag.)
+
+Looptijd: de periode voor terugbetaling, typisch in maanden of jaren. Persoonlijke leningen gaan vaak van 1 tot 5 jaar, soms langer tot 10 jaar afhankelijk van bedrag.
+
+Jaarlijkse rentevoet (JKP): de rentevoet van het krediet. De gebruiker vult dit in op basis van aanbod dat hij heeft of verwacht (bv. “mijn bank biedt 6%”). Eventueel kan men hier ook een drop-down “doel van lening” aanbieden (auto, renovatie, andere) die een indicatieve rente invult, maar dat vereist onderhoud.
+
+Startdatum (optioneel): vooral relevant als men exacte einddatum wil weten; meestal niet nodig.
+
+Berekeningslogica: Net als bij de autolening annuïteitenberekening: vaste maandelijkse aflossing. De formule berekent het maandbedrag dat, vermenigvuldigd over alle termijnen, het geleende bedrag + interest oplevert. Dit is identiek aan de hypotheek/auto berekening, alleen vaak voor kortere looptijd en hogere rente. Er is meestal geen variabele rente hier – consumentenkredieten zijn vast. Ook geen slottermijn (die is typisch alleen bij voertuigen mogelijk). Dus het is een vrij eenvoudige toepassing van de annuïteitenformule:
+Maandlast = (leningsbedrag * i) / (1 - (1+i)^(-N)), met i = maandrente (JKP/12) en N = totaal aantal maanden. De tool berekent ook de totale interest = maandlast*N – leningsbedrag.
+
+Resultaat voor de gebruiker: Primair het maandelijkse bedrag dat moet worden afgelost. Bijvoorbeeld: “Voor €5.000 over 3 jaar aan 7% rente, betaal je €154 per maand.” Daarnaast totale terugbetaling: “In totaal betaal je €5.540, waarvan €540 interest.” Dit maakt duidelijk wat de lening kost. Een aflossingstabel per maand kan getoond worden, al is bij korte leningen de toegevoegde waarde beperkt; toch kan het de volledigheid dienen. Hierin ziet de gebruiker maand voor maand het restant, de betaalde rente en de aflossing. Omdat de looptijd kort is, zou men er ook voor kunnen kiezen alleen een verkort overzicht per jaar of een grafiek te tonen. Een grafiek zoals een taartdiagram met verhouding interest/hoofdsom, of een staafdiagram van jaarlijks betaalde interest, kan helpen visualiseren dat bv. in jaar 1 de hoogste rente wordt betaald en dit afneemt. De tool kan ook aangeven hoeveel de JKP in euro’s betekent: sommige mensen willen weten “7% JKP betekent dat ik X euro per geleende 1000 euro betaal”.
+
+Extra functies:
+
+Leenbedrag op basis van budget: Net als bij de autolening kan men een omgekeerde berekening voorzien: de gebruiker geeft een gewenste maandlast op, en de tool berekent hoeveel hij ongeveer kan lenen voor een bepaalde looptijd en rente. Bijvoorbeeld: “Ik kan €200/maand missen, gedurende 2 jaar, hoeveel kan ik lenen aan 6%?” (Premium).
+
+Meerdere leningen vergelijken / samenvoegen: Een nuttige extra voor persoonlijke lening is vergelijking of samenvoeging. Bijvoorbeeld als iemand al leningen heeft: de tool zou kunnen laten zien wat gebeurt als je meerdere leningen samenvoegt (herfinanciert) tot één. Dit is complexer (meerdere inputs, verschillende rentes) maar kan als aparte tool of premium module.
+
+Aanbiedingen en gemiddelde rentes: Eventueel een functie om te zien wat gangbare rentes zijn voor bepaalde leningsbedragen (maar dit vereist weer data-onderhoud). Of een link “bekijk aanbiedingen”.
+
+Voorwaarden check: Men kan extra informatie geven zoals wat de maximale looptijd wettelijk is voor bedrag X (er zijn in BE soms beperkingen, bv. >€... minimum Y maanden). Dit zou informatief zijn, maar niet strikt een berekening.
+
+Opslaan/exporteren: Opslaan van de berekening in een profiel of export als PDF, vergelijkbaar met andere tools. (Premium opslaan).
+
+Onderhoud: Laag. Wederom verandert de wiskunde niet. Zolang de tool generiek is en de gebruiker zelf rente invult, hoeft u weinig bij te houden. Als echter worden voorzien: “indicatieve rente per doeleinde” of koppeling naar aanbiedingen, dan moet die informatie up-to-date gehouden worden (matig tot hoog onderhoud). Ook eventuele wettelijke wijzigingen (consumentenleningen maxima, etc.) zouden gemonitord moeten worden als de tool die bevat. In de basisvorm volstaat af en toe testen of de calculator nog klopt en eventuele nieuwe UX aanpassingen. Een specifiek punt: JKP berekening kan includeren van een dossierkost; als u dat wilt meenemen, moet u jaarlijks de maximum dossierkosten of dergelijke controleren. Maar waarschijnlijk blijft de onderhoudslast hier laag.
+
+Wettelijke Interest Calculator
+
+Doel: Bereken de verschuldigde wettelijke interest over een bepaald bedrag en periode. In België bestaat een wettelijke rentevoet die toegepast wordt bij schulden, laattijdige betalingen of juridische vonnissen. Met deze tool kan een gebruiker (bv. een schuldeiser of advocaat) berekenen hoeveel interest er is opgebouwd op een bepaald openstaand bedrag tussen twee data, volgens de geldende wettelijke rentepercentages. Dit is nuttig voor bijvoorbeeld: “Als iemand mij €5.000 moest betalen op 1 jan 2023 en ik krijg het pas op 1 jul 2025, hoeveel wettelijke intresten komen daar dan bij?”.
+
+Invoervelden:
+
+Hoofdsom (bedrag): het oorspronkelijke bedrag waarop interest wordt gerekend (bijvoorbeeld de factuur of schuld in euro’s).
+
+Startdatum (vervaldatum): de datum waarop het bedrag verschuldigd was of vanaf wanneer de interest moet lopen.
+
+Einddatum: de datum tot waarop je de berekening wil uitvoeren (vaak “vandaag” of een door de gebruiker gekozen datum, bv. de dag van betaling of vonnis).
+
+Rentevoet type: keuze tussen wettelijke rentevoet (standaard) of eventueel handelsrente (wettelijke interest bij handelstransacties) indien van toepassing. De wettelijke rentevoet is het percentage vastgesteld door de overheid jaarlijks voor gewone schulden (in 2025 bv. 4,5%), de handelsintrest is de hogere rente voor laattijdige betalingen in handelstransacties (in 2025 bv. 11,5% in semester 1). Standaard zal de tool de gewone wettelijke rente gebruiken, maar een optie laat toe de handelsrente te kiezen als het om een B2B-vordering gaat. (Deze percentages verschillen en wijzigen verschillend).
+
+Berekeningsmethode: doorgaans wordt enkelvoudige interest per jaar berekend (interest wordt niet gekapitaliseerd op jaarbasis, tenzij men dat apart vordert). De tool zal standaard ervan uitgaan dat interest niet op interest wordt verder gerekend (dus ieder jaar blijft de basis de hoofdsom). Eventueel kan men een optie “interest kapitaliseren na één jaar” aanbieden, maar in België is dit voor wettelijke intrest enkel mogelijk na gerechtelijke uitspraak meestal, dus standaard uit. Dit kan als geavanceerde optie toegevoegd worden.
+
+Berekeningslogica: De tool haalt voor de betreffende jaren de juiste wettelijke rentevoeten op. De wettelijke interestvoet wijzigt elk jaar volgens wettelijke bepalingen
+claeysengels.be
+. Bijvoorbeeld: 2023 was 5,25%, 2024 was 5,75%, 2025 is 4,5%
+claeysengels.be
+. De berekening gebeurt als volgt:
+
+Bepaal de periode in jaren/dagen tussen start- en einddatum. Als de periode over meerdere kalenderjaren gaat, moet de interest per jaar opgesplitst worden omdat elk jaar een ander percentage kan gelden.
+
+Voor elk jaar (of deel van jaar) wordt de interest = hoofdsom × (rentevoet dat jaar) × (aantal dagen in die periode / 365). (Eventueel 366 dagen voor een deel in een schrikkeljaar, al is dat detail.)
+
+Sommeer de interestbedragen van alle periodes samen. Dit geeft de totale verschuldigde interest.
+De berekening is in feite pro rata temporis per jaar tegen het geldende tarief. Bijvoorbeeld: van 01/07/2024 t/m 31/12/2024 over €5.000 aan 5,75%; van 01/01/2025 t/m 01/07/2025 aan 4,5%. De tool zal intern zo rekenen. Opmerking: indien de gebruiker de handelsrente selecteert, wordt een andere tabel met halfjaarlijkse percentages gebruikt (deze veranderen elk semester). De logica blijft hetzelfde, maar dan per half jaar tarief toepassen.
+Standaard gaat de tool uit van enkelvoudige interest – dat wil zeggen de hoofdsom blijft €5.000 heel de periode, interest wordt niet bij de hoofdsom geteld voor verdere berekening. Dit is conform wettelijke interest die doorgaans eenvoudige rente is (behalve als na jaren men interest vordert en een vonnis interest over interest toekent, wat buiten de scope ligt tenzij expliciet gekozen). Als een kapitalisatieoptie aan staat, zou bij jaarovergang de opgebouwde interest aan de hoofdsom toegevoegd kunnen worden, maar dit is niet standaard juridisch gebruikelijk voor wettelijke rente, dus normaal off.
+
+Resultaat voor de gebruiker: Het resultaat toont de totale verschuldigde interest over de periode. Bijvoorbeeld: “Totaal aan wettelijke interest van 01/01/2023 tot 01/07/2025: €X”. Daarnaast wordt het nieuwe totaalbedrag (hoofdsom + interest) getoond: “Totaal te betalen: €5.000 + €X = €Y”. Vaak is het handig om een specificatie te geven, zeker als de periode meerdere rentevoeten omvat. Daarom kan de output ook een klein overzicht bevatten, bijvoorbeeld:
+
+2023: €5.000 × 5,25% × 365/365 = €262,50
+
+2024: €5.000 × 5,75% × 366/366 = €287,50
+
+2025 (1 jan – 1 jul, 182 dagen): €5.000 × 4,5% × 182/365 ≈ €112,50
+
+Totaal interest: €662,50.
+Zo’n tabelletje laat de gebruiker zien hoe de som tot stand komt. Een grafiek is hier minder essentieel, maar men zou een staafdiagram per jaar kunnen tonen hoeveel interest ieder jaar oplevert (in bovenstaand vb balkjes van ~€262, €288, €112). Dit is meer informatief en kan optioneel zijn. De belangrijkste info is numeriek. Als de handelsrente gebruikt werd, moet dat duidelijk in het resultaat staan (“Op basis van wettelijke interest bij handelstransacties, tarief X%...”). De tool kan ook melding maken van de gehanteerde rentepercentages per jaar, zodat de gebruiker vertrouwen heeft in de correctheid (“Rentevoet 2024 = 5,75% toegepast” etc.).
+
+Extra functies:
+
+Handelsrente berekening: Zoals genoemd, een toggle om de hogere wettelijke rente voor handelstransacties te gebruiken, met automatische selectie van halfjaarlijkse percentages in de berekening. (Premium) – Mogelijk kan deze functie premium zijn als de site zich vooral op consumenten richt en B2B een niche is. Maar het kan ook open zijn, keuze van de sitebeheerder.
+
+Invoer van tussentijdse betalingen: Zeer geavanceerd zou zijn om scenario’s aan te kunnen waar bv. een deel van de schuld werd afbetaald op een bepaalde datum, waardoor daarna interest over het lagere saldo loopt. De gebruiker zou meerdere data/bedragen kunnen invoeren. Dit is complex in UI en berekening, en eerder voor professionals. Vermelden als mogelijkheid kan, maar waarschijnlijk buiten scope van eerste versie.
+
+Juridische presets: Optie om te kiezen “Arbeidsrechtelijke vergoeding” vs “Commerciële schuld” om automatisch juiste rente te kiezen (deze komt overeen met gewone vs handelsrente). Evt. een info-tekstje dat uitlegt wat de huidige rentevoet is.
+
+Updates en notificeer: Premiumgebruikers zouden een alert kunnen instellen voor bijvoorbeeld “nieuwe wettelijke rentevoet bekend”. Aangezien het tarief jaarlijks verandert
+claeysengels.be
+, kan de site een nieuwsbericht of melding geven. Maar dit is meer content dan tool.
+
+Export rapport: Mogelijkheid om de berekening plus toelichting te exporteren (PDF) om bijvoorbeeld bij een aanmaningsbrief te voegen. Dit zou een premium feature kunnen zijn, gegeven het professionele karakter.
+
+Opslaan: Opslaan van berekeningen in het account (bijvoorbeeld meerdere dossiers bijhouden) (Premium).
+
+Onderhoud: Matig tot hoog. De tool vergt jaarlijkse updates van de wettelijke rentevoet (en halfjaarlijks voor de handelsrente). Bijvoorbeeld, voor 2025 is het percentage 4,5%
+claeysengels.be
+, dit moet in de tool zitten. Dit kan men handmatig eenmaal per jaar invoeren (op zich niet veel werk, maar moet wel gebeuren). Als er veranderingen komen in de berekeningsregel (zeldzaam, maar mocht de wet aanpassen hoe het percentage bepaald wordt of de frequentie), moet de tool daarop aangepast. De historische tabel van rentevoeten vanaf een bepaald jaar moet correct zijn; dit vraagt eenmalig invoeren en daarna uitbreiden. Foutgevoeligheid: men moet goed testen dat de dagentelling klopt en dat bij overschrijden van jaargrenzen de juiste percentages gepakt worden. Maar inhoudelijk is de tool relatief stabiel: het wettelijke mechanisme bestaat lang. Kortom, men moet ervoor zorgen jaarlijks het nieuwe percentage in te voeren – dit is een klein maar belangrijk onderhoudspunt (eventueel geautomatiseerd via een overheidsbron als die bestaat). Als premium de handelsrente wordt aangeboden, geldt hetzelfde per semester. Omdat de sitebeheerder hiervoor alert moet zijn, schatten we onderhoud matig (regelmatige kleine updates).
+
+Inflatie vs Rente (Reële Rente) Tool
+
+Doel: Vergelijk het nominale rendement van spaargeld of investering met de inflatie om de reële opbrengst of waardeverandering van geld te bepalen. Met andere woorden, deze tool laat gebruikers zien hoeveel hun spaargeld echt groeit in koopkracht na inflatie, of hoeveel waarde hun geld verliest als de rente lager is dan inflatie. Dit is in tijden van hoge inflatie erg relevant: zelfs met positieve rente kan uw spaargeld minder waard worden in termen van koopkracht
+raisin.nl
+. De tool beantwoordt vragen als: “Als ik X euro spaar tegen Y% rente, maar de inflatie is Z%, wat is mijn geld dan nog waard na N jaar?” en “Welk reëel rendement houd ik over?”.
+
+Invoervelden:
+
+Startbedrag: het bedrag dat u bezit of investeert (bijv. spaargeld nu).
+
+Nominale rentepercentage: de jaarlijkse interest of groei die u ontvangt op dit geld (bijv. spaarrente, depositorente of beleggingsrendement).
+
+Inflatiepercentage: de gemiddelde jaarlijkse inflatie over de beschouwde periode. Dit kan de huidige inflatie zijn of een zelf in te schatten gemiddelde. (Optioneel kan men i.p.v. een vast percentage ook kiezen voor “historische inflatie” voor een bepaalde periode, zie extra functies.)
+
+Looptijd: de periode in jaren waarover gerekend wordt. (Bijv. 5 jaar vooruit kijken, of 10 jaar, etc. Men kan ook een verledenperiode kiezen als men wil zien wat er met geld gebeurde in voorbije jaren.)
+
+Periodieke storting/opname (optioneel): men zou geavanceerd kunnen toelaten om jaarlijks extra bij te sparen of een vast bedrag op te nemen, om meer realistische simulaties te doen. Maar basisfunctionaliteit houdt het vaak bij een startbedrag enkel, om het concept duidelijk te maken.
+
+Berekeningslogica: De tool berekent eerst de nominale groei van het geld over de periode met samengestelde rente. Dat betekent: eindbedrag nominaal = startbedrag × (1 + rente)^N. Vervolgens berekent de tool de waardevermindering door inflatie over dezelfde periode: inflatiefactor = (1 + inflatie)^N. Deze inflatiefactor geeft aan hoeveel prijzen gemiddeld stijgen in N jaar. Bijvoorbeeld bij 3% inflatie over 10 jaar is de factor ~1.343 (d.w.z. iets dat €1 was, kost ~€1,34 na 10 jaar). De reële waarde van het eindbedrag wordt verkregen door het nominale eindbedrag te corrigeren voor inflatie: eindbedrag reëel = eindbedrag nominaal / inflatiefactor. Anders gezegd, de koopkracht van het eindbedrag uitgedrukt in euro’s van het startjaar. Een equivalent is om de reële rente per jaar te berekenen: ongeveer = nominale rente – inflatie
+raisin.nl
+. Bijvoorbeeld bij 1,5% nominale rente en 1% inflatie is de reële rente ~0,5%
+raisin.nl
+. De tool kan deze benadering ook geven, maar zal voor exacte bedragen de eerstgenoemde methode gebruiken. Als er periodieke stortingen zijn, wordt dit ingewikkelder, maar de tool kan dan jaar voor jaar itereren: elk jaar groeit het geld met rente, en de prijzen groeien met inflatie. Elke jaarlijkse bijdrage voegt in nominale termen toe, maar wordt ook onderhevig aan inflatie voor de resterende jaren. De kern is dat de gebruiker inzicht krijgt dat bij inflatie de waarde in reële termen minder hard groeit dan nominale cijfers doen vermoeden.
+Als extra kan de tool ook uitrekenen indien het reële rendement negatief is, hoeveel van de koopkracht verdwijnt. Bijvoorbeeld als inflatie > rente, berekent hij effectief een krimp.
+
+Resultaat voor de gebruiker: De output zal typisch twee bedragen tonen: het nominale eindbedrag na N jaar, en het reële eindbedrag in huidige euro’s. Bijvoorbeeld: “Na 5 jaar heb je nominale €12.000 gespaard, maar gecorrigeerd voor inflatie is dat in koopkracht omgerekend €10.800 waard in prijzen van nu.” Zo ziet de gebruiker het verschil. Daarbij kan het reëel rendement of reële rentepercentage vermeld worden: “Dit komt overeen met een reële groei van +0,5% per jaar” of “een reëel verlies van -2% per jaar” afhankelijk van de situatie
+raisin.nl
+raisin.nl
+. Vaak maakt de tool ook een statement zoals: “Inflatie zorgt ervoor dat €1 vandaag over 5 jaar slechts €0,90 aan koopkracht heeft bij 2% inflatie.” Ter illustratie zou een zin kunnen worden getoond: “Een bedrag van €10 dat iets kon kopen in jaar 0, kost ~€11,74 in jaar 10 bij 1,6% inflatie”
+berekenhet.nl
+, om het concept te duiden. De gebruiker krijgt mogelijk ook een grafiek: een dubbelgrafiek met twee lijnen – de nominale vermogensgroei en de reële vermogensgroei over de tijd. Bijvoorbeeld: de nominale lijn stijgt gestaag omhoog, terwijl de reële lijn veel vlakker loopt of zelfs daalt als inflatie hoger is dan rente. Dit visueel onderscheid maakt snel duidelijk hoe inflatie het effect “opeet”. Daarnaast kan een grafiek de koopkracht van 100 euro tonen over de jaren bij inflatie (dalende lijn), ter referentie. De tool zou ook kunnen aangeven: “Break-even inflatie”: dat is de inflatie waarbij reële groei nul zou zijn gegeven de rente. Maar dat is extra. In elk geval ziet de gebruiker zowel de bedragen als een eventuele procentuele reële winst of verlies na afloop.
+
+Extra functies:
+
+Historische inflatie data: In plaats van zelf een inflatiepercentage in te schatten, kan de gebruiker kiezen om historische CPI cijfers te gebruiken voor een bepaalde periode. Bijvoorbeeld: “Wat was de reële waarde als ik in 2000 €1000 had, tot 2020 aan de spaarrekening 3%?” De tool kan dan de officiële inflatie per jaar (bv. van Statbel of Eurostat) gebruiken om preciezer de koopkracht te berekenen. Dit vereist een dataset met historische inflatie. (Premium) – Dit is een krachtige functie maar vergt onderhoud (inflatiecijfers bijhouden) en is iets voor gevorderden, dus kan als premium gelden.
+
+Meerdere scenario’s: De tool kan de gebruiker meerdere inflatiescenarios laten uitproberen. Bijvoorbeeld een optimistisch scenario (inflatie 1%, rente 2%) versus pessimistisch scenario (inflatie 5%, rente 2%). Je zou dan twee uitkomsten zien en grafieken. (Premium) scenariovergelijking, gezien de complexiteit.
+
+Reële groei vs matras: Een grappige vergelijking is om te tonen wat er gebeurt als je wel spaart vs als je geld thuis onder de matras houdt (0% rente). Bijvoorbeeld: “Onder de matras zou je €10.000 nu over 5 jaar in koopkracht €X waard zijn, terwijl op de spaarrekening (nominaal Y%) €Y waard maar reëel €Z waard.” Dit benadrukt dat sparen met enige rente altijd beter is dan niets, maar ook dat beide kunnen achteruitgaan bij hoge inflatie. Dit kan als extra inzicht gegeven worden (eventueel vrij toegankelijk).
+
+Welk rendement heb ik nodig? Een premium toevoeging kan zijn: de gebruiker vult in “Inflatie is 4%, ik wil dat mijn geld waarde behoudt, welk rentepercentage heb ik minimaal nodig?” – de tool kan dan berekenen dat ongeveer >4% nodig is (strict gezien (1+nominaal)=(1+inflatie) → nominaal ~ inflatie). Of om een bepaalde reële doelstelling te halen.
+
+Notificaties / actuele inflatie: Optioneel: de tool of site kan de actuele inflatie (bv. jaarlijkse CPI van vorige maand) weergeven of bijhouden. Premium gebruikers zouden meldingen kunnen krijgen als de inflatie verandert vs hun spaarrente – al is dat meer een service.
+
+Onderhoud: Laag tot matig. Als de tool louter op gebruikersinput leunt (men geeft zelf inflatie en rente), dan is er nauwelijks onderhoud: het zijn standaard berekeningen. Men moet hooguit jaarlijks checken of geen negatieve of extreme inputs crashen. Echter, als men historische inflatiegegevens wil aanbieden of automatisch de inflatie van laatste jaar invullen, dan vergt dit onderhoud. Bijvoorbeeld jaarlijks de CPI-index of inflatiecijfers invoeren. Belgische inflatiecijfers zijn maandelijks beschikbaar; up-to-date houden is matig werk. Een mogelijke aanpak is om een externe bron te raadplegen, maar aangezien de site op Replit draait en data open is, zou men eerder jaarlijks handmatig de laatste cijfers toevoegen. Als men de periode 1990-heden eenmaal invoert, is het daarna enkel elk jaar aanvullen. Dit is matig onderhoud. Zonder die feature is het laag. Overige premium functies zijn intern berekeningen die niet van externe veranderingen afhangen. Kortom: de kerninflatie-tool zelf is robuust, de onderhoud komt vooral als je het verrijkt met data.
+
+Premium-overwegingen algemeen: De site zal registraties toelaten voor premium functies. We hebben per tool aangegeven welke uitbreidingen goed als premium kunnen dienen (scenariovergelijking, extra data, opslaan/exporteren, specialistische berekeningen). Dit creëert een duidelijk onderscheid: gratis krijgt de basisberekeningen en misschien grafieken, premium krijgt diepere inzichtvergelijkingen, het opslaan van persoonlijke scenario’s en toegang tot actuele data vergelijkingen. Zorg wel dat de basiswaarde van de tools hoog blijft voor alle gebruikers, terwijl de premium lagen voor de echt geïnteresseerden of professionals zijn.
