@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
         
         {/* Interesten.be sectie onderaan */}
-        <div className="border-t border-border pt-8">
+        <div className="border-t border-border pt-8 text-center">
           <div className="text-xl font-bold text-primary mb-4">
             <i className="fas fa-calculator mr-2"></i>
             Interesten.be
