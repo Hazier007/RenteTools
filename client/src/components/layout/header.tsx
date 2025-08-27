@@ -22,28 +22,36 @@ export default function Header({ activeCalculator, onCalculatorChange }: HeaderP
           
           <nav className="hidden md:flex space-x-8">
             <Button
-              variant={activeCalculator === "spaarrente" ? "default" : "ghost"}
-              onClick={() => onCalculatorChange("spaarrente")}
+              variant="ghost"
               className="font-medium"
-              data-testid="nav-spaarrente"
+              data-testid="nav-sparen"
             >
-              Spaarrente
+              <i className="fas fa-piggy-bank mr-2"></i>
+              Sparen
             </Button>
             <Button
-              variant={activeCalculator === "samengestelde" ? "default" : "ghost"}
-              onClick={() => onCalculatorChange("samengestelde")}
+              variant="ghost"
               className="font-medium"
-              data-testid="nav-samengestelde"
+              data-testid="nav-lenen"
             >
-              Samengestelde Rente
+              <i className="fas fa-credit-card mr-2"></i>
+              Lenen
             </Button>
             <Button
-              variant={activeCalculator === "hypotheek" ? "default" : "ghost"}
-              onClick={() => onCalculatorChange("hypotheek")}
+              variant="ghost"
               className="font-medium"
-              data-testid="nav-hypotheek"
+              data-testid="nav-beleggen"
             >
-              Hypotheek
+              <i className="fas fa-chart-line mr-2"></i>
+              Beleggen
+            </Button>
+            <Button
+              variant="ghost"
+              className="font-medium"
+              data-testid="nav-planning"
+            >
+              <i className="fas fa-calculator mr-2"></i>
+              Planning
             </Button>
           </nav>
           
@@ -67,35 +75,38 @@ export default function Header({ activeCalculator, onCalculatorChange }: HeaderP
             <Button
               variant="ghost"
               className="w-full justify-start"
-              onClick={() => {
-                onCalculatorChange("spaarrente");
-                setMobileMenuOpen(false);
-              }}
-              data-testid="mobile-nav-spaarrente"
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="mobile-nav-sparen"
             >
-              Spaarrente Calculator
+              <i className="fas fa-piggy-bank mr-2"></i>
+              Sparen
             </Button>
             <Button
               variant="ghost"
               className="w-full justify-start"
-              onClick={() => {
-                onCalculatorChange("samengestelde");
-                setMobileMenuOpen(false);
-              }}
-              data-testid="mobile-nav-samengestelde"
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="mobile-nav-lenen"
             >
-              Samengestelde Rente
+              <i className="fas fa-credit-card mr-2"></i>
+              Lenen
             </Button>
             <Button
               variant="ghost"
               className="w-full justify-start"
-              onClick={() => {
-                onCalculatorChange("hypotheek");
-                setMobileMenuOpen(false);
-              }}
-              data-testid="mobile-nav-hypotheek"
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="mobile-nav-beleggen"
             >
-              Hypotheek Simulator
+              <i className="fas fa-chart-line mr-2"></i>
+              Beleggen
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start"
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="mobile-nav-planning"
+            >
+              <i className="fas fa-calculator mr-2"></i>
+              Planning
             </Button>
           </div>
         </div>
