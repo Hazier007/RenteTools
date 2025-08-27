@@ -19,7 +19,7 @@ export default function Header({ activeCalculator, onCalculatorChange }: HeaderP
               <img 
                 src={logoUrl} 
                 alt="Interesten.be - Financiële Calculators België" 
-                className="h-12 w-auto"
+                className="h-20 w-auto"
                 data-testid="logo-image"
               />
             </a>
