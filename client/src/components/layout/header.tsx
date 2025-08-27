@@ -22,38 +22,22 @@ export default function Header({ activeCalculator, onCalculatorChange }: HeaderP
           </div>
           
           <nav className="hidden md:flex space-x-8">
-            <Button
-              variant="ghost"
-              className="font-medium"
-              data-testid="nav-sparen"
-            >
+            <a href="/hoogste-spaarrente-belgie" className="flex items-center font-medium text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent" data-testid="nav-sparen">
               <i className="fas fa-piggy-bank mr-2"></i>
               Sparen
-            </Button>
-            <Button
-              variant="ghost"
-              className="font-medium"
-              data-testid="nav-lenen"
-            >
+            </a>
+            <a href="/hypothecaire-lening-berekenen" className="flex items-center font-medium text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent" data-testid="nav-lenen">
               <i className="fas fa-credit-card mr-2"></i>
               Lenen
-            </Button>
-            <Button
-              variant="ghost"
-              className="font-medium"
-              data-testid="nav-beleggen"
-            >
+            </a>
+            <a href="/beleggingsrente-calculator" className="flex items-center font-medium text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent" data-testid="nav-beleggen">
               <i className="fas fa-chart-line mr-2"></i>
               Beleggen
-            </Button>
-            <Button
-              variant="ghost"
-              className="font-medium"
-              data-testid="nav-planning"
-            >
+            </a>
+            <a href="/pensioensparen-calculator" className="flex items-center font-medium text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent" data-testid="nav-planning">
               <i className="fas fa-calculator mr-2"></i>
               Planning
-            </Button>
+            </a>
           </nav>
           
           <div className="md:hidden">
@@ -73,42 +57,42 @@ export default function Header({ activeCalculator, onCalculatorChange }: HeaderP
       {mobileMenuOpen && (
         <div className="md:hidden bg-card border-t border-border">
           <div className="px-4 py-2 space-y-2">
-            <Button
-              variant="ghost"
-              className="w-full justify-start"
+            <a
+              href="/hoogste-spaarrente-belgie"
+              className="flex items-center w-full justify-start text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent"
               onClick={() => setMobileMenuOpen(false)}
               data-testid="mobile-nav-sparen"
             >
               <i className="fas fa-piggy-bank mr-2"></i>
               Sparen
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start"
+            </a>
+            <a
+              href="/hypothecaire-lening-berekenen"
+              className="flex items-center w-full justify-start text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent"
               onClick={() => setMobileMenuOpen(false)}
               data-testid="mobile-nav-lenen"
             >
               <i className="fas fa-credit-card mr-2"></i>
               Lenen
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start"
+            </a>
+            <a
+              href="/beleggingsrente-calculator"
+              className="flex items-center w-full justify-start text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent"
               onClick={() => setMobileMenuOpen(false)}
               data-testid="mobile-nav-beleggen"
             >
               <i className="fas fa-chart-line mr-2"></i>
               Beleggen
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start"
+            </a>
+            <a
+              href="/pensioensparen-calculator"
+              className="flex items-center w-full justify-start text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-accent"
               onClick={() => setMobileMenuOpen(false)}
               data-testid="mobile-nav-planning"
             >
               <i className="fas fa-calculator mr-2"></i>
               Planning
-            </Button>
+            </a>
           </div>
         </div>
       )}

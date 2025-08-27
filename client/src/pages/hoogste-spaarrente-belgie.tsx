@@ -172,6 +172,75 @@ export default function HoogsteSpaarrenteBelgie() {
                 </CardContent>
               </Card>
 
+              {/* Gerelateerde Calculators */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl">Gerelateerde Calculators</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <a href="/samengestelde-interest-berekenen" className="block p-4 border rounded-lg hover:border-primary transition-colors">
+                      <div className="flex items-center mb-2">
+                        <i className="fas fa-chart-line mr-2 text-green-600"></i>
+                        <h4 className="font-semibold">Samengestelde Interest</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">Bereken hoe uw spaargeld groeit met compound interest over lange termijn.</p>
+                    </a>
+                    <a href="/deposito-calculator" className="block p-4 border rounded-lg hover:border-primary transition-colors">
+                      <div className="flex items-center mb-2">
+                        <i className="fas fa-university mr-2 text-purple-600"></i>
+                        <h4 className="font-semibold">Deposito Calculator</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">Vergelijk termijnrekeningen en deposito's voor hogere vaste rentes.</p>
+                    </a>
+                    <a href="/inflatie-calculator-belgie" className="block p-4 border rounded-lg hover:border-primary transition-colors">
+                      <div className="flex items-center mb-2">
+                        <i className="fas fa-trending-down mr-2 text-amber-600"></i>
+                        <h4 className="font-semibold">Inflatie Calculator</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">Zie hoe inflatie uw spaarrente beïnvloedt en uw koopkracht vermindert.</p>
+                    </a>
+                    <a href="/roerende-voorheffing-calculator" className="block p-4 border rounded-lg hover:border-primary transition-colors">
+                      <div className="flex items-center mb-2">
+                        <i className="fas fa-percentage mr-2 text-neutral-600"></i>
+                        <h4 className="font-semibold">Roerende Voorheffing</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">Bereken de belasting op uw spaarrente en ontdek de vrijstellingen.</p>
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Externe Links voor Authority */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <a href="https://www.nbb.be/nl/consumenten/sparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
+                      <i className="fas fa-external-link-alt mr-2"></i>
+                      Nationale Bank België - Sparen
+                    </a>
+                    <a href="https://www.febelfin.be/nl/consumenten/sparen-beleggen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
+                      <i className="fas fa-external-link-alt mr-2"></i>
+                      Febelfin - Sparen en Beleggen
+                    </a>
+                    <a href="https://financien.belgium.be/nl/particulieren/sparen-en-beleggen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
+                      <i className="fas fa-external-link-alt mr-2"></i>
+                      FOD Financiën - Sparen en Beleggen
+                    </a>
+                    <a href="https://www.test-aankoop.be/geld/sparen-en-beleggen/sparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
+                      <i className="fas fa-external-link-alt mr-2"></i>
+                      Test-Aankoop - Sparen Vergelijken
+                    </a>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-4">
+                    Officiële bronnen voor betrouwbare informatie over sparen in België.
+                  </p>
+                </CardContent>
+              </Card>
+
             </div>
           </div>
           
