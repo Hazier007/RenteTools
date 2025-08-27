@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import logoUrl from "../../assets/logo.png";
 
 interface HeaderProps {
   activeCalculator: string;
@@ -14,10 +15,14 @@ export default function Header({ activeCalculator, onCalculatorChange }: HeaderP
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-4">
-            <div className="text-2xl font-bold text-primary">
-              <i className="fas fa-calculator mr-2"></i>
-              Interesten.be
-            </div>
+            <a href="/" className="flex items-center" data-testid="logo-link">
+              <img 
+                src={logoUrl} 
+                alt="Interesten.be - Financiële Calculators België" 
+                className="h-12 w-auto"
+                data-testid="logo-image"
+              />
+            </a>
           </div>
           
           <nav className="hidden md:flex space-x-8">
