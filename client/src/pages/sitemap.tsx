@@ -198,13 +198,19 @@ export default function Sitemap() {
             <CardContent>
               <ul className="space-y-2">
                 <li>
-                  <span className="text-muted-foreground">Over Ons (binnenkort beschikbaar)</span>
+                  <a href="/over-ons" className="text-primary hover:underline">
+                    Over Ons - Wie zijn wij en wat doen we?
+                  </a>
                 </li>
                 <li>
-                  <span className="text-muted-foreground">Privacy (binnenkort beschikbaar)</span>
+                  <a href="/privacy" className="text-primary hover:underline">
+                    Privacy Beleid - Hoe beschermen wij uw gegevens?
+                  </a>
                 </li>
                 <li>
-                  <span className="text-muted-foreground">Voorwaarden (binnenkort beschikbaar)</span>
+                  <a href="/voorwaarden" className="text-primary hover:underline">
+                    Algemene Voorwaarden - Gebruiksvoorwaarden en disclaimer
+                  </a>
                 </li>
                 <li>
                   <a href="/sitemap" className="text-primary hover:underline">

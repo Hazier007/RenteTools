@@ -19,6 +19,9 @@ import RoerendeVoorheffingCalculator from "@/pages/roerende-voorheffing-calculat
 import ReeleRenteBerekenen from "@/pages/reele-rente-berekenen";
 import GeldontwaardigCalculator from "@/pages/geldontwaarding-calculator";
 import LeningHerfinancieren from "@/pages/lening-herfinancieren";
+import OverOns from "@/pages/over-ons";
+import Privacy from "@/pages/privacy";
+import Voorwaarden from "@/pages/voorwaarden";
 import Sitemap from "@/pages/sitemap";
 import NotFound from "@/pages/not-found";
 
@@ -41,6 +44,9 @@ function Router() {
       <Route path="/reele-rente-berekenen" component={ReeleRenteBerekenen} />
       <Route path="/geldontwaarding-calculator" component={GeldontwaardigCalculator} />
       <Route path="/lening-herfinancieren" component={LeningHerfinancieren} />
+      <Route path="/over-ons" component={OverOns} />
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/voorwaarden" component={Voorwaarden} />
       <Route path="/sitemap" component={Sitemap} />
       <Route component={NotFound} />
     </Switch>
