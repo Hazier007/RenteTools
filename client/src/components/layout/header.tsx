@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 interface HeaderProps {
   activeCalculator: string;
-  onCalculatorChange: (calculator: "spaarrente" | "samengestelde" | "hypotheek") => void;
+  onCalculatorChange: (calculator: "spaarrente" | "samengestelde" | "hypotheek" | "autolening" | "persoonlijke" | "deposito" | "beleggingsrente" | "kredietvergelijker" | "pensioenspar" | "inflatie") => void;
 }
 
 export default function Header({ activeCalculator, onCalculatorChange }: HeaderProps) {
