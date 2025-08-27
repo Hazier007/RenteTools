@@ -296,7 +296,7 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="grid gap-6">
+            <div className="grid lg:grid-cols-3 gap-6">
               {calculatorCategories.planning.map((calc, index) => (
                 <Card key={index} className={`${calc.color} hover:shadow-lg transition-all duration-300`}>
                   <CardHeader>
@@ -322,7 +322,7 @@ export default function Home() {
                 </Card>
               ))}
               
-              {/* Google Ad naast de calculators */}
+              {/* Google Ad als derde kaart */}
               <div className="hidden lg:block">
                 <AdPlaceholder size="rectangle" />
               </div>
