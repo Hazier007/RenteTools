@@ -14,6 +14,7 @@ import InflatieCalculator from "@/components/calculators/inflatie-calculator";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import AdPlaceholder from "@/components/ui/ad-placeholder";
 
 type CalculatorType = "spaarrente" | "samengestelde" | "hypotheek" | "autolening" | "persoonlijke" | "deposito" | "beleggingsrente" | "kredietvergelijker" | "pensioenspar" | "inflatie";
 
@@ -64,6 +65,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Top Banner Ad */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
+          <AdPlaceholder size="banner" className="lg:hidden" />
+        </div>
+      </section>
+
       {/* Calculator Categories */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Tabs defaultValue="sparen" className="space-y-8">
@@ -87,7 +96,7 @@ export default function Home() {
           </TabsList>
 
           <TabsContent value="sparen" className="space-y-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setActiveCalculator("spaarrente")}>
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center text-lg">
@@ -132,11 +141,16 @@ export default function Home() {
                   <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" data-testid="button-select-deposito">Selecteren</Button>
                 </CardContent>
               </Card>
+
+              {/* Sidebar Ad */}
+              <div className="hidden lg:block">
+                <AdPlaceholder size="rectangle" />
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="lenen" className="space-y-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setActiveCalculator("hypotheek")}>
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center text-lg">
@@ -197,10 +211,15 @@ export default function Home() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Middle Ad Banner */}
+            <div className="flex justify-center py-6">
+              <AdPlaceholder size="banner" />
+            </div>
           </TabsContent>
 
           <TabsContent value="beleggen" className="space-y-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setActiveCalculator("beleggingsrente")}>
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center text-lg">
@@ -215,11 +234,16 @@ export default function Home() {
                   <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" data-testid="button-select-beleggingsrente">Selecteren</Button>
                 </CardContent>
               </Card>
+
+              {/* Sidebar Ad - more prominent for investing section */}
+              <div className="hidden lg:block lg:col-span-2">
+                <AdPlaceholder size="rectangle" />
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="planning" className="space-y-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setActiveCalculator("pensioenspar")}>
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center text-lg">
@@ -249,6 +273,11 @@ export default function Home() {
                   <Button className="w-full bg-destructive text-destructive-foreground hover:bg-destructive/90" data-testid="button-select-inflatie">Selecteren</Button>
                 </CardContent>
               </Card>
+
+              {/* Sidebar Ad */}
+              <div className="hidden lg:block">
+                <AdPlaceholder size="rectangle" />
+              </div>
             </div>
           </TabsContent>
         </Tabs>
@@ -257,9 +286,28 @@ export default function Home() {
       {/* Active Calculator */}
       {activeCalculator && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          {renderCalculator()}
+          <div className="grid lg:grid-cols-4 gap-8">
+            {/* Calculator Content */}
+            <div className="lg:col-span-3">
+              {renderCalculator()}
+            </div>
+            
+            {/* Sidebar Ads */}
+            <div className="hidden lg:block space-y-6">
+              <AdPlaceholder size="rectangle" />
+              <AdPlaceholder size="rectangle" />
+            </div>
+          </div>
         </section>
       )}
+
+      {/* Bottom Banner Ad */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
+          <AdPlaceholder size="banner" className="lg:hidden" />
+        </div>
+      </section>
 
       <Footer />
     </div>
