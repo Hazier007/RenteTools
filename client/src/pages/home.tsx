@@ -322,8 +322,9 @@ export default function Home() {
                 </Card>
               ))}
               
-              {/* Sidebar Ad */}
-              <div className="hidden lg:block mt-8">
+              {/* Sidebar Ads */}
+              <div className="hidden lg:block mt-8 space-y-6">
+                <AdPlaceholder size="rectangle" />
                 <AdPlaceholder size="rectangle" />
               </div>
             </div>
