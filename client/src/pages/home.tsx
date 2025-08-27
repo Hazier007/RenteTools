@@ -72,6 +72,15 @@ export default function Home() {
         iconColor: "text-indigo-600",
         link: "/kredietvergelijker-belgie",
         features: ["Leningen vergelijken", "Beste deal vinden", "Kosten besparen"]
+      },
+      {
+        title: "Lening Herfinancieren",
+        description: "Bereken of herfinanciering van uw lening loont. Vergelijk kosten en besparingen bij lagere rentes.",
+        icon: "fas fa-sync-alt",
+        color: "bg-cyan-50 dark:bg-cyan-950 border-cyan-200 dark:border-cyan-800",
+        iconColor: "text-cyan-600",
+        link: "/lening-herfinancieren",
+        features: ["Herfinanciering calculator", "Break-even analyse", "Kosten vergelijken"]
       }
     ],
     beleggen: [
@@ -103,6 +112,44 @@ export default function Home() {
         iconColor: "text-amber-600",
         link: "/inflatie-calculator-belgie",
         features: ["Koopkracht impact", "Inflatie effect", "Lange termijn planning"]
+      },
+      {
+        title: "Reële Rente Berekenen",
+        description: "Bereken uw werkelijke rendement na inflatie. Ontdek of uw geld koopkracht wint of verliest.",
+        icon: "fas fa-balance-scale",
+        color: "bg-lime-50 dark:bg-lime-950 border-lime-200 dark:border-lime-800",
+        iconColor: "text-lime-600",
+        link: "/reele-rente-berekenen",
+        features: ["Reële rente calculator", "Koopkracht analyse", "Fisher formule"]
+      },
+      {
+        title: "Geldontwaarding Calculator",
+        description: "Bereken hoe inflatie de waarde van uw geld aantast. Zie wat uw geld waard is in de toekomst.",
+        icon: "fas fa-coins",
+        color: "bg-rose-50 dark:bg-rose-950 border-rose-200 dark:border-rose-800",
+        iconColor: "text-rose-600",
+        link: "/geldontwaarding-calculator",
+        features: ["Geldontwaarding effect", "Toekomstige waarde", "Inflatie impact"]
+      }
+    ],
+    overig: [
+      {
+        title: "Wettelijke Rentevoet België",
+        description: "Bereken wettelijke interest en nalatigheidsrente volgens Belgische wetgeving. Actuele tarieven 2025.",
+        icon: "fas fa-gavel",
+        color: "bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800",
+        iconColor: "text-slate-600",
+        link: "/wettelijke-rentevoet-belgie",
+        features: ["Wettelijke interest", "Nalatigheidsrente", "Juridische tarieven"]
+      },
+      {
+        title: "Roerende Voorheffing Calculator",
+        description: "Bereken belasting op spaarrente en dividenden. Inclusief belastingvrije schijf en vrijstellingen.",
+        icon: "fas fa-percentage",
+        color: "bg-neutral-50 dark:bg-neutral-950 border-neutral-200 dark:border-neutral-800",
+        iconColor: "text-neutral-600",
+        link: "/roerende-voorheffing-calculator",
+        features: ["Belasting calculator", "Vrijstellingen", "Netto rendement"]
       }
     ]
   };
@@ -125,7 +172,7 @@ export default function Home() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-                <div className="text-3xl font-bold">10+</div>
+                <div className="text-3xl font-bold">16+</div>
                 <div className="text-sm opacity-80">Calculators</div>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
@@ -324,6 +371,46 @@ export default function Home() {
               <AdPlaceholder size="rectangle" />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Overig Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center">
+            <i className="fas fa-cogs mr-4 text-primary"></i>
+            Overige Calculators
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Gespecialiseerde financiële tools voor wettelijke interest, belastingen en juridische berekeningen.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {calculatorCategories.overig.map((calc, index) => (
+            <Card key={index} className={`${calc.color} hover:shadow-xl transition-all duration-300 hover:scale-105`}>
+              <CardHeader>
+                <CardTitle className="flex items-center text-xl">
+                  <i className={`${calc.icon} mr-3 text-2xl ${calc.iconColor}`}></i>
+                  {calc.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">{calc.description}</p>
+                <div className="space-y-2">
+                  {calc.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center text-sm">
+                      <i className="fas fa-check mr-2 text-green-600"></i>
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+                <Button asChild className="w-full">
+                  <a href={calc.link}>Berekenen</a>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 

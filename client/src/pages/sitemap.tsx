@@ -101,6 +101,11 @@ export default function Sitemap() {
                     Kredietvergelijker België - Leningen Vergelijken & Besparen
                   </a>
                 </li>
+                <li>
+                  <a href="/lening-herfinancieren" className="text-primary hover:underline">
+                    Lening Herfinancieren - Voordeligste Herfinanciering Berekenen
+                  </a>
+                </li>
               </ul>
             </CardContent>
           </Card>
@@ -142,6 +147,40 @@ export default function Sitemap() {
                 <li>
                   <a href="/inflatie-calculator-belgie" className="text-primary hover:underline">
                     Inflatie Calculator België - Koopkracht Impact Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/reele-rente-berekenen" className="text-primary hover:underline">
+                    Reële Rente Berekenen - Inflatie vs Spaarrente Calculator
+                  </a>
+                </li>
+                <li>
+                  <a href="/geldontwaarding-calculator" className="text-primary hover:underline">
+                    Geldontwaarding Calculator - Wat is mijn Geld Waard over 10 Jaar?
+                  </a>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Overige Calculators */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">
+                <i className="fas fa-cogs mr-3 text-primary"></i>
+                Overige Calculators
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/wettelijke-rentevoet-belgie" className="text-primary hover:underline">
+                    Wettelijke Rentevoet België - Nalatigheidsinterest Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/roerende-voorheffing-calculator" className="text-primary hover:underline">
+                    Roerende Voorheffing Calculator - Belasting op Spaarrente en Dividenden
                   </a>
                 </li>
               </ul>
@@ -190,9 +229,10 @@ export default function Sitemap() {
           <h3>Onze Calculator Categorieën:</h3>
           <ul>
             <li><strong>Sparen:</strong> Tools voor spaarrekeningen, deposito's en samengestelde interest berekeningen</li>
-            <li><strong>Lenen:</strong> Calculators voor hypotheken, autoleningen en persoonlijke kredieten</li>
+            <li><strong>Lenen:</strong> Calculators voor hypotheken, autoleningen, persoonlijke kredieten en herfinanciering</li>
             <li><strong>Beleggen:</strong> Rendement calculators voor beleggingsportefeuilles</li>
-            <li><strong>Planning:</strong> Pensioenplanning en inflatie impact tools</li>
+            <li><strong>Planning:</strong> Pensioenplanning, inflatie impact, reële rente en geldontwaarding tools</li>
+            <li><strong>Overige Calculators:</strong> Wettelijke rentevoet en roerende voorheffing berekeningen</li>
           </ul>
           
           <p>

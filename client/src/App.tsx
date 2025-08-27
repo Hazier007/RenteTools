@@ -14,6 +14,11 @@ import PensioenspaarCalculatorPage from "@/pages/pensioensparen-calculator";
 import BeleggingsrenteCalculatorPage from "@/pages/beleggingsrente-calculator";
 import DepositoCalculatorPage from "@/pages/deposito-calculator";
 import KredietvergelijkerBelgie from "@/pages/kredietvergelijker-belgie";
+import WettelijkeRentevoetBelgie from "@/pages/wettelijke-rentevoet-belgie";
+import RoerendeVoorheffingCalculator from "@/pages/roerende-voorheffing-calculator";
+import ReeleRenteBerekenen from "@/pages/reele-rente-berekenen";
+import GeldontwaardigCalculator from "@/pages/geldontwaarding-calculator";
+import LeningHerfinancieren from "@/pages/lening-herfinancieren";
 import Sitemap from "@/pages/sitemap";
 import NotFound from "@/pages/not-found";
 
@@ -31,6 +36,11 @@ function Router() {
       <Route path="/beleggingsrente-calculator" component={BeleggingsrenteCalculatorPage} />
       <Route path="/deposito-calculator" component={DepositoCalculatorPage} />
       <Route path="/kredietvergelijker-belgie" component={KredietvergelijkerBelgie} />
+      <Route path="/wettelijke-rentevoet-belgie" component={WettelijkeRentevoetBelgie} />
+      <Route path="/roerende-voorheffing-calculator" component={RoerendeVoorheffingCalculator} />
+      <Route path="/reele-rente-berekenen" component={ReeleRenteBerekenen} />
+      <Route path="/geldontwaarding-calculator" component={GeldontwaardigCalculator} />
+      <Route path="/lening-herfinancieren" component={LeningHerfinancieren} />
       <Route path="/sitemap" component={Sitemap} />
       <Route component={NotFound} />
     </Switch>
