@@ -3,6 +3,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import SpaarrenteCalculator from "@/components/calculators/spaarrente-calculator";
 import AdPlaceholder from "@/components/ui/ad-placeholder";
+import RateComparisonWidget from "@/components/rate-comparison";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -22,12 +23,10 @@ export default function HoogsteSpaarrenteBelgie() {
             bereken uw interest en ontdek welke bank het meeste rendement biedt op uw spaargeld.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">💡 Actuele toprentetarieven:</p>
-            <ul className="space-y-1 text-sm opacity-90">
-              <li>• Basisrente tot 0,11% (zonder voorwaarden)</li>
-              <li>• Getrouwheidspremie tot 2,25% (met voorwaarden)</li>
-              <li>• Termijnrekeningen tot 3,00% (vastgezet kapitaal)</li>
-            </ul>
+            <p className="text-lg font-semibold mb-2">💡 Actuele toprentetarieven van Belgische banken:</p>
+            <p className="text-sm opacity-90">
+              Ontdek hieronder de beste spaarrekeningen met real-time bijgewerkte rentes van alle grote Belgische banken.
+            </p>
           </div>
         </div>
       </section>
@@ -46,6 +45,14 @@ export default function HoogsteSpaarrenteBelgie() {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-8">
             
+            {/* Live Rate Comparison */}
+            <RateComparisonWidget 
+              productType="spaarrekening"
+              title="🏆 Hoogste Spaarrentes België 2025"
+              showTop={6}
+              className="mb-8"
+            />
+
             {/* Calculator Section */}
             <Card>
               <CardHeader>

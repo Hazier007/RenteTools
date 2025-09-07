@@ -25,6 +25,9 @@ import Privacy from "@/pages/privacy";
 import Voorwaarden from "@/pages/voorwaarden";
 import Sitemap from "@/pages/sitemap";
 import AdminPage from "@/pages/admin";
+import KasbonCalculatorPage from "@/pages/kasbon-calculator";
+import ETFCalculatorPage from "@/pages/etf-calculator";
+import PensioenCalculatorPage from "@/pages/pensioen-calculator";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -51,6 +54,9 @@ function Router() {
       <Route path="/voorwaarden" component={Voorwaarden} />
       <Route path="/sitemap" component={Sitemap} />
       <Route path="/admin" component={AdminPage} />
+      <Route path="/kasbon-calculator" component={KasbonCalculatorPage} />
+      <Route path="/etf-calculator" component={ETFCalculatorPage} />
+      <Route path="/pensioen-calculator" component={PensioenCalculatorPage} />
       <Route component={NotFound} />
     </Switch>
   );

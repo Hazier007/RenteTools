@@ -3,6 +3,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import HypotheekCalculator from "@/components/calculators/hypotheek-calculator";
 import AdPlaceholder from "@/components/ui/ad-placeholder";
+import RateComparisonWidget from "@/components/rate-comparison";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -22,12 +23,10 @@ export default function HypothecaireLningBerekenen() {
             hypotheekscenario's. Ontdek wat u kunt lenen en plan uw woonfinanciering.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">🏠 Hypotheektarieven 2025:</p>
-            <ul className="space-y-1 text-sm opacity-90">
-              <li>• Vaste rente 20 jaar: vanaf 2,8%</li>
-              <li>• Vaste rente 25 jaar: vanaf 3,1%</li>
-              <li>• Variabele rente: vanaf 2,5%</li>
-            </ul>
+            <p className="text-lg font-semibold mb-2">🏠 Actuele hypotheektarieven van Belgische banken:</p>
+            <p className="text-sm opacity-90">
+              Vergelijk hieronder de laagste woonkrediettarieven en vind de beste hypotheek voor uw situatie.
+            </p>
           </div>
         </div>
       </section>
@@ -45,6 +44,14 @@ export default function HypothecaireLningBerekenen() {
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-3 space-y-8">
             
+            {/* Live Rate Comparison */}
+            <RateComparisonWidget 
+              productType="hypotheek"
+              title="🏠 Laagste Hypotheektarieven België 2025"
+              showTop={5}
+              className="mb-8"
+            />
+
             {/* Calculator */}
             <Card>
               <CardHeader>
