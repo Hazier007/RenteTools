@@ -67,6 +67,46 @@ export default function Sitemap() {
                     Deposito Calculator - Termijnrekening Rendement Berekenen
                   </a>
                 </li>
+                <li>
+                  <a href="/termijnrekening-calculator" className="text-primary hover:underline">
+                    Termijnrekening Calculator - Deposito Rendement Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/kinderrekening-calculator" className="text-primary hover:underline">
+                    Kinderrekening Calculator - Sparen voor Kinderen
+                  </a>
+                </li>
+                <li>
+                  <a href="/noodfonds-calculator" className="text-primary hover:underline">
+                    Noodfonds Calculator - Emergency Fund Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/spaarrekening-vergelijker" className="text-primary hover:underline">
+                    Spaarrekening Vergelijker - Beste Spaarrentes België
+                  </a>
+                </li>
+                <li>
+                  <a href="/loyalty-bonus-calculator" className="text-primary hover:underline">
+                    Loyalty Bonus Calculator - Getrouwheidspremie Optimaliseren
+                  </a>
+                </li>
+                <li>
+                  <a href="/vakantiegeld-sparen-calculator" className="text-primary hover:underline">
+                    Vakantiegeld Sparen Calculator - Dubbel Vakantiegeld Optimaliseren
+                  </a>
+                </li>
+                <li>
+                  <a href="/groepssparen-calculator" className="text-primary hover:underline">
+                    Groepssparen Calculator - Samen Sparen voor Doelen
+                  </a>
+                </li>
+                <li>
+                  <a href="/eindejaarsbonus-calculator" className="text-primary hover:underline">
+                    Eindejaarsbonus Calculator - 13de Maand Optimaliseren
+                  </a>
+                </li>
               </ul>
             </CardContent>
           </Card>

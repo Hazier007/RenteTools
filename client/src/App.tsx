@@ -31,6 +31,14 @@ import PensioenCalculatorPage from "@/pages/pensioen-calculator";
 import BudgetPlannerPage from "@/pages/budget-planner";
 import StudieschuldCalculatorPage from "@/pages/studieschuld-calculator";
 import KredietkaartCalculatorPage from "@/pages/kredietkaart-calculator";
+import TermijnrekeningCalculatorPage from "@/pages/termijnrekening-calculator";
+import KinderrekeningCalculatorPage from "@/pages/kinderrekening-calculator";
+import NoodfondsCalculatorPage from "@/pages/noodfonds-calculator";
+import SpaarrekeningVergelijkerPage from "@/pages/spaarrekening-vergelijker";
+import LoyaltyBonusCalculatorPage from "@/pages/loyalty-bonus-calculator";
+import VakantiegeldSparenCalculatorPage from "@/pages/vakantiegeld-sparen-calculator";
+import GroepssparenCalculatorPage from "@/pages/groepssparen-calculator";
+import EindejaarsbonosCalculatorPage from "@/pages/eindejaarsbonus-calculator";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -63,6 +71,14 @@ function Router() {
       <Route path="/budget-planner" component={BudgetPlannerPage} />
       <Route path="/studieschuld-calculator" component={StudieschuldCalculatorPage} />
       <Route path="/kredietkaart-calculator" component={KredietkaartCalculatorPage} />
+      <Route path="/termijnrekening-calculator" component={TermijnrekeningCalculatorPage} />
+      <Route path="/kinderrekening-calculator" component={KinderrekeningCalculatorPage} />
+      <Route path="/noodfonds-calculator" component={NoodfondsCalculatorPage} />
+      <Route path="/spaarrekening-vergelijker" component={SpaarrekeningVergelijkerPage} />
+      <Route path="/loyalty-bonus-calculator" component={LoyaltyBonusCalculatorPage} />
+      <Route path="/vakantiegeld-sparen-calculator" component={VakantiegeldSparenCalculatorPage} />
+      <Route path="/groepssparen-calculator" component={GroepssparenCalculatorPage} />
+      <Route path="/eindejaarsbonus-calculator" component={EindejaarsbonosCalculatorPage} />
       <Route component={NotFound} />
     </Switch>
   );
