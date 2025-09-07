@@ -4,8 +4,12 @@ import { z } from "zod";
 import { 
   spaarrenteCalculationSchema, 
   samengesteldeRenteSchema, 
-  hypotheekCalculationSchema 
+  hypotheekCalculationSchema,
+  insertBankSchema,
+  insertProductSchema,
+  insertRateSchema
 } from "@shared/schema";
+import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Spaarrente calculation endpoint
@@ -73,6 +77,302 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(result);
     } catch (error) {
       res.status(400).json({ error: "Invalid input data" });
+    }
+  });
+
+  // Banking API Routes
+  
+  // Banks endpoints
+  app.get("/api/banks", async (req, res) => {
+    try {
+      const banks = await storage.getBanks();
+      res.json(banks);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch banks" });
+    }
+  });
+
+  app.get("/api/banks/:id", async (req, res) => {
+    try {
+      const bank = await storage.getBank(req.params.id);
+      if (!bank) {
+        return res.status(404).json({ error: "Bank not found" });
+      }
+      res.json(bank);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch bank" });
+    }
+  });
+
+  app.get("/api/banks/:id/products", async (req, res) => {
+    try {
+      const bankWithProducts = await storage.getBankWithProducts(req.params.id);
+      if (!bankWithProducts) {
+        return res.status(404).json({ error: "Bank not found" });
+      }
+      res.json(bankWithProducts);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch bank with products" });
+    }
+  });
+
+  app.post("/api/banks", async (req, res) => {
+    try {
+      const data = insertBankSchema.parse(req.body);
+      const bank = await storage.createBank(data);
+      res.status(201).json(bank);
+    } catch (error: any) {
+      if (error.issues) {
+        res.status(400).json({ error: "Validation error", details: error.issues });
+      } else {
+        res.status(500).json({ error: "Failed to create bank" });
+      }
+    }
+  });
+
+  app.put("/api/banks/:id", async (req, res) => {
+    try {
+      const data = insertBankSchema.partial().parse(req.body);
+      const bank = await storage.updateBank(req.params.id, data);
+      if (!bank) {
+        return res.status(404).json({ error: "Bank not found" });
+      }
+      res.json(bank);
+    } catch (error: any) {
+      if (error.issues) {
+        res.status(400).json({ error: "Validation error", details: error.issues });
+      } else {
+        res.status(500).json({ error: "Failed to update bank" });
+      }
+    }
+  });
+
+  app.delete("/api/banks/:id", async (req, res) => {
+    try {
+      const success = await storage.deleteBank(req.params.id);
+      if (!success) {
+        return res.status(404).json({ error: "Bank not found" });
+      }
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete bank" });
+    }
+  });
+
+  // Products endpoints
+  app.get("/api/products", async (req, res) => {
+    try {
+      const { type, bankId } = req.query;
+      let products;
+      
+      if (type) {
+        products = await storage.getProductsByType(type as string);
+      } else if (bankId) {
+        products = await storage.getProductsByBank(bankId as string);
+      } else {
+        products = await storage.getProducts();
+      }
+      
+      res.json(products);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch products" });
+    }
+  });
+
+  app.get("/api/products/:id", async (req, res) => {
+    try {
+      const product = await storage.getProduct(req.params.id);
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+      res.json(product);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch product" });
+    }
+  });
+
+  app.get("/api/products/:id/details", async (req, res) => {
+    try {
+      const productDetails = await storage.getProductWithDetails(req.params.id);
+      if (!productDetails) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+      res.json(productDetails);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch product details" });
+    }
+  });
+
+  app.post("/api/products", async (req, res) => {
+    try {
+      const data = insertProductSchema.parse(req.body);
+      const product = await storage.createProduct(data);
+      res.status(201).json(product);
+    } catch (error: any) {
+      if (error.issues) {
+        res.status(400).json({ error: "Validation error", details: error.issues });
+      } else {
+        res.status(500).json({ error: "Failed to create product" });
+      }
+    }
+  });
+
+  app.put("/api/products/:id", async (req, res) => {
+    try {
+      const data = insertProductSchema.partial().parse(req.body);
+      const product = await storage.updateProduct(req.params.id, data);
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+      res.json(product);
+    } catch (error: any) {
+      if (error.issues) {
+        res.status(400).json({ error: "Validation error", details: error.issues });
+      } else {
+        res.status(500).json({ error: "Failed to update product" });
+      }
+    }
+  });
+
+  app.delete("/api/products/:id", async (req, res) => {
+    try {
+      const success = await storage.deleteProduct(req.params.id);
+      if (!success) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete product" });
+    }
+  });
+
+  // Rates endpoints
+  app.get("/api/rates", async (req, res) => {
+    try {
+      const { productId } = req.query;
+      let rates;
+      
+      if (productId) {
+        rates = await storage.getRatesByProduct(productId as string);
+      } else {
+        rates = await storage.getRates();
+      }
+      
+      res.json(rates);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch rates" });
+    }
+  });
+
+  app.get("/api/rates/:id", async (req, res) => {
+    try {
+      const rate = await storage.getRate(req.params.id);
+      if (!rate) {
+        return res.status(404).json({ error: "Rate not found" });
+      }
+      res.json(rate);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch rate" });
+    }
+  });
+
+  app.post("/api/rates", async (req, res) => {
+    try {
+      const data = insertRateSchema.parse(req.body);
+      const rate = await storage.createRate(data);
+      res.status(201).json(rate);
+    } catch (error: any) {
+      if (error.issues) {
+        res.status(400).json({ error: "Validation error", details: error.issues });
+      } else {
+        res.status(500).json({ error: "Failed to create rate" });
+      }
+    }
+  });
+
+  app.put("/api/rates/:id", async (req, res) => {
+    try {
+      const data = insertRateSchema.partial().parse(req.body);
+      const rate = await storage.updateRate(req.params.id, data);
+      if (!rate) {
+        return res.status(404).json({ error: "Rate not found" });
+      }
+      res.json(rate);
+    } catch (error: any) {
+      if (error.issues) {
+        res.status(400).json({ error: "Validation error", details: error.issues });
+      } else {
+        res.status(500).json({ error: "Failed to update rate" });
+      }
+    }
+  });
+
+  app.delete("/api/rates/:id", async (req, res) => {
+    try {
+      const success = await storage.deleteRate(req.params.id);
+      if (!success) {
+        return res.status(404).json({ error: "Rate not found" });
+      }
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete rate" });
+    }
+  });
+
+  // Rate comparison endpoints
+  app.get("/api/compare/savings", async (req, res) => {
+    try {
+      const { minAmount, maxAmount } = req.query;
+      const comparison = await storage.compareSavingsRates(
+        minAmount ? parseFloat(minAmount as string) : undefined,
+        maxAmount ? parseFloat(maxAmount as string) : undefined
+      );
+      res.json(comparison);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to compare savings rates" });
+    }
+  });
+
+  app.get("/api/compare/mortgage", async (req, res) => {
+    try {
+      const { amount, term } = req.query;
+      if (!amount || !term) {
+        return res.status(400).json({ error: "Amount and term are required" });
+      }
+      
+      const comparison = await storage.compareMortgageRates(
+        parseFloat(amount as string),
+        parseInt(term as string)
+      );
+      res.json(comparison);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to compare mortgage rates" });
+    }
+  });
+
+  app.get("/api/compare/personal-loans", async (req, res) => {
+    try {
+      const { amount, term } = req.query;
+      if (!amount || !term) {
+        return res.status(400).json({ error: "Amount and term are required" });
+      }
+      
+      const comparison = await storage.comparePersonalLoanRates(
+        parseFloat(amount as string),
+        parseInt(term as string)
+      );
+      res.json(comparison);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to compare personal loan rates" });
+    }
+  });
+
+  app.get("/api/rates/by-type/:type", async (req, res) => {
+    try {
+      const comparison = await storage.getCurrentRatesByType(req.params.type);
+      res.json(comparison);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch rates by type" });
     }
   });
 
