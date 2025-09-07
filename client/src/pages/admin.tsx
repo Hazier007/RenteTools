@@ -15,30 +15,13 @@ import { useAdminAuth } from "@/hooks/useAdminAuth";
 import AdminLogin from "@/components/admin-login";
 import type { Bank, Product, Rate } from "@shared/schema";
 
-export default function AdminPage() {
-  const { isAuthenticated, isLoading, login, logout } = useAdminAuth();
+function AdminDashboard() {
+  const { logout } = useAdminAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState("banks");
 
-  // Show loading state
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Laden...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Show login form if not authenticated
-  if (!isAuthenticated) {
-    return <AdminLogin onLogin={login} />;
-  }
-
-  // Fetch data
+  // Fetch data - these hooks are always called since this component only renders when authenticated
   const { data: banks = [] } = useQuery<Bank[]>({ queryKey: ["/api/banks"] });
   const { data: products = [] } = useQuery<Product[]>({ queryKey: ["/api/products"] });
   const { data: rates = [] } = useQuery<Rate[]>({ queryKey: ["/api/rates"] });
@@ -512,4 +495,28 @@ function RatesManager({ rates, products, banks }: { rates: Rate[]; products: Pro
       </div>
     </div>
   );
+}
+
+export default function AdminPage() {
+  const { isAuthenticated, isLoading, login } = useAdminAuth();
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return <AdminLogin onLogin={login} />;
+  }
+
+  // Show admin dashboard when authenticated
+  return <AdminDashboard />;
 }
