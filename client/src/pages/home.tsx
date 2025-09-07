@@ -34,6 +34,60 @@ export default function Home() {
         iconColor: "text-purple-600",
         link: "/deposito-calculator",
         features: ["Termijnrekeningen", "Deposito vergelijken", "Vaste rente"]
+      },
+      {
+        title: "Spaarrekening Vergelijker",
+        description: "Vergelijk alle spaarrekeningen van Belgische banken in real-time. Vind de hoogste spaarrente.",
+        icon: "fas fa-balance-scale",
+        color: "bg-indigo-50 dark:bg-indigo-950 border-indigo-200 dark:border-indigo-800",
+        iconColor: "text-indigo-600",
+        link: "/spaarrekening-vergelijker",
+        features: ["Real-time vergelijking", "Belgische banken", "Hoogste rentes"]
+      },
+      {
+        title: "Kinderrekening Calculator",
+        description: "Plan het sparen voor uw kinderen. Bereken hoeveel u nodig heeft voor studies en toekomstige doelen.",
+        icon: "fas fa-child",
+        color: "bg-pink-50 dark:bg-pink-950 border-pink-200 dark:border-pink-800",
+        iconColor: "text-pink-600",
+        link: "/kinderrekening-calculator",
+        features: ["Studiekosten", "Toekomstige waarde", "Spaarplanning"]
+      },
+      {
+        title: "Noodfonds Calculator",
+        description: "Bereken hoeveel u moet sparen voor onverwachte gebeurtenissen en financiële zekerheid.",
+        icon: "fas fa-shield-alt",
+        color: "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800",
+        iconColor: "text-red-600",
+        link: "/noodfonds-calculator",
+        features: ["Emergency fund", "Financiële zekerheid", "Risicobeheer"]
+      },
+      {
+        title: "Vakantiegeld Sparen",
+        description: "Optimaliseer uw vakantiegeld en dubbel vakantiegeld voor maximaal rendement.",
+        icon: "fas fa-umbrella-beach",
+        color: "bg-cyan-50 dark:bg-cyan-950 border-cyan-200 dark:border-cyan-800",
+        iconColor: "text-cyan-600",
+        link: "/vakantiegeld-sparen-calculator",
+        features: ["Dubbel vakantiegeld", "Spaarstrategie", "Optimalisatie"]
+      },
+      {
+        title: "Groepssparen Calculator",
+        description: "Plan en bereken groepssparen met vrienden, familie of collega's voor gezamenlijke doelen.",
+        icon: "fas fa-users",
+        color: "bg-emerald-50 dark:bg-emerald-950 border-emerald-200 dark:border-emerald-800",
+        iconColor: "text-emerald-600",
+        link: "/groepssparen-calculator",
+        features: ["Gezamenlijke doelen", "Groepsplanning", "Fair verdeling"]
+      },
+      {
+        title: "Eindejaarsbonus Calculator",
+        description: "Bereken uw 13de maand en ontdek de beste strategie om dit extra geld te benutten.",
+        icon: "fas fa-gift",
+        color: "bg-amber-50 dark:bg-amber-950 border-amber-200 dark:border-amber-800",
+        iconColor: "text-amber-600",
+        link: "/eindejaarsbonus-calculator",
+        features: ["13de maand", "Optimalisatie", "Spaar vs investeer"]
       }
     ],
     lenen: [
@@ -172,7 +226,7 @@ export default function Home() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-                <div className="text-3xl font-bold">16+</div>
+                <div className="text-3xl font-bold">35+</div>
                 <div className="text-sm opacity-80">Calculators</div>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
@@ -208,11 +262,11 @@ export default function Home() {
             Sparen
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Optimaliseer uw spaargeld met onze professionele rekenhulpen. Van spaarrekeningen tot deposito's.
+            Optimaliseer uw spaargeld met onze uitgebreide collectie professionele spaartools. Van spaarrekeningen tot speciale spaarproducten.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {calculatorCategories.sparen.map((calc, index) => (
             <Card key={index} className={`${calc.color} hover:shadow-xl transition-all duration-300 hover:scale-105`}>
               <CardHeader>
