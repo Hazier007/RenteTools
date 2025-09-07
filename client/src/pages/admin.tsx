@@ -10,13 +10,33 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Pencil, Trash2, Building2, CreditCard, TrendingUp } from "lucide-react";
+import { Plus, Pencil, Trash2, Building2, CreditCard, TrendingUp, LogOut } from "lucide-react";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
+import AdminLogin from "@/components/admin-login";
 import type { Bank, Product, Rate } from "@shared/schema";
 
 export default function AdminPage() {
+  const { isAuthenticated, isLoading, login, logout } = useAdminAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState("banks");
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return <AdminLogin onLogin={login} />;
+  }
 
   // Fetch data
   const { data: banks = [] } = useQuery<Bank[]>({ queryKey: ["/api/banks"] });
@@ -27,10 +47,18 @@ export default function AdminPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Beheer banken, producten en rentevoeten voor Interesten.be
-          </p>
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
+                Beheer banken, producten en rentevoeten voor Interesten.be
+              </p>
+            </div>
+            <Button variant="outline" onClick={logout} data-testid="button-admin-logout">
+              <LogOut size={16} className="mr-2" />
+              Uitloggen
+            </Button>
+          </div>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
@@ -279,7 +307,12 @@ function BankForm({
         </div>
         <div>
           <Label htmlFor="type">Type Bank</Label>
-          <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
+          <Select 
+            value={formData.type} 
+            onValueChange={(value: "retail" | "online" | "cooperative" | "investment") => 
+              setFormData({ ...formData, type: value })
+            }
+          >
             <SelectTrigger data-testid="select-bank-type">
               <SelectValue />
             </SelectTrigger>
