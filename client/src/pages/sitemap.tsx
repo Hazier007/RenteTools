@@ -107,11 +107,6 @@ export default function Sitemap() {
                     Eindejaarsbonus Calculator - 13de Maand Optimaliseren
                   </a>
                 </li>
-                <li>
-                  <a href="/eindejaarsbonus-calculator" className="text-primary hover:underline">
-                    Eindejaarsbonus Calculator - 13de Maand Optimaliseren
-                  </a>
-                </li>
               </ul>
             </CardContent>
           </Card>

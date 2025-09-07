@@ -26,6 +26,31 @@ export default function SpaarrekeningVergelijkerPage() {
       meta.content = 'Vergelijk alle spaarrekeningen van Belgische banken in real-time. Vind de hoogste spaarrente en ontdek welke bank het meeste rendement biedt op uw spaargeld.';
       document.head.appendChild(meta);
     }
+    
+    // Add structured data for SEO
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Spaarrekening Vergelijker België",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web Browser",
+      "description": "Vergelijk alle spaarrekeningen van Belgische banken in real-time en vind de hoogste spaarrente.",
+      "url": "https://interesten.be/spaarrekening-vergelijker",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "Interesten.be"
+      }
+    };
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
   }, []);
   const [bedrag, setBedrag] = useState<number>(25000);
   const [filterType, setFilterType] = useState<string>("alle");
