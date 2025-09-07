@@ -117,27 +117,84 @@ export default function Privacy() {
               </CardTitle>
             </CardHeader>
             <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <p className="text-lg mb-6">
+                Onze website gebruikt cookies om uw ervaring te verbeteren en relevante advertenties te tonen. 
+                U kunt uw cookie voorkeuren beheren via de banner die verschijnt bij uw eerste bezoek.
+              </p>
+              
               <h3>Soorten Cookies</h3>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold">Essentiële Cookies</h4>
-                  <p>Noodzakelijk voor het functioneren van de website (bijvoorbeeld donkere modus voorkeur)</p>
+              <div className="space-y-6">
+                <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
+                  <h4 className="font-semibold flex items-center">
+                    <i className="fas fa-check-circle text-green-600 mr-2"></i>
+                    Noodzakelijke Cookies
+                  </h4>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Deze cookies zijn essentieel voor de werking van de website en kunnen niet worden uitgeschakeld.
+                  </p>
+                  <ul className="text-sm mt-2">
+                    <li>• Sessie cookies voor website functionaliteit</li>
+                    <li>• Cookie consent voorkeuren opslag</li>
+                    <li>• Dark mode en taalvoorkeuren</li>
+                  </ul>
                 </div>
-                <div>
-                  <h4 className="font-semibold">Analytics Cookies</h4>
-                  <p>Google Analytics voor het meten van websiteverkeer en gebruikersgedrag</p>
+
+                <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
+                  <h4 className="font-semibold flex items-center">
+                    <i className="fas fa-chart-bar text-blue-600 mr-2"></i>
+                    Analytische Cookies - Google Analytics (G-P5BE4RN7QX)
+                  </h4>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    We gebruiken Google Analytics om websitestatistieken te verzamelen. <strong>Alleen met uw toestemming.</strong>
+                  </p>
+                  <ul className="text-sm mt-2">
+                    <li>• Aantal bezoekers en paginaweergaven</li>
+                    <li>• Populairste calculators en gebruikerstrajecten</li>
+                    <li>• Technische informatie (browser, apparaat)</li>
+                    <li>• Geografische locatie (land/regio niveau)</li>
+                    <li>• Sessieduur en terugkerende bezoekers</li>
+                  </ul>
                 </div>
-                <div>
-                  <h4 className="font-semibold">Advertentie Cookies</h4>
-                  <p>Google Ads voor het tonen van relevante advertenties</p>
+
+                <div className="bg-purple-50 dark:bg-purple-950 p-4 rounded-lg">
+                  <h4 className="font-semibold flex items-center">
+                    <i className="fas fa-ad text-purple-600 mr-2"></i>
+                    Advertentie Cookies - Google AdSense
+                  </h4>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    We tonen advertenties via Google AdSense om de kosten van de website te dekken. <strong>Alleen met uw toestemming.</strong>
+                  </p>
+                  <ul className="text-sm mt-2">
+                    <li>• Relevante advertenties gebaseerd op uw interesses</li>
+                    <li>• Voorkoming van herhaaldelijke advertenties</li>
+                    <li>• Meting van advertentie-effectiviteit</li>
+                    <li>• Cross-site tracking voor personalisatie</li>
+                    <li>• Advertentie targeting en optimalisatie</li>
+                  </ul>
                 </div>
+              </div>
+
+              <h3>Uw Cookie Rechten</h3>
+              <div className="bg-yellow-50 dark:bg-yellow-950 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">🛡️ Volledige Controle Over Uw Privacy</h4>
+                <ul className="text-sm space-y-1">
+                  <li>• <strong>Vrije keuze:</strong> U kunt kiezen welke cookies u wilt accepteren</li>
+                  <li>• <strong>Intrekken toestemming:</strong> Wijzig uw voorkeuren op elk moment</li>
+                  <li>• <strong>Browser controle:</strong> Beheer cookies in uw browserinstellingen</li>
+                  <li>• <strong>Geen verplichting:</strong> Bij weigering functioneert de website nog steeds volledig</li>
+                  <li>• <strong>Transparantie:</strong> Alle tracking is duidelijk gecommuniceerd</li>
+                </ul>
               </div>
 
               <h3>Cookie Beheer</h3>
               <p>
-                U kunt cookies beheren via uw browserinstellingen. Het uitschakelen van cookies 
-                kan de functionaliteit van onze website beperken.
+                U kunt uw cookie voorkeuren op drie manieren beheren:
               </p>
+              <ol className="text-sm">
+                <li><strong>Via onze cookie banner:</strong> Bij uw eerste bezoek verschijnt een banner</li>
+                <li><strong>Via browserinstellingen:</strong> Alle browsers hebben cookie beheeropties</li>
+                <li><strong>Via opt-out tools:</strong> Google biedt advertentie opt-out mogelijkheden</li>
+              </ol>
             </CardContent>
           </Card>
 
