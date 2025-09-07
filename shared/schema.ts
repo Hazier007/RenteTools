@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { pgTable, text, integer, decimal, boolean, timestamp, uuid, pgEnum } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
 
 // Spaarrente calculation schema
 export const spaarrenteCalculationSchema = z.object({
@@ -32,3 +34,147 @@ export const hypotheekCalculationSchema = z.object({
 export type SpaarrenteCalculation = z.infer<typeof spaarrenteCalculationSchema>;
 export type SamengesteldeRenteCalculation = z.infer<typeof samengesteldeRenteSchema>;
 export type HypotheekCalculation = z.infer<typeof hypotheekCalculationSchema>;
+
+// Database Schema for Banking System
+
+// Enums for database
+export const bankTypeEnum = pgEnum('bank_type', ['retail', 'online', 'cooperative', 'investment']);
+export const productTypeEnum = pgEnum('product_type', [
+  'spaarrekening', 'deposito', 'hypotheek', 'persoonlijke_lening', 'autolening',
+  'kredietkaart', 'beleggingsrekening', 'pensioensparen', 'kasbon', 'staatsbons'
+]);
+export const rateTypeEnum = pgEnum('rate_type', ['fixed', 'variable', 'promotional']);
+
+// Banks table
+export const banksTable = pgTable('banks', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  shortName: text('short_name').notNull(),
+  website: text('website'),
+  logoUrl: text('logo_url'),
+  type: bankTypeEnum('type').notNull(),
+  bic: text('bic'),
+  phone: text('phone'),
+  email: text('email'),
+  description: text('description'),
+  isActive: boolean('is_active').default(true),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+// Financial products table
+export const productsTable = pgTable('products', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  bankId: uuid('bank_id').references(() => banksTable.id).notNull(),
+  name: text('name').notNull(),
+  productType: productTypeEnum('product_type').notNull(),
+  description: text('description'),
+  minAmount: decimal('min_amount', { precision: 12, scale: 2 }),
+  maxAmount: decimal('max_amount', { precision: 12, scale: 2 }),
+  minTerm: integer('min_term'), // in months
+  maxTerm: integer('max_term'), // in months
+  fees: text('fees'), // JSON string for complex fee structure
+  conditions: text('conditions'),
+  isActive: boolean('is_active').default(true),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+// Interest rates table
+export const ratesTable = pgTable('rates', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  productId: uuid('product_id').references(() => productsTable.id).notNull(),
+  rateType: rateTypeEnum('rate_type').notNull(),
+  baseRate: decimal('base_rate', { precision: 5, scale: 2 }).notNull(),
+  loyaltyBonus: decimal('loyalty_bonus', { precision: 5, scale: 2 }).default('0'),
+  promotionalRate: decimal('promotional_rate', { precision: 5, scale: 2 }),
+  promotionalPeriod: integer('promotional_period'), // in months
+  effectiveDate: timestamp('effective_date').notNull(),
+  expiryDate: timestamp('expiry_date'),
+  minAmount: decimal('min_amount', { precision: 12, scale: 2 }),
+  maxAmount: decimal('max_amount', { precision: 12, scale: 2 }),
+  notes: text('notes'),
+  isActive: boolean('is_active').default(true),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+// Rate history for tracking changes
+export const rateHistoryTable = pgTable('rate_history', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  rateId: uuid('rate_id').references(() => ratesTable.id).notNull(),
+  oldRate: decimal('old_rate', { precision: 5, scale: 2 }),
+  newRate: decimal('new_rate', { precision: 5, scale: 2 }),
+  changeDate: timestamp('change_date').defaultNow(),
+  changeReason: text('change_reason'),
+  changedBy: text('changed_by'), // admin user identifier
+});
+
+// Zod schemas for API validation
+export const insertBankSchema = createInsertSchema(banksTable, {
+  name: z.string().min(1, "Bank naam is verplicht"),
+  shortName: z.string().min(1, "Korte naam is verplicht"),
+  website: z.string().url("Ongeldige website URL").optional(),
+  email: z.string().email("Ongeldig e-mailadres").optional(),
+}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertProductSchema = createInsertSchema(productsTable, {
+  name: z.string().min(1, "Product naam is verplicht"),
+  minAmount: z.string().optional(),
+  maxAmount: z.string().optional(),
+}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertRateSchema = createInsertSchema(ratesTable, {
+  baseRate: z.string().min(1, "Basisrente is verplicht"),
+  loyaltyBonus: z.string().optional(),
+  promotionalRate: z.string().optional(),
+}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+// Types for TypeScript
+export type Bank = typeof banksTable.$inferSelect;
+export type InsertBank = z.infer<typeof insertBankSchema>;
+export type Product = typeof productsTable.$inferSelect;
+export type InsertProduct = z.infer<typeof insertProductSchema>;
+export type Rate = typeof ratesTable.$inferSelect;
+export type InsertRate = z.infer<typeof insertRateSchema>;
+export type RateHistory = typeof rateHistoryTable.$inferSelect;
+
+// API Response types
+export type BankWithProducts = Bank & {
+  products: (Product & {
+    currentRate?: Rate;
+  })[];
+};
+
+export type ProductWithDetails = Product & {
+  bank: Bank;
+  currentRate: Rate | null;
+  rateHistory: RateHistory[];
+};
+
+// Rate comparison types
+export type RateComparison = {
+  productType: string;
+  rates: {
+    bankName: string;
+    productName: string;
+    baseRate: number;
+    loyaltyBonus: number;
+    totalRate: number;
+    minAmount: number | null;
+    maxAmount: number | null;
+    conditions: string | null;
+  }[];
+};
