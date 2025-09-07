@@ -28,6 +28,9 @@ import AdminPage from "@/pages/admin";
 import KasbonCalculatorPage from "@/pages/kasbon-calculator";
 import ETFCalculatorPage from "@/pages/etf-calculator";
 import PensioenCalculatorPage from "@/pages/pensioen-calculator";
+import BudgetPlannerPage from "@/pages/budget-planner";
+import StudieschuldCalculatorPage from "@/pages/studieschuld-calculator";
+import KredietkaartCalculatorPage from "@/pages/kredietkaart-calculator";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -57,6 +60,9 @@ function Router() {
       <Route path="/kasbon-calculator" component={KasbonCalculatorPage} />
       <Route path="/etf-calculator" component={ETFCalculatorPage} />
       <Route path="/pensioen-calculator" component={PensioenCalculatorPage} />
+      <Route path="/budget-planner" component={BudgetPlannerPage} />
+      <Route path="/studieschuld-calculator" component={StudieschuldCalculatorPage} />
+      <Route path="/kredietkaart-calculator" component={KredietkaartCalculatorPage} />
       <Route component={NotFound} />
     </Switch>
   );
