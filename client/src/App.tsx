@@ -24,6 +24,7 @@ import OverOns from "@/pages/over-ons";
 import Privacy from "@/pages/privacy";
 import Voorwaarden from "@/pages/voorwaarden";
 import Sitemap from "@/pages/sitemap";
+import AdminPage from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -49,6 +50,7 @@ function Router() {
       <Route path="/privacy" component={Privacy} />
       <Route path="/voorwaarden" component={Voorwaarden} />
       <Route path="/sitemap" component={Sitemap} />
+      <Route path="/admin" component={AdminPage} />
       <Route component={NotFound} />
     </Switch>
   );
