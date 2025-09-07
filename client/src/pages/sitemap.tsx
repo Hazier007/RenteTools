@@ -99,7 +99,12 @@ export default function Sitemap() {
                 </li>
                 <li>
                   <a href="/groepssparen-calculator" className="text-primary hover:underline">
-                    Groepssparen Calculator - Samen Sparen voor Doelen
+                    Groepssparen Calculator - Samen Sparen voor Gezamenlijke Doelen
+                  </a>
+                </li>
+                <li>
+                  <a href="/eindejaarsbonus-calculator" className="text-primary hover:underline">
+                    Eindejaarsbonus Calculator - 13de Maand Optimaliseren
                   </a>
                 </li>
                 <li>

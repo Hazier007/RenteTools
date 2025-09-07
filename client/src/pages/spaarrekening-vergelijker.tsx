@@ -12,8 +12,21 @@ import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { Building2, Star, TrendingUp, Filter, ArrowUpDown } from "lucide-react";
 import type { RateComparison } from "@shared/schema";
+import { useEffect } from 'react';
 
 export default function SpaarrekeningVergelijkerPage() {
+  useEffect(() => {
+    document.title = "Spaarrekening Vergelijker België - Beste Spaarrentes 2025";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Vergelijk alle spaarrekeningen van Belgische banken in real-time. Vind de hoogste spaarrente en ontdek welke bank het meeste rendement biedt op uw spaargeld.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Vergelijk alle spaarrekeningen van Belgische banken in real-time. Vind de hoogste spaarrente en ontdek welke bank het meeste rendement biedt op uw spaargeld.';
+      document.head.appendChild(meta);
+    }
+  }, []);
   const [bedrag, setBedrag] = useState<number>(25000);
   const [filterType, setFilterType] = useState<string>("alle");
   const [sortBy, setSortBy] = useState<string>("totalRate");

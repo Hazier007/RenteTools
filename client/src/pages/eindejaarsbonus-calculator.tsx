@@ -9,8 +9,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
+import { useEffect } from 'react';
 
 export default function EindejaarsbonosCalculatorPage() {
+  useEffect(() => {
+    document.title = "Eindejaarsbonus Calculator België - 13de Maand Optimaliseren";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Bereken uw eindejaarsbonus (13de maand) en ontdek de beste strategie om dit extra geld optimaal in te zetten: sparen, beleggen, schulden aflossen of investeren.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Bereken uw eindejaarsbonus (13de maand) en ontdek de beste strategie om dit extra geld optimaal in te zetten: sparen, beleggen, schulden aflossen of investeren.';
+      document.head.appendChild(meta);
+    }
+  }, []);
   const [brutoMaandloon, setBrutoMaandloon] = useState<number>(3500);
   const [werkRegime, setWerkRegime] = useState<string>("voltijds");
   const [bedrijfBonus, setBedrijfBonus] = useState<number>(0);

@@ -9,8 +9,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { useEffect } from 'react';
 
 export default function LoyaltyBonusCalculatorPage() {
+  useEffect(() => {
+    document.title = "Getrouwheidspremie Calculator België - Loyalty Bonus Optimaliseren";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Bereken of het de moeite loont om van bank te wisselen en hoelang u moet wachten om te profiteren van getrouwheidspremies bij Belgische banken.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Bereken of het de moeite loont om van bank te wisselen en hoelang u moet wachten om te profiteren van getrouwheidspremies bij Belgische banken.';
+      document.head.appendChild(meta);
+    }
+  }, []);
   const [spaarbedrag, setSpaarbedrag] = useState<number>(15000);
   const [huidigeBank, setHuidigeBank] = useState<string>("KBC");
   const [huidigeRente, setHuidigeRente] = useState<number>(1.8);

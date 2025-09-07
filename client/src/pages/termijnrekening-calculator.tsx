@@ -10,8 +10,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { useEffect } from 'react';
 
 export default function TermijnrekeningCalculatorPage() {
+  useEffect(() => {
+    document.title = "Termijnrekening Calculator België - Deposito Rendement Berekenen";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Bereken het rendement van uw termijnrekening en vergelijk de beste deposito tarieven van Belgische banken. Ontdek welke looptijd het meeste oplevert voor uw spaargeld.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Bereken het rendement van uw termijnrekening en vergelijk de beste deposito tarieven van Belgische banken. Ontdek welke looptijd het meeste oplevert voor uw spaargeld.';
+      document.head.appendChild(meta);
+    }
+  }, []);
   const [bedrag, setBedrag] = useState<number>(25000);
   const [looptijd, setLooptijd] = useState<number>(12);
   const [renteType, setRenteType] = useState<string>("vast");

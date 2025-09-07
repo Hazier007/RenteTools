@@ -9,8 +9,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { useEffect } from 'react';
 
 export default function NoodfondsCalculatorPage() {
+  useEffect(() => {
+    document.title = "Noodfonds Calculator België - Emergency Fund Berekenen";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Bereken hoeveel u moet sparen voor onverwachte gebeurtenissen zoals werkloosheid, ziekte of grote uitgaven. Plan uw financiële zekerheid met een solide noodfonds.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Bereken hoeveel u moet sparen voor onverwachte gebeurtenissen zoals werkloosheid, ziekte of grote uitgaven. Plan uw financiële zekerheid met een solide noodfonds.';
+      document.head.appendChild(meta);
+    }
+  }, []);
   const [maandelijkseUitgaven, setMaandelijkseUitgaven] = useState({
     wonen: 1200,
     voeding: 400,

@@ -10,8 +10,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { useEffect } from 'react';
 
 export default function KinderrekeningCalculatorPage() {
+  useEffect(() => {
+    document.title = "Kinderrekening Calculator België - Sparen voor Kinderen";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Plan het sparen voor uw kinderen en bereken hoeveel u nodig heeft voor studies, eerste auto of andere dromen. Vergelijk kinderrekeningen van Belgische banken.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Plan het sparen voor uw kinderen en bereken hoeveel u nodig heeft voor studies, eerste auto of andere dromen. Vergelijk kinderrekeningen van Belgische banken.';
+      document.head.appendChild(meta);
+    }
+  }, []);
   const [startbedrag, setStartbedrag] = useState<number>(1000);
   const [maandelijksBedrag, setMaandelijksBedrag] = useState<number>(50);
   const [kinderLeeftijd, setKinderLeeftijd] = useState<number>(5);
