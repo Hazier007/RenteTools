@@ -55,7 +55,7 @@ export default function VakantiegeldSparenCalculatorPage() {
     
     // Strategy 1: Save entire vacation pay
     const strategie1 = {
-      naam: "Volledig vakantiegeld sparen",
+      naam: "Volledig sparen",
       inleg: vakantiegeld.netto,
       maandelijks: 0,
       beschrijving: "Leg hele vakantiegeld opzij voor volgende jaar"
@@ -63,7 +63,7 @@ export default function VakantiegeldSparenCalculatorPage() {
     
     // Strategy 2: Save vacation pay + monthly extra
     const strategie2 = {
-      naam: "Vakantiegeld + maandelijks extra",
+      naam: "Sparen + extra",
       inleg: vakantiegeld.netto,
       maandelijks: extraMaandelijks,
       beschrijving: "Vakantiegeld + €" + extraMaandelijks + " per maand extra"
@@ -72,7 +72,7 @@ export default function VakantiegeldSparenCalculatorPage() {
     // Strategy 3: Monthly spread of vacation pay
     const maandelijksVerdeling = vakantiegeld.netto / 12;
     const strategie3 = {
-      naam: "Maandelijks verdelen",
+      naam: "Maandelijks",
       inleg: 0,
       maandelijks: maandelijksVerdeling,
       beschrijving: "Vakantiegeld verdelen over 12 maanden"
@@ -431,7 +431,7 @@ export default function VakantiegeldSparenCalculatorPage() {
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={spaarStrategieen}>
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="naam" angle={-45} textAnchor="end" height={80} fontSize={8} />
+                          <XAxis dataKey="naam" angle={-45} textAnchor="end" height={100} fontSize={10} />
                           <YAxis />
                           <Tooltip 
                             formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`, 'Waarde na 5 jaar']}
