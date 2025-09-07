@@ -45,6 +45,18 @@ export const productTypeEnum = pgEnum('product_type', [
 ]);
 export const rateTypeEnum = pgEnum('rate_type', ['fixed', 'variable', 'promotional']);
 
+// Users table for admin functionality
+export const usersTable = pgTable('users', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  username: text('username').notNull().unique(),
+  password: text('password').notNull(),
+  email: text('email').notNull().unique(),
+  role: text('role').notNull().default('admin'),
+  isActive: boolean('is_active').default(true),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
 // Banks table
 export const banksTable = pgTable('banks', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -142,7 +154,19 @@ export const insertRateSchema = createInsertSchema(ratesTable, {
   updatedAt: true,
 });
 
+export const insertUserSchema = createInsertSchema(usersTable, {
+  username: z.string().min(3, "Gebruikersnaam moet minimaal 3 karakters hebben"),
+  password: z.string().min(6, "Wachtwoord moet minimaal 6 karakters hebben"),
+  email: z.string().email("Ongeldig e-mailadres"),
+}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 // Types for TypeScript
+export type User = typeof usersTable.$inferSelect;
+export type InsertUser = z.infer<typeof insertUserSchema>;
 export type Bank = typeof banksTable.$inferSelect;
 export type InsertBank = z.infer<typeof insertBankSchema>;
 export type Product = typeof productsTable.$inferSelect;
