@@ -431,7 +431,7 @@ export default function VakantiegeldSparenCalculatorPage() {
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={spaarStrategieen}>
                           <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="naam" angle={-45} textAnchor="end" height={80} />
+                          <XAxis dataKey="naam" angle={-45} textAnchor="end" height={80} fontSize={8} />
                           <YAxis />
                           <Tooltip 
                             formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`, 'Waarde na 5 jaar']}
