@@ -31,34 +31,6 @@
     <priority>0.8</priority>
   </url>
   
-  <url>
-    <loc>https://interesten.be/inflatie-calculator-belgie</loc>
-    <lastmod>2025-01-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://interesten.be/roerende-voorheffing-calculator</loc>
-    <lastmod>2025-01-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://interesten.be/reele-rente-berekenen</loc>
-    <lastmod>2025-01-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://interesten.be/geldontwaarding-calculator</loc>
-    <lastmod>2025-01-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
   <!-- Lenen Calculators -->
   <url>
     <loc>https://interesten.be/hypothecaire-lening-berekenen</loc>
@@ -96,10 +68,17 @@
   </url>
   
   <url>
-    <loc>https://interesten.be/wettelijke-rentevoet-belgie</loc>
+    <loc>https://interesten.be/studieschuld-calculator</loc>
     <lastmod>2025-01-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/kredietkaart-calculator</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   
   <!-- Beleggen Calculators -->
@@ -111,10 +90,75 @@
   </url>
   
   <url>
+    <loc>https://interesten.be/kasbon-calculator</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/etf-calculator</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Planning Calculators -->
+  <url>
     <loc>https://interesten.be/pensioensparen-calculator</loc>
     <lastmod>2025-01-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/pensioen-calculator</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/budget-planner</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/inflatie-calculator-belgie</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/reele-rente-berekenen</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/geldontwaarding-calculator</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Overige Calculators -->
+  <url>
+    <loc>https://interesten.be/wettelijke-rentevoet-belgie</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://interesten.be/roerende-voorheffing-calculator</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   
   <!-- Informatie Pagina's -->

@@ -106,6 +106,16 @@ export default function Sitemap() {
                     Lening Herfinancieren - Voordeligste Herfinanciering Berekenen
                   </a>
                 </li>
+                <li>
+                  <a href="/studieschuld-calculator" className="text-primary hover:underline">
+                    Studieschuld Calculator - Studielening Terugbetaling Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/kredietkaart-calculator" className="text-primary hover:underline">
+                    Kredietkaart Calculator - Schuld Afbetaling Berekenen
+                  </a>
+                </li>
               </ul>
             </CardContent>
           </Card>
@@ -125,6 +135,16 @@ export default function Sitemap() {
                     Beleggingsrente Calculator - Rendement Portefeuille Berekenen
                   </a>
                 </li>
+                <li>
+                  <a href="/kasbon-calculator" className="text-primary hover:underline">
+                    Kasbon Calculator - Obligatie Rendement Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/etf-calculator" className="text-primary hover:underline">
+                    ETF Calculator - Exchange Traded Funds Rendement Berekenen
+                  </a>
+                </li>
               </ul>
             </CardContent>
           </Card>
@@ -142,6 +162,16 @@ export default function Sitemap() {
                 <li>
                   <a href="/pensioensparen-calculator" className="text-primary hover:underline">
                     Pensioensparen Calculator - Derde Pijler Planning België
+                  </a>
+                </li>
+                <li>
+                  <a href="/pensioen-calculator" className="text-primary hover:underline">
+                    Pensioen Calculator - Volledige Pensioenplanning België
+                  </a>
+                </li>
+                <li>
+                  <a href="/budget-planner" className="text-primary hover:underline">
+                    Budget Planner - Persoonlijke Financiën Beheren
                   </a>
                 </li>
                 <li>
@@ -235,9 +265,9 @@ export default function Sitemap() {
           <h3>Onze Calculator Categorieën:</h3>
           <ul>
             <li><strong>Sparen:</strong> Tools voor spaarrekeningen, deposito's en samengestelde interest berekeningen</li>
-            <li><strong>Lenen:</strong> Calculators voor hypotheken, autoleningen, persoonlijke kredieten en herfinanciering</li>
-            <li><strong>Beleggen:</strong> Rendement calculators voor beleggingsportefeuilles</li>
-            <li><strong>Planning:</strong> Pensioenplanning, inflatie impact, reële rente en geldontwaarding tools</li>
+            <li><strong>Lenen:</strong> Calculators voor hypotheken, autoleningen, persoonlijke kredieten, studieleningen, kredietkaarten en herfinanciering</li>
+            <li><strong>Beleggen:</strong> Rendement calculators voor beleggingsportefeuilles, ETF's, kasbons en obligaties</li>
+            <li><strong>Planning:</strong> Pensioenplanning, budget beheer, inflatie impact, reële rente en geldontwaarding tools</li>
             <li><strong>Overige Calculators:</strong> Wettelijke rentevoet en roerende voorheffing berekeningen</li>
           </ul>
           
