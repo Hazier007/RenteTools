@@ -40,6 +40,7 @@ import VakantiegeldSparenCalculatorPage from "@/pages/vakantiegeld-sparen-calcul
 import GroepssparenCalculatorPage from "@/pages/groepssparen-calculator";
 import EindejaarsbonosCalculatorPage from "@/pages/eindejaarsbonus-calculator";
 import WoningkredietSimulatorPage from "@/pages/woningkrediet-simulator";
+import DoorlopendKredietCalculatorPage from "@/pages/doorlopend-krediet-calculator";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -81,6 +82,7 @@ function Router() {
       <Route path="/groepssparen-calculator" component={GroepssparenCalculatorPage} />
       <Route path="/eindejaarsbonus-calculator" component={EindejaarsbonosCalculatorPage} />
       <Route path="/woningkrediet-simulator" component={WoningkredietSimulatorPage} />
+      <Route path="/doorlopend-krediet-calculator" component={DoorlopendKredietCalculatorPage} />
       <Route component={NotFound} />
     </Switch>
   );
