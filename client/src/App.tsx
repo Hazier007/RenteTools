@@ -36,6 +36,10 @@ import CryptocurrencyCalculatorPage from "@/pages/cryptocurrency-calculator";
 import BelgischeBeleggingsfiscaliteitCalculatorPage from "@/pages/belgische-beleggingsfiscaliteit-calculator";
 import PensioenCalculatorPage from "@/pages/pensioen-calculator";
 import BudgetPlannerPage from "@/pages/budget-planner";
+import FIRECalculatorPage from "@/pages/fire-calculator";
+import LevensverzekeraarCalculatorPage from "@/pages/levensverzekeraar-calculator";
+import DoelspaarcalculatorPage from "@/pages/doelspaarcalculator";
+import BelastingplanningCalculatorPage from "@/pages/belastingplanning-calculator";
 import StudieschuldCalculatorPage from "@/pages/studieschuld-calculator";
 import KredietkaartCalculatorPage from "@/pages/kredietkaart-calculator";
 import TermijnrekeningCalculatorPage from "@/pages/termijnrekening-calculator";
@@ -91,6 +95,10 @@ function Router() {
       <Route path="/belgische-beleggingsfiscaliteit-calculator" component={BelgischeBeleggingsfiscaliteitCalculatorPage} />
       <Route path="/pensioen-calculator" component={PensioenCalculatorPage} />
       <Route path="/budget-planner" component={BudgetPlannerPage} />
+      <Route path="/fire-calculator" component={FIRECalculatorPage} />
+      <Route path="/levensverzekeraar-calculator" component={LevensverzekeraarCalculatorPage} />
+      <Route path="/doelspaarcalculator" component={DoelspaarcalculatorPage} />
+      <Route path="/belastingplanning-calculator" component={BelastingplanningCalculatorPage} />
       <Route path="/studieschuld-calculator" component={StudieschuldCalculatorPage} />
       <Route path="/kredietkaart-calculator" component={KredietkaartCalculatorPage} />
       <Route path="/termijnrekening-calculator" component={TermijnrekeningCalculatorPage} />

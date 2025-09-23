@@ -294,11 +294,65 @@ export default function Home() {
     ],
     planning: [
       {
+        title: "Pensioen Calculator",
+        description: "Volledige pensioenplanning inclusief 1e, 2e en 3e pijler. Bereken vervangingsratio en pensioenkloof.",
+        icon: "fas fa-user-clock",
+        color: "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800",
+        iconColor: "text-blue-600",
+        link: "/pensioen-calculator",
+        features: ["3-pijler systeem", "Vervangingsratio", "Pensioenkloof analyse"]
+      },
+      {
+        title: "Budget Planner",
+        description: "Uitgebreide budgetplanning met Belgische specifieke elementen. Vakantiegeld, kindergeld en 13de maand.",
+        icon: "fas fa-chart-pie",
+        color: "bg-purple-50 dark:bg-purple-950 border-purple-200 dark:border-purple-800",
+        iconColor: "text-purple-600",
+        link: "/budget-planner",
+        features: ["Belgische elementen", "Smart categorisatie", "Spaar optimalisatie"]
+      },
+      {
+        title: "FIRE Calculator",
+        description: "Financial Independence Retire Early planning. 4 FIRE strategieën met Belgische belastingaspecten.",
+        icon: "fas fa-fire",
+        color: "bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800",
+        iconColor: "text-orange-600",
+        link: "/fire-calculator",
+        features: ["4 FIRE strategieën", "4% regel", "Belgische belastingen"]
+      },
+      {
+        title: "Levensverzekeraar Calculator",
+        description: "Vergelijk levensverzekering met term verzekering + beleggen. Tak 21/23 vs ETF strategieën.",
+        icon: "fas fa-shield-alt",
+        color: "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800",
+        iconColor: "text-green-600",
+        link: "/levensverzekeraar-calculator",
+        features: ["Tak 21/23 producten", "Term vs whole life", "Risico analyse"]
+      },
+      {
+        title: "Doelspaarcalculator",
+        description: "Plan meerdere spaardoelen tegelijk. Smart prioritering en budgetoptimalisatie voor alle doelen.",
+        icon: "fas fa-bullseye",
+        color: "bg-teal-50 dark:bg-teal-950 border-teal-200 dark:border-teal-800",
+        iconColor: "text-teal-600",
+        link: "/doelspaarcalculator",
+        features: ["Multi-goal planning", "Smart prioritering", "Budget optimalisatie"]
+      },
+      {
+        title: "Belastingplanning Calculator",
+        description: "Optimaliseer belastingen op investeringen. Spaarbonus, pensioensparen en ETF strategieën.",
+        icon: "fas fa-chart-line",
+        color: "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800",
+        iconColor: "text-yellow-600",
+        link: "/belastingplanning-calculator",
+        features: ["Fiscale optimalisatie", "Roerende voorheffing", "ETF vs dividenden"]
+      },
+      {
         title: "Pensioensparen Calculator",
         description: "Plan uw pensioenopbouw via de derde pijler. Bereken belastingvoordeel en pensioenkapitaal.",
         icon: "fas fa-umbrella",
-        color: "bg-teal-50 dark:bg-teal-950 border-teal-200 dark:border-teal-800",
-        iconColor: "text-teal-600",
+        color: "bg-indigo-50 dark:bg-indigo-950 border-indigo-200 dark:border-indigo-800",
+        iconColor: "text-indigo-600",
         link: "/pensioensparen-calculator",
         features: ["Derde pijler", "Belastingvoordeel", "Pensioenkapitaal"]
       },
@@ -370,7 +424,7 @@ export default function Home() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-                <div className="text-3xl font-bold">51+</div>
+                <div className="text-3xl font-bold">57+</div>
                 <div className="text-sm opacity-80">Calculators</div>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
