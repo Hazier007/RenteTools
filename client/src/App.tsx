@@ -42,6 +42,7 @@ import EindejaarsbonosCalculatorPage from "@/pages/eindejaarsbonus-calculator";
 import WoningkredietSimulatorPage from "@/pages/woningkrediet-simulator";
 import DoorlopendKredietCalculatorPage from "@/pages/doorlopend-krediet-calculator";
 import LeasingkredietCalculatorPage from "@/pages/leasingkrediet-calculator";
+import KredietcapaciteitCalculatorPage from "@/pages/kredietcapaciteit-calculator";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -85,6 +86,7 @@ function Router() {
       <Route path="/woningkrediet-simulator" component={WoningkredietSimulatorPage} />
       <Route path="/doorlopend-krediet-calculator" component={DoorlopendKredietCalculatorPage} />
       <Route path="/leasingkrediet-calculator" component={LeasingkredietCalculatorPage} />
+      <Route path="/kredietcapaciteit-calculator" component={KredietcapaciteitCalculatorPage} />
       <Route component={NotFound} />
     </Switch>
   );
