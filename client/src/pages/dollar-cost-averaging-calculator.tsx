@@ -25,6 +25,13 @@ interface PeriodicInvestment {
   rendement: number;
 }
 
+interface MarketData {
+  maand: number;
+  datum: string;
+  koers: number;
+  maandRendement: number;
+}
+
 export default function DollarCostAveragingCalculatorPage() {
   useEffect(() => {
     document.title = "Dollar Cost Averaging Calculator België - Periodiek Beleggen";
@@ -53,7 +60,7 @@ export default function DollarCostAveragingCalculatorPage() {
   });
 
   // Generate realistic market data with volatility
-  const generateMarketData = () => {
+  const generateMarketData = (): MarketData[] => {
     const maanden = dcaData.investeringsPeriode;
     const maandelijksRendement = dcaData.gemiddeldeRendement / 12 / 100;
     const maandelijkseVolatiliteit = dcaData.volatiliteit / Math.sqrt(12) / 100;
