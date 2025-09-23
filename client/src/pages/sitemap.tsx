@@ -156,6 +156,36 @@ export default function Sitemap() {
                     Kredietkaart Calculator - Schuld Afbetaling Berekenen
                   </a>
                 </li>
+                <li>
+                  <a href="/doorlopend-krediet-calculator" className="text-primary hover:underline">
+                    Doorlopend Krediet Calculator - Revolving Credit Kostprijs Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/leasingkrediet-calculator" className="text-primary hover:underline">
+                    Leasingkrediet Calculator - Auto Leasing vs Aankoop Vergelijken
+                  </a>
+                </li>
+                <li>
+                  <a href="/kredietcapaciteit-calculator" className="text-primary hover:underline">
+                    Kredietcapaciteit Calculator - Maximale Leencapaciteit Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/schuldenconsolidatie-calculator" className="text-primary hover:underline">
+                    Schuldenconsolidatie Calculator - Schulden Samenvoegen Voordeel
+                  </a>
+                </li>
+                <li>
+                  <a href="/groepslening-calculator" className="text-primary hover:underline">
+                    Groepslening Calculator - Samen Lenen Voordelen Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/voorschot-calculator" className="text-primary hover:underline">
+                    Voorschot Calculator - Loonvoorschot Kosten Berekenen
+                  </a>
+                </li>
               </ul>
             </CardContent>
           </Card>
@@ -183,6 +213,41 @@ export default function Sitemap() {
                 <li>
                   <a href="/etf-calculator" className="text-primary hover:underline">
                     ETF Calculator - Exchange Traded Funds Rendement Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/aandelen-calculator" className="text-primary hover:underline">
+                    Aandelen Calculator - Dividend en Koerswinst Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/obligatie-calculator" className="text-primary hover:underline">
+                    Obligatie Calculator - Obligatie Rendement en YTM Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/portfolio-diversificatie-calculator" className="text-primary hover:underline">
+                    Portfolio Diversificatie Calculator - Risico Spreiding Optimaliseren
+                  </a>
+                </li>
+                <li>
+                  <a href="/dollar-cost-averaging-calculator" className="text-primary hover:underline">
+                    Dollar Cost Averaging Calculator - Maandelijks Beleggen Strategie
+                  </a>
+                </li>
+                <li>
+                  <a href="/reit-calculator" className="text-primary hover:underline">
+                    REIT Calculator - Real Estate Investment Trust Rendement
+                  </a>
+                </li>
+                <li>
+                  <a href="/cryptocurrency-calculator" className="text-primary hover:underline">
+                    Cryptocurrency Calculator - Crypto Belegging Rendement Berekenen
+                  </a>
+                </li>
+                <li>
+                  <a href="/belgische-beleggingsfiscaliteit-calculator" className="text-primary hover:underline">
+                    Belgische Beleggingsfiscaliteit Calculator - Taks op Beursverrichtingen
                   </a>
                 </li>
               </ul>
