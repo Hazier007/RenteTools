@@ -211,11 +211,83 @@ export default function Home() {
     ],
     beleggen: [
       {
+        title: "ETF Calculator",
+        description: "Analyseer Exchange Traded Funds met kosten, tracking error en performance vergelijking. Optimaliseer uw ETF portefeuille.",
+        icon: "fas fa-chart-pie",
+        color: "bg-emerald-50 dark:bg-emerald-950 border-emerald-200 dark:border-emerald-800",
+        iconColor: "text-emerald-600",
+        link: "/etf-calculator",
+        features: ["Kosten analyse", "Performance tracking", "Belgische ETF's"]
+      },
+      {
+        title: "Aandelen Calculator",
+        description: "Waardeer aandelen met dividend discount model, P/E ratio's en fundamentele analyse. Belgische dividend belasting inclusief.",
+        icon: "fas fa-chart-line",
+        color: "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800",
+        iconColor: "text-blue-600",
+        link: "/aandelen-calculator",
+        features: ["Dividend yield", "P/E waardering", "Fair value"]
+      },
+      {
+        title: "Obligatie Calculator",
+        description: "Bereken yield to maturity, duration en obligatie risico's. Analyseer staatsobligaties en bedrijfsobligaties.",
+        icon: "fas fa-certificate",
+        color: "bg-purple-50 dark:bg-purple-950 border-purple-200 dark:border-purple-800",
+        iconColor: "text-purple-600",
+        link: "/obligatie-calculator",
+        features: ["YTM berekening", "Duration analyse", "Credit risk"]
+      },
+      {
+        title: "Portfolio Diversificatie",
+        description: "Optimaliseer asset allocatie met Modern Portfolio Theory. Monte Carlo simulatie voor risico-rendement optimalisatie.",
+        icon: "fas fa-chart-area",
+        color: "bg-teal-50 dark:bg-teal-950 border-teal-200 dark:border-teal-800",
+        iconColor: "text-teal-600",
+        link: "/portfolio-diversificatie-calculator",
+        features: ["Asset allocation", "Correlatie analyse", "Monte Carlo"]
+      },
+      {
+        title: "Dollar Cost Averaging",
+        description: "Simuleer periodiek beleggen vs lump sum. Vergelijk strategieën met marktvolatiliteit en timing impact.",
+        icon: "fas fa-calendar-alt",
+        color: "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800",
+        iconColor: "text-green-600",
+        link: "/dollar-cost-averaging-calculator",
+        features: ["DCA strategie", "Timing analyse", "Volatiliteit impact"]
+      },
+      {
+        title: "REIT Calculator",
+        description: "Analyseer vastgoed beleggingsfondsen met FFO, AFFO en NAV berekeningen. Belgische SICAFI inclusief.",
+        icon: "fas fa-building",
+        color: "bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800",
+        iconColor: "text-orange-600",
+        link: "/reit-calculator",
+        features: ["FFO/AFFO analyse", "Dividend yield", "SICAFI voordelen"]
+      },
+      {
+        title: "Cryptocurrency Calculator",
+        description: "Bereken crypto portfolio risico en DeFi yields. Belgische crypto belastingen en volatiliteit analyse.",
+        icon: "fab fa-bitcoin",
+        color: "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800",
+        iconColor: "text-yellow-600",
+        link: "/cryptocurrency-calculator",
+        features: ["DeFi yields", "Risico analyse", "Belgische belasting"]
+      },
+      {
+        title: "Belgische Beleggingsfiscaliteit",
+        description: "Optimaliseer beleggingsbelastingen met roerende voorheffing berekeningen en pensioenspaar strategieën.",
+        icon: "fas fa-percentage",
+        color: "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800",
+        iconColor: "text-red-600",
+        link: "/belgische-beleggingsfiscaliteit-calculator",
+        features: ["Roerende voorheffing", "Pensioensparen", "Belasting optimalisatie"]
+      },
+      {
         title: "Beleggingsrente Calculator",
         description: "Bereken het verwachte rendement van uw beleggingsportefeuille. Inclusief kosten en belastingen.",
         icon: "fas fa-chart-bar",
-        color: "bg-emerald-50 dark:bg-emerald-950 border-emerald-200 dark:border-emerald-800",
-        iconColor: "text-emerald-600",
+        color: "bg-pink-50 dark:bg-pink-950 border-pink-200 dark:border-pink-800",
+        iconColor: "text-pink-600",
         link: "/beleggingsrente-calculator",
         features: ["Portefeuille rendement", "Risico berekenen", "Belgische belastingen"]
       }
@@ -298,7 +370,7 @@ export default function Home() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-                <div className="text-3xl font-bold">43+</div>
+                <div className="text-3xl font-bold">51+</div>
                 <div className="text-sm opacity-80">Calculators</div>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
@@ -424,7 +496,7 @@ export default function Home() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {calculatorCategories.beleggen.map((calc, index) => (
             <Card key={index} className={`${calc.color} hover:shadow-xl transition-all duration-300 hover:scale-105`}>
               <CardHeader>

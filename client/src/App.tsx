@@ -27,6 +27,13 @@ import Sitemap from "@/pages/sitemap";
 import AdminPage from "@/pages/admin";
 import KasbonCalculatorPage from "@/pages/kasbon-calculator";
 import ETFCalculatorPage from "@/pages/etf-calculator";
+import AandelenCalculatorPage from "@/pages/aandelen-calculator";
+import ObligatieCalculatorPage from "@/pages/obligatie-calculator";
+import PortfolioDiversificatieCalculatorPage from "@/pages/portfolio-diversificatie-calculator";
+import DollarCostAveragingCalculatorPage from "@/pages/dollar-cost-averaging-calculator";
+import REITCalculatorPage from "@/pages/reit-calculator";
+import CryptocurrencyCalculatorPage from "@/pages/cryptocurrency-calculator";
+import BelgischeBeleggingsfiscaliteitCalculatorPage from "@/pages/belgische-beleggingsfiscaliteit-calculator";
 import PensioenCalculatorPage from "@/pages/pensioen-calculator";
 import BudgetPlannerPage from "@/pages/budget-planner";
 import StudieschuldCalculatorPage from "@/pages/studieschuld-calculator";
@@ -75,6 +82,13 @@ function Router() {
       <Route path="/admin" component={AdminPage} />
       <Route path="/kasbon-calculator" component={KasbonCalculatorPage} />
       <Route path="/etf-calculator" component={ETFCalculatorPage} />
+      <Route path="/aandelen-calculator" component={AandelenCalculatorPage} />
+      <Route path="/obligatie-calculator" component={ObligatieCalculatorPage} />
+      <Route path="/portfolio-diversificatie-calculator" component={PortfolioDiversificatieCalculatorPage} />
+      <Route path="/dollar-cost-averaging-calculator" component={DollarCostAveragingCalculatorPage} />
+      <Route path="/reit-calculator" component={REITCalculatorPage} />
+      <Route path="/cryptocurrency-calculator" component={CryptocurrencyCalculatorPage} />
+      <Route path="/belgische-beleggingsfiscaliteit-calculator" component={BelgischeBeleggingsfiscaliteitCalculatorPage} />
       <Route path="/pensioen-calculator" component={PensioenCalculatorPage} />
       <Route path="/budget-planner" component={BudgetPlannerPage} />
       <Route path="/studieschuld-calculator" component={StudieschuldCalculatorPage} />
