@@ -44,6 +44,9 @@ import DoorlopendKredietCalculatorPage from "@/pages/doorlopend-krediet-calculat
 import LeasingkredietCalculatorPage from "@/pages/leasingkrediet-calculator";
 import KredietcapaciteitCalculatorPage from "@/pages/kredietcapaciteit-calculator";
 import SchuldenconsolidatieCalculatorPage from "@/pages/schuldenconsolidatie-calculator";
+import GroepsleningCalculatorPage from "@/pages/groepslening-calculator";
+import RentevoetVergelijkerPage from "@/pages/rentevoet-vergelijker";
+import VoorschotCalculatorPage from "@/pages/voorschot-calculator";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -89,6 +92,9 @@ function Router() {
       <Route path="/leasingkrediet-calculator" component={LeasingkredietCalculatorPage} />
       <Route path="/kredietcapaciteit-calculator" component={KredietcapaciteitCalculatorPage} />
       <Route path="/schuldenconsolidatie-calculator" component={SchuldenconsolidatieCalculatorPage} />
+      <Route path="/groepslening-calculator" component={GroepsleningCalculatorPage} />
+      <Route path="/rentevoet-vergelijker" component={RentevoetVergelijkerPage} />
+      <Route path="/voorschot-calculator" component={VoorschotCalculatorPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -92,6 +92,78 @@ export default function Home() {
     ],
     lenen: [
       {
+        title: "Woningkrediet Simulator",
+        description: "Geavanceerde hypotheeksimulator met verschillende scenario's. Bereken maandlast, totale kosten en vergelijk banken.",
+        icon: "fas fa-home",
+        color: "bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800",
+        iconColor: "text-orange-600",
+        link: "/woningkrediet-simulator",
+        features: ["Scenario vergelijking", "Kostenverdeling", "Amortisatie schema"]
+      },
+      {
+        title: "Doorlopend Krediet Calculator",
+        description: "Bereken kosten van revolving credit in België. Simuleer verschillende afbetalingsscenario's voor kredietlijnen.",
+        icon: "fas fa-credit-card",
+        color: "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800",
+        iconColor: "text-blue-600",
+        link: "/doorlopend-krediet-calculator",
+        features: ["Revolving credit", "Afbetaling simulator", "Effectieve rente"]
+      },
+      {
+        title: "Leasingkrediet Calculator",
+        description: "Vergelijk financial en operational leasing. Bereken kosten, fiscale voordelen en vind de beste leasingoptie.",
+        icon: "fas fa-car-side",
+        color: "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800",
+        iconColor: "text-green-600",
+        link: "/leasingkrediet-calculator",
+        features: ["Financial vs operational", "Fiscale voordelen", "Auto & machines"]
+      },
+      {
+        title: "Kredietcapaciteit Calculator",
+        description: "Ontdek hoeveel u kunt lenen op basis van inkomen en uitgaven. Belgische banknormen en kredietwaardigheid.",
+        icon: "fas fa-calculator",
+        color: "bg-purple-50 dark:bg-purple-950 border-purple-200 dark:border-purple-800",
+        iconColor: "text-purple-600",
+        link: "/kredietcapaciteit-calculator",
+        features: ["33% regel", "Krediet score", "Leencapaciteit"]
+      },
+      {
+        title: "Schuldenconsolidatie",
+        description: "Voeg meerdere leningen samen tot één krediet. Bereken besparingen op rente en maandlasten.",
+        icon: "fas fa-layer-group",
+        color: "bg-teal-50 dark:bg-teal-950 border-teal-200 dark:border-teal-800",
+        iconColor: "text-teal-600",
+        link: "/schuldenconsolidatie-calculator",
+        features: ["Meerdere schulden", "Rentebesparing", "Eén maandlast"]
+      },
+      {
+        title: "Groepslening Calculator",
+        description: "Plan leningen met vrienden of familie. Verdeel kosten eerlijk en beheer risico's bij gezamenlijk lenen.",
+        icon: "fas fa-users",
+        color: "bg-pink-50 dark:bg-pink-950 border-pink-200 dark:border-pink-800",
+        iconColor: "text-pink-600",
+        link: "/groepslening-calculator",
+        features: ["Samen lenen", "Eerlijke verdeling", "Risicobeheer"]
+      },
+      {
+        title: "Rentevoet Vergelijker",
+        description: "Vergelijk vaste en variabele rentevoeten. Simuleer verschillende rentescenario's en break-even analyses.",
+        icon: "fas fa-chart-line",
+        color: "bg-indigo-50 dark:bg-indigo-950 border-indigo-200 dark:border-indigo-800",
+        iconColor: "text-indigo-600",
+        link: "/rentevoet-vergelijker",
+        features: ["Vast vs variabel", "Rente simulatie", "Break-even analyse"]
+      },
+      {
+        title: "Voorschot Calculator",
+        description: "Bereken kosten van voorschotten en cash advance. Vergelijk opties voor kortetermijn financiering.",
+        icon: "fas fa-money-bill-wave",
+        color: "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800",
+        iconColor: "text-red-600",
+        link: "/voorschot-calculator",
+        features: ["Cash advance", "Bridge loans", "Kortetermijn krediet"]
+      },
+      {
         title: "Hypothecaire Lening",
         description: "Bereken uw hypotheek met aflossingsschema. Simuleer verschillende scenario's voor uw woonlening.",
         icon: "fas fa-home",
@@ -226,7 +298,7 @@ export default function Home() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-                <div className="text-3xl font-bold">35+</div>
+                <div className="text-3xl font-bold">43+</div>
                 <div className="text-sm opacity-80">Calculators</div>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
