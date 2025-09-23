@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import BeleggingsrenteCalculator from "@/components/calculators/beleggingsrente-calculator";
-import AdPlaceholder from "@/components/ui/ad-placeholder";
+import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function BeleggingsrenteCalculatorPage() {
@@ -34,8 +34,8 @@ export default function BeleggingsrenteCalculatorPage() {
       {/* Top Banner Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
-          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
-          <AdPlaceholder size="banner" className="lg:hidden" />
+          <GoogleAdsense slot="banner" className="hidden lg:block" />
+          <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
 
@@ -259,8 +259,8 @@ export default function BeleggingsrenteCalculatorPage() {
           
           {/* Sidebar */}
           <div className="hidden lg:block space-y-6">
-            <AdPlaceholder size="rectangle" />
-            <AdPlaceholder size="rectangle" />
+            <GoogleAdsense slot="rectangle" />
+            <GoogleAdsense slot="rectangle" />
           </div>
         </div>
       </section>
@@ -268,8 +268,8 @@ export default function BeleggingsrenteCalculatorPage() {
       {/* Bottom Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
-          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
-          <AdPlaceholder size="banner" className="lg:hidden" />
+          <GoogleAdsense slot="banner" className="hidden lg:block" />
+          <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
 

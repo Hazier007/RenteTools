@@ -2,7 +2,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import AdPlaceholder from "@/components/ui/ad-placeholder";
+import GoogleAdsense from "@/components/ui/google-adsense";
 
 export default function Home() {
   
@@ -249,8 +249,7 @@ export default function Home() {
       {/* Top Banner Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
-          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
-          <AdPlaceholder size="banner" className="lg:hidden" />
+          <GoogleAdsense slot="banner" className="w-full max-w-4xl" />
         </div>
       </section>
 
@@ -336,7 +335,7 @@ export default function Home() {
           
           {/* Mid-section Ad */}
           <div className="flex justify-center mt-12">
-            <AdPlaceholder size="banner" />
+            <GoogleAdsense slot="rectangle" />
           </div>
         </div>
       </section>
@@ -422,7 +421,7 @@ export default function Home() {
             
             {/* Google Ad als derde kaart */}
             <div className="hidden lg:block">
-              <AdPlaceholder size="rectangle" />
+              <GoogleAdsense slot="rectangle" />
             </div>
           </div>
         </div>
@@ -517,8 +516,7 @@ export default function Home() {
       {/* Bottom Banner Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
-          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
-          <AdPlaceholder size="banner" className="lg:hidden" />
+          <GoogleAdsense slot="banner" className="w-full max-w-4xl" />
         </div>
       </section>
 

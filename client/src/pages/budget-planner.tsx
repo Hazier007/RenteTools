@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import AdPlaceholder from "@/components/ui/ad-placeholder";
+import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -89,8 +89,8 @@ export default function BudgetPlannerPage() {
       {/* Top Banner Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
-          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
-          <AdPlaceholder size="banner" className="lg:hidden" />
+          <GoogleAdsense slot="banner" className="hidden lg:block" />
+          <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
 
@@ -383,8 +383,8 @@ export default function BudgetPlannerPage() {
           
           {/* Sidebar */}
           <div className="hidden lg:block space-y-6">
-            <AdPlaceholder size="rectangle" />
-            <AdPlaceholder size="rectangle" />
+            <GoogleAdsense slot="rectangle" />
+            <GoogleAdsense slot="rectangle" />
           </div>
         </div>
       </section>
@@ -392,8 +392,8 @@ export default function BudgetPlannerPage() {
       {/* Bottom Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
-          <AdPlaceholder size="leaderboard" className="hidden lg:block" />
-          <AdPlaceholder size="banner" className="lg:hidden" />
+          <GoogleAdsense slot="banner" className="hidden lg:block" />
+          <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
 
