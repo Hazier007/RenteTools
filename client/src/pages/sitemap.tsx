@@ -200,18 +200,38 @@ export default function Sitemap() {
             <CardContent>
               <ul className="space-y-2">
                 <li>
-                  <a href="/pensioensparen-calculator" className="text-primary hover:underline">
-                    Pensioensparen Calculator - Derde Pijler Planning België
-                  </a>
-                </li>
-                <li>
                   <a href="/pensioen-calculator" className="text-primary hover:underline">
-                    Pensioen Calculator - Volledige Pensioenplanning België
+                    Pensioen Calculator - Volledige Pensioenplanning België (1e, 2e, 3e Pijler)
                   </a>
                 </li>
                 <li>
                   <a href="/budget-planner" className="text-primary hover:underline">
-                    Budget Planner - Persoonlijke Financiën Beheren
+                    Budget Planner - Persoonlijke Financiën Beheren met Belgische Elementen
+                  </a>
+                </li>
+                <li>
+                  <a href="/fire-calculator" className="text-primary hover:underline">
+                    FIRE Calculator - Financial Independence Retire Early Planning België
+                  </a>
+                </li>
+                <li>
+                  <a href="/levensverzekeraar-calculator" className="text-primary hover:underline">
+                    Levensverzekeraar Calculator - Levensverzekering vs Beleggen Vergelijken
+                  </a>
+                </li>
+                <li>
+                  <a href="/doelspaarcalculator" className="text-primary hover:underline">
+                    Doelspaarcalculator - Meerdere Spaardoelen Tegelijk Plannen
+                  </a>
+                </li>
+                <li>
+                  <a href="/belastingplanning-calculator" className="text-primary hover:underline">
+                    Belastingplanning Calculator - Optimaliseer Belastingen op Investeringen
+                  </a>
+                </li>
+                <li>
+                  <a href="/pensioensparen-calculator" className="text-primary hover:underline">
+                    Pensioensparen Calculator - Derde Pijler Planning België
                   </a>
                 </li>
                 <li>
