@@ -6,8 +6,11 @@ import GoogleAdsense from "@/components/ui/google-adsense";
 import RateComparisonWidget from "@/components/rate-comparison";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useCanonical } from "@/hooks/use-canonical";
 
 export default function HypothecaireLningBerekenen() {
+  useCanonical();
+  
   return (
     <div className="min-h-screen bg-background">
       <Header activeCalculator="hypotheek" onCalculatorChange={() => {}} />

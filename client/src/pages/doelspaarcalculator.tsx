@@ -4,8 +4,11 @@ import Footer from "@/components/layout/footer";
 import DoelspaarcalculatorComponent from "@/components/calculators/doelspaarcalculator";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useCanonical } from "@/hooks/use-canonical";
 
 export default function DoelspaarcalculatorPage() {
+  useCanonical();
+  
   return (
     <div className="min-h-screen bg-background">
       <head>

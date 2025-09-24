@@ -5,8 +5,11 @@ import SamengesteldeRenteCalculator from "@/components/calculators/samengestelde
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useCanonical } from "@/hooks/use-canonical";
 
 export default function SamengesteldeInterestBerekenen() {
+  useCanonical();
+  
   return (
     <div className="min-h-screen bg-background">
       <Header activeCalculator="samengestelde" onCalculatorChange={() => {}} />

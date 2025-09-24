@@ -3,8 +3,10 @@ import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GoogleAdsense from "@/components/ui/google-adsense";
+import { useCanonical } from "@/hooks/use-canonical";
 
 export default function Home() {
+  useCanonical();
   
   const calculatorCategories = {
     sparen: [
