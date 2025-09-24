@@ -13,8 +13,11 @@ import { useState } from "react";
 import { Building2, Star, TrendingUp, Filter, ArrowUpDown } from "lucide-react";
 import type { RateComparison } from "@shared/schema";
 import { useEffect } from 'react';
+import { useCanonical } from "@/hooks/use-canonical";
 
 export default function SpaarrekeningVergelijkerPage() {
+  useCanonical();
+  
   useEffect(() => {
     document.title = "Spaarrekening Vergelijker België - Beste Spaarrentes 2025";
     const metaDescription = document.querySelector('meta[name="description"]');
