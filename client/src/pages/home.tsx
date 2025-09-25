@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { useCanonical } from "@/hooks/use-canonical";
+import { useConsent } from "@/hooks/use-consent";
 
 export default function Home() {
   useCanonical();
+  const { resetConsent } = useConsent();
   
   const calculatorCategories = {
     sparen: [
@@ -710,6 +712,22 @@ export default function Home() {
               <p className="text-muted-foreground">Alle calculators werken perfect op desktop, tablet en smartphone.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Test Cookie Banner Button - TEMPORARY */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex justify-center">
+          <Button 
+            onClick={() => {
+              resetConsent();
+              window.location.reload();
+            }}
+            variant="outline"
+            className="bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200"
+          >
+            🧪 Test Cookie Banner (Reset Consent)
+          </Button>
         </div>
       </section>
 
