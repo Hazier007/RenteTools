@@ -28,6 +28,8 @@ export function useConsent() {
         const parsed = JSON.parse(stored);
         setConsent(parsed);
         setShowBanner(false);
+        // Apply stored consent to Google services
+        updateGoogleConsent(parsed);
       } else {
         setShowBanner(true);
       }
@@ -49,8 +51,8 @@ export function useConsent() {
     setShowBanner(false);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newConsent));
     
-    // Load Google Analytics and AdSense
-    loadGoogleServices();
+    // Update Google Analytics consent immediately
+    updateGoogleConsent(newConsent);
   };
 
   const rejectAll = () => {
@@ -64,6 +66,9 @@ export function useConsent() {
     setConsent(newConsent);
     setShowBanner(false);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newConsent));
+    
+    // Update Google consent to denied
+    updateGoogleConsent(newConsent);
   };
 
   const resetConsent = () => {
@@ -76,20 +81,37 @@ export function useConsent() {
     setShowBanner(true);
   };
 
-  const loadGoogleServices = () => {
-    // Load Google Analytics
-    if (consent.analytics || consent.status === 'accepted') {
-      window.gtag?.('consent', 'update', {
+  const updateGoogleConsent = (consentState: ConsentState) => {
+    if (!window.gtag) {
+      console.warn('Google Analytics not loaded');
+      return;
+    }
+
+    // Update Google Analytics consent
+    if (consentState.analytics) {
+      window.gtag('consent', 'update', {
         analytics_storage: 'granted',
+      });
+      console.log('✅ Google Analytics consent granted');
+    } else {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'denied',
       });
     }
 
-    // Load Google AdSense
-    if (consent.advertising || consent.status === 'accepted') {
-      window.gtag?.('consent', 'update', {
+    // Update Google AdSense consent
+    if (consentState.advertising) {
+      window.gtag('consent', 'update', {
         ad_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted',
+      });
+      console.log('✅ Google AdSense consent granted');
+    } else {
+      window.gtag('consent', 'update', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
       });
     }
   };
