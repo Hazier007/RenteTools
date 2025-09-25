@@ -20,6 +20,41 @@ export function useConsent() {
 
   const [showBanner, setShowBanner] = useState(false);
 
+  const updateGoogleConsent = (consentState: ConsentState) => {
+    if (!window.gtag) {
+      console.warn('Google Analytics not loaded');
+      return;
+    }
+
+    // Update Google Analytics consent
+    if (consentState.analytics) {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'granted',
+      });
+      console.log('✅ Google Analytics consent granted');
+    } else {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'denied',
+      });
+    }
+
+    // Update Google AdSense consent
+    if (consentState.advertising) {
+      window.gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+      });
+      console.log('✅ Google AdSense consent granted');
+    } else {
+      window.gtag('consent', 'update', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      });
+    }
+  };
+
   useEffect(() => {
     // Load consent from localStorage
     try {
@@ -81,40 +116,7 @@ export function useConsent() {
     setShowBanner(true);
   };
 
-  const updateGoogleConsent = (consentState: ConsentState) => {
-    if (!window.gtag) {
-      console.warn('Google Analytics not loaded');
-      return;
-    }
 
-    // Update Google Analytics consent
-    if (consentState.analytics) {
-      window.gtag('consent', 'update', {
-        analytics_storage: 'granted',
-      });
-      console.log('✅ Google Analytics consent granted');
-    } else {
-      window.gtag('consent', 'update', {
-        analytics_storage: 'denied',
-      });
-    }
-
-    // Update Google AdSense consent
-    if (consentState.advertising) {
-      window.gtag('consent', 'update', {
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-      });
-      console.log('✅ Google AdSense consent granted');
-    } else {
-      window.gtag('consent', 'update', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-      });
-    }
-  };
 
   return {
     consent,
