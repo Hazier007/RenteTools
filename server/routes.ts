@@ -10,6 +10,7 @@ import {
   insertRateSchema
 } from "@shared/schema";
 import { storage } from "./storage";
+import { submitToIndexNow, submitAllCalculators, ALL_CALCULATOR_URLS } from "./indexnow";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Spaarrente calculation endpoint
@@ -374,6 +375,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch rates by type" });
     }
+  });
+
+  // IndexNow routes
+  app.post("/api/indexnow/submit", async (req, res) => {
+    try {
+      const { urls } = req.body;
+      
+      if (!urls || !Array.isArray(urls)) {
+        return res.status(400).json({ error: "URLs array is required" });
+      }
+
+      const result = await submitToIndexNow(urls);
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || "Failed to submit to IndexNow" });
+    }
+  });
+
+  app.post("/api/indexnow/submit-all", async (req, res) => {
+    try {
+      const result = await submitAllCalculators();
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || "Failed to submit all calculators" });
+    }
+  });
+
+  app.get("/api/indexnow/urls", async (req, res) => {
+    res.json({ 
+      urls: ALL_CALCULATOR_URLS,
+      count: ALL_CALCULATOR_URLS.length 
+    });
   });
 
   const httpServer = createServer(app);
