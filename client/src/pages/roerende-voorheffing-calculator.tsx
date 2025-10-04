@@ -7,8 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function RoerendeVoorheffingCalculator() {
+  const seoConfig = getSeoConfig("roerende-voorheffing-calculator");
   const [interestInkomsten, setInterestInkomsten] = useState<string>("1500");
   const [dividendInkomsten, setDividendInkomsten] = useState<string>("500");
   const [belastingvrij] = useState<number>(980); // Belastingvrij bedrag 2025
@@ -49,11 +54,13 @@ export default function RoerendeVoorheffingCalculator() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="overig" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Roerende Voorheffing Calculator - Belasting op Spaarrente en Dividenden
           </h1>
@@ -381,6 +388,11 @@ export default function RoerendeVoorheffingCalculator() {
             </Card>
           </div>
         </div>
+      </section>
+
+      {/* Authority Links */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
       </section>
 
       <Footer />

@@ -12,6 +12,10 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 interface Aandeel {
   ticker: string;
@@ -25,6 +29,8 @@ interface Aandeel {
 }
 
 export default function AandelenCalculatorPage() {
+  const seoConfig = getSeoConfig("aandelen-calculator");
+
   useEffect(() => {
     document.title = "Aandelen Calculator België - Dividend Yield & Waardering";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -213,12 +219,14 @@ export default function AandelenCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="aandelen-calculator" onCalculatorChange={() => {}} />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Aandelen Calculator België
             </h1>
@@ -740,6 +748,11 @@ export default function AandelenCalculatorPage() {
             <GoogleAdsense slot="rectangle" />
           </div>
         </div>
+      </section>
+
+      {/* Authority Links */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
       </section>
 
       {/* Rate Comparison Widget */}

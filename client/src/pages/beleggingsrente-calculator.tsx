@@ -4,15 +4,23 @@ import Footer from "@/components/layout/footer";
 import BeleggingsrenteCalculator from "@/components/calculators/beleggingsrente-calculator";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function BeleggingsrenteCalculatorPage() {
+  const seoConfig = getSeoConfig("beleggingsrente-calculator");
+
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="beleggingsrente" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Beleggingsrente Calculator - Rendement Portefeuille Berekenen
           </h1>
@@ -210,6 +218,9 @@ export default function BeleggingsrenteCalculatorPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Authority Links */}
+            {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
             {/* FAQ */}
             <Card>
