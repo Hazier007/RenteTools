@@ -10,8 +10,14 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function VoorschotCalculatorPage() {
+  const seoConfig = getSeoConfig("voorschot-calculator");
+
   useEffect(() => {
     document.title = "Voorschot Calculator België - Cash Advance & Bridge Loans";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -175,12 +181,14 @@ export default function VoorschotCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="voorschot-calculator" onCalculatorChange={() => {}} />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Voorschot Calculator België
             </h1>
@@ -547,6 +555,8 @@ export default function VoorschotCalculatorPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

@@ -9,8 +9,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function KredietkaartCalculatorPage() {
+  const seoConfig = getSeoConfig("kredietkaart-calculator");
+
   const [schuld, setSchuld] = useState<number>(5000);
   const [rente, setRente] = useState<number>(18.5);
   const [maandelijksBedrag, setMaandelijksBedrag] = useState<number>(200);
@@ -81,11 +87,13 @@ export default function KredietkaartCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="kredietkaart" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Kredietkaart Calculator België - Bereken uw Schuld
           </h1>
@@ -392,6 +400,8 @@ export default function KredietkaartCalculatorPage() {
           <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

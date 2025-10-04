@@ -6,8 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function WettelijkeRentevoetBelgie() {
+  const seoConfig = getSeoConfig("wettelijke-rentevoet-belgie");
+
   const [hoofdsom, setHoofdsom] = useState<string>("10000");
   const [dagen, setDagen] = useState<string>("30");
   const [rentevoet] = useState<string>("7"); // Actuele wettelijke rentevoet 2025
@@ -32,11 +38,13 @@ export default function WettelijkeRentevoetBelgie() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="overig" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Wettelijke Rentevoet België 2025 - Nalatigheidsinterest Berekenen
           </h1>
@@ -304,6 +312,8 @@ export default function WettelijkeRentevoetBelgie() {
           </div>
         </div>
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

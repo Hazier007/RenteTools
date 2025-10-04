@@ -12,6 +12,10 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState, useEffect } from "react";
 import { UserPlus, Trash2 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 interface Deelnemer {
   id: number;
@@ -22,6 +26,8 @@ interface Deelnemer {
 }
 
 export default function GroepsleningCalculatorPage() {
+  const seoConfig = getSeoConfig("groepslening-calculator");
+
   useEffect(() => {
     document.title = "Groepslening Calculator België - Samen Lenen";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -173,12 +179,14 @@ export default function GroepsleningCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="groepslening-calculator" onCalculatorChange={() => {}} />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Groepslening Calculator België
             </h1>
@@ -584,6 +592,8 @@ export default function GroepsleningCalculatorPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

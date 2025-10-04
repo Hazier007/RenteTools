@@ -10,8 +10,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function WoningkredietSimulatorPage() {
+  const seoConfig = getSeoConfig("woningkrediet-simulator");
+
   useEffect(() => {
     document.title = "Woningkrediet Simulator België - Hypotheek Berekenen & Vergelijken";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -150,12 +156,14 @@ export default function WoningkredietSimulatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="woningkrediet-simulator" onCalculatorChange={() => {}} />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Woningkrediet Simulator België
             </h1>
@@ -475,6 +483,8 @@ export default function WoningkredietSimulatorPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

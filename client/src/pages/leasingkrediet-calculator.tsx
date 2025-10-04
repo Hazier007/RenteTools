@@ -12,8 +12,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function LeasingkredietCalculatorPage() {
+  const seoConfig = getSeoConfig("leasingkrediet-calculator");
+
   useEffect(() => {
     document.title = "Leasingkrediet Calculator België - Financial vs Operational Leasing";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -196,12 +202,14 @@ export default function LeasingkredietCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="leasingkrediet-calculator" onCalculatorChange={() => {}} />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Leasingkrediet Calculator België
             </h1>
@@ -647,6 +655,8 @@ export default function LeasingkredietCalculatorPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>
