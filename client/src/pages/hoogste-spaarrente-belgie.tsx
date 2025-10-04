@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import SpaarrenteCalculator from "@/components/calculators/spaarrente-calculator";
@@ -11,6 +11,56 @@ import { Link } from "wouter";
 import { Home } from "lucide-react";
 
 export default function HoogsteSpaarrenteBelgie() {
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hoeveel interest krijg ik op 10.000 euro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Met een gemiddelde spaarrente van 1,5% krijgt u jaarlijks 150 euro interest op 10.000 euro. Met samengestelde interest groeit dit bedrag elk jaar. Na 10 jaar heeft u ongeveer 11.605 euro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat is de hoogste rente op een spaarboekje?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De hoogste gecombineerde rente (basisrente + getrouwheidspremie) ligt momenteel rond de 2,5% voor nieuwe klanten. Let wel: dit geldt vaak alleen voor een beperkt bedrag en periode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wanneer krijg ik de getrouwheidspremie?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De getrouwheidspremie krijgt u na 12 maanden trouw te zijn gebleven bij dezelfde bank. Als u tussentijds van bank wisselt, verliest u de premie over dat jaar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is spaarrente belastbaar in België?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, vanaf 980 euro interest per jaar (2025) betaalt u 30% roerende voorheffing. Tot dit bedrag is uw spaarrente belastingvrij."
+          }
+        }
+      ]
+    };
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(faqSchema);
+    document.head.appendChild(script);
+    
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header activeCalculator="spaarrente" onCalculatorChange={() => {}} />

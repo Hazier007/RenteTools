@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import HypotheekCalculator from "@/components/calculators/hypotheek-calculator";
@@ -13,6 +13,56 @@ import { Home } from "lucide-react";
 
 export default function HypothecaireLningBerekenen() {
   useCanonical();
+
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hoeveel kan ik maximaal lenen voor een hypotheek?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In België kunt u maximaal lenen tot 90% van de waarde van de woning (LTV). Uw maandlast mag niet hoger zijn dan 33% van uw netto inkomen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat is de laagste hypotheekrente in België?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De laagste tarieven beginnen rond 2,5% voor korte looptijden en variabele rentes. Voor vaste rentes van 20-25 jaar liggen de beste tarieven rond 2,8-3,2%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan ik mijn hypotheek herfinancieren?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, herfinancieren kan voordeliger zijn als de rentes zijn gedaald. Let wel op vervroegde terugbetalingskosten bij uw huidige bank."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat is het verschil tussen annuïteiten en lineair aflossen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bij annuïteiten betaalt u elke maand hetzelfde bedrag. Bij lineair aflossen neemt uw maandlast af naarmate u meer heeft afgelost."
+          }
+        }
+      ]
+    };
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(faqSchema);
+    document.head.appendChild(script);
+    
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
   
   return (
     <div className="min-h-screen bg-background">
