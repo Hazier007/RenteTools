@@ -237,6 +237,36 @@ export default function PensioenspaarCalculatorPage() {
               </CardContent>
             </Card>
 
+            {/* Externe Links voor Authority */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <a href="https://financien.belgium.be/nl/particulieren/pensioen/pensioensparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fod-pensioen">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    FOD Financiën - Pensioensparen Gids
+                  </a>
+                  <a href="https://www.wikifin.be/nl/pensioen/pensioensparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-wikifin-pensioen">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    Wikifin - Pensioensparen Uitleg
+                  </a>
+                  <a href="https://www.fsma.be/nl/pensioensparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fsma-pensioen">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    FSMA - Pensioensparen Info
+                  </a>
+                  <a href="https://www.mypension.be" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-mypension">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    MyPension.be - Uw Pensioen Overzicht
+                  </a>
+                </div>
+                <p className="text-xs text-muted-foreground mt-4">
+                  Officiële bronnen voor betrouwbare informatie over pensioen in België.
+                </p>
+              </CardContent>
+            </Card>
+
           </div>
           
           {/* Sidebar */}

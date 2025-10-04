@@ -182,6 +182,36 @@ export default function HypothecaireLningBerekenen() {
               </CardContent>
             </Card>
 
+            {/* Externe Links voor Authority */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <a href="https://www.nbb.be/nl/consumenten/krediet/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-nbb-hypotheek">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    Nationale Bank België - Hypothecair Krediet
+                  </a>
+                  <a href="https://www.fsma.be/nl/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fsma-hypotheek">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    FSMA - Hypothecair Krediet Informatie
+                  </a>
+                  <a href="https://financien.belgium.be/nl/particulieren/woning/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fod-hypotheek">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    FOD Financiën - Woonleningen
+                  </a>
+                  <a href="https://www.wikifin.be/nl/lenen/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-wikifin-hypotheek">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    Wikifin - Hypothecair Krediet Gids
+                  </a>
+                </div>
+                <p className="text-xs text-muted-foreground mt-4">
+                  Officiële bronnen voor betrouwbare informatie over hypotheken in België.
+                </p>
+              </CardContent>
+            </Card>
+
           </div>
           
           {/* Sidebar */}

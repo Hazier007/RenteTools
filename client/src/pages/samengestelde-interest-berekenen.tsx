@@ -215,6 +215,32 @@ export default function SamengesteldeInterestBerekenen() {
               </CardContent>
             </Card>
 
+            {/* Externe Links voor Authority */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <a href="https://www.wikifin.be/nl/sparen-en-beleggen/samengestelde-interest" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-wikifin-compound">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    Wikifin - Samengestelde Interest Uitgelegd
+                  </a>
+                  <a href="https://www.nbb.be/nl/consumenten/sparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-nbb-sparen">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    Nationale Bank België - Sparen & Beleggen
+                  </a>
+                  <a href="https://financien.belgium.be/nl/particulieren/sparen-en-beleggen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fod-beleggen">
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    FOD Financiën - Sparen en Beleggen
+                  </a>
+                </div>
+                <p className="text-xs text-muted-foreground mt-4">
+                  Officiële bronnen voor betrouwbare financiële informatie.
+                </p>
+              </CardContent>
+            </Card>
+
           </div>
           
           {/* Sidebar */}
