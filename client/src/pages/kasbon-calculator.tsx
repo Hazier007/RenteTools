@@ -8,8 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function KasbonCalculatorPage() {
+  const seoConfig = getSeoConfig("kasbon-calculator");
   const [bedrag, setBedrag] = useState<number>(10000);
   const [looptijd, setLooptijd] = useState<number>(1);
   const [rente, setRente] = useState<number>(3.5);
@@ -19,11 +24,13 @@ export default function KasbonCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="kasbon" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Kasbon Calculator België - Bereken uw Rendement
           </h1>
@@ -233,6 +240,7 @@ export default function KasbonCalculatorPage() {
         </div>
       </section>
 
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
       <Footer />
     </div>
   );

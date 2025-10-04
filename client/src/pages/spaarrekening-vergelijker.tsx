@@ -14,9 +14,14 @@ import { Building2, Star, TrendingUp, Filter, ArrowUpDown } from "lucide-react";
 import type { RateComparison } from "@shared/schema";
 import { useEffect } from 'react';
 import { useCanonical } from "@/hooks/use-canonical";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function SpaarrekeningVergelijkerPage() {
   useCanonical();
+  const seoConfig = getSeoConfig("spaarrekening-vergelijker");
   
   useEffect(() => {
     document.title = "Spaarrekening Vergelijker België - Beste Spaarrentes 2025";
@@ -99,11 +104,13 @@ export default function SpaarrekeningVergelijkerPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="spaarrekening-vergelijker" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Spaarrekening Vergelijker België - Beste Spaarrentes 2025
           </h1>
@@ -404,6 +411,11 @@ export default function SpaarrekeningVergelijkerPage() {
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
+      </section>
+
+      {/* Authority Links */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
       </section>
 
       <Footer />

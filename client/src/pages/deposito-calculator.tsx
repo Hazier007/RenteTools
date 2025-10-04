@@ -4,15 +4,23 @@ import Footer from "@/components/layout/footer";
 import DepositoCalculator from "@/components/calculators/deposito-calculator";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function DepositoCalculatorPage() {
+  const seoConfig = getSeoConfig("deposito-calculator");
+  
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="deposito" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Deposito Calculator - Termijnrekening Rendement Berekenen
           </h1>
@@ -152,6 +160,9 @@ export default function DepositoCalculatorPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Authority Links */}
+            {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
             {/* FAQ */}
             <Card>
