@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import HypotheekCalculator from "@/components/calculators/hypotheek-calculator";
@@ -7,70 +6,24 @@ import RateComparisonWidget from "@/components/rate-comparison";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useCanonical } from "@/hooks/use-canonical";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Link } from "wouter";
-import { Home } from "lucide-react";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function HypothecaireLningBerekenen() {
   useCanonical();
-
-  useEffect(() => {
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Hoeveel kan ik maximaal lenen voor een hypotheek?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In België kunt u maximaal lenen tot 90% van de waarde van de woning (LTV). Uw maandlast mag niet hoger zijn dan 33% van uw netto inkomen."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Wat is de laagste hypotheekrente in België?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "De laagste tarieven beginnen rond 2,5% voor korte looptijden en variabele rentes. Voor vaste rentes van 20-25 jaar liggen de beste tarieven rond 2,8-3,2%."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Kan ik mijn hypotheek herfinancieren?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja, herfinancieren kan voordeliger zijn als de rentes zijn gedaald. Let wel op vervroegde terugbetalingskosten bij uw huidige bank."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Wat is het verschil tussen annuïteiten en lineair aflossen?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Bij annuïteiten betaalt u elke maand hetzelfde bedrag. Bij lineair aflossen neemt uw maandlast af naarmate u meer heeft afgelost."
-          }
-        }
-      ]
-    };
-    
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(faqSchema);
-    document.head.appendChild(script);
-    
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  const seoConfig = getSeoConfig("hypothecaire-lening-berekenen");
   
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="hypotheek" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Hypothecaire Lening Berekenen - Hypotheek Simulator België
           </h1>
@@ -97,30 +50,6 @@ export default function HypothecaireLningBerekenen() {
 
       {/* Main Content */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/" className="flex items-center gap-1" data-testid="breadcrumb-home">
-                  <Home className="h-4 w-4" />
-                  Home
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/lenen">Lenen</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Hypotheek Calculator</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-3 space-y-8">
             
@@ -259,35 +188,7 @@ export default function HypothecaireLningBerekenen() {
               </CardContent>
             </Card>
 
-            {/* Externe Links voor Authority */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <a href="https://www.nbb.be/nl/consumenten/krediet/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-nbb-hypotheek">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    Nationale Bank België - Hypothecair Krediet
-                  </a>
-                  <a href="https://www.fsma.be/nl/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fsma-hypotheek">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    FSMA - Hypothecair Krediet Informatie
-                  </a>
-                  <a href="https://financien.belgium.be/nl/particulieren/woning/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fod-hypotheek">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    FOD Financiën - Woonleningen
-                  </a>
-                  <a href="https://www.wikifin.be/nl/lenen/hypothecair-krediet" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-wikifin-hypotheek">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    Wikifin - Hypothecair Krediet Gids
-                  </a>
-                </div>
-                <p className="text-xs text-muted-foreground mt-4">
-                  Officiële bronnen voor betrouwbare informatie over hypotheken in België.
-                </p>
-              </CardContent>
-            </Card>
+            {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
           </div>
           

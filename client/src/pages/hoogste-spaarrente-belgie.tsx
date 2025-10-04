@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import SpaarrenteCalculator from "@/components/calculators/spaarrente-calculator";
@@ -6,68 +6,23 @@ import GoogleAdsense from "@/components/ui/google-adsense";
 import RateComparisonWidget from "@/components/rate-comparison";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Link } from "wouter";
-import { Home } from "lucide-react";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function HoogsteSpaarrenteBelgie() {
-  useEffect(() => {
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Hoeveel interest krijg ik op 10.000 euro?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Met een gemiddelde spaarrente van 1,5% krijgt u jaarlijks 150 euro interest op 10.000 euro. Met samengestelde interest groeit dit bedrag elk jaar. Na 10 jaar heeft u ongeveer 11.605 euro."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Wat is de hoogste rente op een spaarboekje?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "De hoogste gecombineerde rente (basisrente + getrouwheidspremie) ligt momenteel rond de 2,5% voor nieuwe klanten. Let wel: dit geldt vaak alleen voor een beperkt bedrag en periode."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Wanneer krijg ik de getrouwheidspremie?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "De getrouwheidspremie krijgt u na 12 maanden trouw te zijn gebleven bij dezelfde bank. Als u tussentijds van bank wisselt, verliest u de premie over dat jaar."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is spaarrente belastbaar in België?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja, vanaf 980 euro interest per jaar (2025) betaalt u 30% roerende voorheffing. Tot dit bedrag is uw spaarrente belastingvrij."
-          }
-        }
-      ]
-    };
-    
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(faqSchema);
-    document.head.appendChild(script);
-    
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  const seoConfig = getSeoConfig("hoogste-spaarrente-belgie");
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="spaarrente" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Hoogste Spaarrente België 2025
           </h1>
@@ -94,24 +49,6 @@ export default function HoogsteSpaarrenteBelgie() {
 
       {/* Main Content with Calculator */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/" className="flex items-center gap-1" data-testid="breadcrumb-home">
-                  <Home className="h-4 w-4" />
-                  Home
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Hoogste Spaarrente België</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-8">
@@ -289,35 +226,8 @@ export default function HoogsteSpaarrenteBelgie() {
                 </CardContent>
               </Card>
 
-              {/* Externe Links voor Authority */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <a href="https://www.nbb.be/nl/consumenten/sparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
-                      <i className="fas fa-external-link-alt mr-2"></i>
-                      Nationale Bank België - Sparen
-                    </a>
-                    <a href="https://www.febelfin.be/nl/consumenten/sparen-beleggen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
-                      <i className="fas fa-external-link-alt mr-2"></i>
-                      Febelfin - Sparen en Beleggen
-                    </a>
-                    <a href="https://financien.belgium.be/nl/particulieren/sparen-en-beleggen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
-                      <i className="fas fa-external-link-alt mr-2"></i>
-                      FOD Financiën - Sparen en Beleggen
-                    </a>
-                    <a href="https://www.test-aankoop.be/geld/sparen-en-beleggen/sparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
-                      <i className="fas fa-external-link-alt mr-2"></i>
-                      Test-Aankoop - Sparen Vergelijken
-                    </a>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-4">
-                    Officiële bronnen voor betrouwbare informatie over sparen in België.
-                  </p>
-                </CardContent>
-              </Card>
+              {/* Authority Links */}
+              {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
             </div>
           </div>

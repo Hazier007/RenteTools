@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import SamengesteldeRenteCalculator from "@/components/calculators/samengestelde-rente-calculator";
@@ -6,20 +5,24 @@ import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useCanonical } from "@/hooks/use-canonical";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Link } from "wouter";
-import { Home } from "lucide-react";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function SamengesteldeInterestBerekenen() {
   useCanonical();
+  const seoConfig = getSeoConfig("samengestelde-interest-berekenen");
   
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="samengestelde" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Samengestelde Interest Berekenen - Compound Interest Calculator
           </h1>
@@ -48,24 +51,6 @@ export default function SamengesteldeInterestBerekenen() {
 
       {/* Main Content */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/" className="flex items-center gap-1" data-testid="breadcrumb-home">
-                  <Home className="h-4 w-4" />
-                  Home
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Samengestelde Interest</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-3 space-y-8">
             
@@ -236,31 +221,7 @@ export default function SamengesteldeInterestBerekenen() {
               </CardContent>
             </Card>
 
-            {/* Externe Links voor Authority */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <a href="https://www.wikifin.be/nl/sparen-en-beleggen/samengestelde-interest" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-wikifin-compound">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    Wikifin - Samengestelde Interest Uitgelegd
-                  </a>
-                  <a href="https://www.nbb.be/nl/consumenten/sparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-nbb-sparen">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    Nationale Bank België - Sparen & Beleggen
-                  </a>
-                  <a href="https://financien.belgium.be/nl/particulieren/sparen-en-beleggen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fod-beleggen">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    FOD Financiën - Sparen en Beleggen
-                  </a>
-                </div>
-                <p className="text-xs text-muted-foreground mt-4">
-                  Officiële bronnen voor betrouwbare financiële informatie.
-                </p>
-              </CardContent>
-            </Card>
+            {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
           </div>
           

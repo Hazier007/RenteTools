@@ -1,18 +1,24 @@
-import { useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import PensioenspaarCalculator from "@/components/calculators/pensioenspar-calculator";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function PensioenspaarCalculatorPage() {
+  const seoConfig = getSeoConfig("pensioensparen-calculator");
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="pensioenspar" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Pensioensparen Calculator - Derde Pijler Planning België
           </h1>
@@ -237,35 +243,7 @@ export default function PensioenspaarCalculatorPage() {
               </CardContent>
             </Card>
 
-            {/* Externe Links voor Authority */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Nuttige Links en Bronnen</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <a href="https://financien.belgium.be/nl/particulieren/pensioen/pensioensparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fod-pensioen">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    FOD Financiën - Pensioensparen Gids
-                  </a>
-                  <a href="https://www.wikifin.be/nl/pensioen/pensioensparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-wikifin-pensioen">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    Wikifin - Pensioensparen Uitleg
-                  </a>
-                  <a href="https://www.fsma.be/nl/pensioensparen" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-fsma-pensioen">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    FSMA - Pensioensparen Info
-                  </a>
-                  <a href="https://www.mypension.be" target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline" data-testid="link-mypension">
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    MyPension.be - Uw Pensioen Overzicht
-                  </a>
-                </div>
-                <p className="text-xs text-muted-foreground mt-4">
-                  Officiële bronnen voor betrouwbare informatie over pensioen in België.
-                </p>
-              </CardContent>
-            </Card>
+            {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
           </div>
           
