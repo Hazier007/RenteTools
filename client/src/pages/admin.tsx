@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Pencil, Trash2, Building2, CreditCard, TrendingUp, LogOut } from "lucide-react";
+import { Plus, Pencil, Trash2, Building2, CreditCard, TrendingUp, LogOut, Share2 } from "lucide-react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import AdminLogin from "@/components/admin-login";
 import type { Bank, Product, Rate } from "@shared/schema";
@@ -45,7 +45,7 @@ function AdminDashboard() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="banks" className="flex items-center gap-2">
               <Building2 size={16} />
               Banken ({banks.length})
@@ -57,6 +57,10 @@ function AdminDashboard() {
             <TabsTrigger value="rates" className="flex items-center gap-2">
               <TrendingUp size={16} />
               Rentes ({rates.length})
+            </TabsTrigger>
+            <TabsTrigger value="indexnow" className="flex items-center gap-2">
+              <Share2 size={16} />
+              IndexNow
             </TabsTrigger>
           </TabsList>
 
@@ -70,6 +74,10 @@ function AdminDashboard() {
 
           <TabsContent value="rates">
             <RatesManager rates={rates} products={products} banks={banks} />
+          </TabsContent>
+
+          <TabsContent value="indexnow">
+            <IndexNowManager />
           </TabsContent>
         </Tabs>
       </div>
@@ -493,6 +501,210 @@ function RatesManager({ rates, products, banks }: { rates: Rate[]; products: Pro
           );
         })}
       </div>
+    </div>
+  );
+}
+
+function IndexNowManager() {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionResult, setSubmissionResult] = useState<any>(null);
+
+  const { data: urlsData } = useQuery<{ urls: string[], count: number }>({ 
+    queryKey: ["/api/indexnow/urls"] 
+  });
+
+  const submitAllMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch("/api/indexnow/submit-all", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to submit to IndexNow");
+      }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setSubmissionResult(data);
+      toast({ 
+        title: "IndexNow Submission Successful", 
+        description: `${data.submittedUrls || 0} URLs submitted to Bing, Yandex, and other search engines.` 
+      });
+    },
+    onError: (error: any) => {
+      toast({ 
+        title: "IndexNow Submission Failed", 
+        description: error.message, 
+        variant: "destructive" 
+      });
+    },
+  });
+
+  const handleSubmitAll = () => {
+    setIsSubmitting(true);
+    submitAllMutation.mutate();
+  };
+
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Share2 size={20} />
+            IndexNow - Instant Search Engine Indexing
+          </CardTitle>
+          <CardDescription>
+            Submit all calculator pages to Bing, Yandex, Naver, and other IndexNow-supporting search engines for instant indexing.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <div className="bg-blue-500 text-white rounded-full p-2">
+                <Share2 size={16} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">
+                  What is IndexNow?
+                </h3>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  IndexNow is a protocol that instantly notifies search engines when content is published or updated. 
+                  Instead of waiting days or weeks for crawlers to find your pages, IndexNow sends direct notifications 
+                  to Bing, Yandex, and other participating search engines.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="bg-primary text-primary-foreground rounded-full p-1.5">
+                  <TrendingUp size={14} />
+                </div>
+                <h4 className="font-semibold">Total URLs</h4>
+              </div>
+              <div className="text-3xl font-bold text-primary">
+                {urlsData?.count || 0}
+              </div>
+              <p className="text-sm text-muted-foreground mt-1">
+                Calculator pages + info pages
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="bg-green-500 text-white rounded-full p-1.5">
+                  <Share2 size={14} />
+                </div>
+                <h4 className="font-semibold">Supported Engines</h4>
+              </div>
+              <div className="text-sm space-y-1 mt-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>Bing (Microsoft)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>Yandex</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>Naver, Seznam, Yep</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold text-lg">Submit All URLs</h3>
+                <p className="text-sm text-muted-foreground">
+                  Send all {urlsData?.count || 0} calculator pages to IndexNow search engines
+                </p>
+              </div>
+              <Button 
+                onClick={handleSubmitAll} 
+                disabled={submitAllMutation.isPending}
+                size="lg"
+                data-testid="button-submit-indexnow"
+              >
+                {submitAllMutation.isPending ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <Share2 size={16} className="mr-2" />
+                    Submit to IndexNow
+                  </>
+                )}
+              </Button>
+            </div>
+
+            {submissionResult && (
+              <div className={`p-4 rounded-lg ${
+                submissionResult.success 
+                  ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' 
+                  : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
+              }`}>
+                <div className="flex items-start gap-3">
+                  <div className={`${
+                    submissionResult.success 
+                      ? 'bg-green-500 text-white' 
+                      : 'bg-red-500 text-white'
+                  } rounded-full p-2`}>
+                    {submissionResult.success ? '✓' : '✗'}
+                  </div>
+                  <div className="flex-1">
+                    <h4 className={`font-semibold ${
+                      submissionResult.success 
+                        ? 'text-green-900 dark:text-green-100' 
+                        : 'text-red-900 dark:text-red-100'
+                    }`}>
+                      {submissionResult.success ? 'Submission Successful' : 'Submission Failed'}
+                    </h4>
+                    <p className={`text-sm mt-1 ${
+                      submissionResult.success 
+                        ? 'text-green-700 dark:text-green-300' 
+                        : 'text-red-700 dark:text-red-300'
+                    }`}>
+                      {submissionResult.message}
+                    </p>
+                    {submissionResult.success && (
+                      <div className="mt-2 text-xs text-green-600 dark:text-green-400">
+                        Status Code: {submissionResult.statusCode} | 
+                        URLs: {submissionResult.submittedUrls}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <Separator />
+
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+            <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">
+              Important Notes
+            </h4>
+            <ul className="text-sm text-yellow-700 dark:text-yellow-300 space-y-1">
+              <li>• IndexNow submits URLs to Bing, Yandex, and participating search engines</li>
+              <li>• Google does NOT support IndexNow (use XML sitemaps for Google)</li>
+              <li>• Only submit when content is actually updated or newly published</li>
+              <li>• Response code 200 or 202 means the submission was received (not necessarily indexed)</li>
+              <li>• Check Bing Webmaster Tools for verification and detailed insights</li>
+            </ul>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
