@@ -4,10 +4,17 @@ import Footer from "@/components/layout/footer";
 import PensioenCalculator from "@/components/calculators/pensioen-calculator";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function PensioenCalculatorPage() {
+  const seoConfig = getSeoConfig("pensioen-calculator");
+  
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <head>
         <title>Pensioen Calculator België - Plan uw Volledige Pensioen (1e, 2e, 3e Pijler) | Interesten.be</title>
         <meta 
@@ -21,6 +28,7 @@ export default function PensioenCalculatorPage() {
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Pensioen Calculator België - Volledige Pensioenplanning
           </h1>
@@ -272,6 +280,8 @@ export default function PensioenCalculatorPage() {
           <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

@@ -10,8 +10,14 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import { useEffect } from 'react';
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function EindejaarsbonosCalculatorPage() {
+  const seoConfig = getSeoConfig("eindejaarsbonus-calculator");
+  
   useEffect(() => {
     document.title = "Eindejaarsbonus Calculator België - 13de Maand Optimaliseren";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -200,11 +206,13 @@ export default function EindejaarsbonosCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="eindejaarsbonus" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Eindejaarsbonus Calculator België - 13de Maand Optimaliseren
           </h1>
@@ -644,6 +652,8 @@ export default function EindejaarsbonosCalculatorPage() {
           <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

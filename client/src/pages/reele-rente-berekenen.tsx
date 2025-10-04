@@ -6,8 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function ReeleRenteBerekenen() {
+  const seoConfig = getSeoConfig("reele-rente-berekenen");
   const [nominaleRente, setNominaleRente] = useState<string>("2.5");
   const [inflatie, setInflatie] = useState<string>("2.1");
   const [kapitaal, setKapitaal] = useState<string>("10000");
@@ -46,11 +51,13 @@ export default function ReeleRenteBerekenen() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="overig" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Reële Rente Berekenen - Inflatie vs Spaarrente Calculator
           </h1>
@@ -395,6 +402,8 @@ export default function ReeleRenteBerekenen() {
           </div>
         </div>
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>

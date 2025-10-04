@@ -6,8 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import FaqSchema from "@/components/seo/FaqSchema";
+import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 
 export default function GeldontwaardigCalculator() {
+  const seoConfig = getSeoConfig("geldontwaarding-calculator");
   const [huidigeWaarde, setHuidigeWaarde] = useState<string>("10000");
   const [jaren, setJaren] = useState<string>("10");
   const [inflatie, setInflatie] = useState<string>("2.1");
@@ -52,11 +57,13 @@ export default function GeldontwaardigCalculator() {
 
   return (
     <div className="min-h-screen bg-background">
+      {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header activeCalculator="overig" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Geldontwaarding Calculator - Wat is mijn Geld Waard over 10 Jaar?
           </h1>
@@ -431,6 +438,8 @@ export default function GeldontwaardigCalculator() {
           </div>
         </div>
       </section>
+
+      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
       <Footer />
     </div>
