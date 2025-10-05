@@ -5,7 +5,7 @@ import Footer from "@/components/layout/footer";
 export default function Voorwaarden() {
   return (
     <div className="min-h-screen bg-background">
-      <Header activeCalculator="" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

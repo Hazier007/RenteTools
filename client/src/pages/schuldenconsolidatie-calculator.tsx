@@ -178,7 +178,7 @@ export default function SchuldenconsolidatieCalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="schuldenconsolidatie-calculator" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

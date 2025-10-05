@@ -1,4 +1,4 @@
-export type SiloCategory = "Sparen" | "Lenen" | "Beleggen" | "Planning";
+export type SiloCategory = "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
 
 export interface FaqItem {
   question: string;
@@ -12,13 +12,15 @@ export interface AuthorityLink {
 }
 
 export interface CalculatorSeoConfig {
-  category: SiloCategory;
+  slug: string;
+  category: SiloCategory | "Overige";
   pageTitle: string;
   breadcrumbTitle: string;
   metaTitle: string;
   metaDescription: string;
   faqs: FaqItem[];
   authorityLinks: AuthorityLink[];
+  previewImage?: string;
 }
 
 const defaultAuthorityLinks = {
@@ -45,6 +47,7 @@ const defaultAuthorityLinks = {
 };
 
 const defaultFaqsBySilo: Record<SiloCategory, FaqItem[]> = {
+  Overige: [],
   Sparen: [
     {
       question: "Hoeveel interest krijg ik op een spaarrekening?",
@@ -120,7 +123,18 @@ const defaultFaqsBySilo: Record<SiloCategory, FaqItem[]> = {
 };
 
 export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
+  "home": {
+    slug: "home",
+    category: "Overige",
+    pageTitle: "Interesten.be - 57+ Gratis Financiële Calculators België",
+    breadcrumbTitle: "Home",
+    metaTitle: "Interesten.be - 57+ Gratis Financiële Calculators België",
+    metaDescription: "Bereken spaarrente, leningen, hypotheken en beleggingen met 57+ gratis tools. Actuele Belgische rentes en fiscaliteit. 100% gratis, geen verborgen kosten.",
+    faqs: [],
+    authorityLinks: []
+  },
   "hoogste-spaarrente-belgie": {
+    slug: "hoogste-spaarrente-belgie",
     category: "Sparen",
     pageTitle: "Hoogste Spaarrente België",
     breadcrumbTitle: "Hoogste Spaarrente",
@@ -130,6 +144,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "deposito-calculator": {
+    slug: "deposito-calculator",
     category: "Sparen",
     pageTitle: "Deposito Calculator",
     breadcrumbTitle: "Deposito Calculator",
@@ -156,6 +171,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "samengestelde-interest-berekenen": {
+    slug: "samengestelde-interest-berekenen",
     category: "Sparen",
     pageTitle: "Samengestelde Interest Berekenen",
     breadcrumbTitle: "Samengestelde Interest",
@@ -165,6 +181,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "doelspaarcalculator": {
+    slug: "doelspaarcalculator",
     category: "Sparen",
     pageTitle: "Doelspaar Calculator",
     breadcrumbTitle: "Doelspaar Calculator",
@@ -174,6 +191,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
   "spaarrekening-vergelijker": {
+    slug: "spaarrekening-vergelijker",
     category: "Sparen",
     pageTitle: "Spaarrekening Vergelijker",
     breadcrumbTitle: "Spaarrekening Vergelijker",
@@ -183,6 +201,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "kinderrekening-calculator": {
+    slug: "kinderrekening-calculator",
     category: "Sparen",
     pageTitle: "Kinderrekening Calculator",
     breadcrumbTitle: "Kinderrekening",
@@ -192,6 +211,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
   "kasbon-calculator": {
+    slug: "kasbon-calculator",
     category: "Sparen",
     pageTitle: "Kasbon Calculator",
     breadcrumbTitle: "Kasbon Calculator",
@@ -201,6 +221,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
   "termijnrekening-calculator": {
+    slug: "termijnrekening-calculator",
     category: "Sparen",
     pageTitle: "Termijnrekening Calculator",
     breadcrumbTitle: "Termijnrekening",
@@ -210,6 +231,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
   "groepssparen-calculator": {
+    slug: "groepssparen-calculator",
     category: "Sparen",
     pageTitle: "Groepssparen Calculator",
     breadcrumbTitle: "Groepssparen",
@@ -219,6 +241,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "loyalty-bonus-calculator": {
+    slug: "loyalty-bonus-calculator",
     category: "Sparen",
     pageTitle: "Getrouwheidspremie Calculator",
     breadcrumbTitle: "Getrouwheidspremie",
@@ -228,6 +251,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
   "vakantiegeld-sparen-calculator": {
+    slug: "vakantiegeld-sparen-calculator",
     category: "Sparen",
     pageTitle: "Vakantiegeld Sparen Calculator",
     breadcrumbTitle: "Vakantiegeld Sparen",
@@ -237,6 +261,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
   "hypothecaire-lening-berekenen": {
+    slug: "hypothecaire-lening-berekenen",
     category: "Lenen",
     pageTitle: "Hypothecaire Lening Berekenen",
     breadcrumbTitle: "Hypothecaire Lening",
@@ -246,6 +271,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "woningkrediet-simulator": {
+    slug: "woningkrediet-simulator",
     category: "Lenen",
     pageTitle: "Woningkrediet Simulator",
     breadcrumbTitle: "Woningkrediet Simulator",
@@ -255,6 +281,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "persoonlijke-lening-berekenen": {
+    slug: "persoonlijke-lening-berekenen",
     category: "Lenen",
     pageTitle: "Persoonlijke Lening Berekenen",
     breadcrumbTitle: "Persoonlijke Lening",
@@ -264,6 +291,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "autolening-berekenen": {
+    slug: "autolening-berekenen",
     category: "Lenen",
     pageTitle: "Autolening Berekenen",
     breadcrumbTitle: "Autolening",
@@ -273,6 +301,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "lening-herfinancieren": {
+    slug: "lening-herfinancieren",
     category: "Lenen",
     pageTitle: "Lening Herfinancieren",
     breadcrumbTitle: "Lening Herfinancieren",
@@ -282,6 +311,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "schuldenconsolidatie-calculator": {
+    slug: "schuldenconsolidatie-calculator",
     category: "Lenen",
     pageTitle: "Schuldenconsolidatie Calculator",
     breadcrumbTitle: "Schuldenconsolidatie",
@@ -291,6 +321,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "kredietcapaciteit-calculator": {
+    slug: "kredietcapaciteit-calculator",
     category: "Lenen",
     pageTitle: "Kredietcapaciteit Calculator",
     breadcrumbTitle: "Kredietcapaciteit",
@@ -300,6 +331,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
   "kredietvergelijker-belgie": {
+    slug: "kredietvergelijker-belgie",
     category: "Lenen",
     pageTitle: "Kredietvergelijker België",
     breadcrumbTitle: "Kredietvergelijker",
@@ -309,6 +341,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "doorlopend-krediet-calculator": {
+    slug: "doorlopend-krediet-calculator",
     category: "Lenen",
     pageTitle: "Doorlopend Krediet Calculator",
     breadcrumbTitle: "Doorlopend Krediet",
@@ -318,6 +351,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "kredietkaart-calculator": {
+    slug: "kredietkaart-calculator",
     category: "Lenen",
     pageTitle: "Kredietkaart Calculator",
     breadcrumbTitle: "Kredietkaart Kosten",
@@ -327,6 +361,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "leasingkrediet-calculator": {
+    slug: "leasingkrediet-calculator",
     category: "Lenen",
     pageTitle: "Leasingkrediet Calculator",
     breadcrumbTitle: "Leasingkrediet",
@@ -336,6 +371,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "voorschot-calculator": {
+    slug: "voorschot-calculator",
     category: "Lenen",
     pageTitle: "Voorschot Calculator",
     breadcrumbTitle: "Voorschot Berekenen",
@@ -345,6 +381,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.nbb]
   },
   "studieschuld-calculator": {
+    slug: "studieschuld-calculator",
     category: "Lenen",
     pageTitle: "Studieschuld Calculator",
     breadcrumbTitle: "Studieschuld",
@@ -354,6 +391,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "groepslening-calculator": {
+    slug: "groepslening-calculator",
     category: "Lenen",
     pageTitle: "Groepslening Calculator",
     breadcrumbTitle: "Groepslening",
@@ -363,6 +401,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "wettelijke-rentevoet-belgie": {
+    slug: "wettelijke-rentevoet-belgie",
     category: "Lenen",
     pageTitle: "Wettelijke Rentevoet België",
     breadcrumbTitle: "Wettelijke Rentevoet",
@@ -372,6 +411,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
   "beleggingsrente-calculator": {
+    slug: "beleggingsrente-calculator",
     category: "Beleggen",
     pageTitle: "Beleggingsrente Calculator",
     breadcrumbTitle: "Beleggingsrente",
@@ -381,6 +421,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.testAankoop]
   },
   "aandelen-calculator": {
+    slug: "aandelen-calculator",
     category: "Beleggen",
     pageTitle: "Aandelen Calculator",
     breadcrumbTitle: "Aandelen Calculator",
@@ -390,6 +431,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
   "etf-calculator": {
+    slug: "etf-calculator",
     category: "Beleggen",
     pageTitle: "ETF Calculator",
     breadcrumbTitle: "ETF Calculator",
@@ -399,6 +441,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
   "obligatie-calculator": {
+    slug: "obligatie-calculator",
     category: "Beleggen",
     pageTitle: "Obligatie Calculator",
     breadcrumbTitle: "Obligatie Calculator",
@@ -408,6 +451,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
   "cryptocurrency-calculator": {
+    slug: "cryptocurrency-calculator",
     category: "Beleggen",
     pageTitle: "Cryptocurrency Calculator",
     breadcrumbTitle: "Cryptocurrency",
@@ -417,6 +461,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
   "dollar-cost-averaging-calculator": {
+    slug: "dollar-cost-averaging-calculator",
     category: "Beleggen",
     pageTitle: "Dollar Cost Averaging Calculator",
     breadcrumbTitle: "Dollar Cost Averaging",
@@ -426,6 +471,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "portfolio-diversificatie-calculator": {
+    slug: "portfolio-diversificatie-calculator",
     category: "Beleggen",
     pageTitle: "Portfolio Diversificatie Calculator",
     breadcrumbTitle: "Portfolio Diversificatie",
@@ -435,6 +481,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "reit-calculator": {
+    slug: "reit-calculator",
     category: "Beleggen",
     pageTitle: "REIT Calculator",
     breadcrumbTitle: "REIT Calculator",
@@ -444,6 +491,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
   "belgische-beleggingsfiscaliteit-calculator": {
+    slug: "belgische-beleggingsfiscaliteit-calculator",
     category: "Beleggen",
     pageTitle: "Belgische Beleggingsfiscaliteit",
     breadcrumbTitle: "Beleggingsfiscaliteit",
@@ -453,6 +501,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "roerende-voorheffing-calculator": {
+    slug: "roerende-voorheffing-calculator",
     category: "Beleggen",
     pageTitle: "Roerende Voorheffing Calculator",
     breadcrumbTitle: "Roerende Voorheffing",
@@ -462,6 +511,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "pensioensparen-calculator": {
+    slug: "pensioensparen-calculator",
     category: "Planning",
     pageTitle: "Pensioensparen Calculator",
     breadcrumbTitle: "Pensioensparen",
@@ -471,6 +521,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "pensioen-calculator": {
+    slug: "pensioen-calculator",
     category: "Planning",
     pageTitle: "Pensioen Calculator",
     breadcrumbTitle: "Pensioen Calculator",
@@ -480,6 +531,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "fire-calculator": {
+    slug: "fire-calculator",
     category: "Planning",
     pageTitle: "FIRE Calculator",
     breadcrumbTitle: "FIRE Calculator",
@@ -489,6 +541,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "noodfonds-calculator": {
+    slug: "noodfonds-calculator",
     category: "Planning",
     pageTitle: "Noodfonds Calculator",
     breadcrumbTitle: "Noodfonds",
@@ -498,6 +551,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "budget-planner": {
+    slug: "budget-planner",
     category: "Planning",
     pageTitle: "Budget Planner",
     breadcrumbTitle: "Budget Planner",
@@ -507,6 +561,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.testAankoop]
   },
   "belastingplanning-calculator": {
+    slug: "belastingplanning-calculator",
     category: "Planning",
     pageTitle: "Belastingplanning Calculator",
     breadcrumbTitle: "Belastingplanning",
@@ -516,6 +571,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "levensverzekeraar-calculator": {
+    slug: "levensverzekeraar-calculator",
     category: "Planning",
     pageTitle: "Levensverzekeraar Calculator",
     breadcrumbTitle: "Levensverzekering",
@@ -525,6 +581,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "eindejaarsbonus-calculator": {
+    slug: "eindejaarsbonus-calculator",
     category: "Planning",
     pageTitle: "Eindejaarsbonus Calculator",
     breadcrumbTitle: "Eindejaarsbonus",
@@ -534,6 +591,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.fodFinancien]
   },
   "inflatie-calculator-belgie": {
+    slug: "inflatie-calculator-belgie",
     category: "Planning",
     pageTitle: "Inflatie Calculator België",
     breadcrumbTitle: "Inflatie Calculator",
@@ -543,6 +601,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
   "geldontwaarding-calculator": {
+    slug: "geldontwaarding-calculator",
     category: "Planning",
     pageTitle: "Geldontwaarding Calculator",
     breadcrumbTitle: "Geldontwaarding",
@@ -552,6 +611,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
   "reele-rente-berekenen": {
+    slug: "reele-rente-berekenen",
     category: "Planning",
     pageTitle: "Reële Rente Berekenen",
     breadcrumbTitle: "Reële Rente",
@@ -561,6 +621,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
   "rentevoet-vergelijker": {
+    slug: "rentevoet-vergelijker",
     category: "Planning",
     pageTitle: "Rentevoet Vergelijker",
     breadcrumbTitle: "Rentevoet Vergelijker",
@@ -568,7 +629,173 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     metaDescription: "Vergelijk vaste en variabele rentevoeten. Spaarrentes, hypotheekrentes en beleggingsrendementen in België. Vind de beste rente.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
+  },
+  "over-ons": {
+    slug: "over-ons",
+    category: "Overige",
+    pageTitle: "Over Ons",
+    breadcrumbTitle: "Over Ons",
+    metaTitle: "Over Interesten.be - Financiële Calculators België",
+    metaDescription: "Interesten.be helpt u slimme financiële beslissingen nemen met gratis calculators voor sparen, lenen, beleggen en planning in België.",
+    faqs: defaultFaqsBySilo.Overige,
+    authorityLinks: []
+  },
+  "privacy": {
+    slug: "privacy",
+    category: "Overige",
+    pageTitle: "Privacy",
+    breadcrumbTitle: "Privacy",
+    metaTitle: "Privacy & Cookie Policy - Interesten.be",
+    metaDescription: "Privacy policy en cookie informatie van Interesten.be. Lees hoe wij omgaan met uw gegevens.",
+    faqs: defaultFaqsBySilo.Overige,
+    authorityLinks: []
+  },
+  "voorwaarden": {
+    slug: "voorwaarden",
+    category: "Overige",
+    pageTitle: "Algemene Voorwaarden",
+    breadcrumbTitle: "Voorwaarden",
+    metaTitle: "Algemene Voorwaarden - Interesten.be",
+    metaDescription: "Algemene voorwaarden en disclaimer voor het gebruik van Interesten.be calculators en informatie.",
+    faqs: defaultFaqsBySilo.Overige,
+    authorityLinks: []
+  },
+  "sitemap": {
+    slug: "sitemap",
+    category: "Overige",
+    pageTitle: "Sitemap",
+    breadcrumbTitle: "Sitemap",
+    metaTitle: "Sitemap - Alle Calculators Interesten.be",
+    metaDescription: "Volledig overzicht van alle financiële calculators en pagina's op Interesten.be voor België.",
+    faqs: defaultFaqsBySilo.Overige,
+    authorityLinks: []
+  },
+  "admin": {
+    slug: "admin",
+    category: "Overige",
+    pageTitle: "Admin",
+    breadcrumbTitle: "Admin",
+    metaTitle: "Admin Panel - Interesten.be",
+    metaDescription: "Beheer panel voor Interesten.be",
+    faqs: defaultFaqsBySilo.Overige,
+    authorityLinks: []
+  },
+  "sparen": {
+    slug: "sparen",
+    category: "Sparen",
+    pageTitle: "Spaarrekening Calculators België",
+    breadcrumbTitle: "Sparen",
+    metaTitle: "Spaarrekening Calculators België - 11+ Gratis Tools",
+    metaDescription: "Vergelijk de beste spaarrekeningen, deposito's en termijnrekeningen in België. Bereken uw rendement met onze gratis tools.",
+    faqs: defaultFaqsBySilo.Sparen,
+    authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
+  },
+  "lenen": {
+    slug: "lenen",
+    category: "Lenen",
+    pageTitle: "Lening Calculators België",
+    breadcrumbTitle: "Lenen",
+    metaTitle: "Lening Calculators België - Hypotheek & Krediet",
+    metaDescription: "Bereken uw hypotheek, autolening of persoonlijke lening. Vergelijk rentes en vind de beste kredietvoorwaarden.",
+    faqs: defaultFaqsBySilo.Lenen,
+    authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
+  },
+  "beleggen": {
+    slug: "beleggen",
+    category: "Beleggen",
+    pageTitle: "Beleggings Calculators België",
+    breadcrumbTitle: "Beleggen",
+    metaTitle: "Beleggings Calculators België - Aandelen, ETF, Crypto",
+    metaDescription: "Bereken rendement op aandelen, ETF's, obligaties en crypto. Optimaliseer uw beleggingsportefeuille.",
+    faqs: defaultFaqsBySilo.Beleggen,
+    authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.testAankoop]
+  },
+  "planning": {
+    slug: "planning",
+    category: "Planning",
+    pageTitle: "Financiële Planning Tools",
+    breadcrumbTitle: "Planning",
+    metaTitle: "Financiële Planning Tools - Pensioen & FIRE",
+    metaDescription: "Plan uw pensioen, budget en financiële toekomst. FIRE calculator, noodfonds en belastingplanning.",
+    faqs: defaultFaqsBySilo.Planning,
+    authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
+  },
+  "overige": {
+    slug: "overige",
+    category: "Overige",
+    pageTitle: "Informatie & Support",
+    breadcrumbTitle: "Informatie",
+    metaTitle: "Informatie - Interesten.be",
+    metaDescription: "Meer informatie over Interesten.be, privacy beleid en gebruiksvoorwaarden.",
+    faqs: [],
+    authorityLinks: []
   }
+};
+
+export const calculatorsByCategory: Record<SiloCategory, string[]> = {
+  Sparen: [
+    "hoogste-spaarrente-belgie",
+    "deposito-calculator",
+    "samengestelde-interest-berekenen",
+    "doelspaarcalculator",
+    "spaarrekening-vergelijker",
+    "kinderrekening-calculator",
+    "kasbon-calculator",
+    "termijnrekening-calculator",
+    "groepssparen-calculator",
+    "loyalty-bonus-calculator",
+    "vakantiegeld-sparen-calculator"
+  ],
+  Lenen: [
+    "hypothecaire-lening-berekenen",
+    "woningkrediet-simulator",
+    "persoonlijke-lening-berekenen",
+    "autolening-berekenen",
+    "lening-herfinancieren",
+    "schuldenconsolidatie-calculator",
+    "kredietcapaciteit-calculator",
+    "kredietvergelijker-belgie",
+    "doorlopend-krediet-calculator",
+    "kredietkaart-calculator",
+    "leasingkrediet-calculator",
+    "voorschot-calculator",
+    "studieschuld-calculator",
+    "groepslening-calculator",
+    "wettelijke-rentevoet-belgie"
+  ],
+  Beleggen: [
+    "beleggingsrente-calculator",
+    "aandelen-calculator",
+    "etf-calculator",
+    "obligatie-calculator",
+    "cryptocurrency-calculator",
+    "dollar-cost-averaging-calculator",
+    "portfolio-diversificatie-calculator",
+    "reit-calculator",
+    "belgische-beleggingsfiscaliteit-calculator",
+    "roerende-voorheffing-calculator"
+  ],
+  Planning: [
+    "pensioensparen-calculator",
+    "pensioen-calculator",
+    "fire-calculator",
+    "noodfonds-calculator",
+    "budget-planner",
+    "belastingplanning-calculator",
+    "levensverzekeraar-calculator",
+    "eindejaarsbonus-calculator",
+    "inflatie-calculator-belgie",
+    "geldontwaarding-calculator",
+    "reele-rente-berekenen",
+    "rentevoet-vergelijker"
+  ],
+  Overige: [
+    "over-ons",
+    "privacy",
+    "voorwaarden",
+    "sitemap",
+    "admin"
+  ]
 };
 
 export function getSeoConfig(pageSlug: string): CalculatorSeoConfig | null {

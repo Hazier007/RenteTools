@@ -39,7 +39,7 @@ export default function WettelijkeRentevoetBelgie() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="overig" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

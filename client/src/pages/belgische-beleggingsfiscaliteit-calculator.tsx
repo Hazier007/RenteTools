@@ -293,7 +293,7 @@ export default function BelgischeBeleggingsfiscaliteitCalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="belgische-beleggingsfiscaliteit-calculator" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

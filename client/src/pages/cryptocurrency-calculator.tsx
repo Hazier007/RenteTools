@@ -340,7 +340,7 @@ export default function CryptocurrencyCalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="cryptocurrency-calculator" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

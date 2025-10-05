@@ -171,7 +171,7 @@ export default function VoorschotCalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="voorschot-calculator" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export default function Sitemap() {
   return (
     <div className="min-h-screen bg-background">
-      <Header activeCalculator="" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

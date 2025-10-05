@@ -68,7 +68,7 @@ export default function SpaarrekeningVergelijkerPage() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="spaarrekening-vergelijker" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

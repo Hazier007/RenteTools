@@ -209,7 +209,7 @@ export default function AandelenCalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="aandelen-calculator" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">

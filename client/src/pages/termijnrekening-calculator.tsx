@@ -98,7 +98,7 @@ export default function TermijnrekeningCalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <Header activeCalculator="termijnrekening" onCalculatorChange={() => {}} />
+      <Header />
       
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
