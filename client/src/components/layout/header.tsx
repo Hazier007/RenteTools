@@ -47,7 +47,7 @@ export default function Header() {
 
                 {activeDropdown === category.name && (
                   <div 
-                    className="absolute top-full left-0 mt-1 w-72 bg-card/95 backdrop-blur-xl border border-border/50 rounded-lg shadow-xl p-2 animate-in fade-in slide-in-from-top-2 duration-200"
+                    className="absolute top-full left-0 mt-1 w-72 bg-background/98 backdrop-blur-xl border border-border/50 rounded-lg shadow-2xl p-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50"
                     data-testid={`dropdown-${category.name.toLowerCase()}`}
                   >
                     <div className="space-y-1 max-h-96 overflow-y-auto">
@@ -94,7 +94,7 @@ export default function Header() {
       </div>
       
       {mobileMenuOpen && (
-        <div className="md:hidden bg-card/95 backdrop-blur-xl border-t border-border/50">
+        <div className="md:hidden bg-background/98 backdrop-blur-xl border-t border-border/50">
           <div className="px-4 py-3 space-y-1 max-h-[70vh] overflow-y-auto">
             {categories.map((category) => (
               <div key={category.path} className="space-y-1">
