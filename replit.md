@@ -78,3 +78,80 @@ The application is prepared for session-based authentication:
 - **drizzle-zod** - Integration between Drizzle ORM and Zod schemas
 
 The application is specifically designed for the Belgian market with Belgian-specific financial terminology, currency formatting (EUR), and calculation methods that comply with Belgian financial practices.
+
+# Ongoing Refactoring Tasks
+
+## Sidebar Removal & Content Centering (In Progress - 45% Complete)
+
+**Status:** 20 out of ~44 calculator pages refactored
+
+### Pattern for Sidebar Removal
+1. Change `max-w-7xl` to `max-w-4xl` for centered layout
+2. Replace `grid lg:grid-cols-4 gap-8` with plain `div`
+3. Remove `lg:col-span-3` class from main content wrapper
+4. Delete entire sidebar div (contains rectangle ads + related calculators cards)
+5. Add 728x90 banner ad section INSIDE main content, directly after Calculator Card component
+6. Add bottom 728x90 banner ad section before footer
+7. Update AuthorityLinks section to use `max-w-4xl`
+
+### ⚠️ Correction Needed - Ad Placement Issue
+All 20 completed pages have incorrect ad placement. The "Ad After Calculator" section must be positioned INSIDE the main content section (directly after Calculator Card component), not as a separate section outside.
+
+**Fix required:** Move ad placement from outside main content to inside, after Calculator Card.
+
+### ✅ Completed Pages (20/44)
+1. belastingplanning-calculator
+2. budget-planner  
+3. fire-calculator
+4. doelspaarcalculator
+5. hypothecaire-lening-berekenen
+6. pensioensparen-calculator
+7. autolening-berekenen
+8. persoonlijke-lening-berekenen
+9. kredietkaart-calculator
+10. spaarrekening-vergelijker
+11. samengestelde-interest-berekenen
+12. noodfonds-calculator
+13. inflatie-calculator-belgie
+14. beleggingsrente-calculator
+15. aandelen-calculator (special 3-column layout - only ad additions)
+16. roerende-voorheffing-calculator
+17. pensioen-calculator
+18. geldontwaarding-calculator
+19. reele-rente-berekenen
+20. wettelijke-rentevoet-belgie
+
+### 📋 Remaining Pages (~24)
+- hoogste-spaarrente-belgie
+- deposito-calculator
+- kasbon-calculator
+- termijnrekening-calculator
+- loyalty-bonus-calculator
+- kinderrekening-calculator
+- etf-calculator
+- cryptocurrency-calculator
+- obligatie-calculator
+- reit-calculator
+- portfolio-diversificatie-calculator
+- belgische-beleggingsfiscaliteit-calculator
+- dollar-cost-averaging-calculator
+- levensverzekeraar-calculator
+- doorlopend-krediet-calculator
+- groepslening-calculator
+- groepssparen-calculator
+- lening-herfinancieren
+- schuldenconsolidatie-calculator
+- studieschuld-calculator
+- woningkrediet-simulator
+- kredietcapaciteit-calculator
+- kredietvergelijker-belgie
+- leasingkrediet-calculator
+- voorschot-calculator
+- vakantiegeld-sparen-calculator
+- rentevoet-vergelijker
+- eindejaarsbonus-calculator
+
+### Next Steps
+1. Fix ad placement for all 20 completed pages
+2. Complete remaining ~24 calculator pages with correct ad placement
+3. Verify all pages render correctly with centered layout and proper ads
