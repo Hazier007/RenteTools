@@ -10,12 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface ETF {
   id: string;
@@ -31,19 +32,7 @@ interface ETF {
 
 export default function ETFCalculatorPage() {
   const seoConfig = getSeoConfig("etf-calculator");
-
-  useEffect(() => {
-    document.title = "ETF Calculator België - Index Fondsen Vergelijken";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Vergelijk ETFs en bereken rendement inclusief kosten. Analyseer tracking error, dividend yield en fiscale impact van index fondsen in België.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Vergelijk ETFs en bereken rendement inclusief kosten. Analyseer tracking error, dividend yield en fiscale impact van index fondsen in België.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("etf-calculator");
 
   const [belegging, setBelegging] = useState({
     startBedrag: 10000,

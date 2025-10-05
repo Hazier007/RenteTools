@@ -9,22 +9,16 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function BelastingplanningCalculatorPage() {
   useCanonical();
   const seoConfig = getSeoConfig("belastingplanning-calculator");
+  useSeoTags("belastingplanning-calculator");
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <head>
-        <title>Belastingplanning Calculator België - Optimaliseer Uw Investering Belastingen | Interesten.be</title>
-        <meta 
-          name="description" 
-          content="Optimaliseer uw belastingen op investeringen en sparen met onze belastingplanning calculator. Bespaar duizenden euro's per jaar met slimme fiscale strategieën." 
-        />
-      </head>
-      
       <Header activeCalculator="belastingplanning" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}

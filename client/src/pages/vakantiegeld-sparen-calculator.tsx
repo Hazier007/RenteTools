@@ -9,27 +9,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import { useEffect } from 'react';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function VakantiegeldSparenCalculatorPage() {
   const seoConfig = getSeoConfig("vakantiegeld-sparen-calculator");
-  
-  useEffect(() => {
-    document.title = "Vakantiegeld Sparen Calculator België - Dubbel Vakantiegeld Optimaliseren";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken uw vakantiegeld en ontdek slimme spaarstrategieën om uw dubbel vakantiegeld optimaal te benutten voor toekomstige doelen en dromen.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken uw vakantiegeld en ontdek slimme spaarstrategieën om uw dubbel vakantiegeld optimaal te benutten voor toekomstige doelen en dromen.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("vakantiegeld-sparen-calculator");
   const [brutoLoon, setBrutoLoon] = useState<number>(3500);
   const [werkRegimenNaam, setWerkRegime] = useState<string>("voltijds");
   const [vakantiegeldDoel, setVakantiegeldDoel] = useState<string>("vervroegd");

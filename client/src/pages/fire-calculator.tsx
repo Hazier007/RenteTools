@@ -9,22 +9,16 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function FIRECalculatorPage() {
   useCanonical();
   const seoConfig = getSeoConfig("fire-calculator");
+  useSeoTags("fire-calculator");
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <head>
-        <title>FIRE Calculator België - Financial Independence Retire Early Planning | Interesten.be</title>
-        <meta 
-          name="description" 
-          content="Bereken uw FIRE plan (Financial Independence Retire Early) voor België. Ontdek wanneer u financieel onafhankelijk kunt worden en vroeg met pensioen kunt gaan." 
-        />
-      </head>
-      
       <Header activeCalculator="fire" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}

@@ -10,12 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface Aandeel {
   ticker: string;
@@ -30,19 +31,7 @@ interface Aandeel {
 
 export default function AandelenCalculatorPage() {
   const seoConfig = getSeoConfig("aandelen-calculator");
-
-  useEffect(() => {
-    document.title = "Aandelen Calculator België - Dividend Yield & Waardering";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken dividend yield, P/E ratio en aandeelwaardering. Analyseer individuele aandelen met fundamentele analyse tools voor Belgische beleggers.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken dividend yield, P/E ratio en aandeelwaardering. Analyseer individuele aandelen met fundamentele analyse tools voor Belgische beleggers.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("aandelen-calculator");
 
   const [aandeelData, setAandeelData] = useState({
     aankoopprijs: 100,

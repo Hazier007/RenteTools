@@ -11,12 +11,13 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, AreaChart, Area } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface AssetClass {
   naam: string;
@@ -31,19 +32,7 @@ interface AssetClass {
 
 export default function PortfolioDiversificatieCalculatorPage() {
   const seoConfig = getSeoConfig("portfolio-diversificatie-calculator");
-
-  useEffect(() => {
-    document.title = "Portfolio Diversificatie Calculator - Asset Allocatie België";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Optimaliseer uw portfolio allocatie met moderne portfolio theorie. Bereken risico-rendement verhouding en diversificatie voor Belgische beleggers.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Optimaliseer uw portfolio allocatie met moderne portfolio theorie. Bereken risico-rendement verhouding en diversificatie voor Belgische beleggers.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("portfolio-diversificatie-calculator");
 
   const [portfolioData, setPortfolioData] = useState({
     totaalPortfolio: 100000,

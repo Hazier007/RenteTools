@@ -8,28 +8,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function WoningkredietSimulatorPage() {
   const seoConfig = getSeoConfig("woningkrediet-simulator");
-
-  useEffect(() => {
-    document.title = "Woningkrediet Simulator België - Hypotheek Berekenen & Vergelijken";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Simuleer uw woningkrediet met verschillende scenarios. Bereken maandlast, totale kosten en vergelijk hypotheekaanbiedingen van Belgische banken voor uw droomhuis.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Simuleer uw woningkrediet met verschillende scenarios. Bereken maandlast, totale kosten en vergelijk hypotheekaanbiedingen van Belgische banken voor uw droomhuis.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("woningkrediet-simulator");
 
   const [woningprijs, setWoningprijs] = useState<number>(350000);
   const [eigenInbreng, setEigenInbreng] = useState<number>(70000);

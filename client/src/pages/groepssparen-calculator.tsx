@@ -9,27 +9,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
-import { useEffect } from 'react';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function GroepssparenCalculatorPage() {
   const seoConfig = getSeoConfig("groepssparen-calculator");
-  
-  useEffect(() => {
-    document.title = "Groepssparen Calculator België - Samen Sparen voor Gezamenlijke Doelen";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Plan en bereken groepssparen met vrienden, familie of collega\'s. Ontdek hoe u samen kunt sparen voor feesten, uitstappen, cadeaus of grote gezamenlijke doelen.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Plan en bereken groepssparen met vrienden, familie of collega\'s. Ontdek hoe u samen kunt sparen voor feesten, uitstappen, cadeaus of grote gezamenlijke doelen.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("groepssparen-calculator");
   const [aantalDeelnemers, setAantalDeelnemers] = useState<number>(10);
   const [maandelijkeBijdrage, setMaandelijkeBijdrage] = useState<number>(50);
   const [looptijd, setLooptijd] = useState<number>(24);

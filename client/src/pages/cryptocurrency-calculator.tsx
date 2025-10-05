@@ -11,12 +11,13 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, AreaChart, Area, ComposedChart } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface CryptoAsset {
   symbol: string;
@@ -43,19 +44,7 @@ interface HistoricalData {
 
 export default function CryptocurrencyCalculatorPage() {
   const seoConfig = getSeoConfig("cryptocurrency-calculator");
-
-  useEffect(() => {
-    document.title = "Cryptocurrency Calculator België - Crypto Portfolio Analyse";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Analyseer crypto portfolio met volatiliteit, DeFi yields en Belgische belastingimplicaties. Bereken risico-rendement en portfolio optimalisatie voor cryptocurrency.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Analyseer crypto portfolio met volatiliteit, DeFi yields en Belgische belastingimplicaties. Bereken risico-rendement en portfolio optimalisatie voor cryptocurrency.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("cryptocurrency-calculator");
 
   const [cryptoPortfolio, setCryptoPortfolio] = useState({
     totaalInvestering: 25000,

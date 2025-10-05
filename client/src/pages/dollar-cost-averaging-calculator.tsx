@@ -10,12 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area, ComposedChart } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface PeriodicInvestment {
   periode: number;
@@ -38,19 +39,7 @@ interface MarketData {
 
 export default function DollarCostAveragingCalculatorPage() {
   const seoConfig = getSeoConfig("dollar-cost-averaging-calculator");
-
-  useEffect(() => {
-    document.title = "Dollar Cost Averaging Calculator België - Periodiek Beleggen";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken de voordelen van periodiek beleggen vs lump sum investeren. Simuleer DCA strategieën en analyseer marktvolatiliteit impact voor Belgische beleggers.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken de voordelen van periodiek beleggen vs lump sum investeren. Simuleer DCA strategieën en analyseer marktvolatiliteit impact voor Belgische beleggers.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("dollar-cost-averaging-calculator");
 
   const [dcaData, setDcaData] = useState({
     maandelijkseBijdrage: 1000,

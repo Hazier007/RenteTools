@@ -9,22 +9,16 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function DoelspaarcalculatorPage() {
   useCanonical();
   const seoConfig = getSeoConfig("doelspaarcalculator");
+  useSeoTags("doelspaarcalculator");
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <head>
-        <title>Doelspaarcalculator België - Plan Meerdere Spaardoelen Tegelijk | Interesten.be</title>
-        <meta 
-          name="description" 
-          content="Plan en beheer al uw spaardoelen met onze doelspaarcalculator. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer." 
-        />
-      </head>
-      
       <Header activeCalculator="doelsparen" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}

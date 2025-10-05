@@ -9,22 +9,16 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function BudgetPlannerPage() {
   useCanonical();
   const seoConfig = getSeoConfig("budget-planner");
+  useSeoTags("budget-planner");
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <head>
-        <title>Budget Planner België - Persoonlijke Budgetplanning voor Gezinnen | Interesten.be</title>
-        <meta 
-          name="description" 
-          content="Plan uw persoonlijke budget met onze uitgebreide budget planner. Beheer inkomen, uitgaven, sparen en schulden voor een gezonde financiële toekomst in België." 
-        />
-      </head>
-      
       <Header activeCalculator="budget" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}

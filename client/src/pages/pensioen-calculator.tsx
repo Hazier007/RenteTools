@@ -8,21 +8,15 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function PensioenCalculatorPage() {
   const seoConfig = getSeoConfig("pensioen-calculator");
+  useSeoTags("pensioen-calculator");
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <head>
-        <title>Pensioen Calculator België - Plan uw Volledige Pensioen (1e, 2e, 3e Pijler) | Interesten.be</title>
-        <meta 
-          name="description" 
-          content="Bereken uw volledige pensioen in België met onze uitgebreide pensioen calculator. Analyse van wettelijk pensioen, aanvullend pensioen en eigen pensioenopbouw. Plan uw pensioeninkomen." 
-        />
-      </head>
-      
       <Header activeCalculator="pensioen" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}

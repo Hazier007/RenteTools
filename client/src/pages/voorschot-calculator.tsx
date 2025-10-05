@@ -8,28 +8,17 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function VoorschotCalculatorPage() {
   const seoConfig = getSeoConfig("voorschot-calculator");
-
-  useEffect(() => {
-    document.title = "Voorschot Calculator België - Cash Advance & Bridge Loans";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken kosten van voorschotten, cash advance en overbruggingskredieten in België. Vergelijk opties voor tijdelijke financiering en kortetermijnleningen.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken kosten van voorschotten, cash advance en overbruggingskredieten in België. Vergelijk opties voor tijdelijke financiering en kortetermijnleningen.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("voorschot-calculator");
 
   const [voorschot, setVoorschot] = useState({
     bedrag: 15000,

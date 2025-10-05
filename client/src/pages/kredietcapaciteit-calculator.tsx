@@ -10,28 +10,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function KredietcapaciteitCalculatorPage() {
   const seoConfig = getSeoConfig("kredietcapaciteit-calculator");
-
-  useEffect(() => {
-    document.title = "Kredietcapaciteit Calculator België - Hoeveel Kan Ik Lenen?";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken uw kredietcapaciteit in België. Ontdek hoeveel u kunt lenen op basis van inkomen, uitgaven en kredietwaardigheid volgens Belgische banknormen.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken uw kredietcapaciteit in België. Ontdek hoeveel u kunt lenen op basis van inkomen, uitgaven en kredietwaardigheid volgens Belgische banknormen.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("kredietcapaciteit-calculator");
 
   const [nettoInkomen, setNettoInkomen] = useState<number>(3500);
   const [partnerInkomen, setPartnerInkomen] = useState<number>(0);

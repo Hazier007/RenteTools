@@ -9,28 +9,17 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function DoorlopendKredietCalculatorPage() {
   const seoConfig = getSeoConfig("doorlopend-krediet-calculator");
-
-  useEffect(() => {
-    document.title = "Doorlopend Krediet Calculator België - Revolving Credit Berekenen";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken kosten van doorlopend krediet in België. Vergelijk revolving credit aanbiedingen, simuleer verschillende afbetalingsscenarios en vind de voordeligste kredietlijn.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken kosten van doorlopend krediet in België. Vergelijk revolving credit aanbiedingen, simuleer verschillende afbetalingsscenarios en vind de voordeligste kredietlijn.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("doorlopend-krediet-calculator");
 
   const [kredietlimiet, setKredietlimiet] = useState<number>(10000);
   const [gebruiktBedrag, setGebruiktBedrag] = useState<number>(5000);

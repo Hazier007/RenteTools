@@ -9,28 +9,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function RentevoetVergelijkerPage() {
   const seoConfig = getSeoConfig("rentevoet-vergelijker");
-  
-  useEffect(() => {
-    document.title = "Rentevoet Vergelijker België - Vast vs Variabel";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Vergelijk vaste en variabele rentevoeten in België. Simuleer rentefluctuaties en ontdek welke rentetype het meest voordelig is voor uw lening.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Vergelijk vaste en variabele rentevoeten in België. Simuleer rentefluctuaties en ontdek welke rentetype het meest voordelig is voor uw lening.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("rentevoet-vergelijker");
 
   const [lening, setLening] = useState({
     bedrag: 200000,

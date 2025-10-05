@@ -11,12 +11,13 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, ComposedChart } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface InvestmentScenario {
   naam: string;
@@ -38,19 +39,7 @@ interface TaxCalculation {
 
 export default function BelgischeBeleggingsfiscaliteitCalculatorPage() {
   const seoConfig = getSeoConfig("belgische-beleggingsfiscaliteit-calculator");
-
-  useEffect(() => {
-    document.title = "Belgische Beleggingsfiscaliteit Calculator - Roerende Voorheffing & Optimalisatie";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Optimaliseer uw beleggingsbelastingen in België. Bereken roerende voorheffing, dubbele belastingverdragen en fiscale strategieën voor maximaal netto rendement.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Optimaliseer uw beleggingsbelastingen in België. Bereken roerende voorheffing, dubbele belastingverdragen en fiscale strategieën voor maximaal netto rendement.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("belgische-beleggingsfiscaliteit-calculator");
 
   const [fiscaleData, setFiscaleData] = useState({
     jaarlijkseInkomsten: 75000,

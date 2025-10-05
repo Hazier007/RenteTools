@@ -9,13 +9,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Trash2, Plus } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface Schuld {
   id: number;
@@ -28,19 +29,7 @@ interface Schuld {
 
 export default function SchuldenconsolidatieCalculatorPage() {
   const seoConfig = getSeoConfig("schuldenconsolidatie-calculator");
-
-  useEffect(() => {
-    document.title = "Schuldenconsolidatie Calculator België - Leningen Samenvoegen";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken voordelen van schuldenconsolidatie in België. Voeg meerdere leningen samen tot één krediet en bespaar op rente en maandlasten.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken voordelen van schuldenconsolidatie in België. Voeg meerdere leningen samen tot één krediet en bespaar op rente en maandlasten.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("schuldenconsolidatie-calculator");
 
   const [schulden, setSchulden] = useState<Schuld[]>([
     { id: 1, naam: "Kredietkaart", bedrag: 8000, rente: 18.5, maandlast: 240, restLooptijd: 48 },

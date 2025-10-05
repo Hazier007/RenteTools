@@ -11,12 +11,13 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, AreaChart, Area } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface REITData {
   naam: string;
@@ -43,19 +44,7 @@ interface InterestRateScenario {
 
 export default function REITCalculatorPage() {
   const seoConfig = getSeoConfig("reit-calculator");
-
-  useEffect(() => {
-    document.title = "REIT Calculator België - Vastgoed Beleggingsfondsen Analyse";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Analyseer REIT beleggingen met FFO, AFFO en NAV berekeningen. Vergelijk Belgische SICAFI en internationale vastgoed fondsen inclusief dividend analyse.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Analyseer REIT beleggingen met FFO, AFFO en NAV berekeningen. Vergelijk Belgische SICAFI en internationale vastgoed fondsen inclusief dividend analyse.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("reit-calculator");
 
   const [reitInvestering, setReitInvestering] = useState({
     investeringsBedrag: 50000,

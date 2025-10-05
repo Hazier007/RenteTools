@@ -9,22 +9,16 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function LevensverzekeraarCalculatorPage() {
   useCanonical();
   const seoConfig = getSeoConfig("levensverzekeraar-calculator");
+  useSeoTags("levensverzekeraar-calculator");
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
-      <head>
-        <title>Levensverzekeraar Calculator België - Vergelijk Verzekering vs Beleggen | Interesten.be</title>
-        <meta 
-          name="description" 
-          content="Vergelijk levensverzekering met term verzekering + beleggen. Ontdek wat het beste is voor uw situatie met onze uitgebreide calculator voor België." 
-        />
-      </head>
-      
       <Header activeCalculator="levensverzekeraar" onCalculatorChange={() => {}} />
       
       {/* SEO Hero Section */}

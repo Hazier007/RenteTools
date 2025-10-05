@@ -9,27 +9,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import { useEffect } from 'react';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function LoyaltyBonusCalculatorPage() {
   const seoConfig = getSeoConfig("loyalty-bonus-calculator");
-  
-  useEffect(() => {
-    document.title = "Getrouwheidspremie Calculator België - Loyalty Bonus Optimaliseren";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken of het de moeite loont om van bank te wisselen en hoelang u moet wachten om te profiteren van getrouwheidspremies bij Belgische banken.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken of het de moeite loont om van bank te wisselen en hoelang u moet wachten om te profiteren van getrouwheidspremies bij Belgische banken.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("loyalty-bonus-calculator");
   const [spaarbedrag, setSpaarbedrag] = useState<number>(15000);
   const [huidigeBank, setHuidigeBank] = useState<string>("KBC");
   const [huidigeRente, setHuidigeRente] = useState<number>(1.8);

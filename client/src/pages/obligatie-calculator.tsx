@@ -10,12 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 interface Obligatie {
   naam: string;
@@ -30,19 +31,7 @@ interface Obligatie {
 
 export default function ObligatieCalculatorPage() {
   const seoConfig = getSeoConfig("obligatie-calculator");
-
-  useEffect(() => {
-    document.title = "Obligatie Calculator België - Yield to Maturity & Duration";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Bereken yield to maturity, duration en obligatie waardering. Analyseer Belgische staatsleningen (OLO) en bedrijfsobligaties inclusief fiscaliteit.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Bereken yield to maturity, duration en obligatie waardering. Analyseer Belgische staatsleningen (OLO) en bedrijfsobligaties inclusief fiscaliteit.';
-      document.head.appendChild(meta);
-    }
-  }, []);
+  useSeoTags("obligatie-calculator");
 
   const [obligatieData, setObligatieData] = useState({
     nominaleWaarde: 1000,
