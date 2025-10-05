@@ -19,9 +19,9 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center py-2">
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity" data-testid="logo-link">
-            <img src={logoUrl} alt="Interesten.be" className="h-10" />
+            <img src={logoUrl} alt="Interesten.be" className="w-[200px] h-[90px]" />
           </Link>
           
           <nav className="hidden md:flex space-x-1">
