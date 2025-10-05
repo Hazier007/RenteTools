@@ -16,7 +16,7 @@ export default function SparenPage() {
   useSeoTags("sparen");
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-background">
       <AnimatedMeshBackground variant="hero" />
       
       <div className="relative z-10">
