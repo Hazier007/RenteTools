@@ -85,9 +85,8 @@ export default function ReeleRenteBerekenen() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Calculator */}
             <Card>
@@ -366,44 +365,27 @@ export default function ReeleRenteBerekenen() {
               </CardContent>
             </Card>
 
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <GoogleAdsense slot="rectangle" />
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Gerelateerde Calculators</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/inflatie-calculator-belgie">
-                      <i className="fas fa-chart-line mr-2"></i>
-                      Inflatie Calculator
-                    </a>
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/geldontwaarding-calculator">
-                      <i className="fas fa-coins mr-2"></i>
-                      Geldontwaarding
-                    </a>
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/hoogste-spaarrente-belgie">
-                      <i className="fas fa-piggy-bank mr-2"></i>
-                      Spaarrente Vergelijken
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
 
-      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+      {/* Ad After Calculator */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" />
+        </div>
+      </section>
+
+      {/* Bottom Ad */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" className="hidden lg:block" />
+          <GoogleAdsense slot="banner" className="lg:hidden" />
+        </div>
+      </section>
+
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+      </section>
 
       <Footer />
     </div>
