@@ -24,9 +24,13 @@ export function FloatingNumber({
     damping: 60,
     stiffness: 100
   });
-  const displayNumber = useTransform(springValue, (latest) => 
-    Math.round(latest).toLocaleString('nl-BE')
-  );
+  const displayNumber = useTransform(springValue, (latest) => {
+    // Preserve one decimal place for decimal numbers
+    const hasDecimals = numericValue % 1 !== 0;
+    return hasDecimals 
+      ? latest.toLocaleString('nl-BE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })
+      : Math.round(latest).toLocaleString('nl-BE');
+  });
 
   useEffect(() => {
     motionValue.set(numericValue);
