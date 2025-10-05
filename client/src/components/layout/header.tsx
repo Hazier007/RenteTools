@@ -47,7 +47,7 @@ export default function Header() {
                     className="absolute top-full left-0 mt-1 w-72 bg-background backdrop-blur-xl border border-border/50 rounded-lg shadow-2xl p-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50"
                     data-testid={`dropdown-${category.name.toLowerCase()}`}
                   >
-                    <div className="space-y-1 max-h-96 overflow-y-auto">
+                    <div className="space-y-1 max-h-96 overflow-y-auto scrollbar-hide">
                       {getCalculatorsByCategory(category.name as any).slice(0, 6).map((calc) => (
                         <Link
                           key={calc.slug}
