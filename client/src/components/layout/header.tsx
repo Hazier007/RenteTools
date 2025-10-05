@@ -13,8 +13,7 @@ export default function Header() {
     { name: "Sparen", path: "/sparen", icon: "fas fa-piggy-bank" },
     { name: "Lenen", path: "/lenen", icon: "fas fa-credit-card" },
     { name: "Beleggen", path: "/beleggen", icon: "fas fa-chart-line" },
-    { name: "Planning", path: "/planning", icon: "fas fa-calculator" },
-    { name: "Overige", path: "/overige", icon: "fas fa-ellipsis-h" }
+    { name: "Planning", path: "/planning", icon: "fas fa-calculator" }
   ];
 
   return (

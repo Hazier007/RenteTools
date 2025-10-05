@@ -48,12 +48,6 @@ export default function Home() {
       "pensioensparen-calculator",
       "fire-calculator",
       "budget-planner"
-    ].map(slug => getCalculatorBySlug(slug)).filter((calc): calc is NonNullable<typeof calc> => calc !== null),
-    
-    overige: [
-      "over-ons",
-      "privacy",
-      "voorwaarden"
     ].map(slug => getCalculatorBySlug(slug)).filter((calc): calc is NonNullable<typeof calc> => calc !== null)
   };
 
@@ -401,65 +395,6 @@ export default function Home() {
             <Link href="/planning">
               <Button variant="outline" size="lg" data-testid="button-view-all-planning">
                 Bekijk alle Planningtools →
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Overige Section */}
-      <section 
-        id="overige-section" 
-        className="py-20 px-4 relative scroll-mt-20" 
-        data-testid="silo-section-overige"
-        data-category="overige"
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="text-center mb-12"
-          >
-            <GradientText as="h2" className="text-3xl md:text-5xl mb-4">
-              Meer Informatie
-            </GradientText>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Leer meer over Interesten.be en onze privacy voorwaarden
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerChildren}
-          >
-            {topCalculators.overige.map((calc) => (
-              <Link key={calc.slug} href={getNewRoutePath(calc.slug)}>
-                <CalculatorCard
-                  title={calc.seoConfig.pageTitle}
-                  description={calc.seoConfig.metaDescription}
-                  slug={calc.slug}
-                  category={calc.category}
-                  previewImage={calc.seoConfig.previewImage}
-                />
-              </Link>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <Link href="/overige">
-              <Button variant="outline" size="lg" data-testid="button-view-all-overige">
-                Bekijk alle pagina's →
               </Button>
             </Link>
           </motion.div>
