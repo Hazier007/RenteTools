@@ -17,7 +17,7 @@ export default function BeleggenPage() {
 
   return (
     <div className="min-h-screen relative">
-      <AnimatedMeshBackground variant="subtle" />
+      <AnimatedMeshBackground variant="hero" />
       
       <div className="relative z-10">
         <Header />
