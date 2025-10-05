@@ -67,7 +67,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-center space-y-12">
           <motion.div variants={fadeInUp} className="space-y-6">
             <GradientText as="h1" className="text-4xl md:text-6xl lg:text-7xl">
-              Interesten.be - 57+ Financiële Calculators
+              Krijg in seconden duidelijkheid over je financiën
             </GradientText>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto" data-testid="hero-subtitle">
               Bereken spaarrente, leningen en beleggingen. Gratis, snel en betrouwbaar.
