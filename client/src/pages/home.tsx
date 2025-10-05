@@ -715,22 +715,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Test Cookie Banner Button - TEMPORARY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex justify-center">
-          <Button 
-            onClick={() => {
-              resetConsent();
-              window.location.reload();
-            }}
-            variant="outline"
-            className="bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200"
-          >
-            🧪 Test Cookie Banner (Reset Consent)
-          </Button>
-        </div>
-      </section>
-
       {/* Bottom Banner Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
