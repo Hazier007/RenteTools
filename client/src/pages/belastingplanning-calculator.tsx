@@ -53,9 +53,8 @@ export default function BelastingplanningCalculatorPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Calculator */}
             <Card>
@@ -309,117 +308,18 @@ export default function BelastingplanningCalculatorPage() {
               </CardContent>
             </Card>
 
-          </div>
+        </div>
+      </section>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Rectangle Ad */}
-            <div className="sticky top-6">
-              <GoogleAdsense slot="rectangle" />
-            </div>
-
-            {/* Gerelateerde Calculators */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-calculator mr-2 text-primary"></i>
-                  Gerelateerde Calculators
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <a href="/pensioensparen-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-umbrella mr-3 text-blue-600"></i>
-                  <div>
-                    <div className="font-medium">Pensioensparen</div>
-                    <div className="text-xs text-muted-foreground">30% belastingvoordeel</div>
-                  </div>
-                </a>
-                
-                <a href="/beleggingsrente-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-chart-line mr-3 text-green-600"></i>
-                  <div>
-                    <div className="font-medium">Beleggingsrente</div>
-                    <div className="text-xs text-muted-foreground">Na-belasting rendement</div>
-                  </div>
-                </a>
-                
-                <a href="/etf-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-layer-group mr-3 text-purple-600"></i>
-                  <div>
-                    <div className="font-medium">ETF Calculator</div>
-                    <div className="text-xs text-muted-foreground">Index beleggen simulatie</div>
-                  </div>
-                </a>
-              </CardContent>
-            </Card>
-
-            {/* Belasting Tips */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-lightbulb mr-2 text-primary"></i>
-                  Belasting Tips
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div className="p-3 bg-green-50 dark:bg-green-950 rounded-lg">
-                  <div className="font-medium text-green-900 dark:text-green-100">Pensioen First</div>
-                  <div className="text-green-700 dark:text-green-300">Altijd eerst pensioensparen maximaliseren</div>
-                </div>
-                
-                <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
-                  <div className="font-medium text-blue-900 dark:text-blue-100">ETF Voorkeur</div>
-                  <div className="text-blue-700 dark:text-blue-300">Kapitaliserende ETFs over dividend aandelen</div>
-                </div>
-                
-                <div className="p-3 bg-purple-50 dark:bg-purple-950 rounded-lg">
-                  <div className="font-medium text-purple-900 dark:text-purple-100">Lange Termijn</div>
-                  <div className="text-purple-700 dark:text-purple-300">Vermijd speculatiebelasting</div>
-                </div>
-                
-                <div className="p-3 bg-orange-50 dark:bg-orange-950 rounded-lg">
-                  <div className="font-medium text-orange-900 dark:text-orange-100">Jaarlijkse Review</div>
-                  <div className="text-orange-700 dark:text-orange-300">Evalueer strategieën elk jaar</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Belasting Kalender */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-calendar mr-2 text-primary"></i>
-                  Belasting Kalender
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span>Q1: Portfolio Review</span>
-                  <span className="text-xs text-blue-600">Jan-Mar</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Q2: Tax-Loss Check</span>
-                  <span className="text-xs text-green-600">Apr-Jun</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Q3: Rebalancing</span>
-                  <span className="text-xs text-orange-600">Jul-Sep</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Q4: Year-End Planning</span>
-                  <span className="text-xs text-red-600">Oct-Dec</span>
-                </div>
-                <div className="pt-2 border-t text-xs text-muted-foreground">
-                  Belastingaangifte deadline: 30 juni (online)
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+      {/* Ad After Calculator */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" />
         </div>
       </section>
 
       {/* Bottom Banner Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />

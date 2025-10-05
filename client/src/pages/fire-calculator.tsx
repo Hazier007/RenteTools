@@ -53,9 +53,8 @@ export default function FIRECalculatorPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Calculator */}
             <Card>
@@ -214,86 +213,18 @@ export default function FIRECalculatorPage() {
               </CardContent>
             </Card>
 
-          </div>
+        </div>
+      </section>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Rectangle Ad */}
-            <div className="sticky top-6">
-              <GoogleAdsense slot="rectangle" />
-            </div>
-
-            {/* Gerelateerde Calculators */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-calculator mr-2 text-primary"></i>
-                  Gerelateerde Calculators
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <a href="/pensioen-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-calculator mr-3 text-blue-600"></i>
-                  <div>
-                    <div className="font-medium">Pensioen Calculator</div>
-                    <div className="text-xs text-muted-foreground">Volledige pensioenplanning</div>
-                  </div>
-                </a>
-                
-                <a href="/beleggingsrente-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-chart-line mr-3 text-green-600"></i>
-                  <div>
-                    <div className="font-medium">Beleggingsrente</div>
-                    <div className="text-xs text-muted-foreground">Rendement berekenen</div>
-                  </div>
-                </a>
-                
-                <a href="/budget-planner" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-chart-pie mr-3 text-purple-600"></i>
-                  <div>
-                    <div className="font-medium">Budget Planner</div>
-                    <div className="text-xs text-muted-foreground">Persoonlijke budgetplanning</div>
-                  </div>
-                </a>
-              </CardContent>
-            </Card>
-
-            {/* FIRE Mijlpalen */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-flag-checkered mr-2 text-primary"></i>
-                  FIRE Mijlpalen
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div className="p-3 bg-red-50 dark:bg-red-950 rounded-lg">
-                  <div className="font-medium text-red-900 dark:text-red-100">FI/RE 25%</div>
-                  <div className="text-red-700 dark:text-red-300">6 maanden uitgaven - noodfonds</div>
-                </div>
-                
-                <div className="p-3 bg-orange-50 dark:bg-orange-950 rounded-lg">
-                  <div className="font-medium text-orange-900 dark:text-orange-100">FI/RE 50%</div>
-                  <div className="text-orange-700 dark:text-orange-300">Halve weg naar financiële vrijheid</div>
-                </div>
-                
-                <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
-                  <div className="font-medium text-blue-900 dark:text-blue-100">FI/RE 75%</div>
-                  <div className="text-blue-700 dark:text-blue-300">Coast FIRE bereikt - passief groei</div>
-                </div>
-                
-                <div className="p-3 bg-green-50 dark:bg-green-950 rounded-lg">
-                  <div className="font-medium text-green-900 dark:text-green-100">FI/RE 100%</div>
-                  <div className="text-green-700 dark:text-green-300">🔥 Financiële onafhankelijkheid!</div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+      {/* Ad After Calculator */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" />
         </div>
       </section>
 
       {/* Bottom Banner Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
