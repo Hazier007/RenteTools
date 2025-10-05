@@ -70,7 +70,7 @@ export default function Home() {
               Krijg in seconden duidelijkheid over je financiën
             </GradientText>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto" data-testid="hero-subtitle">
-              Bereken spaarrente, leningen en beleggingen. Gratis, snel en betrouwbaar.
+              Van hypotheek tot spaarplan: alle antwoorden op je financiële vragen, direct beschikbaar
             </p>
           </motion.div>
 
