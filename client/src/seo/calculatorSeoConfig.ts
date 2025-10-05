@@ -15,6 +15,8 @@ export interface CalculatorSeoConfig {
   category: SiloCategory;
   pageTitle: string;
   breadcrumbTitle: string;
+  metaTitle: string;
+  metaDescription: string;
   faqs: FaqItem[];
   authorityLinks: AuthorityLink[];
 }
@@ -122,6 +124,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Hoogste Spaarrente België",
     breadcrumbTitle: "Hoogste Spaarrente",
+    metaTitle: "Hoogste Spaarrente België 2025 - Vergelijk Spaarrekeningen",
+    metaDescription: "Vind de hoogste spaarrente in België. Vergelijk basisrente + getrouwheidspremie van alle banken. Actuele tarieven tot 2,5% in 2025.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -129,6 +133,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Deposito Calculator",
     breadcrumbTitle: "Deposito Calculator",
+    metaTitle: "Deposito Calculator België - Termijnrekening Rente Berekenen",
+    metaDescription: "Bereken uw deposito opbrengst in België. Vergelijk termijnrekening tarieven van 1,5% tot 3,5%. Inclusief roerende voorheffing berekening.",
     faqs: [
       {
         question: "Wat is een termijnrekening of deposito?",
@@ -153,6 +159,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Samengestelde Interest Berekenen",
     breadcrumbTitle: "Samengestelde Interest",
+    metaTitle: "Samengestelde Interest Berekenen - Compound Interest België",
+    metaDescription: "Bereken samengestelde interest op uw spaargeld. Zie hoe uw vermogen exponentieel groeit met compound interest. Gratis calculator voor België.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -160,6 +168,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Doelspaar Calculator",
     breadcrumbTitle: "Doelspaar Calculator",
+    metaTitle: "Doelspaarcalculator België - Meerdere Spaardoelen Beheren",
+    metaDescription: "Plan al uw spaardoelen tegelijk. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer. Smart goal planning.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
@@ -167,6 +177,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Spaarrekening Vergelijker",
     breadcrumbTitle: "Spaarrekening Vergelijker",
+    metaTitle: "Spaarrekening Vergelijker België 2025 - Beste Rentes",
+    metaDescription: "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2025.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -174,6 +186,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Kinderrekening Calculator",
     breadcrumbTitle: "Kinderrekening",
+    metaTitle: "Kinderrekening Calculator België - Sparen voor Kinderen",
+    metaDescription: "Bereken hoeveel u moet sparen voor uw kinderen. Kinderrekening rentes tot 2,5% in België. Start vandaag met sparen voor hun toekomst.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
@@ -181,6 +195,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Kasbon Calculator",
     breadcrumbTitle: "Kasbon Calculator",
+    metaTitle: "Kasbon Calculator België - Staatsbons & Kasbons Vergelijken",
+    metaDescription: "Bereken rendement van kasbons en staatsbons in België. Vergelijk looptijden van 1-10 jaar. Vaste rente en belastingvoordelen berekenen.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
@@ -188,6 +204,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Termijnrekening Calculator",
     breadcrumbTitle: "Termijnrekening",
+    metaTitle: "Termijnrekening Calculator België - Vaste Rente Berekenen",
+    metaDescription: "Bereken uw termijnrekening opbrengst. Vaste rente tot 3,5% op termijndeposito's in België. Vergelijk looptijden van 1-12 maanden.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
@@ -195,6 +213,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Groepssparen Calculator",
     breadcrumbTitle: "Groepssparen",
+    metaTitle: "Groepssparen Calculator België - Aanvullend Pensioen Berekenen",
+    metaDescription: "Bereken uw groepsverzekering opbrengst. Werkgeversbijdrage + belastingvoordeel tot 30%. Optimaliseer uw aanvullend pensioen in België.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
@@ -202,6 +222,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Getrouwheidspremie Calculator",
     breadcrumbTitle: "Getrouwheidspremie",
+    metaTitle: "Getrouwheidspremie Calculator - Loyalty Bonus Optimaliseren",
+    metaDescription: "Maximaliseer uw getrouwheidspremie op spaarrekeningen. Bereken wanneer u uw loyalty bonus krijgt. Optimaliseer uw spaarstrategie België.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
@@ -209,6 +231,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Vakantiegeld Sparen Calculator",
     breadcrumbTitle: "Vakantiegeld Sparen",
+    metaTitle: "Vakantiegeld Sparen Calculator België - Droomvakantie Plannen",
+    metaDescription: "Spaar slim voor uw vakantie. Bereken hoeveel u maandelijks moet sparen voor uw droomreis. Vakantiebudget planner voor België.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
@@ -216,6 +240,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Hypothecaire Lening Berekenen",
     breadcrumbTitle: "Hypothecaire Lening",
+    metaTitle: "Hypothecaire Lening Berekenen België - Maandlast Calculator",
+    metaDescription: "Bereken uw hypotheek maandlast en totale kosten. Vaste en variabele rente vanaf 2,5%. Inclusief notaris en registratierechten.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -223,6 +249,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Woningkrediet Simulator",
     breadcrumbTitle: "Woningkrediet Simulator",
+    metaTitle: "Woningkrediet Simulator België - Hoeveel Kan Ik Lenen 2025",
+    metaDescription: "Simuleer uw woningkrediet in België. Bereken leencapaciteit, maandlast en vergelijk vaste vs variabele rente. Tot 90% LTV mogelijk.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -230,6 +258,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Persoonlijke Lening Berekenen",
     breadcrumbTitle: "Persoonlijke Lening",
+    metaTitle: "Persoonlijke Lening Berekenen België - Consumentenkrediet",
+    metaDescription: "Bereken uw persoonlijke lening kosten. Tarieven van 3-8% op consumptieleningen in België. Vergelijk maandlasten en totale kosten.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -237,6 +267,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Autolening Berekenen",
     breadcrumbTitle: "Autolening",
+    metaTitle: "Autolening Berekenen België - Autokredieten Vergelijken",
+    metaDescription: "Bereken uw autolening met rentes vanaf 2,9%. Vergelijk autokredieten en financieringsopties in België. Bereken maandlast en TAEG.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -244,6 +276,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Lening Herfinancieren",
     breadcrumbTitle: "Lening Herfinancieren",
+    metaTitle: "Lening Herfinancieren België - Hypotheek Oversluiten 2025",
+    metaDescription: "Bereken of herfinancieren voordelig is. Vergelijk nieuwe rente met vervroegde terugbetalingskosten. Bespaar tot €10.000+ in België.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -251,6 +285,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Schuldenconsolidatie Calculator",
     breadcrumbTitle: "Schuldenconsolidatie",
+    metaTitle: "Schuldenconsolidatie Calculator België - Leningen Samenvoegen",
+    metaDescription: "Voeg al uw leningen samen tot één lening. Bereken besparing en lagere maandlast. Schuldhulp en consolidatie oplossingen voor België.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -258,6 +294,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Kredietcapaciteit Calculator",
     breadcrumbTitle: "Kredietcapaciteit",
+    metaTitle: "Kredietcapaciteit Calculator België - Hoeveel Kan Ik Lenen",
+    metaDescription: "Bereken hoeveel u kunt lenen op basis van uw inkomen. 33%-regel voor maandlasten. Ontdek uw maximale leenbedrag in België.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
@@ -265,6 +303,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Kredietvergelijker België",
     breadcrumbTitle: "Kredietvergelijker",
+    metaTitle: "Kredietvergelijker België 2025 - Beste Leningrentes",
+    metaDescription: "Vergelijk alle kredieten in België. Persoonlijke leningen, autokredieten en hypotheken. Vind de laagste rente en beste voorwaarden.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -272,6 +312,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Doorlopend Krediet Calculator",
     breadcrumbTitle: "Doorlopend Krediet",
+    metaTitle: "Doorlopend Krediet Calculator België - Revolving Credit",
+    metaDescription: "Bereken kosten van doorlopend krediet. Rentes van 7-12% op kredietlijnen in België. Vergelijk met persoonlijke leningen.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -279,6 +321,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Kredietkaart Calculator",
     breadcrumbTitle: "Kredietkaart Kosten",
+    metaTitle: "Kredietkaart Calculator België - Rente & Kosten Berekenen",
+    metaDescription: "Bereken kredietkaart kosten en rente in België. Vergelijk jaarlijkse kosten, transactiekosten en rentes tot 18%. Bespaar op creditcards.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -286,6 +330,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Leasingkrediet Calculator",
     breadcrumbTitle: "Leasingkrediet",
+    metaTitle: "Leasingkrediet Calculator België - Financial vs Operational",
+    metaDescription: "Vergelijk financial en operational leasing in België. Bereken maandlast, restwaarde en totale kosten. Autoleasing calculator voor bedrijven.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -293,6 +339,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Voorschot Calculator",
     breadcrumbTitle: "Voorschot Berekenen",
+    metaTitle: "Voorschot Calculator België - Cash Advance & Bridge Loans",
+    metaDescription: "Bereken voorschot kosten en overbruggingskrediet. Korte termijn financiering in België. Cash advance rentes en voorwaarden vergelijken.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.nbb]
   },
@@ -300,6 +348,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Studieschuld Calculator",
     breadcrumbTitle: "Studieschuld",
+    metaTitle: "Studieschuld Calculator België - Studielening Terugbetalen",
+    metaDescription: "Bereken uw studieschuld aflossing. Studieleningen rentes 2-4% in België. Ontdek aflossingsplan en totale kosten van studeren.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -307,6 +357,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Groepslening Calculator",
     breadcrumbTitle: "Groepslening",
+    metaTitle: "Groepslening Calculator België - Samen Lenen met Familie",
+    metaDescription: "Bereken groepslening met vrienden of familie. Verdeel kosten eerlijk, beheer risicos en simuleer verschillende scenario's voor gezamenlijk lenen.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -314,6 +366,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Wettelijke Rentevoet België",
     breadcrumbTitle: "Wettelijke Rentevoet",
+    metaTitle: "Wettelijke Rentevoet België 2025 - Actuele Tarieven NBB",
+    metaDescription: "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2025.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
@@ -321,6 +375,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Beleggingsrente Calculator",
     breadcrumbTitle: "Beleggingsrente",
+    metaTitle: "Beleggingsrente Calculator België - Rendement Berekenen",
+    metaDescription: "Bereken uw beleggingsrendement inclusief dividenden en kosten. Compound interest op aandelen en ETFs. Verwacht rendement 7-9% per jaar.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.testAankoop]
   },
@@ -328,6 +384,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Aandelen Calculator",
     breadcrumbTitle: "Aandelen Calculator",
+    metaTitle: "Aandelen Calculator België - Dividend Yield & Waardering",
+    metaDescription: "Bereken dividend yield, P/E ratio en aandelenwaardering. Analyseer Belgische en internationale aandelen. Inclusief 30% roerende voorheffing.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
@@ -335,6 +393,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "ETF Calculator",
     breadcrumbTitle: "ETF Calculator",
+    metaTitle: "ETF Calculator België - Index Fondsen Vergelijken 2025",
+    metaDescription: "Vergelijk ETF kosten en rendement. IWDA, VWCE en andere populaire index trackers. Bereken TER impact en verwacht rendement voor België.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
@@ -342,6 +402,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Obligatie Calculator",
     breadcrumbTitle: "Obligatie Calculator",
+    metaTitle: "Obligatie Calculator België - Yield to Maturity & Duration",
+    metaDescription: "Bereken obligatie rendement, duration en prijs. Staatsobligaties en bedrijfsobligaties vergelijken. YTM calculator voor België.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma]
   },
@@ -349,6 +411,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Cryptocurrency Calculator",
     breadcrumbTitle: "Cryptocurrency",
+    metaTitle: "Cryptocurrency Calculator België - Crypto Portfolio Analyse",
+    metaDescription: "Bereken crypto rendement en risico. Bitcoin, Ethereum en altcoins analyseren. Belgische belastingregels voor crypto (33% meerwaarde).",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
@@ -356,6 +420,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Dollar Cost Averaging Calculator",
     breadcrumbTitle: "Dollar Cost Averaging",
+    metaTitle: "Dollar Cost Averaging Calculator België - Periodiek Beleggen",
+    metaDescription: "Bereken voordelen van periodiek beleggen (DCA). Verminder risico door maandelijks te beleggen. Historische DCA resultaten voor België.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -363,6 +429,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Portfolio Diversificatie Calculator",
     breadcrumbTitle: "Portfolio Diversificatie",
+    metaTitle: "Portfolio Diversificatie Calculator - Asset Allocatie België",
+    metaDescription: "Optimaliseer uw portfolio allocatie. Bereken risico-rendement verhouding en ideale verdeling aandelen/obligaties. Modern portfolio theory.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -370,6 +438,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "REIT Calculator",
     breadcrumbTitle: "REIT Calculator",
+    metaTitle: "REIT Calculator België - Vastgoed Beleggingsfondsen",
+    metaDescription: "Bereken rendement van REITs en vastgoedfondsen. Dividend yield, NAV en FFO analyse. Belgische fiscaliteit op vastgoedbeleggingen.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
   },
@@ -377,6 +447,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Belgische Beleggingsfiscaliteit",
     breadcrumbTitle: "Beleggingsfiscaliteit",
+    metaTitle: "Belgische Beleggingsfiscaliteit Calculator - Roerende Voorheffing",
+    metaDescription: "Bereken belasting op beleggingen in België. 30% roerende voorheffing op dividenden, TOB-taks op transacties. Optimaliseer uw fiscaliteit.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
@@ -384,6 +456,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Roerende Voorheffing Calculator",
     breadcrumbTitle: "Roerende Voorheffing",
+    metaTitle: "Roerende Voorheffing Calculator België - 30% Belasting",
+    metaDescription: "Bereken roerende voorheffing op dividenden en interest. 30% belasting op beleggingsinkomsten in België. Vrijstelling €980 spaarrente.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
@@ -391,6 +465,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Pensioensparen Calculator",
     breadcrumbTitle: "Pensioensparen",
+    metaTitle: "Pensioensparen Calculator België - Belastingvoordeel 30%",
+    metaDescription: "Bereken uw pensioensparen voordeel. Tot 30% belastingvermindering op €1.020 (Pijler 3). Optimaliseer uw aanvullend pensioen in België.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -398,6 +474,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Pensioen Calculator",
     breadcrumbTitle: "Pensioen Calculator",
+    metaTitle: "Pensioen Calculator België - Bereken Uw Pensioenkapitaal",
+    metaDescription: "Bereken hoeveel u nodig heeft voor pensioen. 4%-regel en wettelijk pensioen in België. Plan uw financiële vrijheid vanaf 60-67 jaar.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
@@ -405,6 +483,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "FIRE Calculator",
     breadcrumbTitle: "FIRE Calculator",
+    metaTitle: "FIRE Calculator België - Financial Independence Retire Early",
+    metaDescription: "Bereken wanneer u financieel onafhankelijk wordt. FIRE beweging in België: Lean, Regular, Fat & Coast FIRE. Vroeg met pensioen calculator.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -412,6 +492,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Noodfonds Calculator",
     breadcrumbTitle: "Noodfonds",
+    metaTitle: "Noodfonds Calculator België - Emergency Fund Berekenen",
+    metaDescription: "Bereken uw ideale noodfonds. 3-6 maanden vaste kosten opzij zetten. Financiële zekerheid en bescherming tegen onverwachte uitgaven.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -419,6 +501,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Budget Planner",
     breadcrumbTitle: "Budget Planner",
+    metaTitle: "Budget Planner België - Maandelijks Budget Beheren",
+    metaDescription: "Plan uw maandelijks budget. 50/30/20 regel voor uitgaven. Vaste kosten, sparen en discretionaire uitgaven optimaliseren in België.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.testAankoop]
   },
@@ -426,6 +510,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Belastingplanning Calculator",
     breadcrumbTitle: "Belastingplanning",
+    metaTitle: "Belastingplanning Calculator België - Fiscaal Optimaliseren",
+    metaDescription: "Optimaliseer uw Belgische belastingen. Pensioensparen, groepsverzekering en fiscale aftrekposten. Bespaar tot €1.000+ per jaar.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
@@ -433,6 +519,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Levensverzekeraar Calculator",
     breadcrumbTitle: "Levensverzekering",
+    metaTitle: "Levensverzekering Calculator België - Tak 21 & Tak 23",
+    metaDescription: "Bereken levensverzekering opbrengst. Tak 21 (gewaarborgd) vs Tak 23 (beleggingsverzekering). Vergelijk rendementen en belastingvoordelen.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -440,6 +528,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Eindejaarsbonus Calculator",
     breadcrumbTitle: "Eindejaarsbonus",
+    metaTitle: "Eindejaarsbonus Calculator België - 13de Maand Optimaliseren",
+    metaDescription: "Bereken netto eindejaarsbonus na belastingen. 13de maand optimalisatie en belasting in België. Maximaliseer uw eindejaarspremie.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fodFinancien]
   },
@@ -447,6 +537,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Inflatie Calculator België",
     breadcrumbTitle: "Inflatie Calculator",
+    metaTitle: "Inflatie Calculator België 2025 - Koopkracht Berekenen",
+    metaDescription: "Bereken impact van inflatie op uw koopkracht. Actuele inflatiecijfers België 2-4%. Zie hoe prijsstijgingen uw vermogen aantasten.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
@@ -454,6 +546,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Geldontwaarding Calculator",
     breadcrumbTitle: "Geldontwaarding",
+    metaTitle: "Geldontwaarding Calculator - Vermogen Erosie Berekenen",
+    metaDescription: "Bereken geldontwaarding door inflatie. Zie hoe uw spaargeld in waarde daalt. Bescherm vermogen tegen inflatie in België.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
@@ -461,6 +555,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Reële Rente Berekenen",
     breadcrumbTitle: "Reële Rente",
+    metaTitle: "Reële Rente Berekenen - Nominale Rente Min Inflatie",
+    metaDescription: "Bereken reële rente (nominaal minus inflatie). Ontdek of uw spaarrente inflatie verslaat. Realistisch rendement berekenen voor België.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
@@ -468,6 +564,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Rentevoet Vergelijker",
     breadcrumbTitle: "Rentevoet Vergelijker",
+    metaTitle: "Rentevoet Vergelijker België - Vast vs Variabel 2025",
+    metaDescription: "Vergelijk vaste en variabele rentevoeten. Spaarrentes, hypotheekrentes en beleggingsrendementen in België. Vind de beste rente.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   }
