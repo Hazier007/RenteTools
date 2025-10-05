@@ -99,9 +99,8 @@ export default function SpaarrekeningVergelijkerPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Filter Controls */}
             <Card>
@@ -358,18 +357,18 @@ export default function SpaarrekeningVergelijkerPage() {
               </CardContent>
             </Card>
 
-          </div>
-          
-          {/* Sidebar */}
-          <div className="hidden lg:block space-y-6">
-            <GoogleAdsense slot="rectangle" />
-            <GoogleAdsense slot="rectangle" />
-          </div>
+        </div>
+      </section>
+
+      {/* Ad After Calculator */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" />
         </div>
       </section>
 
       {/* Bottom Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
@@ -377,7 +376,7 @@ export default function SpaarrekeningVergelijkerPage() {
       </section>
 
       {/* Authority Links */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
       </section>
 
