@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { AnimatedMeshBackground, GradientText, FloatingNumber, CalculatorCard } from '@/components/design';
+import { AnimatedMeshBackground, GlassCard, GradientText, FloatingNumber, CalculatorCard } from '@/components/design';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import AuthorityLinks from '@/components/seo/AuthorityLinks';
@@ -38,19 +38,19 @@ export default function PlanningPage() {
                 Plan uw pensioen, budget en financiële toekomst. FIRE calculator, noodfonds en belastingplanning.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-6 pt-4">
-                <div className="text-center" data-testid="stat-tools">
-                  <FloatingNumber value="12" suffix="+" className="text-5xl text-primary" />
-                  <p className="text-sm text-muted-foreground mt-2">Planning Tools</p>
-                </div>
-                <div className="text-center" data-testid="stat-fire">
-                  <span className="text-5xl font-bold text-primary" data-testid="floating-number">🔥</span>
-                  <p className="text-sm text-muted-foreground mt-2">FIRE Ondersteuning</p>
-                </div>
-                <div className="text-center" data-testid="stat-belasting">
-                  <span className="text-5xl font-bold text-primary" data-testid="floating-number">💡</span>
-                  <p className="text-sm text-muted-foreground mt-2">Belastingtips</p>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto pt-4">
+                <GlassCard className="p-6" data-testid="stat-tools">
+                  <FloatingNumber value={12} suffix="+" className="text-4xl md:text-5xl block mb-2" />
+                  <p className="text-sm text-muted-foreground">Planning Tools</p>
+                </GlassCard>
+                <GlassCard className="p-6" data-testid="stat-fire">
+                  <span className="text-4xl md:text-5xl font-bold text-primary block mb-2" data-testid="floating-number">🔥</span>
+                  <p className="text-sm text-muted-foreground">FIRE Ondersteuning</p>
+                </GlassCard>
+                <GlassCard className="p-6" data-testid="stat-belasting">
+                  <span className="text-4xl md:text-5xl font-bold text-primary block mb-2" data-testid="floating-number">💡</span>
+                  <p className="text-sm text-muted-foreground">Belastingtips</p>
+                </GlassCard>
               </div>
             </motion.div>
 

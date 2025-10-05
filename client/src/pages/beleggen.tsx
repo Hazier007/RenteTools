@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { AnimatedMeshBackground, GradientText, FloatingNumber, CalculatorCard } from '@/components/design';
+import { AnimatedMeshBackground, GlassCard, GradientText, FloatingNumber, CalculatorCard } from '@/components/design';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import AuthorityLinks from '@/components/seo/AuthorityLinks';
@@ -38,19 +38,19 @@ export default function BeleggenPage() {
                 Bereken rendement op aandelen, ETF's, obligaties en crypto. Optimaliseer uw beleggingsportefeuille.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-6 pt-4">
-                <div className="text-center" data-testid="stat-tools">
-                  <FloatingNumber value="10" suffix="+" className="text-5xl text-primary" />
-                  <p className="text-sm text-muted-foreground mt-2">Beleggingstools</p>
-                </div>
-                <div className="text-center" data-testid="stat-fiscaliteit">
-                  <span className="text-5xl font-bold text-primary" data-testid="floating-number">📊</span>
-                  <p className="text-sm text-muted-foreground mt-2">Inclusief Fiscaliteit</p>
-                </div>
-                <div className="text-center" data-testid="stat-features">
-                  <span className="text-5xl font-bold text-primary" data-testid="floating-number">⭐</span>
-                  <p className="text-sm text-muted-foreground mt-2">Pro Features</p>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto pt-4">
+                <GlassCard className="p-6" data-testid="stat-tools">
+                  <FloatingNumber value={10} suffix="+" className="text-4xl md:text-5xl block mb-2" />
+                  <p className="text-sm text-muted-foreground">Beleggingstools</p>
+                </GlassCard>
+                <GlassCard className="p-6" data-testid="stat-fiscaliteit">
+                  <span className="text-4xl md:text-5xl font-bold text-primary block mb-2" data-testid="floating-number">📊</span>
+                  <p className="text-sm text-muted-foreground">Inclusief Fiscaliteit</p>
+                </GlassCard>
+                <GlassCard className="p-6" data-testid="stat-features">
+                  <span className="text-4xl md:text-5xl font-bold text-primary block mb-2" data-testid="floating-number">⭐</span>
+                  <p className="text-sm text-muted-foreground">Pro Features</p>
+                </GlassCard>
               </div>
             </motion.div>
 

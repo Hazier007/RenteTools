@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { AnimatedMeshBackground, GradientText, FloatingNumber, CalculatorCard } from '@/components/design';
+import { AnimatedMeshBackground, GlassCard, GradientText, FloatingNumber, CalculatorCard } from '@/components/design';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import AuthorityLinks from '@/components/seo/AuthorityLinks';
@@ -38,19 +38,19 @@ export default function SparenPage() {
                 Vergelijk de beste spaarrekeningen, deposito's en termijnrekeningen in België. Bereken uw rendement met onze gratis tools.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-6 pt-4">
-                <div className="text-center" data-testid="stat-tools">
-                  <FloatingNumber value="11" suffix="+" className="text-5xl text-primary" />
-                  <p className="text-sm text-muted-foreground mt-2">Spaartools</p>
-                </div>
-                <div className="text-center" data-testid="stat-rente">
-                  <FloatingNumber value="3.5" suffix="%" className="text-5xl text-primary" />
-                  <p className="text-sm text-muted-foreground mt-2">Tot 3,5% Rente</p>
-                </div>
-                <div className="text-center" data-testid="stat-gratis">
-                  <FloatingNumber value="100" suffix="%" className="text-5xl text-primary" />
-                  <p className="text-sm text-muted-foreground mt-2">Gratis</p>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto pt-4">
+                <GlassCard className="p-6" data-testid="stat-tools">
+                  <FloatingNumber value={11} suffix="+" className="text-4xl md:text-5xl block mb-2" />
+                  <p className="text-sm text-muted-foreground">Spaartools</p>
+                </GlassCard>
+                <GlassCard className="p-6" data-testid="stat-rente">
+                  <FloatingNumber value={3.5} suffix="%" className="text-4xl md:text-5xl block mb-2" />
+                  <p className="text-sm text-muted-foreground">Tot 3,5% Rente</p>
+                </GlassCard>
+                <GlassCard className="p-6" data-testid="stat-gratis">
+                  <FloatingNumber value={100} suffix="%" className="text-4xl md:text-5xl block mb-2" />
+                  <p className="text-sm text-muted-foreground">Gratis</p>
+                </GlassCard>
               </div>
             </motion.div>
 
