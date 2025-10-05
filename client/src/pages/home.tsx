@@ -76,7 +76,7 @@ export default function Home() {
 
           {/* Floating Stats */}
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
             variants={fadeInUp}
             data-testid="stats-grid"
           >
@@ -89,8 +89,12 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">Altijd toegankelijk</p>
             </GlassCard>
             <GlassCard className="p-6">
-              <FloatingNumber value={10} suffix="K+ Gebruikers" className="text-4xl md:text-5xl block mb-2" />
-              <p className="text-sm text-muted-foreground">Vertrouwen ons</p>
+              <FloatingNumber value={10} suffix="K+ Belgen" className="text-4xl md:text-5xl block mb-2" />
+              <p className="text-sm text-muted-foreground">vertrouwen ons</p>
+            </GlassCard>
+            <GlassCard className="p-6">
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent block mb-2">100%</div>
+              <p className="text-sm text-muted-foreground">Privacy - Geen registratie</p>
             </GlassCard>
           </motion.div>
 
