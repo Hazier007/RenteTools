@@ -50,9 +50,8 @@ export default function PensioenCalculatorPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Calculator */}
             <Card>
@@ -189,93 +188,27 @@ export default function PensioenCalculatorPage() {
               </CardContent>
             </Card>
 
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Rectangle Ad */}
-            <div className="sticky top-6">
-              <GoogleAdsense slot="rectangle" />
-            </div>
-
-            {/* Gerelateerde Calculators */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-calculator mr-2 text-primary"></i>
-                  Gerelateerde Calculators
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <a href="/pensioensparen-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-umbrella mr-3 text-blue-600"></i>
-                  <div>
-                    <div className="font-medium">Pensioensparen</div>
-                    <div className="text-xs text-muted-foreground">Derde pijler berekenen</div>
-                  </div>
-                </a>
-                
-                <a href="/inflatie-calculator-belgie" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-trending-down mr-3 text-orange-600"></i>
-                  <div>
-                    <div className="font-medium">Inflatie Impact</div>
-                    <div className="text-xs text-muted-foreground">Koopkracht effect</div>
-                  </div>
-                </a>
-                
-                <a href="/beleggingsrente-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-chart-line mr-3 text-green-600"></i>
-                  <div>
-                    <div className="font-medium">Beleggingsrente</div>
-                    <div className="text-xs text-muted-foreground">Rendement berekenen</div>
-                  </div>
-                </a>
-              </CardContent>
-            </Card>
-
-            {/* Pensioen Info */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-info-circle mr-2 text-primary"></i>
-                  Pensioen Info 2025
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
-                  <div className="font-medium text-blue-900 dark:text-blue-100">Wettelijke pensioenleeftijd</div>
-                  <div className="text-blue-700 dark:text-blue-300">65 jaar (vanaf 2025: 66 jaar)</div>
-                </div>
-                
-                <div className="p-3 bg-green-50 dark:bg-green-950 rounded-lg">
-                  <div className="font-medium text-green-900 dark:text-green-100">Maximum wettelijk pensioen</div>
-                  <div className="text-green-700 dark:text-green-300">€1.732 per maand (2024)</div>
-                </div>
-                
-                <div className="p-3 bg-orange-50 dark:bg-orange-950 rounded-lg">
-                  <div className="font-medium text-orange-900 dark:text-orange-100">Pensioensparen limiet</div>
-                  <div className="text-orange-700 dark:text-orange-300">€1.310 per jaar (belastingvoordeel)</div>
-                </div>
-                
-                <div className="p-3 bg-purple-50 dark:bg-purple-950 rounded-lg">
-                  <div className="font-medium text-purple-900 dark:text-purple-100">Aanbevolen vervangingsratio</div>
-                  <div className="text-purple-700 dark:text-purple-300">75-85% van laatste salaris</div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
 
-      {/* Bottom Banner Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      {/* Ad After Calculator */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" />
+        </div>
+      </section>
+
+      {/* Bottom Ad */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
 
-      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+      </section>
 
       <Footer />
     </div>

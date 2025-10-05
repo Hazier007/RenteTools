@@ -739,8 +739,15 @@ export default function AandelenCalculatorPage() {
         </div>
       </section>
 
+      {/* Ad After Calculator */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" />
+        </div>
+      </section>
+
       {/* Authority Links */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
       </section>
 
@@ -748,7 +755,7 @@ export default function AandelenCalculatorPage() {
       <RateComparisonWidget productType="aandelen-belegging" title="Vergelijk Broker Tarieven" />
 
       {/* Bottom Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
       </section>
 
