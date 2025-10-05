@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, ChevronDown } from "lucide-react";
 import { getCalculatorsByCategory } from "@/lib/routeRegistry";
-import logoUrl from "../../assets/logo.png";
+import logoUrl from "../../assets/logo-new.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,11 +20,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity" data-testid="logo-link">
-            <img src={logoUrl} alt="Interesten.be" className="h-8 w-8" />
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-              Interesten.be
-            </span>
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity" data-testid="logo-link">
+            <img src={logoUrl} alt="Interesten.be" className="h-10" />
           </Link>
           
           <nav className="hidden md:flex space-x-1">
