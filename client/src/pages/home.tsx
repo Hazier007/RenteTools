@@ -93,8 +93,8 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">vertrouwen ons</p>
             </GlassCard>
             <GlassCard className="p-6">
-              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent block mb-2">100%</div>
-              <p className="text-sm text-muted-foreground">Privacy - Geen registratie</p>
+              <FloatingNumber value={100} suffix="% Privacy" className="text-4xl md:text-5xl block mb-2" />
+              <p className="text-sm text-muted-foreground">Geen registratie</p>
             </GlassCard>
           </motion.div>
 
