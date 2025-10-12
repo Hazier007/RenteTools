@@ -105,9 +105,8 @@ export default function LeningHerfinancieren() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Calculator */}
             <Card>
@@ -281,6 +280,11 @@ export default function LeningHerfinancieren() {
               </CardContent>
             </Card>
 
+            {/* Ad After Calculator */}
+            <div className="flex justify-center py-4">
+              <GoogleAdsense slot="banner" />
+            </div>
+
             {/* Content Sections */}
             <Card>
               <CardHeader>
@@ -433,40 +437,14 @@ export default function LeningHerfinancieren() {
               </CardContent>
             </Card>
 
-          </div>
+        </div>
+      </section>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <GoogleAdsense slot="rectangle" />
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Gerelateerde Calculators</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/hypothecaire-lening-berekenen">
-                      <i className="fas fa-home mr-2"></i>
-                      Hypotheek Calculator
-                    </a>
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/persoonlijke-lening-berekenen">
-                      <i className="fas fa-hand-holding-usd mr-2"></i>
-                      Persoonlijke Lening
-                    </a>
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/kredietvergelijker-belgie">
-                      <i className="fas fa-balance-scale mr-2"></i>
-                      Krediet Vergelijken
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+      {/* Bottom Ad */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex justify-center">
+          <GoogleAdsense slot="banner" className="hidden lg:block" />
+          <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
       </section>
 
