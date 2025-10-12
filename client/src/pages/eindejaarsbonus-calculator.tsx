@@ -226,9 +226,8 @@ export default function EindejaarsbonosCalculatorPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Calculator */}
             <Card>
@@ -511,6 +510,11 @@ export default function EindejaarsbonosCalculatorPage() {
               </CardContent>
             </Card>
 
+            {/* Ad After Calculator */}
+            <div className="flex justify-center py-4">
+              <GoogleAdsense slot="banner" />
+            </div>
+
             {/* Tax Optimization */}
             <Card>
               <CardHeader>
@@ -623,18 +627,11 @@ export default function EindejaarsbonosCalculatorPage() {
               </CardContent>
             </Card>
 
-          </div>
-          
-          {/* Sidebar */}
-          <div className="hidden lg:block space-y-6">
-            <GoogleAdsense slot="rectangle" />
-            <GoogleAdsense slot="rectangle" />
-          </div>
         </div>
       </section>
 
       {/* Bottom Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />

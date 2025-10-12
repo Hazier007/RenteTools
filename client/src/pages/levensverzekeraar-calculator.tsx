@@ -53,9 +53,8 @@ export default function LevensverzekeraarCalculatorPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Calculator */}
             <Card>
@@ -73,6 +72,11 @@ export default function LevensverzekeraarCalculatorPage() {
                 <LevensverzekeraarCalculator />
               </CardContent>
             </Card>
+
+            {/* Ad After Calculator */}
+            <div className="flex justify-center py-4">
+              <GoogleAdsense slot="banner" />
+            </div>
 
             {/* Verzekering Types Uitleg */}
             <Card>
@@ -268,125 +272,11 @@ export default function LevensverzekeraarCalculatorPage() {
               </CardContent>
             </Card>
 
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Rectangle Ad */}
-            <div className="sticky top-6">
-              <GoogleAdsense slot="rectangle" />
-            </div>
-
-            {/* Gerelateerde Calculators */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-calculator mr-2 text-primary"></i>
-                  Gerelateerde Calculators
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <a href="/pensioen-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-calculator mr-3 text-blue-600"></i>
-                  <div>
-                    <div className="font-medium">Pensioen Calculator</div>
-                    <div className="text-xs text-muted-foreground">3-pijler pensioensysteem</div>
-                  </div>
-                </a>
-                
-                <a href="/fire-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-fire mr-3 text-orange-600"></i>
-                  <div>
-                    <div className="font-medium">FIRE Calculator</div>
-                    <div className="text-xs text-muted-foreground">Financiële onafhankelijkheid</div>
-                  </div>
-                </a>
-                
-                <a href="/beleggingsrente-calculator" className="flex items-center p-3 rounded-lg border hover:bg-muted transition-colors">
-                  <i className="fas fa-chart-line mr-3 text-green-600"></i>
-                  <div>
-                    <div className="font-medium">Beleggingsrente</div>
-                    <div className="text-xs text-muted-foreground">Rendement berekenen</div>
-                  </div>
-                </a>
-              </CardContent>
-            </Card>
-
-            {/* Quick Tips */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-lightbulb mr-2 text-primary"></i>
-                  Snelle Tips
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
-                  <div className="font-medium text-blue-900 dark:text-blue-100">Dekking Richtlijn</div>
-                  <div className="text-blue-700 dark:text-blue-300">10x jaarlijks bruto inkomen</div>
-                </div>
-                
-                <div className="p-3 bg-green-50 dark:bg-green-950 rounded-lg">
-                  <div className="font-medium text-green-900 dark:text-green-100">Jonge Leeftijd</div>
-                  <div className="text-green-700 dark:text-green-300">Term + beleggen meestal voordeliger</div>
-                </div>
-                
-                <div className="p-3 bg-orange-50 dark:bg-orange-950 rounded-lg">
-                  <div className="font-medium text-orange-900 dark:text-orange-100">Oudere Leeftijd</div>
-                  <div className="text-orange-700 dark:text-orange-300">Hele leven kan aantrekkelijker worden</div>
-                </div>
-                
-                <div className="p-3 bg-purple-50 dark:bg-purple-950 rounded-lg">
-                  <div className="font-medium text-purple-900 dark:text-purple-100">Zelfdiscipline</div>
-                  <div className="text-purple-700 dark:text-purple-300">Cruciaal voor term + beleggen succes</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Verzekering Aanbieders */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  <i className="fas fa-building mr-2 text-primary"></i>
-                  Belgische Verzekeraars
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span>AG Insurance</span>
-                  <span className="text-xs text-muted-foreground">Tak 21/23</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Allianz</span>
-                  <span className="text-xs text-muted-foreground">Tak 21/23</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>AXA Belgium</span>
-                  <span className="text-xs text-muted-foreground">Tak 21/23</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Belfius Insurance</span>
-                  <span className="text-xs text-muted-foreground">Tak 21/23</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Ethias</span>
-                  <span className="text-xs text-muted-foreground">Tak 21/23</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>KBC Insurance</span>
-                  <span className="text-xs text-muted-foreground">Tak 21/23</span>
-                </div>
-                <div className="pt-2 border-t text-xs text-muted-foreground">
-                  Vergelijk altijd voorwaarden en kosten tussen verschillende aanbieders
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
 
       {/* Bottom Banner Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
