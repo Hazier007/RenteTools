@@ -48,10 +48,8 @@ export default function HoogsteSpaarrenteBelgie() {
       </section>
 
       {/* Main Content with Calculator */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-4 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-3 space-y-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="space-y-8">
             
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
@@ -78,10 +76,12 @@ export default function HoogsteSpaarrenteBelgie() {
               </CardContent>
             </Card>
 
-            {/* Content Sections */}
-            <div className="space-y-8">
-              
-              {/* Hoogste Spaarrente */}
+            {/* Ad After Calculator */}
+            <div className="flex justify-center py-4">
+              <GoogleAdsense slot="banner" />
+            </div>
+
+            {/* Hoogste Spaarrente */}
               <Card>
                 <CardHeader>
                   <CardTitle className="text-xl">Welke bank heeft de hoogste spaarrente in België?</CardTitle>
@@ -226,22 +226,14 @@ export default function HoogsteSpaarrenteBelgie() {
                 </CardContent>
               </Card>
 
-              {/* Authority Links */}
-              {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+            {/* Authority Links */}
+            {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
 
-            </div>
-          </div>
-          
-          {/* Sidebar with Ads */}
-          <div className="hidden lg:block space-y-6">
-            <GoogleAdsense slot="rectangle" />
-            <GoogleAdsense slot="rectangle" />
-          </div>
         </div>
       </section>
 
       {/* Bottom Banner Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
