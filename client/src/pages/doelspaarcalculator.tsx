@@ -73,6 +73,11 @@ export default function DoelspaarcalculatorPage() {
               </CardContent>
             </Card>
 
+            {/* Ad After Calculator */}
+            <div className="flex justify-center py-4">
+              <GoogleAdsense slot="banner" />
+            </div>
+
             {/* Spaardoelen Uitleg */}
             <Card>
               <CardHeader>
@@ -298,13 +303,6 @@ export default function DoelspaarcalculatorPage() {
               </CardContent>
             </Card>
 
-        </div>
-      </section>
-
-      {/* Ad After Calculator */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex justify-center">
-          <GoogleAdsense slot="banner" />
         </div>
       </section>
 
