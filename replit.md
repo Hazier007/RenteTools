@@ -81,25 +81,22 @@ The application is specifically designed for the Belgian market with Belgian-spe
 
 # Ongoing Refactoring Tasks
 
-## Sidebar Removal & Content Centering (In Progress - 45% Complete)
+## ✅ Sidebar Removal & Content Centering - COMPLETED (100%)
 
-**Status:** 20 out of ~44 calculator pages refactored
+**Status:** All calculator pages with ad sidebar layout have been refactored
 
-### Pattern for Sidebar Removal
+### Pattern for Sidebar Removal (Standard Ad Sidebar Layout)
 1. Change `max-w-7xl` to `max-w-4xl` for centered layout
 2. Replace `grid lg:grid-cols-4 gap-8` with plain `div`
 3. Remove `lg:col-span-3` class from main content wrapper
 4. Delete entire sidebar div (contains rectangle ads + related calculators cards)
 5. Add 728x90 banner ad section INSIDE main content, directly after Calculator Card component
-6. Add bottom 728x90 banner ad section before footer
+6. Add bottom 728x90 banner ad section before footer (or update existing to max-w-4xl)
 7. Update AuthorityLinks section to use `max-w-4xl`
 
-### ✅ Ad Placement Fixes - COMPLETED (100%)
-All 20 completed calculator pages now have correct ad placement. The "Ad After Calculator" section is properly positioned INSIDE the main content `space-y-8` container, directly after the Calculator Card component. No duplicate ad sections remain.
+### ✅ Completed Pages - Ad Sidebar Layout (33 pages)
 
-**Verification completed:** All pages follow the correct pattern with ads inside main content div.
-
-### ✅ Completed Pages (20/44)
+**Previous batches (20 pages):**
 1. belastingplanning-calculator
 2. budget-planner  
 3. fire-calculator
@@ -121,37 +118,50 @@ All 20 completed calculator pages now have correct ad placement. The "Ad After C
 19. reele-rente-berekenen
 20. wettelijke-rentevoet-belgie
 
-### 📋 Remaining Pages (~24)
-- hoogste-spaarrente-belgie
-- deposito-calculator
-- kasbon-calculator
-- termijnrekening-calculator
-- loyalty-bonus-calculator
-- kinderrekening-calculator
+**Batch 1 (4 pages):**
+21. hoogste-spaarrente-belgie
+22. deposito-calculator
+23. kasbon-calculator
+24. termijnrekening-calculator
+
+**Batch 2 (2 pages):**
+25. loyalty-bonus-calculator
+26. kinderrekening-calculator
+
+**Batch 3 (4 pages):**
+27. kredietvergelijker-belgie
+28. eindejaarsbonus-calculator
+29. levensverzekeraar-calculator
+30. groepssparen-calculator
+
+**Batch 4 (3 pages):**
+31. vakantiegeld-sparen-calculator
+32. lening-herfinancieren
+33. studieschuld-calculator
+
+### 🔄 Pages with Input Form Sidebar Layout (Skipped - Functional Layout)
+These pages use a different layout with input form on the left (lg:col-span-1) and results on the right (lg:col-span-3). This is a functional layout, not an ad sidebar, so sidebar removal was not needed:
 - etf-calculator
 - cryptocurrency-calculator
+- dollar-cost-averaging-calculator
+
+### ✅ Pages Already Using Correct Layout (No Changes Needed)
+These pages already use max-w-4xl centered layout or don't have lg:col-span-3 sidebar structure:
+- doorlopend-krediet-calculator
+- groepslening-calculator
+- schuldenconsolidatie-calculator
+- woningkrediet-simulator
+- kredietcapaciteit-calculator
+- leasingkrediet-calculator
+- rentevoet-vergelijker
 - obligatie-calculator
 - reit-calculator
 - portfolio-diversificatie-calculator
 - belgische-beleggingsfiscaliteit-calculator
-- dollar-cost-averaging-calculator
-- levensverzekeraar-calculator
-- doorlopend-krediet-calculator
-- groepslening-calculator
-- groepssparen-calculator
-- lening-herfinancieren
-- schuldenconsolidatie-calculator
-- studieschuld-calculator
-- woningkrediet-simulator
-- kredietcapaciteit-calculator
-- kredietvergelijker-belgie
-- leasingkrediet-calculator
 - voorschot-calculator
-- vakantiegeld-sparen-calculator
-- rentevoet-vergelijker
-- eindejaarsbonus-calculator
 
-### Next Steps
-1. Fix ad placement for all 20 completed pages
-2. Complete remaining ~24 calculator pages with correct ad placement
-3. Verify all pages render correctly with centered layout and proper ads
+### Summary
+✅ **All calculator pages with ad sidebar layout have been successfully refactored** (33 pages)
+✅ **All pages now follow consistent ad placement pattern** (banner ad inside main content after calculator)
+✅ **Pages with functional input form sidebars preserved** (3 pages)
+✅ **Pages already using correct layout identified** (12 pages)
