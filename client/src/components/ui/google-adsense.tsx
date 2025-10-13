@@ -1,99 +1,41 @@
-import { useEffect, useRef } from 'react';
-
 interface GoogleAdsenseProps {
-  slot: 'banner' | 'rectangle' | 'article';
-  format?: 'auto' | 'fluid';
-  layout?: 'in-article' | '';
-  responsive?: boolean;
+  slot?: 'banner' | 'rectangle' | 'article';
   className?: string;
 }
 
-// Get slot IDs from the Google AdSense configuration
-const getSlotId = (slot: GoogleAdsenseProps['slot']): string => {
-  switch (slot) {
-    case 'banner':
-      return '3769127417'; // 320x50 banner slot
-    case 'rectangle': 
-      return '2456045742'; // 300x250 rectangle slot
-    case 'article':
-      return '9213025780'; // In-article slot
-    default:
-      return '3769127417'; // Default to banner
-  }
-};
-
-const getPublisherId = (): string => {
-  return 'ca-pub-1772283634325864';
-};
-
+// Simple Auto Ads anchor component
+// With Auto Ads enabled in index.html, Google automatically places ads throughout your site
+// This component serves as an anchor point where ads are preferred
 export default function GoogleAdsense({ 
-  slot, 
-  format = 'auto', 
-  layout = '',
-  responsive = true,
+  slot = 'banner',
   className = '' 
 }: GoogleAdsenseProps) {
-  const adRef = useRef<HTMLModElement>(null);
-  const isAdLoaded = useRef(false);
+  // No initialization needed - Auto Ads handles everything automatically from index.html
 
-  useEffect(() => {
-    // Only load the ad once per component instance
-    if (isAdLoaded.current) return;
-    
-    const loadAd = () => {
-      try {
-        // Ensure adsbygoogle array exists
-        (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-        
-        // Push the ad configuration
-        (window as any).adsbygoogle.push({});
-        isAdLoaded.current = true;
-      } catch (error) {
-        console.error('Error loading Google AdSense ad:', error);
-      }
-    };
-
-    // Load immediately if script is already available
-    if ((window as any).adsbygoogle) {
-      loadAd();
-    } else {
-      // Wait for script to load
-      const script = document.querySelector('script[src*="adsbygoogle.js"]');
-      if (script) {
-        script.addEventListener('load', loadAd);
-        return () => script.removeEventListener('load', loadAd);
-      }
-    }
-  }, []);
-
-  const slotId = getSlotId(slot);
-  const publisherId = getPublisherId();
-
-  // Define styles based on slot type
-  const getAdStyle = (): React.CSSProperties => {
+  // Define min-height based on slot type for layout stability
+  const getMinHeight = (): string => {
     switch (slot) {
       case 'banner':
-        return { display: 'block', minHeight: '90px' };
+        return '90px';
       case 'rectangle':
-        return { display: 'block', minHeight: '250px' };
+        return '250px';
       case 'article':
-        return { display: 'block', textAlign: 'center', minHeight: '250px' };
+        return '250px';
       default:
-        return { display: 'block', minHeight: '90px' };
+        return '90px';
     }
   };
 
   return (
-    <div className={`adsense-container ${className}`} data-testid={`google-ad-${slot}`} style={{ minHeight: slot === 'banner' ? '90px' : '250px' }}>
-      <ins 
-        ref={adRef}
-        className="adsbygoogle"
-        style={getAdStyle()}
-        data-ad-client={publisherId}
-        data-ad-slot={slotId}
-        data-ad-format={format}
-        {...(layout && { 'data-ad-layout': layout })}
-        {...(responsive && { 'data-full-width-responsive': 'true' })}
+    <div 
+      className={`auto-ads-anchor ${className}`} 
+      data-testid={`google-ad-${slot}`} 
+      style={{ minHeight: getMinHeight(), display: 'block', width: '100%' }}
+    >
+      {/* Auto Ads anchor point - Google will automatically fill this space */}
+      <div 
+        style={{ display: 'block', minHeight: getMinHeight() }}
+        data-ad-slot-type={slot}
       />
     </div>
   );

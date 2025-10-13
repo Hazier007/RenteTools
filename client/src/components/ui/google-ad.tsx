@@ -1,11 +1,8 @@
-import { useEffect } from "react";
 import { useConsent } from "@/hooks/use-consent";
 
 interface GoogleAdProps {
   size: "banner" | "rectangle" | "skyscraper" | "leaderboard";
   className?: string;
-  adClient?: string; // ca-pub-XXXXXXXXXXXXXXXX
-  adSlot?: string;   // XXXXXXXXXX
 }
 
 const adSizes = {
@@ -15,29 +12,18 @@ const adSizes = {
   leaderboard: { width: "970", height: "90" },
 };
 
+// Auto Ads anchor component with consent checking
+// With Auto Ads enabled in index.html, Google automatically places ads
+// This component provides anchor points and respects user consent
 export default function GoogleAd({ 
   size, 
-  className = "", 
-  adClient = "ca-pub-XXXXXXXXXXXXXXXX", // Vervang met uw eigen client ID
-  adSlot = "XXXXXXXXXX" // Vervang met uw slot ID
+  className = ""
 }: GoogleAdProps) {
   const adSize = adSizes[size];
   const { hasAdvertisingConsent, consent } = useConsent();
 
-  useEffect(() => {
-    // Only load ads if user has given consent
-    if (hasAdvertisingConsent && consent.status === 'accepted') {
-      try {
-        // Push ad to AdSense
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-      } catch (err) {
-        console.error('AdSense error:', err);
-      }
-    }
-  }, [hasAdvertisingConsent, consent.status]);
-
   // Development mode - show placeholder
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     return (
       <div 
         className={`border-dashed border-2 border-muted-foreground/30 flex items-center justify-center p-4 text-muted-foreground bg-muted/20 ${className}`}
@@ -48,7 +34,7 @@ export default function GoogleAd({
         }}
       >
         <div className="text-center">
-          <div className="text-sm font-medium mb-1">Google Ads</div>
+          <div className="text-sm font-medium mb-1">Google Auto Ads</div>
           <div className="text-xs opacity-70">{adSize.width}x{adSize.height}</div>
           {!hasAdvertisingConsent && (
             <div className="text-xs text-orange-600 mt-1">Consent Required</div>
@@ -79,21 +65,19 @@ export default function GoogleAd({
     );
   }
 
-  // Production mode - show real ads (only with consent)
+  // Production mode with consent - Auto Ads anchor point
   return (
-    <div className={className}>
-      <ins 
-        className="adsbygoogle"
-        style={{ 
-          display: "block",
-          width: `${adSize.width}px`,
-          height: `${adSize.height}px`
-        }}
-        data-ad-client={adClient}
-        data-ad-slot={adSlot}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
+    <div 
+      className={className}
+      style={{
+        minWidth: `${adSize.width}px`,
+        minHeight: `${adSize.height}px`,
+        maxWidth: "100%",
+        display: "block"
+      }}
+      data-ad-anchor={size}
+    >
+      {/* Auto Ads will fill this space automatically */}
     </div>
   );
 }
