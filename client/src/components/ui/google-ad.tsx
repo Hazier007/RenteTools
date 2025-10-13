@@ -68,11 +68,9 @@ export default function GoogleAd({
   // Production mode with consent - Auto Ads anchor point
   return (
     <div 
-      className={className}
+      className={`${className} w-full`}
       style={{
-        minWidth: `${adSize.width}px`,
         minHeight: `${adSize.height}px`,
-        maxWidth: "100%",
         display: "block"
       }}
       data-ad-anchor={size}
