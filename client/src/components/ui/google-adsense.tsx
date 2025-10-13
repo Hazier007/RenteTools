@@ -73,18 +73,18 @@ export default function GoogleAdsense({
   const getAdStyle = (): React.CSSProperties => {
     switch (slot) {
       case 'banner':
-        return { display: 'block' };
+        return { display: 'block', minHeight: '90px' };
       case 'rectangle':
-        return { display: 'block' };
+        return { display: 'block', minHeight: '250px' };
       case 'article':
-        return { display: 'block', textAlign: 'center' };
+        return { display: 'block', textAlign: 'center', minHeight: '250px' };
       default:
-        return { display: 'block' };
+        return { display: 'block', minHeight: '90px' };
     }
   };
 
   return (
-    <div className={`adsense-container ${className}`} data-testid={`google-ad-${slot}`}>
+    <div className={`adsense-container ${className}`} data-testid={`google-ad-${slot}`} style={{ minHeight: slot === 'banner' ? '90px' : '250px' }}>
       <ins 
         ref={adRef}
         className="adsbygoogle"

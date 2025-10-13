@@ -448,7 +448,11 @@ export default function LeningHerfinancieren() {
         </div>
       </section>
 
-      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+      {seoConfig && (
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <AuthorityLinks links={seoConfig.authorityLinks} />
+        </section>
+      )}
 
       <Footer />
     </div>
