@@ -165,3 +165,30 @@ These pages already use max-w-4xl centered layout or don't have lg:col-span-3 si
 ✅ **All pages now follow consistent ad placement pattern** (banner ad inside main content after calculator)
 ✅ **Pages with functional input form sidebars preserved** (3 pages)
 ✅ **Pages already using correct layout identified** (12 pages)
+
+## ✅ Post-Refactor Bug Fixes - COMPLETED (100%)
+
+**Status:** All critical post-refactor issues have been resolved
+
+### Fixed Issues
+
+1. **Google AdSense Ads Not Showing** ✅
+   - Added min-height enforcement to GoogleAdsense component (`client/src/components/ui/google-adsense.tsx`)
+   - Ensures ad containers reserve proper space for ad loading
+   - Fixed both container and <ins> element min-height styles
+
+2. **Dropdown/Select Menu Z-Index Issue** ✅
+   - Increased Select dropdown content z-index to z-[100] (`client/src/components/ui/select.tsx`)
+   - Resolved stacking context conflicts with other elements
+   - Dropdown menus now properly display above all content
+
+3. **AuthorityLinks Centering & Empty Sections** ✅
+   - Implemented conditional wrapper pattern on all pages: `{seoConfig && (<section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6"><AuthorityLinks /></section>)}`
+   - Removed duplicate nested sections from 7 pages (belgische-beleggingsfiscaliteit, cryptocurrency, dollar-cost-averaging, etf, obligatie, portfolio-diversificatie, reit)
+   - Prevents empty section rendering when seoConfig is undefined
+   - All 48+ calculator pages now properly centered with max-w-4xl
+
+### Technical Details
+- **Component Changes**: GoogleAdsense.tsx, Select.tsx
+- **Pages Fixed**: All 48+ calculator pages now use consistent AuthorityLinks pattern
+- **Pattern Validated**: Architect-reviewed and approved for production use
