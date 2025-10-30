@@ -12,9 +12,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function StudieschuldCalculatorPage() {
   const seoConfig = getSeoConfig("studieschuld-calculator");
+  useSeoTags("studieschuld-calculator");
 
   const [studieschuld, setStudieschuld] = useState<number>(25000);
   const [rente, setRente] = useState<number>(2.1);

@@ -11,9 +11,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function RoerendeVoorheffingCalculator() {
   const seoConfig = getSeoConfig("roerende-voorheffing-calculator");
+  useSeoTags("roerende-voorheffing-calculator");
   const [interestInkomsten, setInterestInkomsten] = useState<string>("1500");
   const [dividendInkomsten, setDividendInkomsten] = useState<string>("500");
   const [belastingvrij] = useState<number>(980); // Belastingvrij bedrag 2025

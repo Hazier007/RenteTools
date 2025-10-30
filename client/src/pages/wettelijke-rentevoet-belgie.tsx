@@ -10,9 +10,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function WettelijkeRentevoetBelgie() {
   const seoConfig = getSeoConfig("wettelijke-rentevoet-belgie");
+  useSeoTags("wettelijke-rentevoet-belgie");
 
   const [hoofdsom, setHoofdsom] = useState<string>("10000");
   const [dagen, setDagen] = useState<string>("30");

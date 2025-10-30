@@ -10,9 +10,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function GeldontwaardigCalculator() {
   const seoConfig = getSeoConfig("geldontwaarding-calculator");
+  useSeoTags("geldontwaarding-calculator");
   const [huidigeWaarde, setHuidigeWaarde] = useState<string>("10000");
   const [jaren, setJaren] = useState<string>("10");
   const [inflatie, setInflatie] = useState<string>("2.1");

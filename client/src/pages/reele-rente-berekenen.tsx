@@ -10,9 +10,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function ReeleRenteBerekenen() {
   const seoConfig = getSeoConfig("reele-rente-berekenen");
+  useSeoTags("reele-rente-berekenen");
   const [nominaleRente, setNominaleRente] = useState<string>("2.5");
   const [inflatie, setInflatie] = useState<string>("2.1");
   const [kapitaal, setKapitaal] = useState<string>("10000");

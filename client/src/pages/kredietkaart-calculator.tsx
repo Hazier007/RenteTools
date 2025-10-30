@@ -13,9 +13,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function KredietkaartCalculatorPage() {
   const seoConfig = getSeoConfig("kredietkaart-calculator");
+  useSeoTags("kredietkaart-calculator");
 
   const [schuld, setSchuld] = useState<number>(5000);
   const [rente, setRente] = useState<number>(18.5);

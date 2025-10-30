@@ -8,9 +8,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function DepositoCalculatorPage() {
   const seoConfig = getSeoConfig("deposito-calculator");
+  useSeoTags("deposito-calculator");
   
   return (
     <div className="min-h-screen bg-background">

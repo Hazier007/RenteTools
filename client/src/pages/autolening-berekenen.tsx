@@ -8,9 +8,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function AutoleningBerekenen() {
   const seoConfig = getSeoConfig("autolening-berekenen");
+  useSeoTags("autolening-berekenen");
 
   return (
     <div className="min-h-screen bg-background">

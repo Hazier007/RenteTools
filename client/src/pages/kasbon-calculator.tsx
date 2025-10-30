@@ -12,9 +12,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function KasbonCalculatorPage() {
   const seoConfig = getSeoConfig("kasbon-calculator");
+  useSeoTags("kasbon-calculator");
   const [bedrag, setBedrag] = useState<number>(10000);
   const [looptijd, setLooptijd] = useState<number>(1);
   const [rente, setRente] = useState<number>(3.5);

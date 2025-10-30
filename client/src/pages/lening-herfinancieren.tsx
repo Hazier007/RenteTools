@@ -11,9 +11,11 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
+import { useSeoTags } from "@/hooks/use-seo-tags";
 
 export default function LeningHerfinancieren() {
   const seoConfig = getSeoConfig("lening-herfinancieren");
+  useSeoTags("lening-herfinancieren");
 
   const [huidigeSaldo, setHuidigeSaldo] = useState<string>("150000");
   const [huidigeRente, setHuidigeRente] = useState<string>("4.2");
