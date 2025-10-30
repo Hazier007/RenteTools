@@ -7,6 +7,10 @@ import RateComparisonWidget from "@/components/rate-comparison";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import FaqSchema from "@/components/seo/FaqSchema";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import HowToSchema from "@/components/seo/HowToSchema";
+import WebApplicationSchema from "@/components/seo/WebApplicationSchema";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
@@ -16,9 +20,36 @@ export default function HoogsteSpaarrenteBelgie() {
   const seoConfig = getSeoConfig("hoogste-spaarrente-belgie");
   useSeoTags("hoogste-spaarrente-belgie");
 
+  const breadcrumbItems = [
+    { name: "Home", url: "https://interesten.be" },
+    { name: "Sparen", url: "https://interesten.be/sparen" },
+    { name: "Hoogste Spaarrente België", url: "https://interesten.be/sparen/hoogste-spaarrente-belgie" }
+  ];
+
+  const howToSteps = [
+    { name: "Bedrag invoeren", text: "Vul het bedrag in dat u wilt sparen" },
+    { name: "Rente selecteren", text: "Kies de spaarrente van uw bank of gebruik de voorgestelde rentes" },
+    { name: "Looptijd kiezen", text: "Selecteer hoe lang u het geld wilt sparen" },
+    { name: "Resultaat bekijken", text: "Zie direct hoeveel interest u verdient en wat uw eindkapitaal wordt" }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <HowToSchema 
+        name="Hoe gebruik je de Spaarrente Calculator"
+        description="Bereken in 4 simpele stappen hoeveel interest u verdient op uw spaargeld"
+        steps={howToSteps}
+        totalTime="PT1M"
+      />
+      <WebApplicationSchema 
+        name="Hoogste Spaarrente Calculator België"
+        description="Gratis online calculator om spaarrente en interest te berekenen voor Belgische spaarrekeningen"
+        url="https://interesten.be/sparen/hoogste-spaarrente-belgie"
+        applicationCategory="FinanceApplication"
+      />
+      <OrganizationSchema />
       <Header />
       
       {/* SEO Hero Section */}

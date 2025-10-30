@@ -75,6 +75,14 @@ export default function Header() {
                 )}
               </div>
             ))}
+            <Link 
+              href="/blog"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-muted-foreground hover:text-primary hover:bg-accent/50 transition-all duration-200"
+              data-testid="nav-blog"
+            >
+              <i className="fas fa-newspaper text-sm"></i>
+              Blog
+            </Link>
           </nav>
           
           <div className="md:hidden">

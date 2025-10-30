@@ -7,6 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useCanonical } from "@/hooks/use-canonical";
 import FaqSchema from "@/components/seo/FaqSchema";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import HowToSchema from "@/components/seo/HowToSchema";
+import WebApplicationSchema from "@/components/seo/WebApplicationSchema";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
@@ -16,10 +20,37 @@ export default function HypothecaireLningBerekenen() {
   useCanonical();
   const seoConfig = getSeoConfig("hypothecaire-lening-berekenen");
   useSeoTags("hypothecaire-lening-berekenen");
+
+  const breadcrumbItems = [
+    { name: "Home", url: "https://interesten.be" },
+    { name: "Lenen", url: "https://interesten.be/lenen" },
+    { name: "Hypothecaire Lening Berekenen", url: "https://interesten.be/lenen/hypothecaire-lening-berekenen" }
+  ];
+
+  const howToSteps = [
+    { name: "Leenbedrag invoeren", text: "Vul het bedrag in dat u wilt lenen voor uw woning" },
+    { name: "Looptijd kiezen", text: "Selecteer de looptijd van uw hypotheek (10-30 jaar)" },
+    { name: "Rentevoet selecteren", text: "Kies tussen vast of variabel tarief en vul de rente in" },
+    { name: "Maandlast berekenen", text: "Bekijk direct uw maandelijkse afbetaling en totale kostprijs" }
+  ];
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <HowToSchema 
+        name="Hoe gebruik je de Hypotheek Calculator"
+        description="Bereken in 4 stappen uw maandelijkse hypotheekafbetaling en totale kostprijs"
+        steps={howToSteps}
+        totalTime="PT2M"
+      />
+      <WebApplicationSchema 
+        name="Hypotheek Calculator België"
+        description="Gratis hypotheek simulator om uw maandlast en leenkapaciteit te berekenen voor België"
+        url="https://interesten.be/lenen/hypothecaire-lening-berekenen"
+        applicationCategory="FinanceApplication"
+      />
+      <OrganizationSchema />
       <Header />
       
       {/* SEO Hero Section */}

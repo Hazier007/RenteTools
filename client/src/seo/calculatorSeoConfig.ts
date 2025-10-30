@@ -790,6 +790,7 @@ export const calculatorsByCategory: Record<SiloCategory, string[]> = {
     "rentevoet-vergelijker"
   ],
   Overige: [
+    "blog",
     "over-ons",
     "privacy",
     "voorwaarden",
@@ -797,6 +798,32 @@ export const calculatorsByCategory: Record<SiloCategory, string[]> = {
     "admin"
   ]
 };
+
+const blogSeoConfig: CalculatorSeoConfig = {
+  slug: "blog",
+  category: "Overige",
+  pageTitle: "Financiële Inzichten & Gidsen",
+  breadcrumbTitle: "Blog",
+  metaTitle: "Financieel Advies Blog België | Sparen, Lenen & Beleggen",
+  metaDescription: "Expert artikelen over sparen, lenen, beleggen en financiële planning in België. Praktische tips, strategieën en gidsen voor betere financiële beslissingen.",
+  faqs: [
+    {
+      question: "Hoe vaak verschijnen nieuwe blog artikelen?",
+      answer: "We publiceren regelmatig nieuwe artikelen over actuele financiële onderwerpen in België, met focus op praktische tips en strategieën."
+    },
+    {
+      question: "Zijn de blog artikelen gebaseerd op Belgische wetgeving?",
+      answer: "Ja, alle artikelen zijn specifiek geschreven voor de Belgische situatie, rekening houdend met lokale wetgeving en fiscaliteit."
+    }
+  ],
+  authorityLinks: [
+    defaultAuthorityLinks.nbb,
+    defaultAuthorityLinks.fsma,
+    defaultAuthorityLinks.fodFinancien
+  ]
+};
+
+calculatorSeoConfigs["blog"] = blogSeoConfig;
 
 export function getSeoConfig(pageSlug: string): CalculatorSeoConfig | null {
   return calculatorSeoConfigs[pageSlug] || null;

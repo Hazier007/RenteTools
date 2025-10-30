@@ -11,6 +11,8 @@ import Privacy from "@/pages/privacy";
 import Voorwaarden from "@/pages/voorwaarden";
 import Sitemap from "@/pages/sitemap";
 import AdminPage from "@/pages/admin";
+import BlogPage from "@/pages/blog";
+import BlogDetailPage from "@/pages/blog-detail";
 import SparenPage from "@/pages/sparen";
 import LenenPage from "@/pages/lenen";
 import BeleggenPage from "@/pages/beleggen";
@@ -23,6 +25,10 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      
+      {/* Blog Pages */}
+      <Route path="/blog" component={BlogPage} />
+      <Route path="/blog/:slug" component={BlogDetailPage} />
       
       {/* Category Landing Pages - PRIORITY */}
       <Route path="/sparen" component={SparenPage} />

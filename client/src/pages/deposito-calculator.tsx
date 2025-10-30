@@ -5,6 +5,10 @@ import DepositoCalculator from "@/components/calculators/deposito-calculator";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FaqSchema from "@/components/seo/FaqSchema";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import HowToSchema from "@/components/seo/HowToSchema";
+import WebApplicationSchema from "@/components/seo/WebApplicationSchema";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
@@ -13,10 +17,37 @@ import { useSeoTags } from "@/hooks/use-seo-tags";
 export default function DepositoCalculatorPage() {
   const seoConfig = getSeoConfig("deposito-calculator");
   useSeoTags("deposito-calculator");
+
+  const breadcrumbItems = [
+    { name: "Home", url: "https://interesten.be" },
+    { name: "Sparen", url: "https://interesten.be/sparen" },
+    { name: "Deposito Calculator", url: "https://interesten.be/sparen/deposito-calculator" }
+  ];
+
+  const howToSteps = [
+    { name: "Inlegbedrag invoeren", text: "Vul het bedrag in dat u wilt vastzetten op een deposito" },
+    { name: "Looptijd kiezen", text: "Selecteer de looptijd van het deposito (1, 3 of 5 jaar)" },
+    { name: "Rente vergelijken", text: "Bekijk de verschillende rentetarieven per looptijd" },
+    { name: "Rendement berekenen", text: "Zie direct uw eindkapitaal en totale interest na de looptijd" }
+  ];
   
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <HowToSchema 
+        name="Hoe gebruik je de Deposito Calculator"
+        description="Bereken in 4 stappen het rendement van uw termijnrekening of deposito"
+        steps={howToSteps}
+        totalTime="PT1M"
+      />
+      <WebApplicationSchema 
+        name="Deposito Calculator België"
+        description="Gratis calculator voor deposito en termijnrekening rendement in België"
+        url="https://interesten.be/sparen/deposito-calculator"
+        applicationCategory="FinanceApplication"
+      />
+      <OrganizationSchema />
       <Header />
       
       {/* SEO Hero Section */}
