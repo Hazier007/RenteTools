@@ -57,10 +57,11 @@ The application implements secure session-based authentication with industry-sta
 - **Rate limiting**: Login endpoint limited to 5 attempts per IP per 15 minutes to prevent brute-force attacks
 - **Role-based access control**: Authentication middleware (`requireAuth`, `requireAdmin`) protects administrative routes
 
-### Default Credentials
-- Username: `admin`
-- Password: `admin123`
-- **⚠️ IMPORTANT**: Change default password immediately after first login
+### Admin Credentials
+- Username: `Bart`
+- Password: `BB@@sucks007`
+- Email: `bart@interesten.be`
+- **⚠️ IMPORTANT**: Keep these credentials secure and change password if needed
 
 ### Protected Endpoints (Admin-only)
 - Bank management: POST/PUT/DELETE `/api/banks`
