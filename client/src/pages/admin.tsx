@@ -1129,13 +1129,21 @@ function BlogRssManager() {
 
               <div>
                 <Label htmlFor="post-author">Auteur</Label>
-                <Input
-                  id="post-author"
-                  value={postFormData.authorName}
-                  onChange={(e) => setPostFormData({ ...postFormData, authorName: e.target.value })}
-                  placeholder="Auteur naam"
-                  data-testid="input-post-author"
-                />
+                <Select 
+                  value={postFormData.authorName} 
+                  onValueChange={(v: string) => setPostFormData({ ...postFormData, authorName: v })}
+                >
+                  <SelectTrigger data-testid="select-post-author">
+                    <SelectValue placeholder="Kies een auteur" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Sophie Janssens">Sophie Janssens</SelectItem>
+                    <SelectItem value="Thomas Vermeulen">Thomas Vermeulen</SelectItem>
+                    <SelectItem value="Lisa De Vries">Lisa De Vries</SelectItem>
+                    <SelectItem value="Marc Peeters">Marc Peeters</SelectItem>
+                    <SelectItem value="Emma Claes">Emma Claes</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
