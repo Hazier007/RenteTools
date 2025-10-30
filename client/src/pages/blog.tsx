@@ -7,6 +7,7 @@ import { Link } from "wouter";
 import { blogPosts } from "@/data/blogPosts";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import GoogleAdsense from "@/components/ui/google-adsense";
 
 export default function BlogPage() {
   useSeoTags("blog");
@@ -42,8 +43,13 @@ export default function BlogPage() {
         </div>
       </section>
 
+      {/* Top Banner Ad */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <GoogleAdsense slot="banner" />
+      </section>
+
       {/* Blog Posts Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map(post => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
@@ -88,6 +94,11 @@ export default function BlogPage() {
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* Bottom Banner Ad */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <GoogleAdsense slot="banner" />
       </section>
 
       <Footer />

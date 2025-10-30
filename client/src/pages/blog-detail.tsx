@@ -9,6 +9,7 @@ import { getBlogPost } from "@/data/blogPosts";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ArticleSchema from "@/components/seo/ArticleSchema";
+import GoogleAdsense from "@/components/ui/google-adsense";
 import { useEffect } from "react";
 
 function formatBlogContent(markdown: string): string {
@@ -156,6 +157,11 @@ export default function BlogDetailPage() {
 
       {/* Article Content */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Top Banner Ad */}
+        <div className="mb-8">
+          <GoogleAdsense slot="banner" />
+        </div>
+
         <header className="mb-12">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
             {post.title}
@@ -202,6 +208,11 @@ export default function BlogDetailPage() {
             prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline"
           dangerouslySetInnerHTML={{ __html: formatBlogContent(post.content) }}
         />
+
+        {/* Mid-Content Ad */}
+        <div className="my-8">
+          <GoogleAdsense slot="rectangle" />
+        </div>
 
         {/* Call to Action */}
         <div className="relative overflow-hidden rounded-2xl mt-12 gradient-bg p-8 md:p-12">
@@ -286,6 +297,11 @@ export default function BlogDetailPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Bottom Banner Ad */}
+        <div className="mt-12">
+          <GoogleAdsense slot="banner" />
+        </div>
       </article>
 
       <Footer />
