@@ -105,6 +105,9 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
       let content = completion.choices[0].message.content;
       if (!content) return null;
 
+      // Clean up markdown wrappers that OpenAI might add
+      content = this.stripMarkdownWrappers(content);
+
       const title = await this.generateTitle(item.title!, category);
       
       // Add inline images to content
@@ -146,6 +149,21 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
     }
   }
 
+  private stripMarkdownWrappers(text: string): string {
+    // Trim first to normalize whitespace
+    text = text.trim();
+    
+    // Remove markdown code fences with any surrounding whitespace
+    text = text.replace(/^\s*```(?:markdown)?\s*/i, '').replace(/\s*```\s*$/i, '');
+    
+    // Remove surrounding quotes (single, double, or triple) with any surrounding whitespace
+    // Use global flag to handle multiple quote layers
+    text = text.replace(/^\s*["']{1,3}/g, '').replace(/["']{1,3}\s*$/g, '');
+    
+    // Final trim to clean up any remaining whitespace
+    return text.trim();
+  }
+
   private async generateTitle(originalTitle: string, category: string): Promise<string> {
     try {
       const completion = await openai.chat.completions.create({
@@ -160,7 +178,8 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
         max_tokens: 50,
       });
 
-      return completion.choices[0].message.content?.trim() || originalTitle;
+      const title = completion.choices[0].message.content?.trim() || originalTitle;
+      return this.stripMarkdownWrappers(title);
     } catch (error) {
       return originalTitle;
     }
@@ -389,8 +408,11 @@ Alleen JSON, geen extra tekst.`
       // Generate featured image
       const featuredImage = await this.getCategoryImage(post.category);
       
+      // Clean up existing content wrappers before inserting images
+      let cleanedContent = this.stripMarkdownWrappers(post.content);
+      
       // Add inline images to content
-      const contentWithImages = await this.insertInlineImages(post.content, post.category);
+      const contentWithImages = await this.insertInlineImages(cleanedContent, post.category);
 
       // Update the post
       const updatedPost = await storage.updateBlogPost(postId, {
