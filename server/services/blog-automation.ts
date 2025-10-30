@@ -30,7 +30,7 @@ export class BlogAutomationService {
         
         if (parsedFeed.items && parsedFeed.items.length > 0) {
           for (const item of parsedFeed.items.slice(0, 5)) {
-            await this.processRSSItem(item, feed.category);
+            await this.processRSSItem(item, feed.category, feed.autoPublish ?? false);
           }
           
           await storage.updateRssFeedFetchTime(feed.id);
@@ -41,7 +41,11 @@ export class BlogAutomationService {
     }
   }
 
-  private async processRSSItem(item: RSSItem, category: 'Sparen' | 'Lenen' | 'Beleggen' | 'Planning'): Promise<void> {
+  private async processRSSItem(
+    item: RSSItem, 
+    category: 'Sparen' | 'Lenen' | 'Beleggen' | 'Planning',
+    autoPublish: boolean
+  ): Promise<void> {
     if (!item.title || !item.link || !item.guid) return;
 
     const existingPost = await storage.getBlogPost(this.createSlug(item.title));
@@ -51,17 +55,19 @@ export class BlogAutomationService {
     }
 
     console.log(`Generating blog post for: ${item.title}`);
-    const blogPost = await this.generateBlogPost(item, category);
+    const blogPost = await this.generateBlogPost(item, category, autoPublish);
     
     if (blogPost) {
       await storage.createBlogPost(blogPost);
-      console.log(`Created blog post: ${blogPost.title}`);
+      const statusMsg = autoPublish ? 'published (autopilot)' : 'draft';
+      console.log(`Created blog post as ${statusMsg}: ${blogPost.title}`);
     }
   }
 
   private async generateBlogPost(
     item: RSSItem,
-    category: 'Sparen' | 'Lenen' | 'Beleggen' | 'Planning'
+    category: 'Sparen' | 'Lenen' | 'Beleggen' | 'Planning',
+    autoPublish: boolean
   ): Promise<InsertBlogPost | null> {
     try {
       const sourceContent = item.content || item.contentSnippet || '';
@@ -137,7 +143,7 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
         seoTitle: seoData.title,
         seoDescription: seoData.description,
         seoKeywords: seoData.keywords,
-        status: 'draft',
+        status: autoPublish ? 'published' : 'draft',
         sourceUrl: item.link,
         rssItemId: item.guid,
       };
