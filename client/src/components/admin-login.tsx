@@ -7,11 +7,11 @@ import { useToast } from "@/hooks/use-toast";
 import { Lock } from "lucide-react";
 
 interface AdminLoginProps {
-  onLogin: (email: string, password: string) => boolean;
+  onLogin: (username: string, password: string) => Promise<boolean>;
 }
 
 export default function AdminLogin({ onLogin }: AdminLoginProps) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -21,11 +21,11 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
     setIsLoading(true);
 
     try {
-      const success = onLogin(email, password);
+      const success = await onLogin(username, password);
       if (!success) {
         toast({
           title: "Ongeldige inloggegevens",
-          description: "E-mailadres of wachtwoord is incorrect.",
+          description: "Gebruikersnaam of wachtwoord is incorrect.",
           variant: "destructive"
         });
       }
@@ -55,15 +55,15 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="email">E-mailadres</Label>
+              <Label htmlFor="username">Gebruikersnaam</Label>
               <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@interesten.be"
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="admin"
                 required
-                data-testid="input-admin-email"
+                data-testid="input-admin-username"
               />
             </div>
             <div>
