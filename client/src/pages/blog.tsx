@@ -55,7 +55,7 @@ export default function BlogPage() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="glassmorphic px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="glassmorphic px-3 py-1 rounded-full text-sm font-medium text-foreground">
                       {post.category}
                     </span>
                   </div>
@@ -64,12 +64,12 @@ export default function BlogPage() {
                   <h2 className="text-2xl font-bold mb-3 line-clamp-2">
                     {post.title}
                   </h2>
-                  <p className="text-muted-foreground line-clamp-3">
+                  <p className="text-foreground/80 line-clamp-3">
                     {post.excerpt}
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-4 text-sm text-foreground/70">
                     <div className="flex items-center gap-2">
                       <User className="w-4 h-4" />
                       <span>{post.author.name}</span>
@@ -79,7 +79,7 @@ export default function BlogPage() {
                       <span>{post.readTime} min</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
+                  <div className="flex items-center gap-2 text-sm text-foreground/70 mt-2">
                     <Calendar className="w-4 h-4" />
                     <span>{new Date(post.publishDate).toLocaleDateString('nl-BE', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>

@@ -75,7 +75,7 @@ export default function BlogDetailPage() {
           </Link>
         </div>
         <div className="absolute bottom-8 left-8">
-          <span className="glassmorphic px-4 py-2 rounded-full text-sm font-medium">
+          <span className="glassmorphic px-4 py-2 rounded-full text-sm font-medium text-foreground">
             {post.category}
           </span>
         </div>
@@ -87,7 +87,7 @@ export default function BlogDetailPage() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             {post.title}
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl">
+          <p className="text-xl text-foreground/80 mb-8 max-w-3xl">
             {post.excerpt}
           </p>
           
@@ -100,8 +100,8 @@ export default function BlogDetailPage() {
             />
             <div className="flex-1">
               <div className="font-semibold text-lg">{post.author.name}</div>
-              <div className="text-sm text-muted-foreground mb-3">{post.author.bio}</div>
-              <div className="flex items-center gap-6 text-sm text-muted-foreground">
+              <div className="text-sm text-foreground/70 mb-3">{post.author.bio}</div>
+              <div className="flex items-center gap-6 text-sm text-foreground/70">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>{new Date(post.publishDate).toLocaleDateString('nl-BE', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -137,7 +137,7 @@ export default function BlogDetailPage() {
           <h3 className="text-2xl font-bold mb-4">
             Gebruik onze gratis calculators
           </h3>
-          <p className="text-muted-foreground mb-6">
+          <p className="text-foreground/80 mb-6">
             Bereken direct uw spaarrente, hypotheek, beleggingsrendement en meer
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
