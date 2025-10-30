@@ -11,6 +11,8 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { useEffect } from "react";
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 interface BlogPost {
   id: string;
@@ -31,77 +33,42 @@ interface BlogPost {
   status: string;
 }
 
+// Configure marked for better markdown parsing
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+});
+
 function formatBlogContent(markdown: string): string {
-  let html = markdown;
+  // Use marked to convert markdown to HTML
+  const rawHtml = marked(markdown) as string;
   
-  html = html.replace(/### (.+)/g, '<h3>$1</h3>');
-  html = html.replace(/## (.+)/g, '<h2>$1</h2>');
-  html = html.replace(/# (.+)/g, '<h1>$1</h1>');
+  // Sanitize HTML with DOMPurify to prevent XSS attacks
+  // Allow comprehensive set of markdown/GFM tags while blocking dangerous ones
+  const cleanHtml = DOMPurify.sanitize(rawHtml, {
+    ALLOWED_TAGS: [
+      // Headers
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      // Text formatting
+      'p', 'strong', 'em', 'b', 'i', 'u', 'del', 's', 'sup', 'sub', 'span',
+      // Lists
+      'ul', 'ol', 'li',
+      // Links and images
+      'a', 'img',
+      // Code
+      'code', 'pre',
+      // Quotes and separators
+      'blockquote', 'hr', 'br',
+      // Tables (GFM)
+      'table', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td',
+      // Divisions
+      'div'
+    ],
+    ALLOWED_ATTR: ['href', 'src', 'alt', 'class', 'title', 'align'],
+  });
   
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  
-  html = html.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
-  
-  const lines = html.split('\n');
-  let result = '';
-  let inList = false;
-  let inParagraph = false;
-  
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    
-    if (!line) {
-      if (inParagraph) {
-        result += '</p>';
-        inParagraph = false;
-      }
-      if (inList) {
-        result += '</ul>';
-        inList = false;
-      }
-      continue;
-    }
-    
-    if (line.startsWith('<h')) {
-      if (inParagraph) {
-        result += '</p>';
-        inParagraph = false;
-      }
-      if (inList) {
-        result += '</ul>';
-        inList = false;
-      }
-      result += line;
-    } else if (line.startsWith('- ')) {
-      if (inParagraph) {
-        result += '</p>';
-        inParagraph = false;
-      }
-      if (!inList) {
-        result += '<ul>';
-        inList = true;
-      }
-      result += '<li>' + line.substring(2) + '</li>';
-    } else {
-      if (inList) {
-        result += '</ul>';
-        inList = false;
-      }
-      if (!inParagraph) {
-        result += '<p>';
-        inParagraph = true;
-      } else {
-        result += ' ';
-      }
-      result += line;
-    }
-  }
-  
-  if (inParagraph) result += '</p>';
-  if (inList) result += '</ul>';
-  
-  return result;
+  // Add custom styling to images
+  return cleanHtml.replace(/<img /g, '<img class="w-full rounded-lg my-6 shadow-lg" ');
 }
 
 export default function BlogDetailPage() {
