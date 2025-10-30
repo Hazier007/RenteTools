@@ -1,4 +1,7 @@
 import { storage } from "./storage";
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 10;
 
 async function seedAdmin() {
   try {
@@ -6,12 +9,14 @@ async function seedAdmin() {
     
     if (existingAdmin) {
       console.log("Admin user already exists");
-      return;
+      process.exit(0);
     }
+
+    const hashedPassword = await bcrypt.hash("admin123", SALT_ROUNDS);
 
     const admin = await storage.createUser({
       username: "admin",
-      password: "admin123",
+      password: hashedPassword,
       email: "admin@interesten.be",
       role: "admin",
       isActive: true
@@ -21,8 +26,10 @@ async function seedAdmin() {
     console.log("Username: admin");
     console.log("Password: admin123");
     console.log("\nPLEASE CHANGE THE PASSWORD AFTER FIRST LOGIN!");
+    process.exit(0);
   } catch (error) {
     console.error("Failed to create admin user:", error);
+    process.exit(1);
   }
 }
 

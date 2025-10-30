@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { z } from "zod";
+import bcrypt from "bcrypt";
 import { 
   spaarrenteCalculationSchema, 
   samengesteldeRenteSchema, 
@@ -16,10 +17,48 @@ import { submitToIndexNow, submitAllCalculators, ALL_CALCULATOR_URLS } from "./i
 import { blogAutomationService } from "./services/blog-automation";
 import { requireAdmin } from "./middleware/auth";
 
+// Rate limiting for login endpoint
+interface LoginAttempt {
+  count: number;
+  resetTime: number;
+}
+
+const loginAttempts = new Map<string, LoginAttempt>();
+const MAX_LOGIN_ATTEMPTS = 5;
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const attempt = loginAttempts.get(ip);
+
+  if (!attempt) {
+    loginAttempts.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+
+  if (now > attempt.resetTime) {
+    loginAttempts.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+
+  if (attempt.count >= MAX_LOGIN_ATTEMPTS) {
+    return false;
+  }
+
+  attempt.count++;
+  return true;
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth routes
   app.post("/api/auth/login", async (req, res) => {
     try {
+      const ip = req.ip || req.socket.remoteAddress || 'unknown';
+      
+      if (!checkRateLimit(ip)) {
+        return res.status(429).json({ error: "Too many login attempts. Please try again later." });
+      }
+
       const { username, password } = req.body;
       
       if (!username || !password) {
@@ -28,7 +67,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const user = await storage.getUserByUsername(username);
       
-      if (!user || user.password !== password) {
+      if (!user) {
+        return res.status(401).json({ error: "Invalid credentials" });
+      }
+
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      
+      if (!passwordMatch) {
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
@@ -177,7 +222,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/banks", async (req, res) => {
+  app.post("/api/banks", requireAdmin, async (req, res) => {
     try {
       const data = insertBankSchema.parse(req.body);
       const bank = await storage.createBank(data);
@@ -191,7 +236,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/banks/:id", async (req, res) => {
+  app.put("/api/banks/:id", requireAdmin, async (req, res) => {
     try {
       const data = insertBankSchema.partial().parse(req.body);
       const bank = await storage.updateBank(req.params.id, data);
@@ -208,7 +253,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/banks/:id", async (req, res) => {
+  app.delete("/api/banks/:id", requireAdmin, async (req, res) => {
     try {
       const success = await storage.deleteBank(req.params.id);
       if (!success) {
@@ -264,7 +309,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/products", async (req, res) => {
+  app.post("/api/products", requireAdmin, async (req, res) => {
     try {
       const data = insertProductSchema.parse(req.body);
       const product = await storage.createProduct(data);
@@ -278,7 +323,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/products/:id", async (req, res) => {
+  app.put("/api/products/:id", requireAdmin, async (req, res) => {
     try {
       const data = insertProductSchema.partial().parse(req.body);
       const product = await storage.updateProduct(req.params.id, data);
@@ -295,7 +340,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/products/:id", async (req, res) => {
+  app.delete("/api/products/:id", requireAdmin, async (req, res) => {
     try {
       const success = await storage.deleteProduct(req.params.id);
       if (!success) {
@@ -337,7 +382,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/rates", async (req, res) => {
+  app.post("/api/rates", requireAdmin, async (req, res) => {
     try {
       const data = insertRateSchema.parse(req.body);
       const rate = await storage.createRate(data);
@@ -351,7 +396,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/rates/:id", async (req, res) => {
+  app.put("/api/rates/:id", requireAdmin, async (req, res) => {
     try {
       const data = insertRateSchema.partial().parse(req.body);
       const rate = await storage.updateRate(req.params.id, data);
@@ -368,7 +413,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/rates/:id", async (req, res) => {
+  app.delete("/api/rates/:id", requireAdmin, async (req, res) => {
     try {
       const success = await storage.deleteRate(req.params.id);
       if (!success) {
@@ -438,7 +483,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // IndexNow routes
-  app.post("/api/indexnow/submit", async (req, res) => {
+  app.post("/api/indexnow/submit", requireAdmin, async (req, res) => {
     try {
       const { urls } = req.body;
       
@@ -453,7 +498,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/indexnow/submit-all", async (req, res) => {
+  app.post("/api/indexnow/submit-all", requireAdmin, async (req, res) => {
     try {
       const result = await submitAllCalculators();
       res.json(result);
