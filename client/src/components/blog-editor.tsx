@@ -19,7 +19,7 @@ import {
   Undo,
   Redo,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -73,6 +73,12 @@ export function BlogPostEditor({ content = '', onChange, placeholder = 'Start me
       onChange?.(editor.getHTML());
     },
   });
+
+  useEffect(() => {
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content);
+    }
+  }, [content, editor]);
 
   if (!editor) {
     return null;
