@@ -7,10 +7,13 @@ import {
   hypotheekCalculationSchema,
   insertBankSchema,
   insertProductSchema,
-  insertRateSchema
+  insertRateSchema,
+  insertBlogPostSchema,
+  insertRssFeedSchema
 } from "@shared/schema";
 import { storage } from "./storage";
 import { submitToIndexNow, submitAllCalculators, ALL_CALCULATOR_URLS } from "./indexnow";
+import { blogAutomationService } from "./services/blog-automation";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Spaarrente calculation endpoint
@@ -407,6 +410,138 @@ export async function registerRoutes(app: Express): Promise<Server> {
       urls: ALL_CALCULATOR_URLS,
       count: ALL_CALCULATOR_URLS.length 
     });
+  });
+
+  // Blog automation routes
+  app.get("/api/blog/posts", async (req, res) => {
+    try {
+      const status = req.query.status as string | undefined;
+      const posts = await storage.getBlogPosts(status);
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch blog posts" });
+    }
+  });
+
+  app.get("/api/blog/posts/:slug", async (req, res) => {
+    try {
+      const post = await storage.getBlogPost(req.params.slug);
+      if (!post) {
+        return res.status(404).json({ error: "Blog post not found" });
+      }
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch blog post" });
+    }
+  });
+
+  app.post("/api/blog/posts", async (req, res) => {
+    try {
+      const data = insertBlogPostSchema.parse(req.body);
+      const post = await storage.createBlogPost(data);
+      res.json(post);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid blog post data" });
+    }
+  });
+
+  app.patch("/api/blog/posts/:id", async (req, res) => {
+    try {
+      const post = await storage.updateBlogPost(req.params.id, req.body);
+      if (!post) {
+        return res.status(404).json({ error: "Blog post not found" });
+      }
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update blog post" });
+    }
+  });
+
+  app.delete("/api/blog/posts/:id", async (req, res) => {
+    try {
+      const deleted = await storage.deleteBlogPost(req.params.id);
+      if (!deleted) {
+        return res.status(404).json({ error: "Blog post not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete blog post" });
+    }
+  });
+
+  app.post("/api/blog/posts/:id/publish", async (req, res) => {
+    try {
+      const post = await storage.publishBlogPost(req.params.id);
+      if (!post) {
+        return res.status(404).json({ error: "Blog post not found" });
+      }
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to publish blog post" });
+    }
+  });
+
+  // RSS Feed routes
+  app.get("/api/rss/feeds", async (req, res) => {
+    try {
+      const feeds = await storage.getRssFeeds();
+      res.json(feeds);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch RSS feeds" });
+    }
+  });
+
+  app.post("/api/rss/feeds", async (req, res) => {
+    try {
+      const data = insertRssFeedSchema.parse(req.body);
+      const feed = await storage.createRssFeed(data);
+      res.json(feed);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid RSS feed data" });
+    }
+  });
+
+  app.patch("/api/rss/feeds/:id", async (req, res) => {
+    try {
+      const feed = await storage.updateRssFeed(req.params.id, req.body);
+      if (!feed) {
+        return res.status(404).json({ error: "RSS feed not found" });
+      }
+      res.json(feed);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update RSS feed" });
+    }
+  });
+
+  app.delete("/api/rss/feeds/:id", async (req, res) => {
+    try {
+      const deleted = await storage.deleteRssFeed(req.params.id);
+      if (!deleted) {
+        return res.status(404).json({ error: "RSS feed not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete RSS feed" });
+    }
+  });
+
+  // Blog automation trigger routes
+  app.post("/api/blog/automation/fetch-rss", async (req, res) => {
+    try {
+      await blogAutomationService.fetchRSSFeeds();
+      res.json({ success: true, message: "RSS feeds fetched and processed" });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || "Failed to fetch RSS feeds" });
+    }
+  });
+
+  app.post("/api/blog/automation/publish-pending", async (req, res) => {
+    try {
+      await blogAutomationService.publishPendingPosts();
+      res.json({ success: true, message: "Pending posts published" });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || "Failed to publish pending posts" });
+    }
   });
 
   const httpServer = createServer(app);

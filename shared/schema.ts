@@ -202,3 +202,66 @@ export type RateComparison = {
     conditions: string | null;
   }[];
 };
+
+// Blog automation schema
+export const blogStatusEnum = pgEnum('blog_status', ['draft', 'published', 'archived']);
+export const blogCategoryEnum = pgEnum('blog_category', ['Sparen', 'Lenen', 'Beleggen', 'Planning']);
+
+export const blogPostsTable = pgTable('blog_posts', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  slug: text('slug').notNull().unique(),
+  title: text('title').notNull(),
+  excerpt: text('excerpt').notNull(),
+  content: text('content').notNull(),
+  category: blogCategoryEnum('category').notNull(),
+  authorName: text('author_name').notNull().default('Sophie Janssens'),
+  authorBio: text('author_bio').notNull().default('Financieel expert met 15 jaar ervaring in persoonlijke financiën en vermogensbeheer in België'),
+  authorAvatar: text('author_avatar').notNull().default('https://ui-avatars.com/api/?name=Sophie+Janssens&background=2563eb&color=fff&size=200'),
+  publishDate: timestamp('publish_date').notNull(),
+  readTime: integer('read_time').notNull().default(5),
+  image: text('image').notNull(),
+  seoTitle: text('seo_title').notNull(),
+  seoDescription: text('seo_description').notNull(),
+  seoKeywords: text('seo_keywords').array().notNull(),
+  status: blogStatusEnum('status').notNull().default('draft'),
+  sourceUrl: text('source_url'),
+  rssItemId: text('rss_item_id'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+export const rssFeedsTable = pgTable('rss_feeds', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  url: text('url').notNull().unique(),
+  category: blogCategoryEnum('category').notNull(),
+  isActive: boolean('is_active').default(true),
+  lastFetched: timestamp('last_fetched'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const insertBlogPostSchema = createInsertSchema(blogPostsTable, {
+  title: z.string().min(1, "Titel is verplicht"),
+  excerpt: z.string().min(1, "Uittreksel is verplicht"),
+  content: z.string().min(1, "Content is verplicht"),
+  slug: z.string().min(1, "Slug is verplicht"),
+  seoTitle: z.string().min(1, "SEO titel is verplicht"),
+  seoDescription: z.string().min(1, "SEO beschrijving is verplicht"),
+}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertRssFeedSchema = createInsertSchema(rssFeedsTable, {
+  name: z.string().min(1, "Naam is verplicht"),
+  url: z.string().url("Ongeldige RSS feed URL"),
+}).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type BlogPost = typeof blogPostsTable.$inferSelect;
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type RssFeed = typeof rssFeedsTable.$inferSelect;
+export type InsertRssFeed = z.infer<typeof insertRssFeedSchema>;

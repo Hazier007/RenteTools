@@ -1,19 +1,23 @@
 import { eq, and, desc } from 'drizzle-orm';
-import { db, usersTable, banksTable, productsTable, ratesTable, rateHistoryTable } from './database';
-import { 
-  type IStorage,
-  type User,
-  type InsertUser,
-  type Bank,
-  type InsertBank,
-  type Product,
-  type InsertProduct,
-  type Rate,
-  type InsertRate,
-  type BankWithProducts,
-  type ProductWithDetails,
-  type RateComparison
-} from './storage';
+import { db, usersTable, banksTable, productsTable, ratesTable, rateHistoryTable, blogPostsTable, rssFeedsTable } from './database';
+import type { IStorage } from './storage';
+import type { 
+  User,
+  InsertUser,
+  Bank,
+  InsertBank,
+  Product,
+  InsertProduct,
+  Rate,
+  InsertRate,
+  BankWithProducts,
+  ProductWithDetails,
+  RateComparison,
+  BlogPost,
+  InsertBlogPost,
+  RssFeed,
+  InsertRssFeed
+} from '@shared/schema';
 
 export class DatabaseStorage implements IStorage {
   
@@ -424,5 +428,89 @@ export class DatabaseStorage implements IStorage {
       productType: 'persoonlijke_lening',
       rates
     };
+  }
+
+  // Blog operations
+  async getBlogPosts(status?: string): Promise<BlogPost[]> {
+    if (status) {
+      return await db.select().from(blogPostsTable)
+        .where(eq(blogPostsTable.status, status as any))
+        .orderBy(desc(blogPostsTable.publishDate));
+    }
+    return await db.select().from(blogPostsTable)
+      .orderBy(desc(blogPostsTable.publishDate));
+  }
+
+  async getBlogPost(slug: string): Promise<BlogPost | undefined> {
+    const result = await db.select().from(blogPostsTable)
+      .where(eq(blogPostsTable.slug, slug));
+    return result[0];
+  }
+
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
+    const result = await db.insert(blogPostsTable).values(post).returning();
+    return result[0];
+  }
+
+  async updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    const result = await db.update(blogPostsTable)
+      .set({ ...post, updatedAt: new Date() })
+      .where(eq(blogPostsTable.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteBlogPost(id: string): Promise<boolean> {
+    const result = await db.delete(blogPostsTable)
+      .where(eq(blogPostsTable.id, id))
+      .returning();
+    return result.length > 0;
+  }
+
+  async publishBlogPost(id: string): Promise<BlogPost | undefined> {
+    const result = await db.update(blogPostsTable)
+      .set({ status: 'published', updatedAt: new Date() })
+      .where(eq(blogPostsTable.id, id))
+      .returning();
+    return result[0];
+  }
+
+  // RSS Feed operations
+  async getRssFeeds(): Promise<RssFeed[]> {
+    return await db.select().from(rssFeedsTable)
+      .where(eq(rssFeedsTable.isActive, true));
+  }
+
+  async getRssFeed(id: string): Promise<RssFeed | undefined> {
+    const result = await db.select().from(rssFeedsTable)
+      .where(eq(rssFeedsTable.id, id));
+    return result[0];
+  }
+
+  async createRssFeed(feed: InsertRssFeed): Promise<RssFeed> {
+    const result = await db.insert(rssFeedsTable).values(feed).returning();
+    return result[0];
+  }
+
+  async updateRssFeed(id: string, feed: Partial<InsertRssFeed>): Promise<RssFeed | undefined> {
+    const result = await db.update(rssFeedsTable)
+      .set(feed)
+      .where(eq(rssFeedsTable.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteRssFeed(id: string): Promise<boolean> {
+    const result = await db.update(rssFeedsTable)
+      .set({ isActive: false })
+      .where(eq(rssFeedsTable.id, id))
+      .returning();
+    return result.length > 0;
+  }
+
+  async updateRssFeedFetchTime(id: string): Promise<void> {
+    await db.update(rssFeedsTable)
+      .set({ lastFetched: new Date() })
+      .where(eq(rssFeedsTable.id, id));
   }
 }

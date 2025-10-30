@@ -13,5 +13,7 @@ export const {
   banksTable,
   productsTable,
   ratesTable,
-  rateHistoryTable
+  rateHistoryTable,
+  blogPostsTable,
+  rssFeedsTable
 } = schema;

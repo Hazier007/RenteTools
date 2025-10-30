@@ -9,7 +9,11 @@ import {
   type InsertRate,
   type BankWithProducts,
   type ProductWithDetails,
-  type RateComparison
+  type RateComparison,
+  type BlogPost,
+  type InsertBlogPost,
+  type RssFeed,
+  type InsertRssFeed
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -53,6 +57,22 @@ export interface IStorage {
   compareSavingsRates(minAmount?: number, maxAmount?: number): Promise<RateComparison>;
   compareMortgageRates(amount: number, term: number): Promise<RateComparison>;
   comparePersonalLoanRates(amount: number, term: number): Promise<RateComparison>;
+
+  // Blog operations
+  getBlogPosts(status?: string): Promise<BlogPost[]>;
+  getBlogPost(slug: string): Promise<BlogPost | undefined>;
+  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+  updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined>;
+  deleteBlogPost(id: string): Promise<boolean>;
+  publishBlogPost(id: string): Promise<BlogPost | undefined>;
+
+  // RSS Feed operations
+  getRssFeeds(): Promise<RssFeed[]>;
+  getRssFeed(id: string): Promise<RssFeed | undefined>;
+  createRssFeed(feed: InsertRssFeed): Promise<RssFeed>;
+  updateRssFeed(id: string, feed: Partial<InsertRssFeed>): Promise<RssFeed | undefined>;
+  deleteRssFeed(id: string): Promise<boolean>;
+  updateRssFeedFetchTime(id: string): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -76,7 +96,9 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const user: User = { 
       ...insertUser, 
-      id, 
+      id,
+      role: insertUser.role ?? 'admin',
+      isActive: insertUser.isActive ?? true,
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -112,6 +134,20 @@ export class MemStorage implements IStorage {
   async compareSavingsRates(minAmount?: number, maxAmount?: number): Promise<RateComparison> { return { productType: 'spaarrekening', rates: [] }; }
   async compareMortgageRates(amount: number, term: number): Promise<RateComparison> { return { productType: 'hypotheek', rates: [] }; }
   async comparePersonalLoanRates(amount: number, term: number): Promise<RateComparison> { return { productType: 'persoonlijke_lening', rates: [] }; }
+
+  async getBlogPosts(status?: string): Promise<BlogPost[]> { return []; }
+  async getBlogPost(slug: string): Promise<BlogPost | undefined> { return undefined; }
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> { throw new Error('Not implemented in MemStorage'); }
+  async updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined> { return undefined; }
+  async deleteBlogPost(id: string): Promise<boolean> { return false; }
+  async publishBlogPost(id: string): Promise<BlogPost | undefined> { return undefined; }
+
+  async getRssFeeds(): Promise<RssFeed[]> { return []; }
+  async getRssFeed(id: string): Promise<RssFeed | undefined> { return undefined; }
+  async createRssFeed(feed: InsertRssFeed): Promise<RssFeed> { throw new Error('Not implemented in MemStorage'); }
+  async updateRssFeed(id: string, feed: Partial<InsertRssFeed>): Promise<RssFeed | undefined> { return undefined; }
+  async deleteRssFeed(id: string): Promise<boolean> { return false; }
+  async updateRssFeedFetchTime(id: string): Promise<void> { }
 }
 
 // Import and use DatabaseStorage for production
