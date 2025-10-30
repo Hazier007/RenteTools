@@ -236,6 +236,7 @@ export const rssFeedsTable = pgTable('rss_feeds', {
   url: text('url').notNull().unique(),
   category: blogCategoryEnum('category').notNull(),
   isActive: boolean('is_active').default(true),
+  autoPublish: boolean('auto_publish').default(false),
   lastFetched: timestamp('last_fetched'),
   createdAt: timestamp('created_at').defaultNow(),
 });
