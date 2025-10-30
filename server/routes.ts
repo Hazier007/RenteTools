@@ -646,6 +646,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/blog/automation/generate-images/:postId", requireAdmin, async (req, res) => {
+    try {
+      const postId = req.params.postId;
+      const updatedPost = await blogAutomationService.generateImagesForPost(postId);
+      if (!updatedPost) {
+        return res.status(404).json({ error: "Blog post not found" });
+      }
+      res.json({ success: true, post: updatedPost });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || "Failed to generate images" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

@@ -2,6 +2,7 @@ import Parser from 'rss-parser';
 import OpenAI from 'openai';
 import { storage } from '../storage';
 import type { InsertBlogPost } from '@shared/schema';
+import axios from 'axios';
 
 const rssParser = new Parser();
 const openai = new OpenAI({
@@ -101,15 +102,22 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
         max_tokens: 3000,
       });
 
-      const content = completion.choices[0].message.content;
+      let content = completion.choices[0].message.content;
       if (!content) return null;
 
       const title = await this.generateTitle(item.title!, category);
+      
+      // Add inline images to content
+      content = await this.insertInlineImages(content, category);
+      
       const excerpt = await this.generateExcerpt(content);
       const seoData = await this.generateSEOData(title, content);
 
       const slug = this.createSlug(title);
       const readTime = this.calculateReadTime(content);
+      
+      // Fetch featured image
+      const featuredImage = await this.getCategoryImage(category);
 
       const blogPost: InsertBlogPost = {
         slug,
@@ -122,7 +130,7 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
         authorAvatar: 'https://ui-avatars.com/api/?name=Sophie+Janssens&background=2563eb&color=fff&size=200',
         publishDate: new Date(),
         readTime,
-        image: this.getCategoryImage(category),
+        image: featuredImage,
         seoTitle: seoData.title,
         seoDescription: seoData.description,
         seoKeywords: seoData.keywords,
@@ -249,7 +257,43 @@ Alleen JSON, geen extra tekst.`
     return Math.max(1, Math.ceil(words / wordsPerMinute));
   }
 
-  private getCategoryImage(category: string): string {
+  private async fetchStockImage(query: string): Promise<string | null> {
+    try {
+      const response = await axios.get('https://api.pexels.com/v1/search', {
+        params: {
+          query,
+          per_page: 1,
+          orientation: 'landscape'
+        },
+        headers: {
+          Authorization: '563492ad6f917000010000013cef52dfb5614d75b6cd1b0db1e93bef'
+        }
+      });
+
+      if (response.data.photos && response.data.photos.length > 0) {
+        return response.data.photos[0].src.large2x;
+      }
+      return null;
+    } catch (error) {
+      console.error('Error fetching stock image:', error);
+      return null;
+    }
+  }
+
+  private async getCategoryImage(category: string): Promise<string> {
+    const queries: Record<string, string> = {
+      'Sparen': 'savings money piggybank',
+      'Lenen': 'loan mortgage house keys',
+      'Beleggen': 'investment stocks finance',
+      'Planning': 'financial planning calculator'
+    };
+    
+    const query = queries[category] || 'finance money';
+    const imageUrl = await this.fetchStockImage(query);
+    
+    if (imageUrl) return imageUrl;
+    
+    // Fallback to static images
     const images: Record<string, string> = {
       'Sparen': 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&h=675&fit=crop',
       'Lenen': 'https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&h=675&fit=crop',
@@ -259,12 +303,64 @@ Alleen JSON, geen extra tekst.`
     return images[category] || images['Sparen'];
   }
 
+  private async insertInlineImages(content: string, category: string): Promise<string> {
+    const sections = content.split(/\n## /);
+    if (sections.length < 3) return content;
+
+    const imageQueries: Record<string, string[]> = {
+      'Sparen': ['piggy bank savings', 'interest rate chart', 'belgian bank'],
+      'Lenen': ['mortgage contract', 'loan calculator', 'house financing'],
+      'Beleggen': ['stock market graph', 'investment portfolio', 'financial growth'],
+      'Planning': ['budget planning', 'retirement savings', 'financial goals']
+    };
+
+    const queries = imageQueries[category] || ['finance', 'money', 'calculator'];
+    const insertPositions = [Math.floor(sections.length / 3), Math.floor(2 * sections.length / 3)];
+    
+    for (let i = 0; i < Math.min(2, insertPositions.length); i++) {
+      const position = insertPositions[i];
+      if (position < sections.length && queries[i]) {
+        const imageUrl = await this.fetchStockImage(queries[i]);
+        if (imageUrl) {
+          sections[position] = `${sections[position]}\n\n![${queries[i]}](${imageUrl})\n`;
+        }
+      }
+    }
+
+    return sections.join('\n## ');
+  }
+
   async publishPendingPosts(): Promise<void> {
     const draftPosts = await storage.getBlogPosts('draft');
     
     for (const post of draftPosts) {
       await storage.publishBlogPost(post.id);
       console.log(`Published blog post: ${post.title}`);
+    }
+  }
+
+  async generateImagesForPost(postId: string): Promise<any> {
+    try {
+      const post = await storage.getBlogPost(postId);
+      if (!post) return null;
+
+      // Generate featured image
+      const featuredImage = await this.getCategoryImage(post.category);
+      
+      // Add inline images to content
+      const contentWithImages = await this.insertInlineImages(post.content, post.category);
+
+      // Update the post
+      const updatedPost = await storage.updateBlogPost(postId, {
+        image: featuredImage,
+        content: contentWithImages
+      });
+
+      console.log(`Generated images for blog post: ${post.title}`);
+      return updatedPost;
+    } catch (error) {
+      console.error('Error generating images for post:', error);
+      throw error;
     }
   }
 }

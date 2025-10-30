@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Pencil, Trash2, Building2, CreditCard, TrendingUp, LogOut, Share2, BookOpen, Loader2, RefreshCw, Send, Eye } from "lucide-react";
+import { Plus, Pencil, Trash2, Building2, CreditCard, TrendingUp, LogOut, Share2, BookOpen, Loader2, RefreshCw, Send, Eye, ImageIcon } from "lucide-react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import AdminLogin from "@/components/admin-login";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -585,6 +585,34 @@ function BlogRssManager() {
     }
   });
 
+  const generateImagesMutation = useMutation({
+    mutationFn: async (postId: string) => {
+      const response = await fetch(`/api/blog/automation/generate-images/${postId}`, { 
+        method: 'POST' 
+      });
+      if (!response.ok) throw new Error('Failed to generate images');
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Afbeeldingen gegenereerd",
+        description: "Featured image en inline afbeeldingen zijn toegevoegd.",
+      });
+      queryClient.invalidateQueries({ queryKey: ['/api/blog/posts'] });
+      if (editingPost) {
+        setShowPostDialog(false);
+        setEditingPost(null);
+      }
+    },
+    onError: () => {
+      toast({
+        title: "Fout bij genereren",
+        description: "Er is een fout opgetreden bij het genereren van afbeeldingen.",
+        variant: "destructive",
+      });
+    }
+  });
+
   const addFeedMutation = useMutation({
     mutationFn: async (data: { name: string; url: string; category: string }) => {
       return await fetch('/api/rss/feeds', {
@@ -1149,13 +1177,34 @@ function BlogRssManager() {
 
             <div>
               <Label htmlFor="post-image">Afbeelding URL *</Label>
-              <Input
-                id="post-image"
-                value={postFormData.image}
-                onChange={(e) => setPostFormData({ ...postFormData, image: e.target.value })}
-                placeholder="https://example.com/image.jpg"
-                data-testid="input-post-image"
-              />
+              <div className="flex gap-2">
+                <Input
+                  id="post-image"
+                  value={postFormData.image}
+                  onChange={(e) => setPostFormData({ ...postFormData, image: e.target.value })}
+                  placeholder="https://example.com/image.jpg"
+                  data-testid="input-post-image"
+                  className="flex-1"
+                />
+                {editingPost && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => generateImagesMutation.mutate(editingPost.id)}
+                    disabled={generateImagesMutation.isPending}
+                    data-testid="button-generate-images"
+                  >
+                    {generateImagesMutation.isPending ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <ImageIcon className="h-4 w-4" />
+                    )}
+                  </Button>
+                )}
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {editingPost ? "Klik op de knop om automatisch een featured image en inline afbeeldingen te genereren" : "Featured image URL wordt automatisch gegenereerd bij RSS posts"}
+              </p>
             </div>
 
             <div>
