@@ -44,12 +44,15 @@ Currently implements an **in-memory storage** system with a well-defined interfa
 The storage interface defines CRUD operations for users, making it straightforward to replace the in-memory implementation with a database-backed solution.
 
 ## Authentication and Authorization
-The application is prepared for session-based authentication:
+The application implements session-based authentication:
 
-- User schema defined with username/password fields
-- Session storage configuration for PostgreSQL ready for implementation
-- Currently uses memory storage but designed for easy upgrade to persistent sessions
-- No authentication currently implemented but foundation is in place
+- **Express-session** with in-memory storage for session management
+- User schema defined with username/password fields in PostgreSQL database
+- Authentication middleware (`requireAuth`, `requireAdmin`) to protect routes
+- Session-based authentication for admin dashboard
+- Default admin user: username `admin`, password `admin123` (should be changed after first login)
+- Protected endpoints: Blog post management, RSS feed management, blog automation
+- Public endpoints: Calculator pages, blog viewing, bank/product/rate viewing
 
 ## External Dependencies
 
