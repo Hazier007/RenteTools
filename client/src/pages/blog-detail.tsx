@@ -217,49 +217,49 @@ export default function BlogDetailPage() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
               <Link href="/sparen/hoogste-spaarrente-belgie">
-                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-spaarrente">
+                <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/40" data-testid="cta-spaarrente">
                   <CardContent className="p-6 text-center">
                     <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-blue-500/20 flex items-center justify-center">
-                      <PiggyBank className="w-6 h-6 text-white" />
+                      <PiggyBank className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <h4 className="font-bold text-white mb-1">Spaarrente</h4>
-                    <p className="text-sm text-white/80">Maximaliseer uw spaargeld</p>
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-1">Spaarrente</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Maximaliseer uw spaargeld</p>
                   </CardContent>
                 </Card>
               </Link>
               
               <Link href="/lenen/hypothecaire-lening-berekenen">
-                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-hypotheek">
+                <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/40" data-testid="cta-hypotheek">
                   <CardContent className="p-6 text-center">
                     <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-green-500/20 flex items-center justify-center">
-                      <Home className="w-6 h-6 text-white" />
+                      <Home className="w-6 h-6 text-green-600 dark:text-green-400" />
                     </div>
-                    <h4 className="font-bold text-white mb-1">Hypotheek</h4>
-                    <p className="text-sm text-white/80">Bereken uw woonlening</p>
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-1">Hypotheek</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Bereken uw woonlening</p>
                   </CardContent>
                 </Card>
               </Link>
               
               <Link href="/beleggen/beleggingsrente-calculator">
-                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-beleggen">
+                <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/40" data-testid="cta-beleggen">
                   <CardContent className="p-6 text-center">
                     <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-purple-500/20 flex items-center justify-center">
-                      <TrendingUp className="w-6 h-6 text-white" />
+                      <TrendingUp className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                     </div>
-                    <h4 className="font-bold text-white mb-1">Beleggen</h4>
-                    <p className="text-sm text-white/80">Groei uw vermogen</p>
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-1">Beleggen</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Groei uw vermogen</p>
                   </CardContent>
                 </Card>
               </Link>
               
               <Link href="/planning/pensioen-calculator">
-                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-pensioen">
+                <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/40" data-testid="cta-pensioen">
                   <CardContent className="p-6 text-center">
                     <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-orange-500/20 flex items-center justify-center">
-                      <Calculator className="w-6 h-6 text-white" />
+                      <Calculator className="w-6 h-6 text-orange-600 dark:text-orange-400" />
                     </div>
-                    <h4 className="font-bold text-white mb-1">Pensioen</h4>
-                    <p className="text-sm text-white/80">Plan uw toekomst</p>
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-1">Pensioen</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Plan uw toekomst</p>
                   </CardContent>
                 </Card>
               </Link>
