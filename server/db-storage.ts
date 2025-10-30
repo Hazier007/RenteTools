@@ -447,6 +447,12 @@ export class DatabaseStorage implements IStorage {
     return result[0];
   }
 
+  async getBlogPostById(id: string): Promise<BlogPost | undefined> {
+    const result = await db.select().from(blogPostsTable)
+      .where(eq(blogPostsTable.id, id));
+    return result[0];
+  }
+
   async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
     const result = await db.insert(blogPostsTable).values(post).returning();
     return result[0];

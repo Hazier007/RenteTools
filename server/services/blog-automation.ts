@@ -258,6 +258,13 @@ Alleen JSON, geen extra tekst.`
   }
 
   private async fetchStockImage(query: string): Promise<string | null> {
+    // Skip if no API key configured
+    const apiKey = process.env.PEXELS_API_KEY;
+    if (!apiKey) {
+      console.log('No Pexels API key configured, using fallback images');
+      return null;
+    }
+
     try {
       const response = await axios.get('https://api.pexels.com/v1/search', {
         params: {
@@ -266,7 +273,7 @@ Alleen JSON, geen extra tekst.`
           orientation: 'landscape'
         },
         headers: {
-          Authorization: '563492ad6f917000010000013cef52dfb5614d75b6cd1b0db1e93bef'
+          Authorization: apiKey
         }
       });
 
@@ -304,30 +311,65 @@ Alleen JSON, geen extra tekst.`
   }
 
   private async insertInlineImages(content: string, category: string): Promise<string> {
-    const sections = content.split(/\n## /);
-    if (sections.length < 3) return content;
+    // Split content into lines and find good insertion points
+    const lines = content.split('\n');
+    if (lines.length < 20) return content; // Too short for inline images
 
     const imageQueries: Record<string, string[]> = {
-      'Sparen': ['piggy bank savings', 'interest rate chart', 'belgian bank'],
-      'Lenen': ['mortgage contract', 'loan calculator', 'house financing'],
-      'Beleggen': ['stock market graph', 'investment portfolio', 'financial growth'],
-      'Planning': ['budget planning', 'retirement savings', 'financial goals']
+      'Sparen': ['piggy bank savings', 'interest rate chart'],
+      'Lenen': ['mortgage contract', 'loan calculator'],
+      'Beleggen': ['stock market graph', 'investment portfolio'],
+      'Planning': ['budget planning', 'retirement savings']
     };
 
-    const queries = imageQueries[category] || ['finance', 'money', 'calculator'];
-    const insertPositions = [Math.floor(sections.length / 3), Math.floor(2 * sections.length / 3)];
+    const fallbackImages: Record<string, string[]> = {
+      'Sparen': [
+        'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&h=675&fit=crop',
+        'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=675&fit=crop'
+      ],
+      'Lenen': [
+        'https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&h=675&fit=crop',
+        'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&h=675&fit=crop'
+      ],
+      'Beleggen': [
+        'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=675&fit=crop',
+        'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1200&h=675&fit=crop'
+      ],
+      'Planning': [
+        'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=675&fit=crop',
+        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=675&fit=crop'
+      ]
+    };
+
+    const queries = imageQueries[category] || ['finance', 'money'];
+    const fallbacks = fallbackImages[category] || fallbackImages['Sparen'];
     
-    for (let i = 0; i < Math.min(2, insertPositions.length); i++) {
-      const position = insertPositions[i];
-      if (position < sections.length && queries[i]) {
-        const imageUrl = await this.fetchStockImage(queries[i]);
-        if (imageUrl) {
-          sections[position] = `${sections[position]}\n\n![${queries[i]}](${imageUrl})\n`;
+    // Insert at 1/3 and 2/3 of content, after empty lines (paragraph breaks)
+    const insertPositions = [Math.floor(lines.length / 3), Math.floor(2 * lines.length / 3)];
+    
+    // Work backwards to avoid index shifting
+    for (let i = insertPositions.length - 1; i >= 0; i--) {
+      let position = insertPositions[i];
+      
+      // Find next empty line after position for clean insertion
+      while (position < lines.length && lines[position].trim() !== '') {
+        position++;
+      }
+      
+      if (position < lines.length && queries[i]) {
+        let imageUrl = await this.fetchStockImage(queries[i]);
+        
+        if (!imageUrl) {
+          imageUrl = fallbacks[i] || fallbacks[0];
         }
+        
+        const altText = queries[i];
+        // Insert image markdown after empty line
+        lines.splice(position + 1, 0, '', `![${altText}](${imageUrl})`, '');
       }
     }
 
-    return sections.join('\n## ');
+    return lines.join('\n');
   }
 
   async publishPendingPosts(): Promise<void> {
@@ -341,7 +383,7 @@ Alleen JSON, geen extra tekst.`
 
   async generateImagesForPost(postId: string): Promise<any> {
     try {
-      const post = await storage.getBlogPost(postId);
+      const post = await storage.getBlogPostById(postId);
       if (!post) return null;
 
       // Generate featured image

@@ -61,6 +61,7 @@ export interface IStorage {
   // Blog operations
   getBlogPosts(status?: string): Promise<BlogPost[]>;
   getBlogPost(slug: string): Promise<BlogPost | undefined>;
+  getBlogPostById(id: string): Promise<BlogPost | undefined>;
   createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
   updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined>;
   deleteBlogPost(id: string): Promise<boolean>;
@@ -137,6 +138,7 @@ export class MemStorage implements IStorage {
 
   async getBlogPosts(status?: string): Promise<BlogPost[]> { return []; }
   async getBlogPost(slug: string): Promise<BlogPost | undefined> { return undefined; }
+  async getBlogPostById(id: string): Promise<BlogPost | undefined> { return undefined; }
   async createBlogPost(post: InsertBlogPost): Promise<BlogPost> { throw new Error('Not implemented in MemStorage'); }
   async updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined> { return undefined; }
   async deleteBlogPost(id: string): Promise<boolean> { return false; }
