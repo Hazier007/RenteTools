@@ -3,7 +3,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Clock, User, Calendar, ArrowLeft } from "lucide-react";
+import { Clock, User, Calendar, ArrowLeft, Calculator, TrendingUp, PiggyBank, Home } from "lucide-react";
 import { Link } from "wouter";
 import { getBlogPost } from "@/data/blogPosts";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
@@ -204,25 +204,69 @@ export default function BlogDetailPage() {
         />
 
         {/* Call to Action */}
-        <div className="glassmorphic p-8 rounded-lg mt-12 text-center">
-          <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-            Gebruik onze gratis calculators
-          </h3>
-          <p className="text-gray-700 dark:text-gray-300 mb-6">
-            Bereken direct uw spaarrente, hypotheek, beleggingsrendement en meer
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/sparen/hoogste-spaarrente-belgie">
-              <Button size="lg" data-testid="cta-spaarrente">
-                Spaarrente Calculator
-              </Button>
-            </Link>
-            <Link href="/lenen/hypothecaire-lening-berekenen">
-              <Button size="lg" variant="outline" className="glassmorphic" data-testid="cta-hypotheek">
-                Hypotheek Calculator
-              </Button>
-            </Link>
+        <div className="relative overflow-hidden rounded-2xl mt-12 gradient-bg p-8 md:p-12">
+          <div className="relative z-10">
+            <div className="text-center mb-8">
+              <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+                Bereken uw financiële toekomst
+              </h3>
+              <p className="text-lg text-white/90 max-w-2xl mx-auto">
+                Gebruik onze geavanceerde calculators om slimme financiële beslissingen te nemen
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              <Link href="/sparen/hoogste-spaarrente-belgie">
+                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-spaarrente">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-blue-500/20 flex items-center justify-center">
+                      <PiggyBank className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-bold text-white mb-1">Spaarrente</h4>
+                    <p className="text-sm text-white/80">Maximaliseer uw spaargeld</p>
+                  </CardContent>
+                </Card>
+              </Link>
+              
+              <Link href="/lenen/hypothecaire-lening-berekenen">
+                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-hypotheek">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <Home className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-bold text-white mb-1">Hypotheek</h4>
+                    <p className="text-sm text-white/80">Bereken uw woonlening</p>
+                  </CardContent>
+                </Card>
+              </Link>
+              
+              <Link href="/beleggen/beleggingsrente-calculator">
+                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-beleggen">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-purple-500/20 flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-bold text-white mb-1">Beleggen</h4>
+                    <p className="text-sm text-white/80">Groei uw vermogen</p>
+                  </CardContent>
+                </Card>
+              </Link>
+              
+              <Link href="/planning/pensioen-calculator">
+                <Card className="glassmorphic hover:scale-105 transition-all duration-300 cursor-pointer h-full border-white/20" data-testid="cta-pensioen">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-orange-500/20 flex items-center justify-center">
+                      <Calculator className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-bold text-white mb-1">Pensioen</h4>
+                    <p className="text-sm text-white/80">Plan uw toekomst</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
           </div>
+          
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none"></div>
         </div>
 
         {/* Author Bio */}
