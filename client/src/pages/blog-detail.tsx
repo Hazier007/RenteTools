@@ -75,7 +75,7 @@ export default function BlogDetailPage() {
           </Link>
         </div>
         <div className="absolute bottom-8 left-8">
-          <span className="glassmorphic px-4 py-2 rounded-full text-sm font-medium text-foreground">
+          <span className="glassmorphic px-4 py-2 rounded-full text-sm font-medium text-gray-900 dark:text-white">
             {post.category}
           </span>
         </div>
@@ -84,10 +84,10 @@ export default function BlogDetailPage() {
       {/* Article Content */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <header className="mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
             {post.title}
           </h1>
-          <p className="text-xl text-foreground/80 mb-8 max-w-3xl">
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl">
             {post.excerpt}
           </p>
           
@@ -99,9 +99,9 @@ export default function BlogDetailPage() {
               className="w-16 h-16 rounded-full"
             />
             <div className="flex-1">
-              <div className="font-semibold text-lg">{post.author.name}</div>
-              <div className="text-sm text-foreground/70 mb-3">{post.author.bio}</div>
-              <div className="flex items-center gap-6 text-sm text-foreground/70">
+              <div className="font-semibold text-lg text-gray-900 dark:text-white">{post.author.name}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-3">{post.author.bio}</div>
+              <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>{new Date(post.publishDate).toLocaleDateString('nl-BE', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -117,15 +117,15 @@ export default function BlogDetailPage() {
 
         {/* Article Body */}
         <div 
-          className="prose prose-lg prose-invert max-w-none
-            prose-headings:font-bold 
+          className="prose prose-lg max-w-none text-gray-800 dark:text-gray-200
+            prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
             prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-            prose-p:mb-6 prose-p:leading-relaxed
+            prose-p:mb-6 prose-p:leading-relaxed prose-p:text-gray-800 dark:prose-p:text-gray-200
             prose-ul:my-6 prose-ul:space-y-3
-            prose-li:my-2
-            prose-strong:text-primary
-            prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
+            prose-li:my-2 prose-li:text-gray-800 dark:prose-li:text-gray-200
+            prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold
+            prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline"
           dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>').replace(/#{1,6} /g, match => {
             const level = match.length - 1;
             return `<h${level}>`;
@@ -134,10 +134,10 @@ export default function BlogDetailPage() {
 
         {/* Call to Action */}
         <div className="glassmorphic p-8 rounded-lg mt-12 text-center">
-          <h3 className="text-2xl font-bold mb-4">
+          <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
             Gebruik onze gratis calculators
           </h3>
-          <p className="text-foreground/80 mb-6">
+          <p className="text-gray-700 dark:text-gray-300 mb-6">
             Bereken direct uw spaarrente, hypotheek, beleggingsrendement en meer
           </p>
           <div className="flex flex-wrap gap-4 justify-center">

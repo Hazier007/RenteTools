@@ -32,7 +32,7 @@ export default function BlogPage() {
               <Button
                 key={cat}
                 variant={cat === "Alle" ? "default" : "outline"}
-                className={cat === "Alle" ? "" : "glassmorphic"}
+                className={cat === "Alle" ? "" : "glassmorphic text-gray-900 dark:text-white font-semibold hover:text-gray-900 dark:hover:text-white"}
                 data-testid={`filter-${cat.toLowerCase()}`}
               >
                 {cat}
@@ -55,21 +55,21 @@ export default function BlogPage() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="glassmorphic px-3 py-1 rounded-full text-sm font-medium text-foreground">
+                    <span className="glassmorphic px-3 py-1 rounded-full text-sm font-medium text-gray-900 dark:text-white">
                       {post.category}
                     </span>
                   </div>
                 </div>
                 <CardHeader>
-                  <h2 className="text-2xl font-bold mb-3 line-clamp-2">
+                  <h2 className="text-2xl font-bold mb-3 line-clamp-2 text-gray-900 dark:text-white">
                     {post.title}
                   </h2>
-                  <p className="text-foreground/80 line-clamp-3">
+                  <p className="text-gray-700 dark:text-gray-300 line-clamp-3">
                     {post.excerpt}
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-4 text-sm text-foreground/70">
+                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <User className="w-4 h-4" />
                       <span>{post.author.name}</span>
@@ -79,7 +79,7 @@ export default function BlogPage() {
                       <span>{post.readTime} min</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-foreground/70 mt-2">
+                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mt-2">
                     <Calendar className="w-4 h-4" />
                     <span>{new Date(post.publishDate).toLocaleDateString('nl-BE', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
