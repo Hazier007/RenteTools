@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Pencil, Trash2, Building2, CreditCard, TrendingUp, LogOut, Share2, BookOpen, Loader2, RefreshCw, Send, Eye, ImageIcon } from "lucide-react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
@@ -521,6 +523,7 @@ function BlogRssManager() {
   const [newFeedUrl, setNewFeedUrl] = useState("");
   const [newFeedName, setNewFeedName] = useState("");
   const [newFeedCategory, setNewFeedCategory] = useState<"Sparen" | "Lenen" | "Beleggen" | "Planning">("Sparen");
+  const [newFeedAutoPublish, setNewFeedAutoPublish] = useState(false);
   const [showPostDialog, setShowPostDialog] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
   const [postFormData, setPostFormData] = useState({
@@ -614,7 +617,7 @@ function BlogRssManager() {
   });
 
   const addFeedMutation = useMutation({
-    mutationFn: async (data: { name: string; url: string; category: string }) => {
+    mutationFn: async (data: { name: string; url: string; category: string; autoPublish: boolean }) => {
       return await fetch('/api/rss/feeds', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -629,6 +632,24 @@ function BlogRssManager() {
       queryClient.invalidateQueries({ queryKey: ['/api/rss/feeds'] });
       setNewFeedUrl("");
       setNewFeedName("");
+      setNewFeedAutoPublish(false);
+    }
+  });
+
+  const toggleAutoPublishMutation = useMutation({
+    mutationFn: async ({ id, autoPublish }: { id: string; autoPublish: boolean }) => {
+      return await fetch(`/api/rss/feeds/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ autoPublish }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "AutoPilot bijgewerkt",
+        description: "De autopublish instelling is gewijzigd.",
+      });
+      queryClient.invalidateQueries({ queryKey: ['/api/rss/feeds'] });
     }
   });
 
@@ -734,7 +755,8 @@ function BlogRssManager() {
       addFeedMutation.mutate({
         name: newFeedName,
         url: newFeedUrl,
-        category: newFeedCategory
+        category: newFeedCategory,
+        autoPublish: newFeedAutoPublish
       });
     }
   };
@@ -1039,6 +1061,20 @@ function BlogRssManager() {
                     </Select>
                   </div>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="feed-autopublish"
+                    checked={newFeedAutoPublish}
+                    onCheckedChange={(checked) => setNewFeedAutoPublish(checked as boolean)}
+                    data-testid="checkbox-feed-autopublish"
+                  />
+                  <Label 
+                    htmlFor="feed-autopublish" 
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  >
+                    AutoPilot - Publiceer nieuwe posts automatisch zonder controle
+                  </Label>
+                </div>
                 <Button type="submit" disabled={addFeedMutation.isPending || !newFeedUrl || !newFeedName} data-testid="button-add-feed">
                   {addFeedMutation.isPending ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1066,10 +1102,10 @@ function BlogRssManager() {
               <Card key={feed.id} className="glassmorphic" data-testid={`rss-feed-${feed.id}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between">
-                    <div>
+                    <div className="flex-1">
                       <CardTitle className="text-lg mb-1">{feed.name}</CardTitle>
                       <CardDescription className="break-all">{feed.url}</CardDescription>
-                      <div className="flex gap-2 mt-2">
+                      <div className="flex gap-2 mt-2 flex-wrap items-center">
                         <span className="text-sm bg-purple-500/20 px-2 py-1 rounded text-purple-700 dark:text-purple-300">
                           {feed.category}
                         </span>
@@ -1078,6 +1114,20 @@ function BlogRssManager() {
                             Laatst opgehaald: {new Date(feed.lastFetched).toLocaleDateString('nl-BE')}
                           </span>
                         )}
+                      </div>
+                      <div className="flex items-center gap-2 mt-3">
+                        <Switch
+                          checked={feed.autoPublish ?? false}
+                          onCheckedChange={(checked) => toggleAutoPublishMutation.mutate({ id: feed.id, autoPublish: checked })}
+                          data-testid={`switch-autopublish-${feed.id}`}
+                        />
+                        <Label className="text-sm cursor-pointer">
+                          AutoPilot {feed.autoPublish ? (
+                            <Badge className="ml-1 bg-green-500">AAN</Badge>
+                          ) : (
+                            <Badge variant="secondary" className="ml-1">UIT</Badge>
+                          )}
+                        </Label>
                       </div>
                     </div>
                     <Button
