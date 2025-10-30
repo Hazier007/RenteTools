@@ -44,15 +44,38 @@ Currently implements an **in-memory storage** system with a well-defined interfa
 The storage interface defines CRUD operations for users, making it straightforward to replace the in-memory implementation with a database-backed solution.
 
 ## Authentication and Authorization
-The application implements session-based authentication:
+The application implements secure session-based authentication with industry-standard security practices:
 
-- **Express-session** with in-memory storage for session management
-- User schema defined with username/password fields in PostgreSQL database
-- Authentication middleware (`requireAuth`, `requireAdmin`) to protect routes
-- Session-based authentication for admin dashboard
-- Default admin user: username `admin`, password `admin123` (should be changed after first login)
-- Protected endpoints: Blog post management, RSS feed management, blog automation
-- Public endpoints: Calculator pages, blog viewing, bank/product/rate viewing
+### Security Implementation
+- **Bcrypt password hashing**: All passwords hashed with saltRounds=10 (never stored in plaintext)
+- **Express-session** with production-ready configuration:
+  - Requires SESSION_SECRET environment variable (application fails to start without it in production)
+  - httpOnly cookies to prevent XSS attacks
+  - sameSite: 'lax' for CSRF protection
+  - secure: true in production for HTTPS-only cookies
+  - 24-hour session expiration
+- **Rate limiting**: Login endpoint limited to 5 attempts per IP per 15 minutes to prevent brute-force attacks
+- **Role-based access control**: Authentication middleware (`requireAuth`, `requireAdmin`) protects administrative routes
+
+### Default Credentials
+- Username: `admin`
+- Password: `admin123`
+- **⚠️ IMPORTANT**: Change default password immediately after first login
+
+### Protected Endpoints (Admin-only)
+- Bank management: POST/PUT/DELETE `/api/banks`
+- Product management: POST/PUT/DELETE `/api/products`
+- Rate management: POST/PUT/DELETE `/api/rates`
+- Blog post management: POST/PATCH/DELETE `/api/blog/posts`
+- RSS feed management: POST/PATCH/DELETE `/api/rss/feeds`
+- Blog automation: POST `/api/blog/automation/*`
+- IndexNow submissions: POST `/api/indexnow/submit`
+
+### Public Endpoints
+- All GET endpoints (reading data)
+- Calculator pages and calculations
+- Blog post viewing
+- Bank/product/rate viewing
 
 ## External Dependencies
 
