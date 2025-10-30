@@ -11,6 +11,79 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import { useEffect } from "react";
 
+function formatBlogContent(markdown: string): string {
+  let html = markdown;
+  
+  html = html.replace(/### (.+)/g, '<h3>$1</h3>');
+  html = html.replace(/## (.+)/g, '<h2>$1</h2>');
+  html = html.replace(/# (.+)/g, '<h1>$1</h1>');
+  
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  
+  html = html.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+  
+  const lines = html.split('\n');
+  let result = '';
+  let inList = false;
+  let inParagraph = false;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    
+    if (!line) {
+      if (inParagraph) {
+        result += '</p>';
+        inParagraph = false;
+      }
+      if (inList) {
+        result += '</ul>';
+        inList = false;
+      }
+      continue;
+    }
+    
+    if (line.startsWith('<h')) {
+      if (inParagraph) {
+        result += '</p>';
+        inParagraph = false;
+      }
+      if (inList) {
+        result += '</ul>';
+        inList = false;
+      }
+      result += line;
+    } else if (line.startsWith('- ')) {
+      if (inParagraph) {
+        result += '</p>';
+        inParagraph = false;
+      }
+      if (!inList) {
+        result += '<ul>';
+        inList = true;
+      }
+      result += '<li>' + line.substring(2) + '</li>';
+    } else {
+      if (inList) {
+        result += '</ul>';
+        inList = false;
+      }
+      if (!inParagraph) {
+        result += '<p>';
+        inParagraph = true;
+      } else {
+        result += ' ';
+      }
+      result += line;
+    }
+  }
+  
+  if (inParagraph) result += '</p>';
+  if (inList) result += '</ul>';
+  
+  return result;
+}
+
 export default function BlogDetailPage() {
   const [, params] = useRoute("/blog/:slug");
   const post = params?.slug ? getBlogPost(params.slug) : undefined;
@@ -117,19 +190,17 @@ export default function BlogDetailPage() {
 
         {/* Article Body */}
         <div 
-          className="prose prose-lg max-w-none text-gray-800 dark:text-gray-200
+          className="prose max-w-none text-gray-800 dark:text-gray-200
             prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
-            prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-            prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-            prose-p:mb-6 prose-p:leading-relaxed prose-p:text-gray-800 dark:prose-p:text-gray-200
-            prose-ul:my-6 prose-ul:space-y-3
-            prose-li:my-2 prose-li:text-gray-800 dark:prose-li:text-gray-200
+            prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4 prose-h1:hidden
+            prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+            prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+            prose-p:mb-4 prose-p:leading-relaxed prose-p:text-base prose-p:text-gray-800 dark:prose-p:text-gray-200
+            prose-ul:my-4 prose-ul:space-y-2 prose-ul:list-disc prose-ul:pl-6
+            prose-li:text-gray-800 dark:prose-li:text-gray-200 prose-li:text-base
             prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold
             prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline"
-          dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>').replace(/#{1,6} /g, match => {
-            const level = match.length - 1;
-            return `<h${level}>`;
-          }).replace(/<br\/><br\/>([^<])/g, '</p><p>$1').replace(/^([^<])/,'<p>$1').replace(/([^>])$/,'$1</p>') }}
+          dangerouslySetInnerHTML={{ __html: formatBlogContent(post.content) }}
         />
 
         {/* Call to Action */}
