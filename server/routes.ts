@@ -14,8 +14,65 @@ import {
 import { storage } from "./storage";
 import { submitToIndexNow, submitAllCalculators, ALL_CALCULATOR_URLS } from "./indexnow";
 import { blogAutomationService } from "./services/blog-automation";
+import { requireAdmin } from "./middleware/auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Auth routes
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      if (!username || !password) {
+        return res.status(400).json({ error: "Username and password required" });
+      }
+
+      const user = await storage.getUserByUsername(username);
+      
+      if (!user || user.password !== password) {
+        return res.status(401).json({ error: "Invalid credentials" });
+      }
+
+      req.session.userId = user.id;
+      req.session.username = user.username;
+      req.session.role = user.role;
+
+      res.json({ 
+        success: true,
+        user: {
+          id: user.id,
+          username: user.username,
+          role: user.role
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Login failed" });
+    }
+  });
+
+  app.post("/api/auth/logout", async (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Logout failed" });
+      }
+      res.json({ success: true });
+    });
+  });
+
+  app.get("/api/auth/session", async (req, res) => {
+    if (req.session.userId) {
+      res.json({
+        authenticated: true,
+        user: {
+          id: req.session.userId,
+          username: req.session.username,
+          role: req.session.role
+        }
+      });
+    } else {
+      res.json({ authenticated: false });
+    }
+  });
+
   // Spaarrente calculation endpoint
   app.post("/api/calculate/spaarrente", async (req, res) => {
     try {
@@ -435,7 +492,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/blog/posts", async (req, res) => {
+  app.post("/api/blog/posts", requireAdmin, async (req, res) => {
     try {
       const data = insertBlogPostSchema.parse(req.body);
       const post = await storage.createBlogPost(data);
@@ -445,7 +502,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.patch("/api/blog/posts/:id", async (req, res) => {
+  app.patch("/api/blog/posts/:id", requireAdmin, async (req, res) => {
     try {
       const post = await storage.updateBlogPost(req.params.id, req.body);
       if (!post) {
@@ -457,7 +514,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/blog/posts/:id", async (req, res) => {
+  app.delete("/api/blog/posts/:id", requireAdmin, async (req, res) => {
     try {
       const deleted = await storage.deleteBlogPost(req.params.id);
       if (!deleted) {
@@ -469,7 +526,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/blog/posts/:id/publish", async (req, res) => {
+  app.post("/api/blog/posts/:id/publish", requireAdmin, async (req, res) => {
     try {
       const post = await storage.publishBlogPost(req.params.id);
       if (!post) {
@@ -491,7 +548,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/rss/feeds", async (req, res) => {
+  app.post("/api/rss/feeds", requireAdmin, async (req, res) => {
     try {
       const data = insertRssFeedSchema.parse(req.body);
       const feed = await storage.createRssFeed(data);
@@ -501,7 +558,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.patch("/api/rss/feeds/:id", async (req, res) => {
+  app.patch("/api/rss/feeds/:id", requireAdmin, async (req, res) => {
     try {
       const feed = await storage.updateRssFeed(req.params.id, req.body);
       if (!feed) {
@@ -513,7 +570,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/rss/feeds/:id", async (req, res) => {
+  app.delete("/api/rss/feeds/:id", requireAdmin, async (req, res) => {
     try {
       const deleted = await storage.deleteRssFeed(req.params.id);
       if (!deleted) {
@@ -526,7 +583,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Blog automation trigger routes
-  app.post("/api/blog/automation/fetch-rss", async (req, res) => {
+  app.post("/api/blog/automation/fetch-rss", requireAdmin, async (req, res) => {
     try {
       await blogAutomationService.fetchRSSFeeds();
       res.json({ success: true, message: "RSS feeds fetched and processed" });
@@ -535,7 +592,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/blog/automation/publish-pending", async (req, res) => {
+  app.post("/api/blog/automation/publish-pending", requireAdmin, async (req, res) => {
     try {
       await blogAutomationService.publishPendingPosts();
       res.json({ success: true, message: "Pending posts published" });
