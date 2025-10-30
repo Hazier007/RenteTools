@@ -5,12 +5,31 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, User, Calendar, ArrowLeft, Calculator, TrendingUp, PiggyBank, Home } from "lucide-react";
 import { Link } from "wouter";
-import { getBlogPost } from "@/data/blogPosts";
+import { useQuery } from "@tanstack/react-query";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { useEffect } from "react";
+
+interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  authorName: string;
+  authorBio: string;
+  authorAvatar: string;
+  publishDate: string;
+  readTime: number;
+  image: string;
+  seoTitle: string;
+  seoDescription: string;
+  seoKeywords: string[];
+  status: string;
+}
 
 function formatBlogContent(markdown: string): string {
   let html = markdown;
@@ -87,25 +106,65 @@ function formatBlogContent(markdown: string): string {
 
 export default function BlogDetailPage() {
   const [, params] = useRoute("/blog/:slug");
-  const post = params?.slug ? getBlogPost(params.slug) : undefined;
+  
+  const { data: post, isLoading, isError, error } = useQuery<BlogPost | null>({
+    queryKey: ['/api/blog/posts', params?.slug],
+    queryFn: async () => {
+      const res = await fetch(`/api/blog/posts/${params?.slug}`);
+      if (!res.ok) {
+        if (res.status === 404) return null;
+        throw new Error('Failed to fetch blog post');
+      }
+      return res.json();
+    },
+    enabled: !!params?.slug
+  });
 
   useEffect(() => {
     if (post) {
-      document.title = post.seo.title;
+      document.title = post.seoTitle;
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
-        metaDescription.setAttribute('content', post.seo.description);
+        metaDescription.setAttribute('content', post.seoDescription);
       }
     }
   }, [post]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Blog post laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Er is een fout opgetreden</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">We konden de blog post niet laden. Probeer het later opnieuw.</p>
+          <div className="flex gap-4 justify-center">
+            <Button onClick={() => window.location.reload()} data-testid="retry-button">Opnieuw proberen</Button>
+            <Link href="/blog">
+              <Button variant="outline" data-testid="back-to-blog-error">Terug naar blog</Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Blog post niet gevonden</h1>
+          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Blog post niet gevonden</h1>
           <Link href="/blog">
-            <Button>Terug naar blog</Button>
+            <Button data-testid="back-to-blog-notfound">Terug naar blog</Button>
           </Link>
         </div>
       </div>
@@ -125,7 +184,10 @@ export default function BlogDetailPage() {
       <ArticleSchema 
         headline={post.title}
         description={post.excerpt}
-        author={post.author}
+        author={{
+          name: post.authorName,
+          bio: post.authorBio
+        }}
         publishDate={post.publishDate}
         image={post.image}
         category={post.category}
@@ -173,13 +235,13 @@ export default function BlogDetailPage() {
           {/* Author Info */}
           <div className="flex items-start gap-4 glassmorphic p-6 rounded-lg">
             <img 
-              src={post.author.avatar} 
-              alt={post.author.name}
+              src={post.authorAvatar} 
+              alt={post.authorName}
               className="w-16 h-16 rounded-full"
             />
             <div className="flex-1">
-              <div className="font-semibold text-lg text-gray-900 dark:text-white">{post.author.name}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 mb-3">{post.author.bio}</div>
+              <div className="font-semibold text-lg text-gray-900 dark:text-white">{post.authorName}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-3">{post.authorBio}</div>
               <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
@@ -283,16 +345,16 @@ export default function BlogDetailPage() {
         {/* Author Bio */}
         <Card className="glassmorphic mt-12">
           <CardContent className="p-8">
-            <h3 className="text-2xl font-bold mb-6">Over de auteur</h3>
+            <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Over de auteur</h3>
             <div className="flex items-start gap-4">
               <img 
-                src={post.author.avatar} 
-                alt={post.author.name}
+                src={post.authorAvatar} 
+                alt={post.authorName}
                 className="w-20 h-20 rounded-full"
               />
               <div>
-                <div className="font-bold text-xl mb-2">{post.author.name}</div>
-                <div className="text-muted-foreground">{post.author.bio}</div>
+                <div className="font-bold text-xl mb-2 text-gray-900 dark:text-white">{post.authorName}</div>
+                <div className="text-gray-700 dark:text-gray-300">{post.authorBio}</div>
               </div>
             </div>
           </CardContent>
