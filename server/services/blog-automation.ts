@@ -20,7 +20,93 @@ interface RSSItem {
   guid?: string;
 }
 
+interface QualityAssessment {
+  score: number;
+  reasoning: string;
+  strengths: string[];
+  concerns: string[];
+}
+
 export class BlogAutomationService {
+  
+  private async assessArticleQuality(article: {
+    title: string;
+    content: string;
+    sourceUrl: string;
+  }): Promise<QualityAssessment> {
+    try {
+      const prompt = `Je bent een kwaliteitsbeoordelaar voor Interesten.be, een Belgische website over financiën (sparen, lenen, beleggen, planning).
+
+ARTIKEL OM TE BEOORDELEN:
+Titel: ${article.title}
+Bron URL: ${article.sourceUrl}
+Content (eerste 1500 karakters): ${article.content.substring(0, 1500)}
+
+BEOORDELINGSCRITERIA:
+Geef een totaalscore van 1-10 (waarbij 10 het hoogste is) op basis van deze criteria:
+
+1. **Nieuwswaarde (1-10):** Is dit actueel, relevant en belangrijk voor Belgische lezers?
+2. **Financiële Relevantie (1-10):** Gaat dit over sparen, lenen, beleggen of financiële planning?
+3. **Contentkwaliteit (1-10):** Is de content informatief, goed geschreven en waardevol?
+4. **SEO-potentieel (1-10):** Zal dit zoekverkeer aantrekken en lezers betrekken?
+5. **Belgische Marktrelevantie (1-10):** Is dit specifiek relevant voor Belgische financiële consumenten?
+
+INSTRUCTIES:
+- Geef een totaalscore van 1-10 (gemiddelde van de 5 criteria)
+- Schrijf een beknopte uitleg (2-3 zinnen) van de score
+- Vermeld 2-4 sterke punten van het artikel
+- Vermeld 1-3 aandachtspunten of zwakke punten
+
+Geef je beoordeling terug in JSON formaat:
+{
+  "score": <nummer tussen 1 en 10>,
+  "reasoning": "<beknopte uitleg van de score>",
+  "strengths": ["<sterk punt 1>", "<sterk punt 2>", ...],
+  "concerns": ["<aandachtspunt 1>", "<aandachtspunt 2>", ...]
+}
+
+Alleen JSON, geen extra tekst.`;
+
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content: 'Je bent een professionele kwaliteitsbeoordelaar voor financiële content. Je beoordeelt objectief en geeft concrete feedback.'
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        temperature: 0.3,
+        max_tokens: 500,
+        response_format: { type: 'json_object' }
+      });
+
+      const response = completion.choices[0].message.content;
+      if (!response) {
+        throw new Error('No response from OpenAI');
+      }
+
+      const assessment = JSON.parse(response) as QualityAssessment;
+      
+      if (!assessment.score || assessment.score < 1 || assessment.score > 10) {
+        console.warn('Invalid quality score, defaulting to 5:', assessment);
+        assessment.score = 5;
+      }
+
+      return assessment;
+    } catch (error) {
+      console.error('Error assessing article quality:', error);
+      return {
+        score: 5,
+        reasoning: 'Automatische beoordeling mislukt - handmatige review vereist',
+        strengths: [],
+        concerns: ['Kwaliteitsbeoordeling kon niet worden uitgevoerd']
+      };
+    }
+  }
   
   async fetchRSSFeeds(): Promise<void> {
     const feeds = await storage.getRssFeeds();
@@ -142,6 +228,44 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
       // Fetch featured image
       const featuredImage = await this.getCategoryImage(category);
 
+      let qualityAssessment: QualityAssessment;
+      try {
+        qualityAssessment = await this.assessArticleQuality({
+          title,
+          content,
+          sourceUrl: item.link!
+        });
+        
+        console.log(`[Quality Assessment] "${title}"`);
+        console.log(`  Score: ${qualityAssessment.score}/10`);
+        console.log(`  Reasoning: ${qualityAssessment.reasoning}`);
+        if (qualityAssessment.strengths.length > 0) {
+          console.log(`  Strengths: ${qualityAssessment.strengths.join(', ')}`);
+        }
+        if (qualityAssessment.concerns.length > 0) {
+          console.log(`  Concerns: ${qualityAssessment.concerns.join(', ')}`);
+        }
+      } catch (error) {
+        console.error('[Quality Assessment] Failed, defaulting to draft status:', error);
+        qualityAssessment = {
+          score: 5,
+          reasoning: 'Beoordeling mislukt - vereist handmatige review',
+          strengths: [],
+          concerns: ['Automatische kwaliteitsbeoordeling is mislukt']
+        };
+      }
+
+      const shouldAutoPublish = autoPublish && qualityAssessment.score > 7;
+      const finalStatus = shouldAutoPublish ? 'published' : 'draft';
+      
+      const publishDecision = autoPublish 
+        ? (shouldAutoPublish 
+            ? `Auto-published (score: ${qualityAssessment.score}/10 > 7)` 
+            : `Saved as draft (score: ${qualityAssessment.score}/10 ≤ 7)`)
+        : 'Saved as draft (auto-publish disabled)';
+      
+      console.log(`[Publish Decision] ${publishDecision}`);
+
       const blogPost: InsertBlogPost = {
         slug,
         title,
@@ -157,9 +281,14 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
         seoTitle: seoData.title,
         seoDescription: seoData.description,
         seoKeywords: seoData.keywords,
-        status: autoPublish ? 'published' : 'draft',
+        status: finalStatus,
         sourceUrl: item.link,
         rssItemId: item.guid,
+        qualityScore: qualityAssessment.score,
+        qualityReasoning: qualityAssessment.reasoning,
+        qualityStrengths: qualityAssessment.strengths,
+        qualityConcerns: qualityAssessment.concerns,
+        qualityAssessedAt: new Date(),
       };
 
       return blogPost;

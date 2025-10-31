@@ -226,6 +226,11 @@ export const blogPostsTable = pgTable('blog_posts', {
   status: blogStatusEnum('status').notNull().default('draft'),
   sourceUrl: text('source_url'),
   rssItemId: text('rss_item_id'),
+  qualityScore: integer('quality_score'),
+  qualityReasoning: text('quality_reasoning'),
+  qualityStrengths: text('quality_strengths').array(),
+  qualityConcerns: text('quality_concerns').array(),
+  qualityAssessedAt: timestamp('quality_assessed_at'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 });
