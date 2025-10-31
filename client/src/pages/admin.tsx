@@ -618,11 +618,7 @@ function BlogRssManager() {
 
   const addFeedMutation = useMutation({
     mutationFn: async (data: { name: string; url: string; category: string; autoPublish: boolean }) => {
-      return await fetch('/api/rss/feeds', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return await apiRequest('POST', '/api/rss/feeds', data);
     },
     onSuccess: () => {
       toast({
@@ -633,16 +629,19 @@ function BlogRssManager() {
       setNewFeedUrl("");
       setNewFeedName("");
       setNewFeedAutoPublish(false);
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Fout bij toevoegen feed",
+        description: error.message || "Er is een fout opgetreden bij het toevoegen van de RSS feed.",
+        variant: "destructive",
+      });
     }
   });
 
   const toggleAutoPublishMutation = useMutation({
     mutationFn: async ({ id, autoPublish }: { id: string; autoPublish: boolean }) => {
-      return await fetch(`/api/rss/feeds/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ autoPublish }),
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return await apiRequest('PATCH', `/api/rss/feeds/${id}`, { autoPublish });
     },
     onSuccess: () => {
       toast({
@@ -650,12 +649,19 @@ function BlogRssManager() {
         description: "De autopublish instelling is gewijzigd.",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/rss/feeds'] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Fout bij bijwerken autopublish",
+        description: error.message || "Er is een fout opgetreden bij het wijzigen van de autopublish instelling.",
+        variant: "destructive",
+      });
     }
   });
 
   const deleteFeedMutation = useMutation({
     mutationFn: async (id: string) => {
-      return await fetch(`/api/rss/feeds/${id}`, { method: 'DELETE' });
+      return await apiRequest('DELETE', `/api/rss/feeds/${id}`);
     },
     onSuccess: () => {
       toast({
@@ -663,12 +669,19 @@ function BlogRssManager() {
         description: "De RSS feed is succesvol verwijderd.",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/rss/feeds'] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Fout bij verwijderen feed",
+        description: error.message || "Er is een fout opgetreden bij het verwijderen van de RSS feed.",
+        variant: "destructive",
+      });
     }
   });
 
   const publishPostMutation = useMutation({
     mutationFn: async (id: string) => {
-      return await fetch(`/api/blog/posts/${id}/publish`, { method: 'POST' });
+      return await apiRequest('POST', `/api/blog/posts/${id}/publish`);
     },
     onSuccess: () => {
       toast({
@@ -676,12 +689,19 @@ function BlogRssManager() {
         description: "De blog post is succesvol gepubliceerd.",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/blog/posts'] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Fout bij publiceren",
+        description: error.message || "Er is een fout opgetreden bij het publiceren van de blog post.",
+        variant: "destructive",
+      });
     }
   });
 
   const deletePostMutation = useMutation({
     mutationFn: async (id: string) => {
-      return await fetch(`/api/blog/posts/${id}`, { method: 'DELETE' });
+      return await apiRequest('DELETE', `/api/blog/posts/${id}`);
     },
     onSuccess: () => {
       toast({
@@ -689,6 +709,13 @@ function BlogRssManager() {
         description: "De blog post is succesvol verwijderd.",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/blog/posts'] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Fout bij verwijderen post",
+        description: error.message || "Er is een fout opgetreden bij het verwijderen van de blog post.",
+        variant: "destructive",
+      });
     }
   });
 
