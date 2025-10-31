@@ -8,7 +8,7 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-import ArticleSchema from "@/components/seo/ArticleSchema";
+import NewsArticleSchema from "@/components/seo/NewsArticleSchema";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import { useEffect } from "react";
 import { marked } from 'marked';
@@ -157,17 +157,7 @@ export default function BlogDetailPage() {
     <div className="min-h-screen bg-background">
       <OrganizationSchema />
       <BreadcrumbSchema items={breadcrumbItems} />
-      <ArticleSchema 
-        headline={post.title}
-        description={post.excerpt}
-        author={{
-          name: post.authorName,
-          bio: post.authorBio
-        }}
-        publishDate={post.publishDate}
-        image={post.image}
-        category={post.category}
-      />
+      <NewsArticleSchema post={post} />
       <Header />
       
       {/* Hero Image */}
