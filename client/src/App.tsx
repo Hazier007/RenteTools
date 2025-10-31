@@ -14,6 +14,7 @@ import AdminPage from "@/pages/admin";
 import BlogAutomationPage from "@/pages/admin/blog-automation";
 import BlogPage from "@/pages/blog";
 import BlogDetailPage from "@/pages/blog-detail";
+import NieuwsPage from "@/pages/nieuws";
 import SparenPage from "@/pages/sparen";
 import LenenPage from "@/pages/lenen";
 import BeleggenPage from "@/pages/beleggen";
@@ -26,6 +27,9 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      
+      {/* Nieuws Page */}
+      <Route path="/nieuws" component={NieuwsPage} />
       
       {/* Blog Pages */}
       <Route path="/blog" component={BlogPage} />
