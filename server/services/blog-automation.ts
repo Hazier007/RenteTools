@@ -3,6 +3,8 @@ import OpenAI from 'openai';
 import { storage } from '../storage';
 import type { InsertBlogPost } from '@shared/schema';
 import axios from 'axios';
+import { marked } from 'marked';
+import { injectInnerLinks } from './innerlink-service';
 
 const rssParser = new Parser();
 const openai = new OpenAI({
@@ -118,6 +120,18 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
       
       // Add inline images to content
       content = await this.insertInlineImages(content, category);
+      
+      // Convert markdown to HTML for innerlink injection
+      const htmlContent = marked(content) as string;
+      
+      // Inject innerlinks
+      const { modifiedHtml, linkedCalculators, linkCount } = await injectInnerLinks(htmlContent);
+      
+      // Log which calculators were linked
+      console.log(`[Blog Automation] Injected ${linkCount} innerlinks:`, linkedCalculators);
+      
+      // Store as HTML (blog-detail will be updated to handle both markdown and HTML)
+      content = modifiedHtml;
       
       const excerpt = await this.generateExcerpt(content);
       const seoData = await this.generateSEOData(title, content);

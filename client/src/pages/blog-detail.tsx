@@ -39,9 +39,18 @@ marked.setOptions({
   gfm: true,
 });
 
-function formatBlogContent(markdown: string): string {
-  // Use marked to convert markdown to HTML
-  const rawHtml = marked(markdown) as string;
+function formatBlogContent(content: string): string {
+  // Detect if content is already HTML (new posts with innerlinks) or markdown (legacy posts)
+  const isHtml = content.trim().startsWith('<');
+  
+  let rawHtml: string;
+  if (isHtml) {
+    // Content is already HTML (new format with innerlinks)
+    rawHtml = content;
+  } else {
+    // Content is markdown (legacy format) - convert to HTML
+    rawHtml = marked(content) as string;
+  }
   
   // Sanitize HTML with DOMPurify to prevent XSS attacks
   // Allow comprehensive set of markdown/GFM tags while blocking dangerous ones
@@ -64,7 +73,7 @@ function formatBlogContent(markdown: string): string {
       // Divisions
       'div'
     ],
-    ALLOWED_ATTR: ['href', 'src', 'alt', 'class', 'title', 'align'],
+    ALLOWED_ATTR: ['href', 'src', 'alt', 'class', 'title', 'align', 'target', 'rel'],
   });
   
   // Add custom styling to images
