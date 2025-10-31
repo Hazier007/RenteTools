@@ -579,7 +579,7 @@ export function getCalculatorsByCategory(category: CalculatorCategory): Calculat
   return calculatorRegistry.filter(calc => calc.category === category);
 }
 
-export function findCalculatorsByKeywords(text: string, limit: number = 5): Calculator[] {
+export function findCalculatorsByKeywords(text: string, limit: number = 5): Array<{ calculator: Calculator; score: number }> {
   if (!text || text.trim().length === 0) {
     return [];
   }
@@ -634,8 +634,7 @@ export function findCalculatorsByKeywords(text: string, limit: number = 5): Calc
   return calculatorsWithScores
     .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map(item => item.calculator);
+    .slice(0, limit);
 }
 
 export function getCategoryCounts(): Record<CalculatorCategory, number> {
