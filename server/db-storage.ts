@@ -1,4 +1,4 @@
-import { eq, and, desc } from 'drizzle-orm';
+import { eq, and, desc, gte } from 'drizzle-orm';
 import { db, usersTable, banksTable, productsTable, ratesTable, rateHistoryTable, blogPostsTable, rssFeedsTable } from './database';
 import type { IStorage } from './storage';
 import type { 
@@ -479,6 +479,15 @@ export class DatabaseStorage implements IStorage {
       .where(eq(blogPostsTable.id, id))
       .returning();
     return result[0];
+  }
+
+  async getRecentBlogPosts(sinceDate: Date): Promise<BlogPost[]> {
+    return await db.select().from(blogPostsTable)
+      .where(and(
+        eq(blogPostsTable.status, 'published'),
+        gte(blogPostsTable.publishDate, sinceDate)
+      ))
+      .orderBy(desc(blogPostsTable.publishDate));
   }
 
   // RSS Feed operations

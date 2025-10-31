@@ -583,6 +583,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Google News Sitemap endpoint
+  app.get("/news-sitemap.xml", async (req, res) => {
+    try {
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+      const recentPosts = await storage.getRecentBlogPosts(sevenDaysAgo);
+
+      const escapeXml = (unsafe: string): string => {
+        return unsafe
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&apos;');
+      };
+
+      const formatDate = (date: Date): string => {
+        return date.toISOString();
+      };
+
+      let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+      xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
+      xml += '        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n';
+
+      for (const post of recentPosts) {
+        const url = `https://interesten.be/blog/${post.slug}`;
+        const keywords = post.seoKeywords ? post.seoKeywords.join(', ') : '';
+        
+        xml += '  <url>\n';
+        xml += `    <loc>${escapeXml(url)}</loc>\n`;
+        xml += '    <news:news>\n';
+        xml += '      <news:publication>\n';
+        xml += '        <news:name>Interesten.be</news:name>\n';
+        xml += '        <news:language>nl</news:language>\n';
+        xml += '      </news:publication>\n';
+        xml += `      <news:publication_date>${formatDate(post.publishDate)}</news:publication_date>\n`;
+        xml += `      <news:title>${escapeXml(post.title)}</news:title>\n`;
+        if (keywords) {
+          xml += `      <news:keywords>${escapeXml(keywords)}</news:keywords>\n`;
+        }
+        xml += '    </news:news>\n';
+        xml += '  </url>\n';
+      }
+
+      xml += '</urlset>';
+
+      res.set('Content-Type', 'application/xml; charset=utf-8');
+      res.send(xml);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to generate news sitemap" });
+    }
+  });
+
   // RSS Feed routes
   app.get("/api/rss/feeds", async (req, res) => {
     try {
