@@ -26,6 +26,67 @@ app.use(session({
   }
 }));
 
+// Legacy URL redirects for SEO - must be before catch-all handler
+const legacyRedirects: Record<string, string> = {
+  '/de-intrest-op-mijn-spaarrekening.html': '/sparen/spaarrekening-vergelijker',
+  '/intresten-rekening-courant.html': '/sparen/samengestelde-interest-berekenen',
+  '/welke-interesten-krijg-ik-op-mijn-spaarrekeningen.html': '/sparen/hoogste-spaarrente-belgie',
+  '/wettelijke-interesten.html': '/lenen/wettelijke-rentevoet-belgie',
+  '/looif.html': '/', // No equivalent, redirect to home
+};
+
+// 301 Redirect handler for legacy URLs
+app.use((req, res, next) => {
+  const redirect = legacyRedirects[req.path];
+  if (redirect) {
+    return res.redirect(301, redirect);
+  }
+  next();
+});
+
+// 404 handler for legacy .html URLs that weren't redirected
+// Only targets paths that look like old-style page URLs, not legitimate files
+app.use((req, res, next) => {
+  const path = req.path;
+  
+  // Skip legitimate .html files (index.html, verification files, etc.)
+  if (path === '/index.html' || 
+      path.startsWith('/assets/') || 
+      path.startsWith('/static/') ||
+      path.includes('google') ||
+      path.includes('bing') ||
+      path.includes('sitemap')) {
+    return next();
+  }
+  
+  // Only 404 for .html files that look like legacy page URLs
+  // Pattern: /some-slug-here.html (lowercase, with dashes, at root level)
+  if (path.endsWith('.html') && path.match(/^\/[a-z0-9-]+\.html$/)) {
+    return res.status(404).send(`
+      <!DOCTYPE html>
+      <html lang="nl">
+      <head>
+        <meta charset="UTF-8">
+        <title>Pagina niet gevonden - Interesten.be</title>
+        <meta name="robots" content="noindex">
+        <style>
+          body { font-family: system-ui; text-align: center; padding: 50px; }
+          h1 { color: #333; }
+          a { color: #0066cc; }
+        </style>
+      </head>
+      <body>
+        <h1>404 - Pagina niet gevonden</h1>
+        <p>De pagina die u zoekt bestaat niet of is verplaatst.</p>
+        <p><a href="/">Ga naar de homepage</a></p>
+      </body>
+      </html>
+    `);
+  }
+  
+  next();
+});
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
