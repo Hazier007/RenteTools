@@ -13,7 +13,7 @@ import {
   insertRssFeedSchema
 } from "@shared/schema";
 import { storage } from "./storage";
-import { submitToIndexNow, submitAllCalculators, ALL_CALCULATOR_URLS } from "./indexnow";
+import { submitToIndexNow, submitAllCalculators, getAllCanonicalUrls } from "./indexnow";
 import { blogAutomationService } from "./services/blog-automation";
 import { requireAdmin } from "./middleware/auth";
 import { calculatorRegistry } from "../shared/calculator-registry";
@@ -509,9 +509,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   app.get("/api/indexnow/urls", async (req, res) => {
+    const urls = getAllCanonicalUrls();
     res.json({ 
-      urls: ALL_CALCULATOR_URLS,
-      count: ALL_CALCULATOR_URLS.length 
+      urls,
+      count: urls.length 
     });
   });
 
