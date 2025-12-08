@@ -50,13 +50,15 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   const path = req.path;
   
-  // Skip legitimate .html files (index.html, verification files, etc.)
+  // Skip legitimate .html files and XML sitemaps
+  // Note: Be specific - only skip actual sitemap.xml and news-sitemap.xml, not sitemap.html
   if (path === '/index.html' || 
+      path === '/sitemap.xml' ||
+      path === '/news-sitemap.xml' ||
       path.startsWith('/assets/') || 
       path.startsWith('/static/') ||
       path.includes('google') ||
-      path.includes('bing') ||
-      path.includes('sitemap')) {
+      path.includes('bing')) {
     return next();
   }
   

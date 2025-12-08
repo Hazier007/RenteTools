@@ -219,3 +219,58 @@ These pages already use max-w-4xl centered layout or don't have lg:col-span-3 si
 - **Component Changes**: GoogleAdsense.tsx, Select.tsx
 - **Pages Fixed**: All 48+ calculator pages now use consistent AuthorityLinks pattern
 - **Pattern Validated**: Architect-reviewed and approved for production use
+
+## ✅ SEO Indexing Fixes - COMPLETED (December 2024)
+
+**Problem:** Bing Webmaster Tools reported failing URLs blocking Google/Bing indexing:
+- Legacy .html URLs returning soft-404s (HTTP 200 with homepage content)
+- Duplicate calculator URLs (/slug vs /category/slug) causing duplicate content penalties
+- Sitemap containing non-canonical URLs
+
+### Implemented Fixes
+
+1. **Legacy .html URL Redirects** ✅ (server/index.ts)
+   - 5 specific .html URLs now 301 redirect to modern equivalents:
+     - `/de-intrest-op-mijn-spaarrekening.html` → `/sparen/spaarrekening-vergelijker`
+     - `/intresten-rekening-courant.html` → `/sparen/samengestelde-interest-berekenen`
+     - `/welke-interesten-krijg-ik-op-mijn-spaarrekeningen.html` → `/sparen/hoogste-spaarrente-belgie`
+     - `/wettelijke-interesten.html` → `/lenen/wettelijke-rentevoet-belgie`
+     - `/looif.html` → `/` (home)
+
+2. **Proper 404 Handler** ✅ (server/index.ts)
+   - Returns HTTP 404 for unknown legacy .html URLs
+   - Dutch error page with `noindex` meta tag
+   - Skips legitimate files: /index.html, /sitemap.xml, /news-sitemap.xml, verification files
+
+3. **Calculator URL Canonicalization** ✅ (server/index.ts)
+   - Server-side 301 redirects from `/slug` to `/category/slug`
+   - Dynamically generated from calculatorRegistry (48+ calculators)
+   - Examples:
+     - `/kasbon-calculator` → `/sparen/kasbon-calculator`
+     - `/pensioen-calculator` → `/planning/pensioen-calculator`
+     - `/roerende-voorheffing-calculator` → `/beleggen/roerende-voorheffing-calculator`
+
+4. **Dynamic Sitemap Generator** ✅ (server/routes.ts)
+   - Replaced static sitemap.xml with dynamic server-side generator
+   - Uses calculatorRegistry for canonical URLs only
+   - Includes: homepage, 5 category landing pages, all calculators, nieuws, blog, static pages
+   - Dynamically includes published blog posts with lastmod dates
+   - Cached for 1 hour via Cache-Control header
+
+### SEO Middleware Order (server/index.ts)
+1. Session configuration
+2. Legacy .html redirects (301)
+3. Legacy .html 404 handler
+4. Calculator canonical redirects (301)
+5. Request logging
+6. API routes
+7. Vite/static serving
+
+### Endpoints
+- `/sitemap.xml` - Dynamic sitemap with canonical URLs (68+ URLs)
+- `/news-sitemap.xml` - News sitemap for recent blog posts (7 days)
+
+### Next Steps
+- Submit updated sitemap in Bing Webmaster Tools
+- Request URL re-crawl of previously failing entries
+- Monitor crawl stats for soft-404 warning clearance
