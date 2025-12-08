@@ -16,6 +16,7 @@ import { storage } from "./storage";
 import { submitToIndexNow, submitAllCalculators, ALL_CALCULATOR_URLS } from "./indexnow";
 import { blogAutomationService } from "./services/blog-automation";
 import { requireAdmin } from "./middleware/auth";
+import { calculatorRegistry } from "../shared/calculator-registry";
 
 // Rate limiting for login endpoint
 interface LoginAttempt {
@@ -580,6 +581,102 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(post);
     } catch (error) {
       res.status(500).json({ error: "Failed to publish blog post" });
+    }
+  });
+
+  // Dynamic sitemap.xml generator using calculatorRegistry for canonical URLs
+  app.get("/sitemap.xml", async (req, res) => {
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      
+      let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+      xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+      
+      xml += `  <url>
+    <loc>https://interesten.be/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>\n`;
+      
+      const categories = [
+        { path: '/sparen', priority: '0.9' },
+        { path: '/lenen', priority: '0.9' },
+        { path: '/beleggen', priority: '0.9' },
+        { path: '/planning', priority: '0.9' },
+        { path: '/overige', priority: '0.7' },
+      ];
+      
+      for (const cat of categories) {
+        xml += `  <url>
+    <loc>https://interesten.be${cat.path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${cat.priority}</priority>
+  </url>\n`;
+      }
+      
+      for (const calc of calculatorRegistry) {
+        const priority = calc.url.includes('hoogste-spaarrente') || calc.url.includes('hypothecaire') ? '0.9' : '0.8';
+        xml += `  <url>
+    <loc>https://interesten.be${calc.url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>${priority}</priority>
+  </url>\n`;
+      }
+      
+      xml += `  <url>
+    <loc>https://interesten.be/nieuws</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>\n`;
+      
+      xml += `  <url>
+    <loc>https://interesten.be/blog</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>\n`;
+      
+      const staticPages = [
+        { path: '/over-ons', priority: '0.5' },
+        { path: '/privacy', priority: '0.3' },
+        { path: '/voorwaarden', priority: '0.3' },
+        { path: '/sitemap', priority: '0.4' },
+      ];
+      
+      for (const page of staticPages) {
+        xml += `  <url>
+    <loc>https://interesten.be${page.path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>${page.priority}</priority>
+  </url>\n`;
+      }
+      
+      try {
+        const publishedPosts = await storage.getBlogPosts('published');
+        for (const post of publishedPosts) {
+          const lastmod = post.publishDate ? new Date(post.publishDate).toISOString().split('T')[0] : today;
+          xml += `  <url>
+    <loc>https://interesten.be/blog/${post.slug}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>\n`;
+        }
+      } catch (error) {
+      }
+      
+      xml += '</urlset>';
+      
+      res.set('Content-Type', 'application/xml; charset=utf-8');
+      res.set('Cache-Control', 'public, max-age=3600');
+      res.send(xml);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to generate sitemap" });
     }
   });
 
