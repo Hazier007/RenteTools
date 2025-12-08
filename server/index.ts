@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { calculatorRegistry } from "../shared/calculator-registry";
 
 const app = express();
 app.use(express.json());
@@ -84,6 +85,22 @@ app.use((req, res, next) => {
     `);
   }
   
+  next();
+});
+
+// Generate slug-to-canonical redirect map from calculator registry
+const slugToCanonical: Record<string, string> = {};
+for (const calc of calculatorRegistry) {
+  // Map /slug to /category/slug (e.g., /kasbon-calculator → /sparen/kasbon-calculator)
+  slugToCanonical[`/${calc.slug}`] = calc.url;
+}
+
+// 301 Redirect handler for non-canonical calculator URLs
+app.use((req, res, next) => {
+  const canonical = slugToCanonical[req.path];
+  if (canonical && canonical !== req.path) {
+    return res.redirect(301, canonical);
+  }
   next();
 });
 
