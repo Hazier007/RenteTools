@@ -126,20 +126,20 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "home": {
     slug: "home",
     category: "Overige",
-    pageTitle: "Hoogste Spaarrente België 2025 + 70+ Gratis Financiële Calculators",
+    pageTitle: "Hoogste Spaarrente België 2025 + 70+ Gratis Calculators",
     breadcrumbTitle: "Home",
-    metaTitle: "Hoogste Spaarrente België 2025 + 70+ Gratis Financiële Calculators",
-    metaDescription: "Vind direct de hoogste spaarrente in België (tot 2,85% in 2025), bereken je hypotheek maandlasten of FIRE-doel. 70+ gratis tools voor sparen, lenen, beleggen & planning. Actueel, anoniem en 100% Belgisch.",
+    metaTitle: "Hoogste Spaarrente België 2025 + 70+ Gratis Calculators",
+    metaDescription: "Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België 2025.",
     faqs: [],
     authorityLinks: []
   },
   "hoogste-spaarrente-belgie": {
     slug: "hoogste-spaarrente-belgie",
     category: "Sparen",
-    pageTitle: "Hoogste Spaarrente België",
+    pageTitle: "Hoogste Spaarrente België December 2025",
     breadcrumbTitle: "Hoogste Spaarrente",
-    metaTitle: "Hoogste Spaarrente België 2025 - Vergelijk Spaarrekeningen",
-    metaDescription: "Vind de hoogste spaarrente in België. Vergelijk basisrente + getrouwheidspremie van alle banken. Actuele tarieven tot 2,5% in 2025.",
+    metaTitle: "Hoogste Spaarrente België December 2025: Top Banken",
+    metaDescription: "Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update december 2025.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -173,10 +173,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "samengestelde-interest-berekenen": {
     slug: "samengestelde-interest-berekenen",
     category: "Sparen",
-    pageTitle: "Samengestelde Interest Berekenen",
+    pageTitle: "Samengestelde Interest Berekenen België 2025",
     breadcrumbTitle: "Samengestelde Interest",
-    metaTitle: "Samengestelde Interest Berekenen - Compound Interest België",
-    metaDescription: "Bereken samengestelde interest op uw spaargeld. Zie hoe uw vermogen exponentieel groeit met compound interest. Gratis calculator voor België.",
+    metaTitle: "Samengestelde Interest Berekenen België 2025",
+    metaDescription: "Zie hoe rente-op-rente je spaargeld laat groeien. Bereken incl. roerende voorheffing – gratis compound interest tool.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -223,10 +223,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "termijnrekening-calculator": {
     slug: "termijnrekening-calculator",
     category: "Sparen",
-    pageTitle: "Termijnrekening Calculator",
+    pageTitle: "Termijnrekening Hoogste Rente België 2025",
     breadcrumbTitle: "Termijnrekening",
-    metaTitle: "Termijnrekening Calculator België - Vaste Rente Berekenen",
-    metaDescription: "Bereken uw termijnrekening opbrengst. Vaste rente tot 3,5% op termijndeposito's in België. Vergelijk looptijden van 1-12 maanden.",
+    metaTitle: "Termijnrekening Hoogste Rente België 2025",
+    metaDescription: "Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool december 2025.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
@@ -263,10 +263,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "hypothecaire-lening-berekenen": {
     slug: "hypothecaire-lening-berekenen",
     category: "Lenen",
-    pageTitle: "Hypothecaire Lening Berekenen",
+    pageTitle: "Hypotheek Berekenen België 2025",
     breadcrumbTitle: "Hypothecaire Lening",
-    metaTitle: "Hypothecaire Lening Berekenen België - Maandlast Calculator",
-    metaDescription: "Bereken uw hypotheek maandlast en totale kosten. Vaste en variabele rente vanaf 2,5%. Inclusief notaris en registratierechten.",
+    metaTitle: "Hypotheek Berekenen België 2025: Maandlasten & Kosten",
+    metaDescription: "Bereken je hypotheek maandlasten 2025 incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -503,20 +503,20 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "roerende-voorheffing-calculator": {
     slug: "roerende-voorheffing-calculator",
     category: "Beleggen",
-    pageTitle: "Roerende Voorheffing Calculator",
+    pageTitle: "Roerende Voorheffing Berekenen 2025 België",
     breadcrumbTitle: "Roerende Voorheffing",
-    metaTitle: "Roerende Voorheffing Calculator België - 30% Belasting",
-    metaDescription: "Bereken roerende voorheffing op dividenden en interest. 30% belasting op beleggingsinkomsten in België. Vrijstelling €980 spaarrente.",
+    metaTitle: "Roerende Voorheffing Berekenen 2025 België",
+    metaDescription: "Bereken je roerende voorheffing op interest/dividenden + vrijstelling tot €1050. Tips om belasting te minimaliseren – gratis tool.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "pensioensparen-calculator": {
     slug: "pensioensparen-calculator",
     category: "Planning",
-    pageTitle: "Pensioensparen Calculator",
+    pageTitle: "Pensioensparen Berekenen België 2025",
     breadcrumbTitle: "Pensioensparen",
-    metaTitle: "Pensioensparen Calculator België - Belastingvoordeel 30%",
-    metaDescription: "Bereken uw pensioensparen voordeel. Tot 30% belastingvermindering op €1.020 (Pijler 3). Optimaliseer uw aanvullend pensioen in België.",
+    metaTitle: "Pensioensparen Berekenen België 2025: Belastingvoordeel",
+    metaDescription: "Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor 2025 – gratis calculator.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -533,10 +533,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "fire-calculator": {
     slug: "fire-calculator",
     category: "Planning",
-    pageTitle: "FIRE Calculator",
+    pageTitle: "FIRE Calculator België",
     breadcrumbTitle: "FIRE Calculator",
-    metaTitle: "FIRE Calculator België - Financial Independence Retire Early",
-    metaDescription: "Bereken wanneer u financieel onafhankelijk wordt. FIRE beweging in België: Lean, Regular, Fat & Coast FIRE. Vroeg met pensioen calculator.",
+    metaTitle: "FIRE Calculator België: Wanneer Financieel Onafhankelijk?",
+    metaDescription: "Bereken wanneer je FIRE bereikt (Lean/Fat) met Belgische fiscaliteit & roerende voorheffing. Gratis FIRE simulator 2025.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -593,10 +593,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "inflatie-calculator-belgie": {
     slug: "inflatie-calculator-belgie",
     category: "Planning",
-    pageTitle: "Inflatie Calculator België",
+    pageTitle: "Inflatie Calculator België 2025",
     breadcrumbTitle: "Inflatie Calculator",
-    metaTitle: "Inflatie Calculator België 2025 - Koopkracht Berekenen",
-    metaDescription: "Bereken impact van inflatie op uw koopkracht. Actuele inflatiecijfers België 2-4%. Zie hoe prijsstijgingen uw vermogen aantasten.",
+    metaTitle: "Inflatie Calculator België 2025: Bescherm Je Spaargeld",
+    metaDescription: "Bereken hoe inflatie je spaargeld aantast + tips om je koopkracht te beschermen. Actueel voor 2025 – gratis tool België.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
