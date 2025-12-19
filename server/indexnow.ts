@@ -1,4 +1,7 @@
 import { calculatorRegistry } from '@shared/calculator-registry';
+import { db } from './database';
+import { blogPostsTable } from '@shared/schema';
+import { eq } from 'drizzle-orm';
 
 const INDEXNOW_API_URL = 'https://api.indexnow.org/IndexNow';
 const SITE_URL = 'https://interesten.be';
@@ -72,7 +75,7 @@ export async function submitToIndexNow(urls: string[]): Promise<IndexNowResponse
 }
 
 // Generate canonical URLs from calculator registry
-export function getAllCanonicalUrls(): string[] {
+export function getStaticUrls(): string[] {
   const urls: string[] = [
     '/',
     '/sparen',
@@ -95,6 +98,27 @@ export function getAllCanonicalUrls(): string[] {
   return urls;
 }
 
+// Get all URLs including blog posts (async because it queries database)
+export async function getAllCanonicalUrls(): Promise<string[]> {
+  const urls = getStaticUrls();
+  
+  // Add all published blog post URLs
+  try {
+    const posts = await db.select({ slug: blogPostsTable.slug })
+      .from(blogPostsTable)
+      .where(eq(blogPostsTable.status, 'published'));
+    
+    for (const post of posts) {
+      urls.push(`/blog/${post.slug}`);
+    }
+  } catch (error) {
+    console.error('Failed to fetch blog posts for IndexNow:', error);
+  }
+  
+  return urls;
+}
+
 export async function submitAllCalculators(): Promise<IndexNowResponse> {
-  return submitToIndexNow(getAllCanonicalUrls());
+  const urls = await getAllCanonicalUrls();
+  return submitToIndexNow(urls);
 }

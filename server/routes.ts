@@ -509,7 +509,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   app.get("/api/indexnow/urls", async (req, res) => {
-    const urls = getAllCanonicalUrls();
+    const urls = await getAllCanonicalUrls();
     res.json({ 
       urls,
       count: urls.length 

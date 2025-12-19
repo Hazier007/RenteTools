@@ -1347,6 +1347,7 @@ function IndexNowManager() {
       const response = await fetch("/api/indexnow/submit-all", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
       if (!response.ok) {
         const error = await response.json();
