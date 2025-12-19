@@ -126,10 +126,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "home": {
     slug: "home",
     category: "Overige",
-    pageTitle: "Interesten.be - 57+ Gratis Financiële Calculators België",
+    pageTitle: "Hoogste Spaarrente België 2025 + 70+ Gratis Financiële Calculators",
     breadcrumbTitle: "Home",
-    metaTitle: "Interesten.be - 57+ Gratis Financiële Calculators België",
-    metaDescription: "Bereken spaarrente, leningen, hypotheken en beleggingen met 57+ gratis tools. Actuele Belgische rentes en fiscaliteit. 100% gratis, geen verborgen kosten.",
+    metaTitle: "Hoogste Spaarrente België 2025 + 70+ Gratis Financiële Calculators",
+    metaDescription: "Vind direct de hoogste spaarrente in België (tot 2,85% in 2025), bereken je hypotheek maandlasten of FIRE-doel. 70+ gratis tools voor sparen, lenen, beleggen & planning. Actueel, anoniem en 100% Belgisch.",
     faqs: [],
     authorityLinks: []
   },

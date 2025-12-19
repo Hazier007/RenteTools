@@ -1,55 +1,98 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { TrendingUp, Scale, CheckCircle } from "lucide-react";
+import { Trophy, Home as HomeIcon, Flame, TrendingUp, Shield, Eye, MapPin, Heart, ArrowRight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { useSeoTags } from "@/hooks/use-seo-tags";
-import { getCalculatorsByCategory, getCalculatorBySlug, getNewRoutePath } from "@/lib/routeRegistry";
+import { getNewRoutePath } from "@/lib/routeRegistry";
 import { 
   AnimatedMeshBackground, 
   GlassCard, 
   GradientText, 
-  FloatingNumber, 
-  CalculatorCard 
+  FloatingNumber
 } from "@/components/design";
 import { staggerChildren, fadeInUp } from "@/lib/animations";
 
 export default function Home() {
   useSeoTags("home");
 
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
+  const featuredCalculators = [
+    {
+      slug: "hoogste-spaarrente-belgie",
+      icon: Trophy,
+      title: "Hoogste Spaarrente België 2025",
+      description: "Vergelijk actuele rentes (basis + getrouwheidspremie) van alle banken. Tot 2,85% mogelijk – bereken je opbrengst nu.",
+      category: "sparen"
+    },
+    {
+      slug: "hypothecaire-lening-berekenen",
+      icon: HomeIcon,
+      title: "Hypotheek Berekenen België",
+      description: "Bereken je maandlast, totale kosten en maximale lening. Inclusief registratierechten, notaris & actuele rente 2025.",
+      category: "lenen"
+    },
+    {
+      slug: "fire-calculator",
+      icon: Flame,
+      title: "FIRE Calculator",
+      description: "Bereken wanneer je financieel onafhankelijk bent (Lean, Regular of Fat FIRE). Specifiek voor Belgische fiscaliteit.",
+      category: "planning"
+    },
+    {
+      slug: "samengestelde-interest-berekenen",
+      icon: TrendingUp,
+      title: "Samengestelde Interest Berekenen",
+      description: "Zie hoe je spaargeld exponentieel groeit met compound interest. Inclusief roerende voorheffing.",
+      category: "sparen"
     }
-  };
+  ];
 
-  const topCalculators = {
-    sparen: [
-      "hoogste-spaarrente-belgie",
-      "deposito-calculator",
-      "samengestelde-interest-berekenen"
-    ].map(slug => getCalculatorBySlug(slug)).filter((calc): calc is NonNullable<typeof calc> => calc !== null),
-    
-    lenen: [
-      "hypothecaire-lening-berekenen",
-      "persoonlijke-lening-berekenen",
-      "autolening-berekenen"
-    ].map(slug => getCalculatorBySlug(slug)).filter((calc): calc is NonNullable<typeof calc> => calc !== null),
-    
-    beleggen: [
-      "etf-calculator",
-      "aandelen-calculator",
-      "portfolio-diversificatie-calculator"
-    ].map(slug => getCalculatorBySlug(slug)).filter((calc): calc is NonNullable<typeof calc> => calc !== null),
-    
-    planning: [
-      "pensioensparen-calculator",
-      "fire-calculator",
-      "budget-planner"
-    ].map(slug => getCalculatorBySlug(slug)).filter((calc): calc is NonNullable<typeof calc> => calc !== null)
-  };
+  const categories = [
+    {
+      title: "Sparen",
+      href: "/sparen",
+      items: ["Hoogste spaarrente", "Deposito & termijnrekening", "Samengestelde interest", "Kinderrekening & meer"]
+    },
+    {
+      title: "Lenen",
+      href: "/lenen",
+      items: ["Hypothecaire lening", "Persoonlijke & autolening", "Herfinancieren", "Kredietcapaciteit"]
+    },
+    {
+      title: "Beleggen",
+      href: "/beleggen",
+      items: ["ETF & aandelen calculator", "Roerende voorheffing", "Portfolio diversificatie", "Crypto & obligaties"]
+    },
+    {
+      title: "Financiële Planning",
+      href: "/planning",
+      items: ["Pensioensparen", "FIRE & budget planner", "Inflatie calculator", "Noodfonds & meer"]
+    }
+  ];
+
+  const trustPoints = [
+    {
+      icon: TrendingUp,
+      title: "Actueel & betrouwbaar",
+      description: "Rentes en fiscaliteit altijd bijgewerkt voor 2025."
+    },
+    {
+      icon: Shield,
+      title: "Volledig anoniem",
+      description: "Geen account nodig, geen gegevens opgeslagen."
+    },
+    {
+      icon: MapPin,
+      title: "Specifiek voor België",
+      description: "Roerende voorheffing, registratierechten, getrouwheidspremie – alles correct berekend."
+    },
+    {
+      icon: Heart,
+      title: "Gratis voor altijd",
+      description: "Geen verborgen kosten of upsells."
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,124 +101,50 @@ export default function Home() {
 
       {/* Hero Section */}
       <motion.section
-        className="relative min-h-screen flex items-center justify-center py-32 px-4"
+        className="relative min-h-[90vh] flex items-center justify-center py-24 px-4"
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
         data-testid="hero-section"
       >
-        <div className="max-w-7xl mx-auto text-center space-y-12">
+        <div className="max-w-7xl mx-auto text-center space-y-10">
           <motion.div variants={fadeInUp} className="space-y-6">
-            <GradientText as="h1" className="text-4xl md:text-6xl lg:text-7xl">
-              Krijg in seconden duidelijkheid over je financiën
+            <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight">
+              Hoogste Spaarrente België 2025 & 70+ Gratis Financiële Calculators
             </GradientText>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto" data-testid="hero-subtitle">
-              Van hypotheek tot spaarplan: alle antwoorden op je financiële vragen, direct beschikbaar
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="hero-subtitle">
+              <strong>Krijg in 30 seconden duidelijkheid over je geldzaken.</strong> Van de actuele hoogste spaarrente vinden tot je hypotheek maandlast berekenen of wanneer je financieel onafhankelijk bent – alles gratis, anoniem en altijd up-to-date voor België.
             </p>
           </motion.div>
 
-          {/* Floating Stats */}
+          {/* Stats Grid */}
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto"
             variants={fadeInUp}
             data-testid="stats-grid"
           >
-            <GlassCard className="p-6">
-              <FloatingNumber value={57} suffix="+ Tools" className="text-4xl md:text-5xl block mb-2" />
-              <p className="text-sm text-muted-foreground">Financiële calculators</p>
+            <GlassCard className="p-4 md:p-6">
+              <FloatingNumber value={70} suffix="+ Tools" className="text-2xl md:text-4xl block mb-1" />
+              <p className="text-xs md:text-sm text-muted-foreground">Financiële calculators</p>
             </GlassCard>
-            <GlassCard className="p-6">
-              <FloatingNumber value={100} suffix="% Gratis" className="text-4xl md:text-5xl block mb-2" />
-              <p className="text-sm text-muted-foreground">Altijd toegankelijk</p>
+            <GlassCard className="p-4 md:p-6">
+              <FloatingNumber value={100} suffix="% Gratis" className="text-2xl md:text-4xl block mb-1" />
+              <p className="text-xs md:text-sm text-muted-foreground">Altijd toegankelijk</p>
             </GlassCard>
-            <GlassCard className="p-6">
-              <FloatingNumber value={10} suffix="K+ Belgen" className="text-4xl md:text-5xl block mb-2" />
-              <p className="text-sm text-muted-foreground">vertrouwen ons</p>
+            <GlassCard className="p-4 md:p-6">
+              <FloatingNumber value={10} suffix="K+ Gebruikers" className="text-2xl md:text-4xl block mb-1" />
+              <p className="text-xs md:text-sm text-muted-foreground">Belgische bezoekers</p>
             </GlassCard>
-            <GlassCard className="p-6">
-              <FloatingNumber value={100} suffix="% Privacy" className="text-4xl md:text-5xl block mb-2" />
-              <p className="text-sm text-muted-foreground">Geen registratie</p>
+            <GlassCard className="p-4 md:p-6">
+              <FloatingNumber value={100} suffix="% Privacy" className="text-2xl md:text-4xl block mb-1" />
+              <p className="text-xs md:text-sm text-muted-foreground">Geen registratie</p>
             </GlassCard>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            variants={fadeInUp}
-            data-testid="cta-buttons"
-          >
-            <Button 
-              size="lg" 
-              onClick={() => scrollToSection("sparen-section")}
-              data-testid="button-ontdek-tools"
-              className="text-lg px-8"
-            >
-              Ontdek Tools
-            </Button>
-            <Link href="/over-ons">
-              <Button 
-                variant="outline" 
-                size="lg"
-                data-testid="button-over-ons"
-                className="text-lg px-8 w-full sm:w-auto"
-              >
-                Over Ons
-              </Button>
-            </Link>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* USP Section */}
-      <section className="py-20 px-4 relative" data-testid="usp-section">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerChildren}
-          >
-            <motion.div variants={fadeInUp}>
-              <GlassCard hover className="p-8 h-full">
-                <TrendingUp className="w-12 h-12 text-primary mb-4" />
-                <h3 className="text-xl font-bold mb-3">Actuele Bankrentes</h3>
-                <p className="text-muted-foreground">
-                  Real-time updates van Belgische banken en actuele tarieven
-                </p>
-              </GlassCard>
-            </motion.div>
-
-            <motion.div variants={fadeInUp}>
-              <GlassCard hover className="p-8 h-full">
-                <Scale className="w-12 h-12 text-primary mb-4" />
-                <h3 className="text-xl font-bold mb-3">Belgische Fiscaliteit</h3>
-                <p className="text-muted-foreground">
-                  Roerende voorheffing & belastingregels specifiek voor België
-                </p>
-              </GlassCard>
-            </motion.div>
-
-            <motion.div variants={fadeInUp}>
-              <GlassCard hover className="p-8 h-full">
-                <CheckCircle className="w-12 h-12 text-primary mb-4" />
-                <h3 className="text-xl font-bold mb-3">100% Gratis</h3>
-                <p className="text-muted-foreground">
-                  Geen verborgen kosten, altijd toegankelijk voor iedereen
-                </p>
-              </GlassCard>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Sparen Section */}
-      <section 
-        id="sparen-section" 
-        className="py-20 px-4 relative scroll-mt-20" 
-        data-testid="silo-section-sparen"
-        data-category="sparen"
-      >
+      {/* Featured Calculators Section */}
+      <section className="py-20 px-4 relative" data-testid="featured-calculators-section">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
@@ -184,221 +153,151 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center mb-12"
           >
-            <GradientText as="h2" className="text-3xl md:text-5xl mb-4">
-              Spaarrekeningen
+            <GradientText as="h2" className="text-2xl md:text-4xl mb-4">
+              Meest gebruikte calculators – start direct
             </GradientText>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Vergelijk spaarrentes, deposito's en ontdek de kracht van samengestelde interest
-            </p>
           </motion.div>
 
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+            className="grid md:grid-cols-2 gap-6"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerChildren}
           >
-            {topCalculators.sparen.map((calc) => (
-              <Link key={calc.slug} href={getNewRoutePath(calc.slug)}>
-                <CalculatorCard
-                  title={calc.seoConfig.pageTitle}
-                  description={calc.seoConfig.metaDescription}
-                  slug={calc.slug}
-                  category={calc.category}
-                  previewImage={calc.seoConfig.previewImage}
-                />
-              </Link>
-            ))}
+            {featuredCalculators.map((calc) => {
+              const IconComponent = calc.icon;
+              return (
+                <motion.div key={calc.slug} variants={fadeInUp}>
+                  <Link href={getNewRoutePath(calc.slug)}>
+                    <GlassCard hover tilt className="p-6 md:p-8 h-full cursor-pointer group">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-xl bg-primary/10 text-primary shrink-0">
+                          <IconComponent className="w-8 h-8" />
+                        </div>
+                        <div className="flex-1 space-y-3">
+                          <h3 className="text-xl md:text-2xl font-bold group-hover:text-primary transition-colors">
+                            {calc.title}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {calc.description}
+                          </p>
+                          <div className="flex items-center text-primary font-semibold group-hover:gap-3 transition-all">
+                            <span>Direct berekenen</span>
+                            <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </div>
+                    </GlassCard>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-20 px-4 bg-muted/30 relative" data-testid="categories-section">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <GradientText as="h2" className="text-2xl md:text-4xl mb-4">
+              Ontdek al onze categorieën
+            </GradientText>
           </motion.div>
 
           <motion.div
-            className="text-center"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerChildren}
+          >
+            {categories.map((category) => (
+              <motion.div key={category.title} variants={fadeInUp}>
+                <GlassCard hover className="p-6 h-full">
+                  <h3 className="text-xl font-bold mb-4">{category.title}</h3>
+                  <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
+                    {category.items.map((item, index) => (
+                      <li key={index} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={category.href}>
+                    <Button variant="outline" className="w-full group">
+                      Bekijk alle {category.title.toLowerCase()}tools
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Trust Section */}
+      <section className="py-20 px-4 relative" data-testid="trust-section">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <GradientText as="h2" className="text-2xl md:text-4xl mb-4">
+              Waarom tienduizenden Belgen Interesten.be vertrouwen
+            </GradientText>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerChildren}
+          >
+            {trustPoints.map((point, index) => {
+              const IconComponent = point.icon;
+              return (
+                <motion.div key={index} variants={fadeInUp}>
+                  <GlassCard className="p-6 h-full text-center">
+                    <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4">
+                      <IconComponent className="w-6 h-6" />
+                    </div>
+                    <h3 className="font-bold mb-2">{point.title}</h3>
+                    <p className="text-sm text-muted-foreground">{point.description}</p>
+                  </GlassCard>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Links */}
+          <motion.div
+            className="text-center mt-12 space-x-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <Link href="/sparen">
-              <Button variant="outline" size="lg" data-testid="button-view-all-sparen">
-                Bekijk alle Spaartools →
+            <Link href="/over-ons">
+              <Button variant="outline" size="lg" data-testid="button-over-ons">
+                Meer over ons <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Lenen Section */}
-      <section 
-        id="lenen-section" 
-        className="py-20 px-4 bg-muted/30 relative scroll-mt-20" 
-        data-testid="silo-section-lenen"
-        data-category="lenen"
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="text-center mb-12"
-          >
-            <GradientText as="h2" className="text-3xl md:text-5xl mb-4">
-              Leningen
-            </GradientText>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Bereken hypotheken, persoonlijke leningen en autoleningen met actuele tarieven
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerChildren}
-          >
-            {topCalculators.lenen.map((calc) => (
-              <Link key={calc.slug} href={getNewRoutePath(calc.slug)}>
-                <CalculatorCard
-                  title={calc.seoConfig.pageTitle}
-                  description={calc.seoConfig.metaDescription}
-                  slug={calc.slug}
-                  category={calc.category}
-                  previewImage={calc.seoConfig.previewImage}
-                />
-              </Link>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <Link href="/lenen">
-              <Button variant="outline" size="lg" data-testid="button-view-all-lenen">
-                Bekijk alle Leentools →
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Beleggen Section */}
-      <section 
-        id="beleggen-section" 
-        className="py-20 px-4 relative scroll-mt-20" 
-        data-testid="silo-section-beleggen"
-        data-category="beleggen"
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="text-center mb-12"
-          >
-            <GradientText as="h2" className="text-3xl md:text-5xl mb-4">
-              Beleggen
-            </GradientText>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Optimaliseer uw portfolio met ETF's, aandelen en diversificatie strategieën
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerChildren}
-          >
-            {topCalculators.beleggen.map((calc) => (
-              <Link key={calc.slug} href={getNewRoutePath(calc.slug)}>
-                <CalculatorCard
-                  title={calc.seoConfig.pageTitle}
-                  description={calc.seoConfig.metaDescription}
-                  slug={calc.slug}
-                  category={calc.category}
-                  previewImage={calc.seoConfig.previewImage}
-                />
-              </Link>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <Link href="/beleggen">
-              <Button variant="outline" size="lg" data-testid="button-view-all-beleggen">
-                Bekijk alle Beleggingstools →
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Planning Section */}
-      <section 
-        id="planning-section" 
-        className="py-20 px-4 bg-muted/30 relative scroll-mt-20" 
-        data-testid="silo-section-planning"
-        data-category="planning"
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="text-center mb-12"
-          >
-            <GradientText as="h2" className="text-3xl md:text-5xl mb-4">
-              Financiële Planning
-            </GradientText>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Plan uw pensioen, FIRE strategie en budget met geavanceerde tools
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerChildren}
-          >
-            {topCalculators.planning.map((calc) => (
-              <Link key={calc.slug} href={getNewRoutePath(calc.slug)}>
-                <CalculatorCard
-                  title={calc.seoConfig.pageTitle}
-                  description={calc.seoConfig.metaDescription}
-                  slug={calc.slug}
-                  category={calc.category}
-                  previewImage={calc.seoConfig.previewImage}
-                />
-              </Link>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <Link href="/planning">
-              <Button variant="outline" size="lg" data-testid="button-view-all-planning">
-                Bekijk alle Planningtools →
+            <Link href="/blog">
+              <Button variant="outline" size="lg" data-testid="button-blog">
+                Lees onze tips & nieuws <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
           </motion.div>
