@@ -132,7 +132,7 @@ export default function Home() {
               <p className="text-xs md:text-sm text-muted-foreground">Altijd toegankelijk</p>
             </GlassCard>
             <GlassCard className="p-4 md:p-6">
-              <FloatingNumber value={10} suffix="K+ Gebruikers" className="text-2xl md:text-4xl block mb-1" />
+              <FloatingNumber value={10} suffix="K+" className="text-2xl md:text-4xl block mb-1" />
               <p className="text-xs md:text-sm text-muted-foreground">Belgische bezoekers</p>
             </GlassCard>
             <GlassCard className="p-4 md:p-6">
