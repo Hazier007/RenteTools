@@ -1,0 +1,96 @@
+<h1>Hoogste Spaarrente België 2025 & 70+ Gratis Financiële Calculators</h1>
+
+<p><strong>Krijg in 30 seconden duidelijkheid over je geldzaken.</strong> Van de actuele hoogste spaarrente vinden tot je hypotheek maandlast berekenen of wanneer je financieel onafhankelijk bent – alles gratis, anoniem en altijd up-to-date voor België.</p>
+
+<div class="stats-grid"> <!-- Maak dit 4 kolommen op desktop -->
+    <div>70+ Tools</div>
+    <div>100% Gratis</div>
+    <div>10.000+ Gebruikers</div>
+    <div>100% Privacy (geen registratie)</div>
+</div>
+
+<h2>Meest gebruikte calculators – start direct</h2>
+
+<div class="featured-tools"> <!-- Grote knoppen/grid met 3-4 kolommen -->
+    <a href="/sparen/hoogste-spaarrente-belgie" class="big-button">
+        <h3>🏆 Hoogste Spaarrente België 2025</h3>
+        <p>Vergelijk actuele rentes (basis + getrouwheidspremie) van alle banken. Tot 2,85% mogelijk – bereken je opbrengst nu.</p>
+        <strong>Direct berekenen →</strong>
+    </a>
+
+    <a href="/lenen/hypothecaire-lening-berekenen" class="big-button">
+        <h3>🏠 Hypotheek Berekenen België</h3>
+        <p>Bereken je maandlast, totale kosten en maximale lening. Inclusief registratierechten, notaris & actuele rente 2025.</p>
+        <strong>Direct berekenen →</strong>
+    </a>
+
+    <a href="/planning/fire-calculator" class="big-button">
+        <h3>🔥 FIRE Calculator</h3>
+        <p>Bereken wanneer je financieel onafhankelijk bent (Lean, Regular of Fat FIRE). Specifiek voor Belgische fiscaliteit.</p>
+        <strong>Direct berekenen →</strong>
+    </a>
+
+    <a href="/sparen/samengestelde-interest-berekenen" class="big-button">
+        <h3>📈 Samengestelde Interest Berekenen</h3>
+        <p>Zie hoe je spaargeld exponentieel groeit met compound interest. Inclusief roerende voorheffing.</p>
+        <strong>Direct berekenen →</strong>
+    </a>
+</div>
+
+<h2>Ontdek al onze categorieën</h2>
+
+<div class="categories-grid">
+    <div>
+        <h3>Sparen</h3>
+        <ul>
+            <li>Hoogste spaarrente</li>
+            <li>Deposito & termijnrekening</li>
+            <li>Samengestelde interest</li>
+            <li>Kinderrekening & meer</li>
+        </ul>
+        <a href="/sparen">Bekijk alle spaartools →</a>
+    </div>
+
+    <div>
+        <h3>Lenen</h3>
+        <ul>
+            <li>Hypothecaire lening</li>
+            <li>Persoonlijke & autolening</li>
+            <li>Herfinancieren</li>
+            <li>Kredietcapaciteit</li>
+        </ul>
+        <a href="/lenen">Bekijk alle leentools →</a>
+    </div>
+
+    <div>
+        <h3>Beleggen</h3>
+        <ul>
+            <li>ETF & aandelen calculator</li>
+            <li>Roerende voorheffing</li>
+            <li>Portfolio diversificatie</li>
+            <li>Crypto & obligaties</li>
+        </ul>
+        <a href="/beleggen">Bekijk alle beleggingstools →</a>
+    </div>
+
+    <div>
+        <h3>Financiële Planning</h3>
+        <ul>
+            <li>Pensioensparen</li>
+            <li>FIRE & budget planner</li>
+            <li>Inflatie calculator</li>
+            <li>Noodfonds & meer</li>
+        </ul>
+        <a href="/planning">Bekijk alle planningtools →</a>
+    </div>
+</div>
+
+<h2>Waarom tienduizenden Belgen Interesten.be vertrouwen</h2>
+<p>
+    • <strong>Actueel & betrouwbaar:</strong> Rentes en fiscaliteit altijd bijgewerkt voor 2025.<br>
+    • <strong>Volledig anoniem:</strong> Geen account nodig, geen gegevens opgeslagen.<br>
+    • <strong>Specifiek voor België:</strong> Roerende voorheffing, registratierechten, getrouwheidspremie – alles correct berekend.<br>
+    • <strong>Gratis voor altijd:</strong> Geen verborgen kosten of upsells.
+</p>
+
+<p><a href="/over-ons">Meer over ons →</a> | <a href="/blog">Lees onze laatste tips & nieuws →</a></p>
