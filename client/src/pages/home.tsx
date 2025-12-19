@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Trophy, Home as HomeIcon, Flame, TrendingUp, Shield, Eye, MapPin, Heart, ArrowRight } from "lucide-react";
+import { Trophy, Home as HomeIcon, Flame, TrendingUp, Shield, MapPin, Heart, ArrowRight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -169,8 +169,8 @@ export default function Home() {
               const IconComponent = calc.icon;
               return (
                 <motion.div key={calc.slug} variants={fadeInUp}>
-                  <Link href={getNewRoutePath(calc.slug)}>
-                    <GlassCard hover tilt className="p-6 md:p-8 h-full cursor-pointer group">
+                  <Link href={getNewRoutePath(calc.slug)} data-testid={`link-featured-${calc.slug}`}>
+                    <GlassCard hover tilt className="p-6 md:p-8 h-full cursor-pointer group" data-testid={`card-featured-${calc.slug}`}>
                       <div className="flex items-start gap-4">
                         <div className="p-3 rounded-xl bg-primary/10 text-primary shrink-0">
                           <IconComponent className="w-8 h-8" />
@@ -221,7 +221,7 @@ export default function Home() {
           >
             {categories.map((category) => (
               <motion.div key={category.title} variants={fadeInUp}>
-                <GlassCard hover className="p-6 h-full">
+                <GlassCard hover className="p-6 h-full" data-testid={`card-category-${category.title.toLowerCase()}`}>
                   <h3 className="text-xl font-bold mb-4">{category.title}</h3>
                   <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
                     {category.items.map((item, index) => (
@@ -232,7 +232,7 @@ export default function Home() {
                     ))}
                   </ul>
                   <Link href={category.href}>
-                    <Button variant="outline" className="w-full group">
+                    <Button variant="outline" className="w-full group" data-testid={`button-view-${category.title.toLowerCase()}`}>
                       Bekijk alle {category.title.toLowerCase()}tools
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -270,11 +270,11 @@ export default function Home() {
               const IconComponent = point.icon;
               return (
                 <motion.div key={index} variants={fadeInUp}>
-                  <GlassCard className="p-6 h-full text-center">
+                  <GlassCard className="p-6 h-full text-center" data-testid={`card-trust-${index}`}>
                     <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4">
                       <IconComponent className="w-6 h-6" />
                     </div>
-                    <h3 className="font-bold mb-2">{point.title}</h3>
+                    <h3 className="font-bold mb-2" data-testid={`text-trust-title-${index}`}>{point.title}</h3>
                     <p className="text-sm text-muted-foreground">{point.description}</p>
                   </GlassCard>
                 </motion.div>
