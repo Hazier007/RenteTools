@@ -31,7 +31,7 @@ export default function AutoleningBerekenen() {
             simuleer verschillende scenario's en vind de goedkoopste autofinanciering.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">🚗 Autolening tarieven 2025:</p>
+            <p className="text-lg font-semibold mb-2">🚗 Autolening tarieven 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• Nieuwe auto: vanaf 3,5% JKP</li>
               <li>• Tweedehands auto: vanaf 4,2% JKP</li>

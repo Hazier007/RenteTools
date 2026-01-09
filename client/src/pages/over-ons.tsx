@@ -14,7 +14,7 @@ export default function OverOns() {
             Over Ons - Interesten.be
           </h1>
           <p className="text-xl mb-8 opacity-90">
-            Uw vertrouwde partner voor financiële calculators en tools in België sinds 2025.
+            Uw vertrouwde partner voor financiële calculators en tools in België sinds 2026.
           </p>
         </div>
       </section>

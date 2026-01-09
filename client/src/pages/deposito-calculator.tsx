@@ -62,7 +62,7 @@ export default function DepositoCalculatorPage() {
             looptijden en uitkeringsopties voor de beste deal.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">🏦 Deposito tarieven 2025:</p>
+            <p className="text-lg font-semibold mb-2">🏦 Deposito tarieven 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• 1 jaar: tot 3,2% bruto</li>
               <li>• 3 jaar: tot 3,5% bruto</li>
@@ -241,7 +241,7 @@ export default function DepositoCalculatorPage() {
                     <h3 className="font-semibold mb-2">Moet ik belasting betalen op deposito-interest?</h3>
                     <p className="text-sm text-muted-foreground">
                       Ja, 30% roerende voorheffing wordt automatisch ingehouden. 
-                      Tot €980 per jaar (2025) is uw interest belastingvrij.
+                      Tot €980 per jaar (2026) is uw interest belastingvrij.
                     </p>
                   </div>
 

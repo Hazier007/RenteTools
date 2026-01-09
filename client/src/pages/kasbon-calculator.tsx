@@ -64,7 +64,7 @@ export default function KasbonCalculatorPage() {
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
               productType="kasbon"
-              title="📈 Beste Kasbon Rentes België 2025"
+              title="📈 Beste Kasbon Rentes België 2026"
               showTop={5}
               className="mb-8"
             />

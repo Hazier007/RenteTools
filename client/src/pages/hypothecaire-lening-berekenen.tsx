@@ -88,7 +88,7 @@ export default function HypothecaireLningBerekenen() {
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
               productType="hypotheek"
-              title="🏠 Laagste Hypotheektarieven België 2025"
+              title="🏠 Laagste Hypotheektarieven België 2026"
               showTop={5}
               className="mb-8"
             />

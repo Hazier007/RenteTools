@@ -274,13 +274,13 @@ export default function GeldontwaardigCalculator() {
                 
                 <h3>Historische Voorbeelden Geldontwaarding:</h3>
                 <div className="bg-red-50 dark:bg-red-950 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">📊 Prijsstijgingen België (2000-2025):</h4>
+                  <h4 className="font-semibold mb-2">📊 Prijsstijgingen België (2000-2026):</h4>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div>
                       <p><strong>Huizenprijs gemiddeld:</strong></p>
                       <ul className="ml-4">
                         <li>• 2000: €140.000</li>
-                        <li>• 2025: €350.000</li>
+                        <li>• 2026: €350.000</li>
                         <li>• Stijging: +150%</li>
                       </ul>
                     </div>
@@ -288,7 +288,7 @@ export default function GeldontwaardigCalculator() {
                       <p><strong>Brood per brood:</strong></p>
                       <ul className="ml-4">
                         <li>• 2000: €1,50</li>
-                        <li>• 2025: €2,50</li>
+                        <li>• 2026: €2,50</li>
                         <li>• Stijging: +67%</li>
                       </ul>
                     </div>

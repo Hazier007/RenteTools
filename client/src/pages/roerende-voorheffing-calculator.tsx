@@ -18,7 +18,7 @@ export default function RoerendeVoorheffingCalculator() {
   useSeoTags("roerende-voorheffing-calculator");
   const [interestInkomsten, setInterestInkomsten] = useState<string>("1500");
   const [dividendInkomsten, setDividendInkomsten] = useState<string>("500");
-  const [belastingvrij] = useState<number>(980); // Belastingvrij bedrag 2025
+  const [belastingvrij] = useState<number>(980); // Belastingvrij bedrag 2026
   const [roerendeVoorheffingPercentage] = useState<number>(30);
   
   const berekenRoerendeVoorheffing = () => {
@@ -71,7 +71,7 @@ export default function RoerendeVoorheffingCalculator() {
             Ontdek uw belastingvrije bedrag en netto-opbrengst van uw beleggingen.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">💰 Belastingtarieven 2025:</p>
+            <p className="text-lg font-semibold mb-2">💰 Belastingtarieven 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• Spaarrente: €980 belastingvrij, daarna 30%</li>
               <li>• Dividenden: 30% vanaf de eerste euro</li>
@@ -137,7 +137,7 @@ export default function RoerendeVoorheffingCalculator() {
                     </div>
                     
                     <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
-                      <h4 className="font-semibold mb-2">ℹ️ Belastingvrije Bedragen 2025:</h4>
+                      <h4 className="font-semibold mb-2">ℹ️ Belastingvrije Bedragen 2026:</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Interest: Eerste €{belastingvrij.toLocaleString('nl-BE')} belastingvrij</li>
                         <li>• Dividenden: Geen vrijstelling</li>
@@ -222,7 +222,7 @@ export default function RoerendeVoorheffingCalculator() {
                   interest inkomsten. Dit bedrag wordt jaarlijks aangepast en geldt per persoon.
                 </p>
                 
-                <h3>Belastingvrije Schijf Spaarrente 2025:</h3>
+                <h3>Belastingvrije Schijf Spaarrente 2026:</h3>
                 <ul>
                   <li><strong>€980 per jaar:</strong> Volledig belastingvrij voor alle spaarders</li>
                   <li><strong>30% roerende voorheffing:</strong> Op het bedrag boven €980</li>
@@ -327,7 +327,7 @@ export default function RoerendeVoorheffingCalculator() {
                   <div>
                     <h3 className="font-semibold mb-2">Hoeveel spaarrente is belastingvrij in België?</h3>
                     <p className="text-sm text-muted-foreground">
-                      In 2025 is €980 aan interest per jaar volledig belastingvrij. Dit geldt per persoon, 
+                      In 2026 is €980 aan interest per jaar volledig belastingvrij. Dit geldt per persoon, 
                       dus echtparen kunnen samen €1.960 belastingvrij ontvangen.
                     </p>
                   </div>

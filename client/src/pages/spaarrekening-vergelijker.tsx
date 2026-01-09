@@ -75,7 +75,7 @@ export default function SpaarrekeningVergelijkerPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Spaarrekening Vergelijker België - Beste Spaarrentes 2025
+            Spaarrekening Vergelijker België - Beste Spaarrentes 2026
           </h1>
           <p className="text-xl mb-8 opacity-90">
             Vergelijk alle spaarrekeningen van Belgische banken in real-time. Vind de hoogste 

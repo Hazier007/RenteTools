@@ -21,7 +21,7 @@ export default function Home() {
     {
       slug: "hoogste-spaarrente-belgie",
       icon: Trophy,
-      title: "Hoogste Spaarrente België 2025",
+      title: "Hoogste Spaarrente België 2026",
       description: "Vergelijk actuele rentes (basis + getrouwheidspremie) van alle banken. Tot 2,85% mogelijk – bereken je opbrengst nu.",
       category: "sparen"
     },
@@ -29,7 +29,7 @@ export default function Home() {
       slug: "hypothecaire-lening-berekenen",
       icon: HomeIcon,
       title: "Hypotheek Berekenen België",
-      description: "Bereken je maandlast, totale kosten en maximale lening. Inclusief registratierechten, notaris & actuele rente 2025.",
+      description: "Bereken je maandlast, totale kosten en maximale lening. Inclusief registratierechten, notaris & actuele rente 2026.",
       category: "lenen"
     },
     {
@@ -75,7 +75,7 @@ export default function Home() {
     {
       icon: TrendingUp,
       title: "Actueel & betrouwbaar",
-      description: "Rentes en fiscaliteit altijd bijgewerkt voor 2025."
+      description: "Rentes en fiscaliteit altijd bijgewerkt voor 2026."
     },
     {
       icon: Shield,
@@ -110,7 +110,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-center space-y-10">
           <motion.div variants={fadeInUp} className="space-y-6">
             <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight">
-              Hoogste Spaarrente België 2025 & 70+ Gratis Financiële Calculators
+              Hoogste Spaarrente België 2026 & 70+ Gratis Financiële Calculators
             </GradientText>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="hero-subtitle">
               <strong>Krijg in 30 seconden duidelijkheid over je geldzaken.</strong> Van de actuele hoogste spaarrente vinden tot je hypotheek maandlast berekenen of wanneer je financieel onafhankelijk bent – alles gratis, anoniem en altijd up-to-date voor België.

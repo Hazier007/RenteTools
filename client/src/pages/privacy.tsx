@@ -38,7 +38,7 @@ export default function Privacy() {
                 gebruiken en beschermen wanneer u onze website gebruikt.
               </p>
               <p>
-                <strong>Laatste update:</strong> 27 augustus 2025
+                <strong>Laatste update:</strong> 27 augustus 2026
               </p>
             </CardContent>
           </Card>

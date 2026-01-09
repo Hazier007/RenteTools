@@ -33,7 +33,7 @@ export default function BudgetPlannerPage() {
             Analyseer uw inkomen en uitgaven, stel spaardoelen en verbeter uw financiële gezondheid.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">💰 Budget Planning 2025:</p>
+            <p className="text-lg font-semibold mb-2">💰 Budget Planning 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• Aanbevolen spaarpercentage: 20% van inkomen</li>
               <li>• Noodfonds: 6 maanden uitgaven</li>

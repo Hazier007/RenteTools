@@ -40,12 +40,12 @@ export const calculatorRegistry: Calculator[] = [
   {
     slug: "hoogste-spaarrente-belgie",
     title: "Hoogste Spaarrente België",
-    description: "Vind de hoogste spaarrente in België. Vergelijk basisrente + getrouwheidspremie van alle banken. Actuele tarieven tot 2,5% in 2025.",
+    description: "Vind de hoogste spaarrente in België. Vergelijk basisrente + getrouwheidspremie van alle banken. Actuele tarieven tot 2,5% in 2026.",
     category: "Sparen",
     url: "/sparen/hoogste-spaarrente-belgie",
     keywords: extractKeywords(
       "Hoogste Spaarrente België",
-      "Vind de hoogste spaarrente in België. Vergelijk basisrente + getrouwheidspremie van alle banken. Actuele tarieven tot 2,5% in 2025."
+      "Vind de hoogste spaarrente in België. Vergelijk basisrente + getrouwheidspremie van alle banken. Actuele tarieven tot 2,5% in 2026."
     )
   },
   {
@@ -84,12 +84,12 @@ export const calculatorRegistry: Calculator[] = [
   {
     slug: "spaarrekening-vergelijker",
     title: "Spaarrekening Vergelijker",
-    description: "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2025.",
+    description: "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2026.",
     category: "Sparen",
     url: "/sparen/spaarrekening-vergelijker",
     keywords: extractKeywords(
       "Spaarrekening Vergelijker",
-      "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2025."
+      "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2026."
     )
   },
   {
@@ -315,12 +315,12 @@ export const calculatorRegistry: Calculator[] = [
   {
     slug: "wettelijke-rentevoet-belgie",
     title: "Wettelijke Rentevoet België",
-    description: "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2025.",
+    description: "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2026.",
     category: "Lenen",
     url: "/lenen/wettelijke-rentevoet-belgie",
     keywords: extractKeywords(
       "Wettelijke Rentevoet België",
-      "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2025."
+      "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2026."
     )
   },
   {

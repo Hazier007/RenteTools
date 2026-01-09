@@ -31,7 +31,7 @@ export default function PersoonlijkeLeningBerekenen() {
             simuleer verschillende bedragen en ontdek de voordeligste financiering.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">💳 Persoonlijke lening tarieven 2025:</p>
+            <p className="text-lg font-semibold mb-2">💳 Persoonlijke lening tarieven 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• Vanaf 4,9% JKP voor beste klanten</li>
               <li>• Gemiddeld 8-12% JKP</li>

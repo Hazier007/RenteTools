@@ -324,7 +324,7 @@ export default function CryptocurrencyCalculatorPage() {
       trading: "Volledig belastbaar als bedrijfsactiviteit"
     },
     toekomstigeWetgeving: [
-      "EU MiCA regulatie implementatie (2024-2025)",
+      "EU MiCA regulatie implementatie (2024-2026)",
       "Mogelijke crypto belasting op kapitaalwinsten",
       "Rapportageplicht voor crypto exchanges",
       "Verscherpte anti-witwaswetgeving"

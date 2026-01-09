@@ -149,7 +149,7 @@ export default function KinderrekeningCalculatorPage() {
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
               productType="kinderrekening"
-              title="👶 Beste Kinderrekening Tarieven België 2025"
+              title="👶 Beste Kinderrekening Tarieven België 2026"
               showTop={5}
               className="mb-8"
             />

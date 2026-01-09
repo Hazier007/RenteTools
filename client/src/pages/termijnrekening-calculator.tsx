@@ -45,7 +45,7 @@ export default function TermijnrekeningCalculatorPage() {
     }
     
     // Belgian tax calculation (30% roerende voorheffing)
-    const belastingVrij = 980; // 2025 threshold
+    const belastingVrij = 980; // 2026 threshold
     const belastbareRente = Math.max(0, bruttoRendement - belastingVrij);
     const verschuldigdeBelasting = belasting ? belastbareRente * 0.30 : 0;
     nettoRendement = bruttoRendement - verschuldigdeBelasting;
@@ -92,7 +92,7 @@ export default function TermijnrekeningCalculatorPage() {
     { jaar: 2022, rente: 2.1 },
     { jaar: 2023, rente: 2.8 },
     { jaar: 2024, rente: 3.2 },
-    { jaar: 2025, rente: 3.2 }
+    { jaar: 2026, rente: 3.2 }
   ];
 
   return (
@@ -135,7 +135,7 @@ export default function TermijnrekeningCalculatorPage() {
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
               productType="deposito"
-              title="🏆 Beste Termijnrekening Tarieven België 2025"
+              title="🏆 Beste Termijnrekening Tarieven België 2026"
               showTop={6}
               className="mb-8"
             />
@@ -323,7 +323,7 @@ export default function TermijnrekeningCalculatorPage() {
                     </div>
 
                     <div>
-                      <h4 className="font-semibold mb-3">Rente trend (2020-2025)</h4>
+                      <h4 className="font-semibold mb-3">Rente trend (2020-2026)</h4>
                       <div className="h-48">
                         <ResponsiveContainer width="100%" height="100%">
                           <LineChart data={renteTrends}>

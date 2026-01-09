@@ -93,7 +93,7 @@ export default function Footer() {
           </p>
         </div>
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          © 2025 Interesten.be - Alle rechten voorbehouden
+          © 2026 Interesten.be - Alle rechten voorbehouden
         </div>
       </div>
     </footer>

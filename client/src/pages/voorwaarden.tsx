@@ -40,7 +40,7 @@ export default function Voorwaarden() {
               <div className="bg-muted p-4 rounded-lg">
                 <p><strong>Website:</strong> www.interesten.be</p>
                 <p><strong>Eigenaar:</strong> Interesten.be</p>
-                <p><strong>Laatste update:</strong> 27 augustus 2025</p>
+                <p><strong>Laatste update:</strong> 27 augustus 2026</p>
               </div>
             </CardContent>
           </Card>

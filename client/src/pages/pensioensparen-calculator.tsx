@@ -29,7 +29,7 @@ export default function PensioenspaarCalculatorPage() {
             simuleer uw pensioenkapitaal en optimaliseer uw pensioensparen.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">🏛️ Pensioensparen 2025:</p>
+            <p className="text-lg font-semibold mb-2">🏛️ Pensioensparen 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• Maximum inleg: €1.310 per jaar</li>
               <li>• Belastingvoordeel: 30% (tot €393)</li>
@@ -125,7 +125,7 @@ export default function PensioenspaarCalculatorPage() {
                   U krijgt 30% van uw inleg terug via uw belastingaangifte.
                 </p>
                 
-                <h3>Maximumbedragen en voordelen 2025:</h3>
+                <h3>Maximumbedragen en voordelen 2026:</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse border border-border">
                     <thead>

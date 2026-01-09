@@ -21,8 +21,8 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "hoogste-spaarrente-verdienen-2025",
-    title: "10 Tips om de Hoogste Spaarrente te Verdienen in 2025",
+    slug: "hoogste-spaarrente-verdienen-2026",
+    title: "10 Tips om de Hoogste Spaarrente te Verdienen in 2026",
     excerpt: "Ontdek hoe u maximaal rendement haalt uit uw spaargeld met deze praktische strategieën voor Belgische spaarders.",
     category: "Sparen",
     author: {
@@ -30,11 +30,11 @@ export const blogPosts: BlogPost[] = [
       bio: "Financieel expert met 15 jaar ervaring in persoonlijke financiën en vermogensbeheer in België",
       avatar: "https://ui-avatars.com/api/?name=Sophie+Janssens&background=2563eb&color=fff&size=200"
     },
-    publishDate: "2025-01-15",
+    publishDate: "2026-01-15",
     readTime: 8,
     image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&h=675&fit=crop",
     content: `
-# 10 Tips om de Hoogste Spaarrente te Verdienen in 2025
+# 10 Tips om de Hoogste Spaarrente te Verdienen in 2026
 
 In het huidige financiële klimaat is het belangrijker dan ooit om het maximale uit uw spaargeld te halen. Met inflatie die uw koopkracht beïnvloedt, kan elke extra 0,1% rente een significant verschil maken. Hier zijn 10 bewezen strategieën om de hoogste spaarrente te verdienen in België.
 
@@ -64,7 +64,7 @@ Leg niet al uw eieren in één mand. Door uw spaargeld te spreiden over meerdere
 
 Voor geld dat u 1-5 jaar kunt missen, bieden deposito's vaak hogere rentes dan gewone spaarrekeningen.
 
-**Huidige tarieven (januari 2025):**
+**Huidige tarieven (januari 2026):**
 - 1 jaar deposito: tot 3,2%
 - 3 jaar deposito: tot 3,5%
 - 5 jaar deposito: tot 3,8%
@@ -73,7 +73,7 @@ Voor geld dat u 1-5 jaar kunt missen, bieden deposito's vaak hogere rentes dan g
 
 Vergeet niet dat u roerende voorheffing betaalt op spaarrente:
 - **30% roerende voorheffing** op interest
-- **Eerste €980 belastingvrij** (2025)
+- **Eerste €980 belastingvrij** (2026)
 
 ## 6. Gebruik Welkomstbonussen
 
@@ -124,7 +124,7 @@ Met deze 10 strategieën kunt u uw spaarrendement significant verhogen. Vergeet 
 *Gebruik onze [spaarrente calculator](/sparen/hoogste-spaarrente-belgie) om te berekenen hoeveel interest u kunt verdienen.*
     `,
     seo: {
-      title: "10 Tips Hoogste Spaarrente België 2025 | Maximaal Rendement",
+      title: "10 Tips Hoogste Spaarrente België 2026 | Maximaal Rendement",
       description: "Verdien maximale rente op uw spaargeld met deze 10 bewezen strategieën voor Belgische spaarders. Inclusief tips over deposito's, getrouwheidspremies en spreiding.",
       keywords: ["hoogste spaarrente", "spaarrente tips", "sparen belgië", "deposito tarieven", "getrouwheidspremie"]
     }
@@ -139,7 +139,7 @@ Met deze 10 strategieën kunt u uw spaarrendement significant verhogen. Vergeet 
       bio: "Hypotheekadviseur en financieel planner gespecialiseerd in woningfinanciering en vermogensopbouw",
       avatar: "https://ui-avatars.com/api/?name=Marc+Dubois&background=10b981&color=fff&size=200"
     },
-    publishDate: "2025-01-10",
+    publishDate: "2026-01-10",
     readTime: 12,
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=675&fit=crop",
     content: `
@@ -302,7 +302,7 @@ Er is geen one-size-fits-all antwoord. Maar met deze richtlijnen:
 *De beste keuze is de keuze die u 's nachts laat slapen terwijl uw vermogen groeit.*
     `,
     seo: {
-      title: "Hypotheek Aflossen of Beleggen België? | Complete Gids 2025",
+      title: "Hypotheek Aflossen of Beleggen België? | Complete Gids 2026",
       description: "Ontdek of u beter uw hypotheek vervroegd kunt aflossen of dat geld beleggen. Inclusief berekeningen, voorbeelden en praktische strategie voor België.",
       keywords: ["hypotheek aflossen", "vervroegd aflossen", "beleggen of aflossen", "hypotheek belgië", "financiële planning"]
     }
@@ -317,7 +317,7 @@ Er is geen one-size-fits-all antwoord. Maar met deze richtlijnen:
       bio: "Fiscaal adviseur gespecialiseerd in persoonlijke financiën en vermogensoptimalisatie in België",
       avatar: "https://ui-avatars.com/api/?name=Lien+Vermeulen&background=f59e0b&color=fff&size=200"
     },
-    publishDate: "2025-01-05",
+    publishDate: "2026-01-05",
     readTime: 10,
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=675&fit=crop",
     content: `
@@ -330,7 +330,7 @@ Belastingen kunnen uw rendement significant beïnvloeden. Maar België biedt ver
 ### Hoeveel kunt u inleggen?
 
 **Optie 1: Standaard Tarief**
-- Maximum: **€1.310 per jaar** (2025)
+- Maximum: **€1.310 per jaar** (2026)
 - Belastingvoordeel: **30%**
 - Maximale terugave: **€393**
 
@@ -383,7 +383,7 @@ Bij **geregelde spaarrekeningen** is de getrouwheidspremie belastingvrij, maar:
 
 ### De €980 Vrijstelling
 
-Sinds 2025 is **€980 aan spaarinterest belastingvrij**:
+Sinds 2026 is **€980 aan spaarinterest belastingvrij**:
 - Eerste €980 aan interest = 0% belasting
 - Alles erboven = 30% roerende voorheffing
 
@@ -507,7 +507,7 @@ Let op de **beurstaks bij aan/verkoop**:
 **Disclaimer:** Dit artikel is louter informatief. Raadpleeg een fiscaal adviseur voor persoonlijk advies.
     `,
     seo: {
-      title: "Belgische Belastingvoordelen Spaarders & Beleggers 2025",
+      title: "Belgische Belastingvoordelen Spaarders & Beleggers 2026",
       description: "Complete gids voor fiscale voordelen in België: pensioensparen, spaarrente vrijstelling, beleggingsfondsen en meer. Maximaliseer uw netto-rendement.",
       keywords: ["belastingvoordelen belgië", "pensioensparen", "roerende voorheffing", "fiscale optimalisatie", "sparen belastingvrij"]
     }

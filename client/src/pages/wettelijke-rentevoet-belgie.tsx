@@ -18,7 +18,7 @@ export default function WettelijkeRentevoetBelgie() {
 
   const [hoofdsom, setHoofdsom] = useState<string>("10000");
   const [dagen, setDagen] = useState<string>("30");
-  const [rentevoet] = useState<string>("7"); // Actuele wettelijke rentevoet 2025
+  const [rentevoet] = useState<string>("7"); // Actuele wettelijke rentevoet 2026
   
   const berekenWettelijkeRente = () => {
     const bedrag = parseFloat(hoofdsom) || 0;
@@ -48,14 +48,14 @@ export default function WettelijkeRentevoetBelgie() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Wettelijke Rentevoet België 2025 - Nalatigheidsinterest Berekenen
+            Wettelijke Rentevoet België 2026 - Nalatigheidsinterest Berekenen
           </h1>
           <p className="text-xl mb-8 opacity-90">
             Bereken wettelijke interest en nalatigheidsinterest volgens de actuele Belgische wetgeving. 
             Ontdek de huidige rentevoet en bereken uw verschuldigde of ontvangen interest.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">⚖️ Actuele tarieven 2025:</p>
+            <p className="text-lg font-semibold mb-2">⚖️ Actuele tarieven 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• Wettelijke rentevoet: 7,00% per jaar</li>
               <li>• Gerechtelijke rentevoet: 7,00% per jaar</li>
@@ -115,7 +115,7 @@ export default function WettelijkeRentevoetBelgie() {
                     </div>
                     
                     <div>
-                      <Label>Wettelijke rentevoet 2025</Label>
+                      <Label>Wettelijke rentevoet 2026</Label>
                       <Input
                         value={`${rentevoet}% per jaar`}
                         disabled
@@ -172,7 +172,7 @@ export default function WettelijkeRentevoetBelgie() {
                   wordt jaarlijks vastgesteld door de Minister van Financiën.
                 </p>
                 
-                <h3>Actuele Rentevoet België 2025:</h3>
+                <h3>Actuele Rentevoet België 2026:</h3>
                 <ul>
                   <li><strong>7,00% per jaar:</strong> Voor alle wettelijke verplichtingen</li>
                   <li><strong>Dagelijks samengesteld:</strong> Interest wordt dagelijks berekend</li>
@@ -183,7 +183,7 @@ export default function WettelijkeRentevoetBelgie() {
                 <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
                   <h4 className="font-semibold mb-2">📊 Historische Wettelijke Rentevoeten:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• 2025: 7,00% (huidig tarief)</li>
+                    <li>• 2026: 7,00% (huidig tarief)</li>
                     <li>• 2024: 7,00%</li>
                     <li>• 2023: 7,00%</li>
                     <li>• 2022: 7,00%</li>

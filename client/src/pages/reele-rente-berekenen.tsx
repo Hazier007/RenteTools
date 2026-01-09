@@ -131,7 +131,7 @@ export default function ReeleRenteBerekenen() {
                         placeholder="2.1"
                       />
                       <p className="text-xs text-muted-foreground mt-1">
-                        Verwachte inflatie per jaar (België 2025: ~2,1%)
+                        Verwachte inflatie per jaar (België 2026: ~2,1%)
                       </p>
                     </div>
                     

@@ -127,7 +127,7 @@ export default function KredietkaartCalculatorPage() {
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
               productType="kredietkaart"
-              title="💳 Laagste Kredietkaart Rentes België 2025"
+              title="💳 Laagste Kredietkaart Rentes België 2026"
               showTop={5}
               className="mb-8"
             />

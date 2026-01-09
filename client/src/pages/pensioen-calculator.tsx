@@ -31,7 +31,7 @@ export default function PensioenCalculatorPage() {
             Bereken uw toekomstig pensioeninkomen, vervangingsratio en ontdek eventuele tekorten.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">🏛️ Belgisch Pensioensysteem 2025:</p>
+            <p className="text-lg font-semibold mb-2">🏛️ Belgisch Pensioensysteem 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
               <li>• 1e Pijler: Wettelijk pensioen (max €1.732/maand)</li>
               <li>• 2e Pijler: Aanvullend pensioen via werkgever</li>

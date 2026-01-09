@@ -57,7 +57,7 @@ export default function HoogsteSpaarrenteBelgie() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Hoogste Spaarrente België 2025
+            Hoogste Spaarrente België 2026
           </h1>
           <p className="text-xl mb-8 opacity-90">
             Vind de beste spaarrekening met de hoogste rente. Vergelijk spaarrekeningen, 
@@ -87,7 +87,7 @@ export default function HoogsteSpaarrenteBelgie() {
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
               productType="spaarrekening"
-              title="🏆 Hoogste Spaarrentes België 2025"
+              title="🏆 Hoogste Spaarrentes België 2026"
               showTop={6}
               className="mb-8"
             />
@@ -211,7 +211,7 @@ export default function HoogsteSpaarrenteBelgie() {
                     <div>
                       <h3 className="font-semibold mb-2">Is spaarrente belastbaar in België?</h3>
                       <p className="text-sm text-muted-foreground">
-                        Ja, vanaf 980 euro interest per jaar (2025) betaalt u 30% roerende voorheffing. 
+                        Ja, vanaf 980 euro interest per jaar (2026) betaalt u 30% roerende voorheffing. 
                         Tot dit bedrag is uw spaarrente belastingvrij.
                       </p>
                     </div>

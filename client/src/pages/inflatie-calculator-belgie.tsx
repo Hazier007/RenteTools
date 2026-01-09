@@ -31,9 +31,9 @@ export default function InflatieCalculatorBelgie() {
             en hoe inflatie uw spaargeld beïnvloedt.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">📊 Inflatie België 2025:</p>
+            <p className="text-lg font-semibold mb-2">📊 Inflatie België 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
-              <li>• Actuele inflatie: ~2,8% (januari 2025)</li>
+              <li>• Actuele inflatie: ~2,8% (januari 2026)</li>
               <li>• ECB doelstelling: 2,0%</li>
               <li>• 10-jaars gemiddelde: 2,1%</li>
             </ul>

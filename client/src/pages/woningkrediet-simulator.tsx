@@ -165,7 +165,7 @@ export default function WoningkredietSimulatorPage() {
                 Belgische Banken
               </Badge>
               <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground">
-                Actuele Tarieven 2025
+                Actuele Tarieven 2026
               </Badge>
               <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground">
                 Scenario Vergelijking

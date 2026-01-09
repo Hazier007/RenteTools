@@ -360,7 +360,7 @@ export default function EindejaarsbonosCalculatorPage() {
 
                   {/* Bonus Calculation */}
                   <div className="bg-muted/50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">🎁 Uw eindejaarsbonus 2025:</h3>
+                    <h3 className="text-lg font-semibold mb-4">🎁 Uw eindejaarsbonus 2026:</h3>
                     
                     <div className="space-y-3">
                       <div className="flex justify-between">
