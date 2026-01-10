@@ -12,6 +12,7 @@ import HowToSchema from "@/components/seo/HowToSchema";
 import WebApplicationSchema from "@/components/seo/WebApplicationSchema";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
@@ -220,44 +221,8 @@ export default function HoogsteSpaarrenteBelgie() {
                 </CardContent>
               </Card>
 
-              {/* Gerelateerde Calculators */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Gerelateerde Calculators</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <a href="/samengestelde-interest-berekenen" className="block p-4 border rounded-lg hover:border-primary transition-colors">
-                      <div className="flex items-center mb-2">
-                        <i className="fas fa-chart-line mr-2 text-green-600"></i>
-                        <h4 className="font-semibold">Samengestelde Interest</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground">Bereken hoe uw spaargeld groeit met compound interest over lange termijn.</p>
-                    </a>
-                    <a href="/deposito-calculator" className="block p-4 border rounded-lg hover:border-primary transition-colors">
-                      <div className="flex items-center mb-2">
-                        <i className="fas fa-university mr-2 text-purple-600"></i>
-                        <h4 className="font-semibold">Deposito Calculator</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground">Vergelijk termijnrekeningen en deposito's voor hogere vaste rentes.</p>
-                    </a>
-                    <a href="/inflatie-calculator-belgie" className="block p-4 border rounded-lg hover:border-primary transition-colors">
-                      <div className="flex items-center mb-2">
-                        <i className="fas fa-trending-down mr-2 text-amber-600"></i>
-                        <h4 className="font-semibold">Inflatie Calculator</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground">Zie hoe inflatie uw spaarrente beïnvloedt en uw koopkracht vermindert.</p>
-                    </a>
-                    <a href="/roerende-voorheffing-calculator" className="block p-4 border rounded-lg hover:border-primary transition-colors">
-                      <div className="flex items-center mb-2">
-                        <i className="fas fa-percentage mr-2 text-neutral-600"></i>
-                        <h4 className="font-semibold">Roerende Voorheffing</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground">Bereken de belasting op uw spaarrente en ontdek de vrijstellingen.</p>
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Related Calculators */}
+              <RelatedCalculators currentSlug="hoogste-spaarrente-belgie" />
 
             {/* Authority Links */}
             {seoConfig && (

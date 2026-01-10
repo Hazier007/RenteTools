@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 
@@ -248,6 +249,11 @@ export default function PensioenspaarCalculatorPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Related Calculators */}
+            <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <RelatedCalculators currentSlug="pensioensparen-calculator" />
+            </section>
 
             {seoConfig && (
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

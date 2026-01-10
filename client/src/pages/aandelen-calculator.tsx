@@ -17,6 +17,7 @@ import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 
 interface Aandeel {
   ticker: string;
@@ -744,6 +745,11 @@ export default function AandelenCalculatorPage() {
         <div className="flex justify-center">
           <GoogleAdsense slot="banner" />
         </div>
+      </section>
+
+      {/* Related Calculators */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RelatedCalculators currentSlug="aandelen-calculator" />
       </section>
 
       {/* Authority Links */}

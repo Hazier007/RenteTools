@@ -17,6 +17,7 @@ import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 
 interface Obligatie {
   naam: string;
@@ -824,6 +825,11 @@ export default function ObligatieCalculatorPage() {
       {/* Bottom Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
+      </section>
+
+      {/* Related Calculators */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RelatedCalculators currentSlug="obligatie-calculator" />
       </section>
 
       {/* Authority Links */}

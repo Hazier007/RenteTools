@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 
@@ -417,6 +418,11 @@ export default function GeldontwaardigCalculator() {
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
+      </section>
+
+      {/* Related Calculators */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RelatedCalculators currentSlug="geldontwaarding-calculator" />
       </section>
 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">

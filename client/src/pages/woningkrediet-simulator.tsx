@@ -12,6 +12,7 @@ import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
@@ -471,6 +472,11 @@ export default function WoningkredietSimulatorPage() {
       {/* Bottom Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
+      </section>
+
+      {/* Related Calculators */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RelatedCalculators currentSlug="woningkrediet-simulator" />
       </section>
 
       {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}

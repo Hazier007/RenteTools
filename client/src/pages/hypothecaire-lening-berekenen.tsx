@@ -12,6 +12,7 @@ import HowToSchema from "@/components/seo/HowToSchema";
 import WebApplicationSchema from "@/components/seo/WebApplicationSchema";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
@@ -224,6 +225,11 @@ export default function HypothecaireLningBerekenen() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Related Calculators */}
+            <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <RelatedCalculators currentSlug="hypothecaire-lening-berekenen" />
+            </section>
 
             {seoConfig && (
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

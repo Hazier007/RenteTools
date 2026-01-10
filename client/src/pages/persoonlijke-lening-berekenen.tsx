@@ -6,6 +6,7 @@ import GoogleAdsense from "@/components/ui/google-adsense";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
@@ -234,6 +235,11 @@ export default function PersoonlijkeLeningBerekenen() {
           <GoogleAdsense slot="banner" className="hidden lg:block" />
           <GoogleAdsense slot="banner" className="lg:hidden" />
         </div>
+      </section>
+
+      {/* Related Calculators */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RelatedCalculators currentSlug="persoonlijke-lening-berekenen" />
       </section>
 
       {seoConfig && (

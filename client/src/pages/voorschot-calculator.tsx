@@ -12,6 +12,7 @@ import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
@@ -543,6 +544,11 @@ export default function VoorschotCalculatorPage() {
       {/* Bottom Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <GoogleAdsense slot="banner" className="w-full max-w-4xl mx-auto" />
+      </section>
+
+      {/* Related Calculators */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RelatedCalculators currentSlug="voorschot-calculator" />
       </section>
 
       {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}

@@ -9,6 +9,7 @@ import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 
 export default function BeleggingsrenteCalculatorPage() {
   const seoConfig = getSeoConfig("beleggingsrente-calculator");
@@ -224,6 +225,11 @@ export default function BeleggingsrenteCalculatorPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Related Calculators */}
+            <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <RelatedCalculators currentSlug="beleggingsrente-calculator" />
+            </section>
 
             {/* Authority Links */}
             {seoConfig && (
