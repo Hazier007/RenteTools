@@ -4,6 +4,7 @@ import Footer from "@/components/layout/footer";
 import SpaarrenteCalculator from "@/components/calculators/spaarrente-calculator";
 import GoogleAdsense from "@/components/ui/google-adsense";
 import RateComparisonWidget from "@/components/rate-comparison";
+import { DynamicComparisonTable } from "@/components/comparison/DynamicComparisonTable";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -92,6 +93,21 @@ export default function HoogsteSpaarrenteBelgie() {
               showTop={6}
               className="mb-8"
             />
+
+            {/* Dynamic Comparison Table with Affiliate Links */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">
+                  Vergelijk spaarrekeningen en open direct een rekening
+                </CardTitle>
+                <p className="text-muted-foreground">
+                  Klik op "Open rekening" om direct naar de bank te gaan en een spaarrekening te openen.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <DynamicComparisonTable productType="spaarrekening" limit={10} />
+              </CardContent>
+            </Card>
 
             {/* Calculator Section */}
             <Card>

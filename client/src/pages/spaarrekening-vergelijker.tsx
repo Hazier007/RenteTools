@@ -15,6 +15,7 @@ import type { RateComparison } from "@shared/schema";
 import { useCanonical } from "@/hooks/use-canonical";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import { DynamicComparisonTable } from "@/components/comparison/DynamicComparisonTable";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
@@ -364,6 +365,23 @@ export default function SpaarrekeningVergelijkerPage() {
             </Card>
 
         </div>
+      </section>
+
+      {/* Dynamic Comparison Table with Affiliate Links */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl">
+              Open direct een spaarrekening
+            </CardTitle>
+            <p className="text-muted-foreground">
+              Vergelijk de beste aanbiedingen en open direct een rekening bij de bank van uw keuze.
+            </p>
+          </CardHeader>
+          <CardContent>
+            <DynamicComparisonTable productType="spaarrekening" limit={10} />
+          </CardContent>
+        </Card>
       </section>
 
       {/* Bottom Ad */}
