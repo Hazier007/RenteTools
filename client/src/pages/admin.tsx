@@ -385,16 +385,100 @@ function BankForm({
 }
 
 function ProductsManager({ products, banks }: { products: Product[]; banks: Bank[] }) {
-  // Similar structure to BanksManager but for products
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [isAdding, setIsAdding] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+
+  const createProductMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error("Failed to create product");
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
+      setIsAdding(false);
+      toast({ title: "Product toegevoegd", description: "Het product is succesvol toegevoegd." });
+    },
+    onError: () => {
+      toast({ title: "Fout", description: "Er is een fout opgetreden bij het toevoegen van het product.", variant: "destructive" });
+    },
+  });
+
+  const updateProductMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      const response = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error("Failed to update product");
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
+      setEditingProduct(null);
+      toast({ title: "Product bijgewerkt", description: "Het product is succesvol bijgewerkt." });
+    },
+    onError: () => {
+      toast({ title: "Fout", description: "Er is een fout opgetreden bij het bijwerken van het product.", variant: "destructive" });
+    },
+  });
+
+  const deleteProductMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const response = await fetch(`/api/products/${id}`, { method: "DELETE" });
+      if (!response.ok) throw new Error("Failed to delete product");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
+      toast({ title: "Product verwijderd", description: "Het product is succesvol verwijderd." });
+    },
+    onError: () => {
+      toast({ title: "Fout", description: "Er is een fout opgetreden bij het verwijderen van het product.", variant: "destructive" });
+    },
+  });
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-semibold">Producten Beheer</h2>
-        <Button data-testid="button-add-product">
+        <Button onClick={() => setIsAdding(true)} data-testid="button-add-product">
           <Plus size={16} className="mr-2" />
           Product Toevoegen
         </Button>
       </div>
+
+      {(isAdding || editingProduct) && (
+        <Card>
+          <CardHeader>
+            <CardTitle>{isAdding ? "Nieuw Product Toevoegen" : "Product Bewerken"}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ProductForm
+              product={editingProduct}
+              banks={banks}
+              onSubmit={(data) => {
+                if (editingProduct) {
+                  updateProductMutation.mutate({ id: editingProduct.id, data });
+                } else {
+                  createProductMutation.mutate(data);
+                }
+              }}
+              onCancel={() => {
+                setIsAdding(false);
+                setEditingProduct(null);
+              }}
+              isLoading={createProductMutation.isPending || updateProductMutation.isPending}
+            />
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid gap-4">
         {products.map((product) => {
@@ -404,12 +488,19 @@ function ProductsManager({ products, banks }: { products: Product[]; banks: Bank
               <CardContent className="pt-6">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <h3 className="text-lg font-semibold" data-testid={`text-product-name-${product.id}`}>
                         {product.name}
                       </h3>
                       <Badge variant="secondary">{product.productType}</Badge>
                       <Badge variant="outline">{bank?.shortName}</Badge>
+                      {product.isFeatured && <Badge variant="default">Featured</Badge>}
+                      {product.affiliateUrl && <Badge variant="outline">Affiliate</Badge>}
+                      {product.isActive ? (
+                        <Badge variant="default">Actief</Badge>
+                      ) : (
+                        <Badge variant="destructive">Inactief</Badge>
+                      )}
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                       {product.description}
@@ -420,12 +511,29 @@ function ProductsManager({ products, banks }: { products: Product[]; banks: Bank
                       {product.minTerm && <span>Min termijn: {product.minTerm} maanden </span>}
                       {product.maxTerm && <span>Max termijn: {product.maxTerm} maanden</span>}
                     </div>
+                    {product.affiliateUrl && (
+                      <div className="text-sm text-blue-600 dark:text-blue-400 mt-1 truncate max-w-md">
+                        <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer">
+                          {product.affiliateUrl}
+                        </a>
+                      </div>
+                    )}
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" data-testid={`button-edit-product-${product.id}`}>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => setEditingProduct(product)}
+                      data-testid={`button-edit-product-${product.id}`}
+                    >
                       <Pencil size={14} />
                     </Button>
-                    <Button variant="destructive" size="sm" data-testid={`button-delete-product-${product.id}`}>
+                    <Button 
+                      variant="destructive" 
+                      size="sm" 
+                      onClick={() => deleteProductMutation.mutate(product.id)}
+                      data-testid={`button-delete-product-${product.id}`}
+                    >
                       <Trash2 size={14} />
                     </Button>
                   </div>
@@ -436,6 +544,217 @@ function ProductsManager({ products, banks }: { products: Product[]; banks: Bank
         })}
       </div>
     </div>
+  );
+}
+
+function ProductForm({
+  product,
+  banks,
+  onSubmit,
+  onCancel,
+  isLoading,
+}: {
+  product?: Product | null;
+  banks: Bank[];
+  onSubmit: (data: any) => void;
+  onCancel: () => void;
+  isLoading: boolean;
+}) {
+  const [formData, setFormData] = useState({
+    bankId: product?.bankId || "",
+    name: product?.name || "",
+    productType: (product?.productType || "spaarrekening") as "spaarrekening" | "deposito" | "hypotheek" | "persoonlijke_lening" | "autolening" | "kredietkaart" | "beleggingsrekening" | "pensioensparen" | "kasbon" | "staatsbons",
+    description: product?.description || "",
+    minAmount: product?.minAmount || "",
+    maxAmount: product?.maxAmount || "",
+    minTerm: product?.minTerm?.toString() || "",
+    maxTerm: product?.maxTerm?.toString() || "",
+    conditions: product?.conditions || "",
+    affiliateUrl: product?.affiliateUrl || "",
+    isFeatured: product?.isFeatured || false,
+    isActive: product?.isActive ?? true,
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit({
+      ...formData,
+      minAmount: formData.minAmount || null,
+      maxAmount: formData.maxAmount || null,
+      minTerm: formData.minTerm ? parseInt(formData.minTerm) : null,
+      maxTerm: formData.maxTerm ? parseInt(formData.maxTerm) : null,
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="bankId">Bank *</Label>
+          <Select 
+            value={formData.bankId} 
+            onValueChange={(value) => setFormData({ ...formData, bankId: value })}
+          >
+            <SelectTrigger data-testid="select-product-bank">
+              <SelectValue placeholder="Selecteer een bank" />
+            </SelectTrigger>
+            <SelectContent>
+              {banks.map((bank) => (
+                <SelectItem key={bank.id} value={bank.id}>
+                  {bank.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor="name">Product Naam *</Label>
+          <Input
+            id="name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+            data-testid="input-product-name"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="productType">Product Type *</Label>
+          <Select 
+            value={formData.productType} 
+            onValueChange={(value: typeof formData.productType) => 
+              setFormData({ ...formData, productType: value })
+            }
+          >
+            <SelectTrigger data-testid="select-product-type">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="spaarrekening">Spaarrekening</SelectItem>
+              <SelectItem value="deposito">Deposito</SelectItem>
+              <SelectItem value="hypotheek">Hypotheek</SelectItem>
+              <SelectItem value="persoonlijke_lening">Persoonlijke Lening</SelectItem>
+              <SelectItem value="autolening">Autolening</SelectItem>
+              <SelectItem value="kredietkaart">Kredietkaart</SelectItem>
+              <SelectItem value="beleggingsrekening">Beleggingsrekening</SelectItem>
+              <SelectItem value="pensioensparen">Pensioensparen</SelectItem>
+              <SelectItem value="kasbon">Kasbon</SelectItem>
+              <SelectItem value="staatsbons">Staatsbons</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor="affiliateUrl">Affiliate URL</Label>
+          <Input
+            id="affiliateUrl"
+            type="url"
+            value={formData.affiliateUrl}
+            onChange={(e) => setFormData({ ...formData, affiliateUrl: e.target.value })}
+            placeholder="https://www.awin1.com/..."
+            data-testid="input-product-affiliate-url"
+          />
+        </div>
+      </div>
+
+      <div>
+        <Label htmlFor="description">Beschrijving</Label>
+        <Textarea
+          id="description"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          rows={3}
+          data-testid="textarea-product-description"
+        />
+      </div>
+
+      <div className="grid grid-cols-4 gap-4">
+        <div>
+          <Label htmlFor="minAmount">Min Bedrag (€)</Label>
+          <Input
+            id="minAmount"
+            type="number"
+            step="0.01"
+            value={formData.minAmount}
+            onChange={(e) => setFormData({ ...formData, minAmount: e.target.value })}
+            data-testid="input-product-min-amount"
+          />
+        </div>
+        <div>
+          <Label htmlFor="maxAmount">Max Bedrag (€)</Label>
+          <Input
+            id="maxAmount"
+            type="number"
+            step="0.01"
+            value={formData.maxAmount}
+            onChange={(e) => setFormData({ ...formData, maxAmount: e.target.value })}
+            data-testid="input-product-max-amount"
+          />
+        </div>
+        <div>
+          <Label htmlFor="minTerm">Min Termijn (maanden)</Label>
+          <Input
+            id="minTerm"
+            type="number"
+            value={formData.minTerm}
+            onChange={(e) => setFormData({ ...formData, minTerm: e.target.value })}
+            data-testid="input-product-min-term"
+          />
+        </div>
+        <div>
+          <Label htmlFor="maxTerm">Max Termijn (maanden)</Label>
+          <Input
+            id="maxTerm"
+            type="number"
+            value={formData.maxTerm}
+            onChange={(e) => setFormData({ ...formData, maxTerm: e.target.value })}
+            data-testid="input-product-max-term"
+          />
+        </div>
+      </div>
+
+      <div>
+        <Label htmlFor="conditions">Voorwaarden</Label>
+        <Textarea
+          id="conditions"
+          value={formData.conditions}
+          onChange={(e) => setFormData({ ...formData, conditions: e.target.value })}
+          rows={2}
+          data-testid="textarea-product-conditions"
+        />
+      </div>
+
+      <div className="flex gap-6 pt-2">
+        <div className="flex items-center gap-2">
+          <Switch
+            id="isFeatured"
+            checked={formData.isFeatured}
+            onCheckedChange={(checked) => setFormData({ ...formData, isFeatured: checked })}
+            data-testid="switch-product-featured"
+          />
+          <Label htmlFor="isFeatured">Featured</Label>
+        </div>
+        <div className="flex items-center gap-2">
+          <Switch
+            id="isActive"
+            checked={formData.isActive}
+            onCheckedChange={(checked) => setFormData({ ...formData, isActive: checked })}
+            data-testid="switch-product-active"
+          />
+          <Label htmlFor="isActive">Actief</Label>
+        </div>
+      </div>
+
+      <div className="flex gap-2 pt-4">
+        <Button type="submit" disabled={isLoading || !formData.bankId} data-testid="button-submit-product">
+          {isLoading ? "Opslaan..." : "Opslaan"}
+        </Button>
+        <Button type="button" variant="outline" onClick={onCancel} data-testid="button-cancel-product">
+          Annuleren
+        </Button>
+      </div>
+    </form>
   );
 }
 
