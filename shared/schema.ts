@@ -87,6 +87,8 @@ export const productsTable = pgTable('products', {
   maxTerm: integer('max_term'), // in months
   fees: text('fees'), // JSON string for complex fee structure
   conditions: text('conditions'),
+  affiliateUrl: text('affiliate_url'), // Awin/affiliate link for this product
+  isFeatured: boolean('is_featured').default(false), // Highlight in comparison tables
   isActive: boolean('is_active').default(true),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
