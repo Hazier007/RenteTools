@@ -1,8 +1,11 @@
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
+import fs from "fs";
+import path from "path";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { calculatorRegistry } from "../shared/calculator-registry";
+import { injectSeoMeta } from "./seo-config";
 
 const app = express();
 app.use(express.json());
@@ -153,7 +156,18 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    const distPath = path.resolve(import.meta.dirname, "public");
+    
+    app.use(express.static(distPath));
+    
+    app.use("*", (req, res) => {
+      const indexPath = path.resolve(distPath, "index.html");
+      let html = fs.readFileSync(indexPath, "utf-8");
+      
+      html = injectSeoMeta(html, req.originalUrl);
+      
+      res.set("Content-Type", "text/html").send(html);
+    });
   }
 
   // ALWAYS serve the app on the port specified in the environment variable PORT
