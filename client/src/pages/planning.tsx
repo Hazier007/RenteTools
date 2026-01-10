@@ -54,6 +54,43 @@ export default function PlanningPage() {
               </div>
             </motion.div>
 
+            <motion.div variants={fadeInUp} className="max-w-4xl mx-auto">
+              <GlassCard className="p-8">
+                <h2 className="text-2xl font-bold mb-4">Financiële planning in België: pensioen, FIRE & budget</h2>
+                <div className="space-y-4 text-muted-foreground">
+                  <p>
+                    België kent een <strong>pensioensysteem met 3 pijlers</strong>: wettelijk pensioen, aanvullend 
+                    werkgeverspensioen en individueel pensioensparen (met tot 30% belastingvoordeel). Steeds meer 
+                    Belgen streven naar financiële onafhankelijkheid via de FIRE-beweging (Financial Independence, 
+                    Retire Early) met de bekende <strong>4%-regel</strong> als richtlijn.
+                  </p>
+                  <p>
+                    <strong>Waarom onze planningtools gebruiken?</strong>
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Bereken uw pensioen en aanvullende spaarnoodzaak</li>
+                    <li>Ontdek uw FIRE-getal en pad naar financiële vrijheid</li>
+                    <li>Plan uw budget en bouw een noodfonds op</li>
+                    <li>Houd rekening met inflatie en koopkrachtverlies</li>
+                  </ul>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            {seoConfig && seoConfig.faqs.length > 0 && (
+              <motion.div variants={fadeInUp} className="max-w-4xl mx-auto">
+                <h2 className="text-2xl font-bold mb-6 text-center">Veelgestelde vragen</h2>
+                <div className="space-y-4">
+                  {seoConfig.faqs.map((faq, index) => (
+                    <GlassCard key={index} className="p-6">
+                      <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
+                      <p className="text-muted-foreground">{faq.answer}</p>
+                    </GlassCard>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
             <motion.div
               variants={staggerChildren}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"

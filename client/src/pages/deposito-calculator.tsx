@@ -10,6 +10,7 @@ import HowToSchema from "@/components/seo/HowToSchema";
 import WebApplicationSchema from "@/components/seo/WebApplicationSchema";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
+import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
@@ -197,6 +198,9 @@ export default function DepositoCalculatorPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Related Calculators */}
+            <RelatedCalculators currentSlug="deposito-calculator" />
 
             {/* Authority Links */}
             {seoConfig && (

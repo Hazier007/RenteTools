@@ -54,6 +54,43 @@ export default function LenenPage() {
               </div>
             </motion.div>
 
+            <motion.div variants={fadeInUp} className="max-w-4xl mx-auto">
+              <GlassCard className="p-8">
+                <h2 className="text-2xl font-bold mb-4">Lenen in België: hypotheek, autolening & meer</h2>
+                <div className="space-y-4 text-muted-foreground">
+                  <p>
+                    De Belgische kredietmarkt biedt diverse opties: van hypothecaire leningen met <strong>LTV tot 90%</strong> tot 
+                    persoonlijke leningen en autoleningen. De vuistregel is dat uw maandlast niet hoger mag zijn dan 
+                    <strong> 33% van uw netto-inkomen</strong>. Vergeet ook de bijkomende kosten niet: registratierechten, 
+                    notariskosten en verzekeringen.
+                  </p>
+                  <p>
+                    <strong>Waarom onze leentools gebruiken?</strong>
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Vergelijk actuele hypotheekrentes van Belgische banken</li>
+                    <li>Bereken uw maximale leencapaciteit en maandlasten</li>
+                    <li>Ontdek of herfinancieren voordeliger is</li>
+                    <li>Simuleer autoleningen, persoonlijke leningen en doorlopend krediet</li>
+                  </ul>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            {seoConfig && seoConfig.faqs.length > 0 && (
+              <motion.div variants={fadeInUp} className="max-w-4xl mx-auto">
+                <h2 className="text-2xl font-bold mb-6 text-center">Veelgestelde vragen</h2>
+                <div className="space-y-4">
+                  {seoConfig.faqs.map((faq, index) => (
+                    <GlassCard key={index} className="p-6">
+                      <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
+                      <p className="text-muted-foreground">{faq.answer}</p>
+                    </GlassCard>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
             <motion.div
               variants={staggerChildren}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"

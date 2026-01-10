@@ -4,6 +4,89 @@ export interface SeoConfig {
   metaDescription: string;
 }
 
+export type SiloCategory = "Home" | "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
+
+const slugToCategory: Record<string, SiloCategory> = {
+  "home": "Home",
+  "hoogste-spaarrente-belgie": "Sparen",
+  "deposito-calculator": "Sparen",
+  "samengestelde-interest-berekenen": "Sparen",
+  "doelspaarcalculator": "Sparen",
+  "spaarrekening-vergelijker": "Sparen",
+  "kinderrekening-calculator": "Sparen",
+  "kasbon-calculator": "Sparen",
+  "termijnrekening-calculator": "Sparen",
+  "groepssparen-calculator": "Sparen",
+  "loyalty-bonus-calculator": "Sparen",
+  "vakantiegeld-sparen-calculator": "Sparen",
+  "sparen": "Sparen",
+  "hypothecaire-lening-berekenen": "Lenen",
+  "woningkrediet-simulator": "Lenen",
+  "persoonlijke-lening-berekenen": "Lenen",
+  "autolening-berekenen": "Lenen",
+  "lening-herfinancieren": "Lenen",
+  "schuldenconsolidatie-calculator": "Lenen",
+  "kredietcapaciteit-calculator": "Lenen",
+  "kredietvergelijker-belgie": "Lenen",
+  "doorlopend-krediet-calculator": "Lenen",
+  "kredietkaart-calculator": "Lenen",
+  "leasingkrediet-calculator": "Lenen",
+  "voorschot-calculator": "Lenen",
+  "studieschuld-calculator": "Lenen",
+  "groepslening-calculator": "Lenen",
+  "wettelijke-rentevoet-belgie": "Lenen",
+  "lenen": "Lenen",
+  "beleggingsrente-calculator": "Beleggen",
+  "aandelen-calculator": "Beleggen",
+  "etf-calculator": "Beleggen",
+  "obligatie-calculator": "Beleggen",
+  "cryptocurrency-calculator": "Beleggen",
+  "dollar-cost-averaging-calculator": "Beleggen",
+  "portfolio-diversificatie-calculator": "Beleggen",
+  "reit-calculator": "Beleggen",
+  "belgische-beleggingsfiscaliteit-calculator": "Beleggen",
+  "roerende-voorheffing-calculator": "Beleggen",
+  "beleggen": "Beleggen",
+  "pensioensparen-calculator": "Planning",
+  "pensioen-calculator": "Planning",
+  "fire-calculator": "Planning",
+  "noodfonds-calculator": "Planning",
+  "budget-planner": "Planning",
+  "belastingplanning-calculator": "Planning",
+  "levensverzekeraar-calculator": "Planning",
+  "eindejaarsbonus-calculator": "Planning",
+  "planning": "Planning",
+  "inflatie-calculator-belgie": "Overige",
+  "geldontwaarding-calculator": "Overige",
+  "reele-rente-berekenen": "Overige",
+  "rentevoet-vergelijker": "Overige",
+  "over-ons": "Overige",
+  "privacy": "Overige",
+  "voorwaarden": "Overige",
+  "sitemap": "Overige",
+  "blog": "Overige",
+  "nieuws": "Overige",
+  "overige": "Overige",
+};
+
+const categoryToPrettyName: Record<SiloCategory, string> = {
+  "Home": "Home",
+  "Sparen": "Sparen",
+  "Lenen": "Lenen",
+  "Beleggen": "Beleggen",
+  "Planning": "Planning",
+  "Overige": "Overige",
+};
+
+const categoryToPath: Record<SiloCategory, string> = {
+  "Home": "/",
+  "Sparen": "/sparen",
+  "Lenen": "/lenen",
+  "Beleggen": "/beleggen",
+  "Planning": "/planning",
+  "Overige": "/overige",
+};
+
 export const seoConfigs: Record<string, SeoConfig> = {
   "home": {
     slug: "home",
@@ -328,6 +411,139 @@ export function getSeoConfigForUrl(url: string): SeoConfig | null {
   return seoConfigs[slug] || null;
 }
 
+function slugToPrettyName(slug: string): string {
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function escapeJsonForHtml(json: string): string {
+  return json
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/'/g, '\\u0027');
+}
+
+function generateBreadcrumbSchema(url: string, seoConfig: SeoConfig): object {
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  const slug = seoConfig.slug;
+  const category = slugToCategory[slug];
+  
+  const breadcrumbItems: { "@type": string; position: number; name: string; item: string }[] = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://interesten.be/"
+    }
+  ];
+  
+  if (category && category !== 'Home' && slug !== 'home') {
+    const isCategoryPage = ['sparen', 'lenen', 'beleggen', 'planning', 'overige'].includes(slug);
+    
+    if (!isCategoryPage) {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 2,
+        name: categoryToPrettyName[category],
+        item: `https://interesten.be${categoryToPath[category]}`
+      });
+      
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 3,
+        name: slugToPrettyName(slug),
+        item: `https://interesten.be${cleanUrl}`
+      });
+    } else {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 2,
+        name: categoryToPrettyName[category],
+        item: `https://interesten.be${cleanUrl}`
+      });
+    }
+  } else if (slug !== 'home') {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: slugToPrettyName(slug),
+      item: `https://interesten.be${cleanUrl}`
+    });
+  }
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbItems
+  };
+}
+
+function generateWebSiteSchema(): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Interesten.be",
+    "url": "https://interesten.be",
+    "description": "Gratis Belgische financiële calculators voor sparen, lenen en beleggen. Bereken spaarrente, hypotheek, compound interest en meer.",
+    "inLanguage": "nl-BE",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Interesten.be",
+      "url": "https://interesten.be"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://interesten.be/sitemap",
+      "query-input": "required name=search_term_string"
+    }
+  };
+}
+
+function generateCalculatorSchema(seoConfig: SeoConfig, url: string): object | null {
+  const slug = seoConfig.slug;
+  const category = slugToCategory[slug];
+  
+  const nonCalculatorSlugs = ['home', 'over-ons', 'privacy', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'sparen', 'lenen', 'beleggen', 'planning', 'overige'];
+  if (!category || nonCalculatorSlugs.includes(slug)) {
+    return null;
+  }
+  
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": seoConfig.metaTitle.split(' - ')[0] || seoConfig.metaTitle,
+    "description": seoConfig.metaDescription,
+    "url": `https://interesten.be${cleanUrl}`,
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "inLanguage": "nl-BE",
+    "provider": {
+      "@type": "Organization",
+      "name": "Interesten.be",
+      "url": "https://interesten.be"
+    }
+  };
+}
+
+function escapeHtmlAttribute(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 export function injectSeoMeta(html: string, url: string): string {
   const seoConfig = getSeoConfigForUrl(url);
   
@@ -336,36 +552,85 @@ export function injectSeoMeta(html: string, url: string): string {
   }
   
   let result = html;
+  const escapedTitle = escapeHtmlAttribute(seoConfig.metaTitle);
+  const escapedDescription = escapeHtmlAttribute(seoConfig.metaDescription);
   
-  result = result.replace(
-    /<title>[^<]*<\/title>/,
-    `<title>${seoConfig.metaTitle}</title>`
-  );
+  const titleRegex = /<title>[^<]*<\/title>/;
+  if (titleRegex.test(result)) {
+    result = result.replace(titleRegex, `<title>${escapedTitle}</title>`);
+  } else if (result.includes('<head>')) {
+    result = result.replace('<head>', `<head>\n    <title>${escapedTitle}</title>`);
+  }
   
-  result = result.replace(
-    /<meta name="description" content="[^"]*" \/>/,
-    `<meta name="description" content="${seoConfig.metaDescription}" />`
-  );
+  const descriptionRegex = /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i;
+  if (descriptionRegex.test(result)) {
+    result = result.replace(descriptionRegex, `<meta name="description" content="${escapedDescription}" />`);
+  } else if (result.includes('</head>')) {
+    result = result.replace('</head>', `  <meta name="description" content="${escapedDescription}" />\n  </head>`);
+  }
   
-  result = result.replace(
-    /<meta property="og:title" content="[^"]*" \/>/,
-    `<meta property="og:title" content="${seoConfig.metaTitle}" />`
-  );
+  const ogTitleRegex = /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i;
+  if (ogTitleRegex.test(result)) {
+    result = result.replace(ogTitleRegex, `<meta property="og:title" content="${escapedTitle}" />`);
+  }
   
-  result = result.replace(
-    /<meta property="og:description" content="[^"]*" \/>/,
-    `<meta property="og:description" content="${seoConfig.metaDescription}" />`
-  );
+  const ogDescRegex = /<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i;
+  if (ogDescRegex.test(result)) {
+    result = result.replace(ogDescRegex, `<meta property="og:description" content="${escapedDescription}" />`);
+  }
   
-  result = result.replace(
-    /<meta name="twitter:title" content="[^"]*" \/>/,
-    `<meta name="twitter:title" content="${seoConfig.metaTitle}" />`
-  );
+  const twitterTitleRegex = /<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/i;
+  if (twitterTitleRegex.test(result)) {
+    result = result.replace(twitterTitleRegex, `<meta name="twitter:title" content="${escapedTitle}" />`);
+  }
   
-  result = result.replace(
-    /<meta name="twitter:description" content="[^"]*" \/>/,
-    `<meta name="twitter:description" content="${seoConfig.metaDescription}" />`
-  );
+  const twitterDescRegex = /<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/i;
+  if (twitterDescRegex.test(result)) {
+    result = result.replace(twitterDescRegex, `<meta name="twitter:description" content="${escapedDescription}" />`);
+  }
+  
+  const cleanPath = url.split('?')[0].split('#')[0];
+  const canonicalUrl = cleanPath === '/' || cleanPath === '' 
+    ? 'https://interesten.be/' 
+    : `https://interesten.be${cleanPath}`;
+  
+  const existingCanonicalRegex = /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i;
+  if (existingCanonicalRegex.test(result)) {
+    result = result.replace(existingCanonicalRegex, `<link rel="canonical" href="${canonicalUrl}" />`);
+  } else if (result.includes('</head>')) {
+    result = result.replace(
+      '</head>',
+      `<link rel="canonical" href="${canonicalUrl}" />\n  </head>`
+    );
+  }
+  
+  const structuredDataScripts: string[] = [];
+  
+  if (seoConfig.slug === 'home') {
+    const websiteJson = escapeJsonForHtml(JSON.stringify(generateWebSiteSchema(), null, 2));
+    structuredDataScripts.push(`<script type="application/ld+json">\n${websiteJson}\n    </script>`);
+  } else {
+    const breadcrumbJson = escapeJsonForHtml(JSON.stringify(generateBreadcrumbSchema(url, seoConfig), null, 2));
+    structuredDataScripts.push(`<script type="application/ld+json">\n${breadcrumbJson}\n    </script>`);
+    
+    const calculatorSchema = generateCalculatorSchema(seoConfig, url);
+    if (calculatorSchema) {
+      const calculatorJson = escapeJsonForHtml(JSON.stringify(calculatorSchema, null, 2));
+      structuredDataScripts.push(`<script type="application/ld+json">\n${calculatorJson}\n    </script>`);
+    }
+  }
+  
+  if (structuredDataScripts.length > 0) {
+    const existingLdJsonRegex = /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/;
+    if (existingLdJsonRegex.test(result)) {
+      result = result.replace(existingLdJsonRegex, structuredDataScripts.join('\n    '));
+    } else if (result.includes('</head>')) {
+      result = result.replace(
+        '</head>',
+        `${structuredDataScripts.join('\n    ')}\n  </head>`
+      );
+    }
+  }
   
   return result;
 }

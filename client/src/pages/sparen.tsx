@@ -54,6 +54,42 @@ export default function SparenPage() {
               </div>
             </motion.div>
 
+            <motion.div variants={fadeInUp} className="max-w-4xl mx-auto">
+              <GlassCard className="p-8">
+                <h2 className="text-2xl font-bold mb-4">Slim sparen in België: alles wat je moet weten</h2>
+                <div className="space-y-4 text-muted-foreground">
+                  <p>
+                    België kent een uniek spaarsysteem met basisrente én getrouwheidspremie. De hoogste gecombineerde 
+                    rentes liggen momenteel rond <strong>2,5% tot 2,85%</strong>, maar voorwaarden verschillen sterk per bank. 
+                    Onze spaartools helpen je de beste keuze maken.
+                  </p>
+                  <p>
+                    <strong>Waarom sparen via onze tools?</strong>
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Vergelijk actuele rentes van alle Belgische banken</li>
+                    <li>Bereken je netto-opbrengst inclusief roerende voorheffing</li>
+                    <li>Ontdek termijnrekeningen en kasbons als alternatief</li>
+                    <li>Plan doelgericht sparen voor auto, vakantie of noodfonds</li>
+                  </ul>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            {seoConfig && seoConfig.faqs.length > 0 && (
+              <motion.div variants={fadeInUp} className="max-w-4xl mx-auto">
+                <h2 className="text-2xl font-bold mb-6 text-center">Veelgestelde vragen</h2>
+                <div className="space-y-4">
+                  {seoConfig.faqs.map((faq, index) => (
+                    <GlassCard key={index} className="p-6">
+                      <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
+                      <p className="text-muted-foreground">{faq.answer}</p>
+                    </GlassCard>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
             <motion.div
               variants={staggerChildren}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
