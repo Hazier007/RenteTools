@@ -13,6 +13,7 @@ import {
   FloatingNumber
 } from "@/components/design";
 import { staggerChildren, fadeInUp } from "@/lib/animations";
+import heroBackground from "@assets/Generated_Image_January_11,_2026_-_12_57AM_1768089450787.jpeg";
 
 export default function Home() {
   useSeoTags("home");
@@ -99,15 +100,22 @@ export default function Home() {
       <AnimatedMeshBackground variant="hero" />
       <Header />
 
-      {/* Hero Section */}
+      {/* Hero Section with Background Image */}
       <motion.section
         className="relative min-h-[90vh] flex items-center justify-center py-24 px-4"
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
         data-testid="hero-section"
+        style={{
+          backgroundImage: `url(${heroBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center right',
+          backgroundRepeat: 'no-repeat'
+        }}
       >
-        <div className="max-w-7xl mx-auto text-center space-y-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent" />
+        <div className="relative max-w-7xl mx-auto text-center space-y-10">
           <motion.div variants={fadeInUp} className="space-y-6">
             <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight">
               Hoogste Spaarrente België 2026 & 70+ Gratis Financiële Calculators
