@@ -41,7 +41,8 @@ export type HypotheekCalculation = z.infer<typeof hypotheekCalculationSchema>;
 export const bankTypeEnum = pgEnum('bank_type', ['retail', 'online', 'cooperative', 'investment']);
 export const productTypeEnum = pgEnum('product_type', [
   'spaarrekening', 'deposito', 'hypotheek', 'persoonlijke_lening', 'autolening',
-  'kredietkaart', 'beleggingsrekening', 'pensioensparen', 'kasbon', 'staatsbons'
+  'kredietkaart', 'beleggingsrekening', 'pensioensparen', 'kasbon', 'staatsbons',
+  'crypto_platform'
 ]);
 export const rateTypeEnum = pgEnum('rate_type', ['fixed', 'variable', 'promotional']);
 
