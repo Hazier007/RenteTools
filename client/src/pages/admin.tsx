@@ -563,7 +563,7 @@ function ProductForm({
   const [formData, setFormData] = useState({
     bankId: product?.bankId || "",
     name: product?.name || "",
-    productType: (product?.productType || "spaarrekening") as "spaarrekening" | "deposito" | "hypotheek" | "persoonlijke_lening" | "autolening" | "kredietkaart" | "beleggingsrekening" | "pensioensparen" | "kasbon" | "staatsbons",
+    productType: (product?.productType || "spaarrekening") as "spaarrekening" | "deposito" | "hypotheek" | "persoonlijke_lening" | "autolening" | "kredietkaart" | "beleggingsrekening" | "pensioensparen" | "kasbon" | "staatsbons" | "crypto_platform",
     description: product?.description || "",
     minAmount: product?.minAmount || "",
     maxAmount: product?.maxAmount || "",
@@ -642,6 +642,7 @@ function ProductForm({
               <SelectItem value="pensioensparen">Pensioensparen</SelectItem>
               <SelectItem value="kasbon">Kasbon</SelectItem>
               <SelectItem value="staatsbons">Staatsbons</SelectItem>
+              <SelectItem value="crypto_platform">Crypto Platform</SelectItem>
             </SelectContent>
           </Select>
         </div>
