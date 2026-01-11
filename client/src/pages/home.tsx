@@ -117,7 +117,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/60" />
         <div className="relative max-w-7xl mx-auto text-center space-y-10">
           <motion.div variants={fadeInUp} className="space-y-6">
-            <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight drop-shadow-lg">
+            <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight" outline>
               Hoogste Spaarrente België 2026 & 70+ Gratis Financiële Calculators
             </GradientText>
             <p className="text-lg md:text-xl text-gray-900 dark:text-gray-100 max-w-3xl mx-auto" data-testid="hero-subtitle">

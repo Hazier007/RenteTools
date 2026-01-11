@@ -5,12 +5,14 @@ interface GradientTextProps {
   children: ReactNode;
   className?: string;
   as?: 'h1' | 'h2' | 'h3' | 'p' | 'span';
+  outline?: boolean;
 }
 
 export function GradientText({ 
   children, 
   className, 
-  as = 'span' 
+  as = 'span',
+  outline = false
 }: GradientTextProps) {
   return createElement(
     as,
@@ -20,6 +22,7 @@ export function GradientText({
         'bg-clip-text text-transparent',
         'font-bold',
         'animate-gradient',
+        outline && 'gradient-text-outline',
         className
       ),
       'data-testid': 'gradient-text'
