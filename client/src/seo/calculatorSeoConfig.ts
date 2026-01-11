@@ -510,6 +510,87 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
+  "crypto-belasting-calculator": {
+    slug: "crypto-belasting-calculator",
+    category: "Beleggen",
+    pageTitle: "Belgische Crypto Belasting Calculator",
+    breadcrumbTitle: "Crypto Belasting",
+    metaTitle: "Crypto Belasting Calculator België - Hobby vs Professioneel 2026",
+    metaDescription: "Bereken crypto belasting in België. Goede huisvader (belastingvrij), speculatief (33%) of staking (30%). Gratis Belgische crypto tax calculator.",
+    faqs: [
+      {
+        question: "Moet ik belasting betalen op mijn crypto winsten in België?",
+        answer: "Dat hangt af van uw situatie. Als 'goede huisvader' (lange termijn, passief beleggen) zijn winsten belastingvrij. Bij speculatieve handel of professionele activiteit betaalt u 33% op meerwaarden."
+      },
+      {
+        question: "Wat is het goede huisvader principe voor crypto?",
+        answer: "Het goede huisvader principe betekent dat u belegt als deel van normaal vermogensbeheer: lange houdperiode, beperkte transacties, geen geleend geld, en passieve strategie. Winsten zijn dan belastingvrij."
+      },
+      {
+        question: "Hoeveel belasting betaal ik op staking rewards?",
+        answer: "Staking rewards worden in België beschouwd als roerend inkomen en zijn onderworpen aan 30% roerende voorheffing, ongeacht of u als hobby belegger of professioneel wordt geclassificeerd."
+      },
+      {
+        question: "Hoe weet de fiscus of ik speculatief handel?",
+        answer: "De fiscus kijkt naar meerdere factoren: frequentie van transacties, houdperiode, gebruik van leverage, tijdsbesteding, kennis, en het aandeel crypto in uw vermogen. Bij twijfel, consulteer een belastingadviseur."
+      }
+    ],
+    authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
+  },
+  "staking-apy-calculator": {
+    slug: "staking-apy-calculator",
+    category: "Beleggen",
+    pageTitle: "Staking APY Calculator",
+    breadcrumbTitle: "Staking APY",
+    metaTitle: "Staking APY Calculator België - Crypto Staking Rendement 2026",
+    metaDescription: "Bereken uw crypto staking rendement met APY naar APR conversie. Compound interest berekening voor staking rewards. Gratis Belgische staking calculator.",
+    faqs: [
+      {
+        question: "Wat is het verschil tussen APY en APR bij staking?",
+        answer: "APR is het jaarlijkse rentepercentage zonder samengestelde interest. APY houdt rekening met compound interest en is daarom hoger. Bij dagelijks compounding kan 10% APR resulteren in 10,52% APY."
+      },
+      {
+        question: "Hoeveel kan ik verdienen met crypto staking?",
+        answer: "Staking rendementen variëren sterk: 3-5% voor stabiele coins zoals ETH, tot 10-20% voor kleinere altcoins. Let op: hogere rendementen betekenen vaak hogere risico's."
+      },
+      {
+        question: "Moet ik belasting betalen op staking rewards in België?",
+        answer: "Ja, staking rewards worden beschouwd als roerend inkomen en zijn onderworpen aan 30% roerende voorheffing in België, ongeacht uw classificatie als hobby of professionele belegger."
+      },
+      {
+        question: "Wat zijn de risico's van crypto staking?",
+        answer: "Risico's omvatten: lock-up periodes waardoor u niet kunt verkopen, slashing bij validator fouten, smart contract risico's, en koersdalingen van de gestakete crypto."
+      }
+    ],
+    authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
+  },
+  "crypto-winst-verlies-calculator": {
+    slug: "crypto-winst-verlies-calculator",
+    category: "Beleggen",
+    pageTitle: "Crypto Winst/Verlies Calculator",
+    breadcrumbTitle: "Crypto Winst/Verlies",
+    metaTitle: "Crypto Winst/Verlies Calculator België - ROI Berekenen 2026",
+    metaDescription: "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator.",
+    faqs: [
+      {
+        question: "Hoe bereken ik mijn crypto winst of verlies?",
+        answer: "Trek uw totale investering (aankoopprijs + kosten) af van de huidige waarde. Vergeet niet om verkoopkosten mee te nemen voor een accurate netto winst/verlies berekening."
+      },
+      {
+        question: "Wat is cost basis bij crypto?",
+        answer: "Cost basis is uw totale investering per coin, inclusief aankoopprijs en alle bijkomende kosten zoals transactiefees. Dit is belangrijk voor belastingaangifte en ROI berekening."
+      },
+      {
+        question: "Hoe bereken ik mijn break-even prijs?",
+        answer: "Break-even is de prijs waarvoor u moet verkopen om geen winst of verlies te maken. Dit is uw cost basis plus eventuele verkoopkosten, gedeeld door het aantal coins."
+      },
+      {
+        question: "Welke kosten moet ik meerekenen bij crypto handel?",
+        answer: "Reken met: exchange trading fees (0,1-0,5%), network fees (gas fees), spread kosten, en eventuele stortings- of opnamekosten. Deze kunnen significant zijn bij kleinere bedragen."
+      }
+    ],
+    authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
+  },
   "pensioensparen-calculator": {
     slug: "pensioensparen-calculator",
     category: "Planning",
@@ -769,6 +850,9 @@ export const calculatorsByCategory: Record<SiloCategory, string[]> = {
     "etf-calculator",
     "obligatie-calculator",
     "cryptocurrency-calculator",
+    "crypto-belasting-calculator",
+    "staking-apy-calculator",
+    "crypto-winst-verlies-calculator",
     "dollar-cost-averaging-calculator",
     "portfolio-diversificatie-calculator",
     "reit-calculator",

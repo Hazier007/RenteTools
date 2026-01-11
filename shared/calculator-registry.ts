@@ -379,6 +379,28 @@ export const calculatorRegistry: Calculator[] = [
     )
   },
   {
+    slug: "staking-apy-calculator",
+    title: "Staking APY Calculator",
+    description: "Bereken uw crypto staking rendement met APY naar APR conversie. Compound interest berekening voor staking rewards. Gratis Belgische staking calculator.",
+    category: "Beleggen",
+    url: "/beleggen/staking-apy-calculator",
+    keywords: extractKeywords(
+      "Staking APY Calculator",
+      "Bereken uw crypto staking rendement met APY naar APR conversie. Compound interest berekening voor staking rewards. Gratis Belgische staking calculator."
+    )
+  },
+  {
+    slug: "crypto-winst-verlies-calculator",
+    title: "Crypto Winst/Verlies Calculator",
+    description: "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator.",
+    category: "Beleggen",
+    url: "/beleggen/crypto-winst-verlies-calculator",
+    keywords: extractKeywords(
+      "Crypto Winst/Verlies Calculator",
+      "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator."
+    )
+  },
+  {
     slug: "dollar-cost-averaging-calculator",
     title: "Dollar Cost Averaging Calculator",
     description: "Bereken voordelen van periodiek beleggen (DCA). Verminder risico door maandelijks te beleggen. Historische DCA resultaten voor België.",

@@ -38,6 +38,9 @@ const PortfolioDiversificatieCalculatorPage = lazy(() => import('@/pages/portfol
 const DollarCostAveragingCalculatorPage = lazy(() => import('@/pages/dollar-cost-averaging-calculator'));
 const REITCalculatorPage = lazy(() => import('@/pages/reit-calculator'));
 const CryptocurrencyCalculatorPage = lazy(() => import('@/pages/cryptocurrency-calculator'));
+const CryptoBelastingCalculatorPage = lazy(() => import('@/pages/crypto-belasting-calculator'));
+const StakingApyCalculatorPage = lazy(() => import('@/pages/staking-apy-calculator'));
+const CryptoWinstVerliesCalculatorPage = lazy(() => import('@/pages/crypto-winst-verlies-calculator'));
 const BelgischeBeleggingsfiscaliteitCalculatorPage = lazy(() => import('@/pages/belgische-beleggingsfiscaliteit-calculator'));
 
 const PensioenCalculatorPage = lazy(() => import('@/pages/pensioen-calculator'));
@@ -92,6 +95,9 @@ export const calculatorComponentRegistry: Record<string, ComponentType<any>> = {
   "dollar-cost-averaging-calculator": DollarCostAveragingCalculatorPage,
   "reit-calculator": REITCalculatorPage,
   "cryptocurrency-calculator": CryptocurrencyCalculatorPage,
+  "crypto-belasting-calculator": CryptoBelastingCalculatorPage,
+  "staking-apy-calculator": StakingApyCalculatorPage,
+  "crypto-winst-verlies-calculator": CryptoWinstVerliesCalculatorPage,
   "belgische-beleggingsfiscaliteit-calculator": BelgischeBeleggingsfiscaliteitCalculatorPage,
   
   "pensioen-calculator": PensioenCalculatorPage,
