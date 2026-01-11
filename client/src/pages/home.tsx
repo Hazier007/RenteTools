@@ -114,15 +114,17 @@ export default function Home() {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
         <div className="relative max-w-7xl mx-auto text-center space-y-10">
           <motion.div variants={fadeInUp} className="space-y-6">
-            <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight" outline>
-              Hoogste Spaarrente België 2026 & 70+ Gratis Financiële Calculators
-            </GradientText>
-            <p className="text-lg md:text-xl text-gray-900 dark:text-gray-100 max-w-3xl mx-auto" data-testid="hero-subtitle">
-              <strong>Krijg in 30 seconden duidelijkheid over je geldzaken.</strong> Van de actuele hoogste spaarrente vinden tot je hypotheek maandlast berekenen of wanneer je financieel onafhankelijk bent – alles gratis, anoniem en altijd up-to-date voor België.
-            </p>
+            <div className="inline-block bg-white/70 dark:bg-gray-900/70 backdrop-blur-md rounded-2xl px-6 py-4 md:px-10 md:py-6 shadow-lg border border-white/20 dark:border-white/10">
+              <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight">
+                Hoogste Spaarrente België 2026 & 70+ Gratis Financiële Calculators
+              </GradientText>
+              <p className="text-lg md:text-xl text-gray-800 dark:text-gray-200 max-w-3xl mx-auto mt-4" data-testid="hero-subtitle">
+                <strong>Krijg in 30 seconden duidelijkheid over je geldzaken.</strong> Van de actuele hoogste spaarrente vinden tot je hypotheek maandlast berekenen of wanneer je financieel onafhankelijk bent – alles gratis, anoniem en altijd up-to-date voor België.
+              </p>
+            </div>
           </motion.div>
 
           {/* Stats Grid */}
