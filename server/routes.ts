@@ -545,7 +545,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const post = await storage.createBlogPost(data);
       res.json(post);
     } catch (error) {
-      res.status(400).json({ error: "Invalid blog post data" });
+      console.error("Blog post validation error:", error);
+      res.status(400).json({ error: "Invalid blog post data", details: error instanceof Error ? error.message : String(error) });
     }
   });
 

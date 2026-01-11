@@ -256,6 +256,7 @@ export const insertBlogPostSchema = createInsertSchema(blogPostsTable, {
   slug: z.string().min(1, "Slug is verplicht"),
   seoTitle: z.string().min(1, "SEO titel is verplicht"),
   seoDescription: z.string().min(1, "SEO beschrijving is verplicht"),
+  publishDate: z.coerce.date(),
 }).omit({
   id: true,
   createdAt: true,
