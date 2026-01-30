@@ -1,7 +1,14 @@
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface SeoConfig {
   slug: string;
   metaTitle: string;
   metaDescription: string;
+  pageTitle?: string;
+  faqs?: FaqItem[];
 }
 
 export type SiloCategory = "Home" | "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
@@ -87,36 +94,74 @@ const categoryToPath: Record<SiloCategory, string> = {
   "Overige": "/overige",
 };
 
+const defaultFaqs = {
+  sparen: [
+    { question: "Hoeveel interest krijg ik op een spaarrekening?", answer: "De gemiddelde spaarrente in België ligt rond 1,5-2,5%. Dit bestaat uit een basisrente en getrouwheidspremie. De getrouwheidspremie krijgt u na 12 maanden trouw blijven bij dezelfde bank." },
+    { question: "Tot welk bedrag is spaarrente belastingvrij?", answer: "In 2026 is spaarrente belastingvrij tot 1.050 euro per jaar. Boven dit bedrag betaalt u 30% roerende voorheffing over het meerdere." },
+    { question: "Wat is de hoogste spaarrente in België?", answer: "De hoogste gecombineerde rentes liggen momenteel tussen 2% en 2,85% voor spaarrekeningen. Let wel op voorwaarden zoals maximumbedragen en looptijden." }
+  ],
+  lenen: [
+    { question: "Hoeveel kan ik maximaal lenen?", answer: "In België kunt u maximaal lenen tot 90% van de waarde van de woning (LTV). Uw maandlast mag niet hoger zijn dan 33% van uw netto inkomen." },
+    { question: "Wat is de laagste hypotheekrente in België?", answer: "De laagste hypotheekrente begint rond 2,5% voor korte looptijden. Voor vaste rentes van 20-25 jaar liggen de tarieven tussen 2,8% en 3,5%." },
+    { question: "Wat zijn de kosten van een lening?", answer: "Naast de interest betaalt u ook notariskosten, registratierechten, brandverzekering en eventueel schuldsaldoverzekering. Totaal ongeveer 10-15% van de leensom." }
+  ],
+  beleggen: [
+    { question: "Hoeveel belasting betaal ik op beleggingswinst?", answer: "In België betaalt u 30% roerende voorheffing op dividenden en interesten. Meerwaarden op aandelen zijn belastingvrij, tenzij u speculatief belegt." },
+    { question: "Wat is een veilig rendement bij beleggen?", answer: "Historisch gezien leveren gediversifieerde aandelenportefeuilles gemiddeld 7-9% per jaar op. Obligaties geven 2-4%. Houd rekening met inflatie en kosten." },
+    { question: "Zijn ETF's beter dan individuele aandelen?", answer: "ETF's bieden directe diversificatie tegen lage kosten. Voor beginners zijn breed gespreide ETF's vaak veiliger dan individuele aandelen." }
+  ],
+  planning: [
+    { question: "Hoeveel moet ik sparen voor mijn pensioen?", answer: "Financiële adviseurs raden aan om 15-20% van uw bruto-inkomen te sparen voor pensioen. Via pensioensparen krijgt u tot 30% belastingvoordeel." },
+    { question: "Wat is de 4%-regel voor pensioen?", answer: "De 4%-regel stelt dat u jaarlijks 4% van uw pensioenspaarpot kunt opnemen zonder deze uit te putten. Voor €500.000 is dat €20.000 per jaar." },
+    { question: "Hoeveel noodfonds moet ik hebben?", answer: "Experts adviseren 3-6 maanden vaste kosten als noodfonds. Voor een gezin met €3.000/maand kosten betekent dit €9.000-€18.000." }
+  ]
+};
+
 export const seoConfigs: Record<string, SeoConfig> = {
   "home": {
     slug: "home",
+    pageTitle: "Hoogste Spaarrente België 2026 + 70+ Gratis Calculators",
     metaTitle: "Hoogste Spaarrente België 2026 + 70+ Gratis Calculators",
-    metaDescription: "Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België 2026."
+    metaDescription: "Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België 2026.",
+    faqs: [
+      { question: "Wat kan ik doen op Interesten.be?", answer: "Op Interesten.be vindt u 70+ gratis financiële calculators voor sparen, lenen, beleggen en planning. Vergelijk spaarrentes, bereken uw hypotheek of plan uw FIRE-doel." },
+      { question: "Zijn de calculators gratis?", answer: "Ja, alle calculators op Interesten.be zijn 100% gratis te gebruiken. U hoeft niet in te loggen en wij slaan geen persoonlijke gegevens op." }
+    ]
   },
   "hoogste-spaarrente-belgie": {
     slug: "hoogste-spaarrente-belgie",
+    pageTitle: "Hoogste Spaarrente België December 2026",
     metaTitle: "Hoogste Spaarrente België December 2026: Top Banken",
-    metaDescription: "Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update december 2026."
+    metaDescription: "Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update december 2026.",
+    faqs: defaultFaqs.sparen
   },
   "deposito-calculator": {
     slug: "deposito-calculator",
+    pageTitle: "Deposito Calculator België",
     metaTitle: "Deposito Calculator België - Termijnrekening Rente Berekenen",
-    metaDescription: "Bereken uw deposito opbrengst in België. Vergelijk termijnrekening tarieven van 1,5% tot 3,5%. Inclusief roerende voorheffing berekening."
+    metaDescription: "Bereken uw deposito opbrengst in België. Vergelijk termijnrekening tarieven van 1,5% tot 3,5%. Inclusief roerende voorheffing berekening.",
+    faqs: defaultFaqs.sparen
   },
   "samengestelde-interest-berekenen": {
     slug: "samengestelde-interest-berekenen",
+    pageTitle: "Samengestelde Interest Berekenen België 2026",
     metaTitle: "Samengestelde Interest Berekenen België 2026",
-    metaDescription: "Zie hoe rente-op-rente je spaargeld laat groeien. Bereken incl. roerende voorheffing – gratis compound interest tool."
+    metaDescription: "Zie hoe rente-op-rente je spaargeld laat groeien. Bereken incl. roerende voorheffing – gratis compound interest tool.",
+    faqs: defaultFaqs.sparen
   },
   "doelspaarcalculator": {
     slug: "doelspaarcalculator",
+    pageTitle: "Doelspaar Calculator België",
     metaTitle: "Doelspaarcalculator België - Meerdere Spaardoelen Beheren",
-    metaDescription: "Plan al uw spaardoelen tegelijk. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer. Smart goal planning."
+    metaDescription: "Plan al uw spaardoelen tegelijk. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer. Smart goal planning.",
+    faqs: defaultFaqs.sparen
   },
   "spaarrekening-vergelijker": {
     slug: "spaarrekening-vergelijker",
+    pageTitle: "Spaarrekening Vergelijker België 2026",
     metaTitle: "Spaarrekening Vergelijker België 2026 - Beste Rentes",
-    metaDescription: "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2026."
+    metaDescription: "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2026.",
+    faqs: defaultFaqs.sparen
   },
   "kinderrekening-calculator": {
     slug: "kinderrekening-calculator",
@@ -150,8 +195,10 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "hypothecaire-lening-berekenen": {
     slug: "hypothecaire-lening-berekenen",
+    pageTitle: "Hypotheek Berekenen België 2026",
     metaTitle: "Hypotheek Berekenen België 2026: Maandlasten & Kosten",
-    metaDescription: "Bereken je hypotheek maandlasten 2026 incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België."
+    metaDescription: "Bereken je hypotheek maandlasten 2026 incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België.",
+    faqs: defaultFaqs.lenen
   },
   "woningkrediet-simulator": {
     slug: "woningkrediet-simulator",
@@ -235,8 +282,10 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "etf-calculator": {
     slug: "etf-calculator",
+    pageTitle: "ETF Calculator België",
     metaTitle: "ETF Calculator België - Index Fondsen Vergelijken 2026",
-    metaDescription: "Vergelijk ETF kosten en rendement. IWDA, VWCE en andere populaire index trackers. Bereken TER impact en verwacht rendement voor België."
+    metaDescription: "Vergelijk ETF kosten en rendement. IWDA, VWCE en andere populaire index trackers. Bereken TER impact en verwacht rendement voor België.",
+    faqs: defaultFaqs.beleggen
   },
   "obligatie-calculator": {
     slug: "obligatie-calculator",
@@ -275,8 +324,10 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "pensioensparen-calculator": {
     slug: "pensioensparen-calculator",
+    pageTitle: "Pensioensparen Berekenen België 2026",
     metaTitle: "Pensioensparen Berekenen België 2026: Belastingvoordeel",
-    metaDescription: "Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor 2026 – gratis calculator."
+    metaDescription: "Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor 2026 – gratis calculator.",
+    faqs: defaultFaqs.planning
   },
   "pensioen-calculator": {
     slug: "pensioen-calculator",
@@ -285,8 +336,10 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "fire-calculator": {
     slug: "fire-calculator",
+    pageTitle: "FIRE Calculator België",
     metaTitle: "FIRE Calculator België: Wanneer Financieel Onafhankelijk?",
-    metaDescription: "Bereken wanneer je FIRE bereikt (Lean/Fat) met Belgische fiscaliteit & roerende voorheffing. Gratis FIRE simulator 2026."
+    metaDescription: "Bereken wanneer je FIRE bereikt (Lean/Fat) met Belgische fiscaliteit & roerende voorheffing. Gratis FIRE simulator 2026.",
+    faqs: defaultFaqs.planning
   },
   "noodfonds-calculator": {
     slug: "noodfonds-calculator",
@@ -632,5 +685,72 @@ export function injectSeoMeta(html: string, url: string): string {
     }
   }
   
+  // Inject static content into <div id="root"> for SEO crawlers
+  const ssrContent = generateSSRContent(seoConfig, url);
+  if (ssrContent) {
+    result = result.replace(
+      '<div id="root"></div>',
+      `<div id="root">${ssrContent}</div>`
+    );
+  }
+  
   return result;
+}
+
+function generateSSRContent(seoConfig: SeoConfig, url: string): string {
+  const slug = seoConfig.slug;
+  const category = slugToCategory[slug];
+  const categoryName = category ? categoryToPrettyName[category] : '';
+  
+  // Generate breadcrumb HTML
+  const cleanPath = url.split('?')[0].split('#')[0];
+  let breadcrumbHtml = '<nav aria-label="breadcrumb" style="margin-bottom:1rem;font-size:0.875rem;color:#666;">';
+  breadcrumbHtml += '<a href="/" style="color:#2563eb;text-decoration:none;">Home</a>';
+  
+  if (category && category !== 'Home' && category !== 'Overige' && slug !== category.toLowerCase()) {
+    breadcrumbHtml += ` &gt; <a href="/${category.toLowerCase()}" style="color:#2563eb;text-decoration:none;">${categoryName}</a>`;
+  }
+  if (slug !== 'home') {
+    breadcrumbHtml += ` &gt; <span>${seoConfig.metaTitle.split(' - ')[0].split(' | ')[0]}</span>`;
+  }
+  breadcrumbHtml += '</nav>';
+  
+  // Main heading from meta title
+  const h1Title = seoConfig.pageTitle || seoConfig.metaTitle.split(' - ')[0].split(' | ')[0];
+  
+  // Build static content shell
+  let content = `
+    <div style="max-width:1200px;margin:0 auto;padding:2rem;font-family:system-ui,-apple-system,sans-serif;">
+      ${breadcrumbHtml}
+      <header style="margin-bottom:2rem;">
+        <h1 style="font-size:2rem;font-weight:700;color:#1a1a1a;margin-bottom:1rem;">${escapeHtmlAttribute(h1Title)}</h1>
+        <p style="font-size:1.125rem;color:#4a4a4a;line-height:1.6;">${escapeHtmlAttribute(seoConfig.metaDescription)}</p>
+      </header>
+      <main>
+        <p style="color:#666;">Loading calculator...</p>
+      </main>`;
+  
+  // Add FAQ section if available
+  if (seoConfig.faqs && seoConfig.faqs.length > 0) {
+    content += `
+      <section style="margin-top:3rem;">
+        <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:1.5rem;">Veelgestelde Vragen</h2>`;
+    
+    for (const faq of seoConfig.faqs) {
+      content += `
+        <div style="margin-bottom:1.5rem;">
+          <h3 style="font-size:1.125rem;font-weight:600;margin-bottom:0.5rem;">${escapeHtmlAttribute(faq.question)}</h3>
+          <p style="color:#4a4a4a;line-height:1.6;">${escapeHtmlAttribute(faq.answer)}</p>
+        </div>`;
+    }
+    content += '</section>';
+  }
+  
+  content += `
+      <footer style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e5e5;color:#666;font-size:0.875rem;">
+        <p>&copy; 2026 Interesten.be - Gratis Belgische financiële calculators</p>
+      </footer>
+    </div>`;
+  
+  return content;
 }
