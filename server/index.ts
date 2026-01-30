@@ -161,10 +161,21 @@ app.use((req, res, next) => {
     app.use(express.static(distPath));
     
     app.use("*", (req, res) => {
-      const indexPath = path.resolve(distPath, "index.html");
-      let html = fs.readFileSync(indexPath, "utf-8");
+      const urlPath = req.originalUrl.split('?')[0];
       
-      html = injectSeoMeta(html, req.originalUrl);
+      // Check for pre-rendered HTML at /route/index.html
+      const prerenderedPath = path.join(distPath, urlPath, "index.html");
+      
+      let html: string;
+      if (fs.existsSync(prerenderedPath)) {
+        // Serve pre-rendered HTML (already has full content)
+        html = fs.readFileSync(prerenderedPath, "utf-8");
+      } else {
+        // Fallback to root index.html with SEO meta injection
+        const indexPath = path.resolve(distPath, "index.html");
+        html = fs.readFileSync(indexPath, "utf-8");
+        html = injectSeoMeta(html, req.originalUrl);
+      }
       
       res.set("Content-Type", "text/html").send(html);
     });
