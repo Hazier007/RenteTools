@@ -43,30 +43,28 @@ function findChromium() {
   throw new Error('Chromium not found. Install via: nix-env -iA nixpkgs.chromium');
 }
 
-// Load routes from prerender-routes.json
+// Load routes from prerender-routes.json (always regenerate to ensure freshness)
 function loadRoutes() {
+  console.log('Generating routes from calculatorSeoConfig...');
+  execSync('node scripts/generate-routes.cjs', { cwd: rootDir, stdio: 'inherit' });
   const routesPath = path.join(rootDir, 'prerender-routes.json');
-  if (!fs.existsSync(routesPath)) {
-    console.log('Generating routes...');
-    execSync('node scripts/generate-routes.cjs', { cwd: rootDir, stdio: 'inherit' });
-  }
   return JSON.parse(fs.readFileSync(routesPath, 'utf8'));
 }
 
 // Start a simple static server for the dist folder
 async function startServer(port) {
+  const express = (await import('express')).default;
+  const app = express();
+  
+  // Serve static files
+  app.use(express.static(distDir));
+  
+  // SPA fallback - serve index.html for all routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(distDir, 'index.html'));
+  });
+  
   return new Promise((resolve, reject) => {
-    const express = (await import('express')).default;
-    const app = express();
-    
-    // Serve static files
-    app.use(express.static(distDir));
-    
-    // SPA fallback - serve index.html for all routes
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distDir, 'index.html'));
-    });
-    
     const server = app.listen(port, () => {
       console.log(`Static server running on http://localhost:${port}`);
       resolve(server);
