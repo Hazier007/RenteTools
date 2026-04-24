@@ -265,7 +265,7 @@ export default function InflatieCalculator() {
                     <CalculationResult
                       label={result.berekening === "toekomst" ? "Extra Geld Nodig" : "Koopkrachtverlies"}
                       value={formatCurrency(Math.abs(result.koopkrachtVerlies))}
-                      variant="destructive"
+                      variant="error"
                       data-testid="result-koopkrachtverlies"
                     />
                     <CalculationResult

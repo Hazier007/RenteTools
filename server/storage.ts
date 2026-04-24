@@ -154,8 +154,14 @@ export class MemStorage implements IStorage {
   async updateRssFeedFetchTime(id: string): Promise<void> { }
 }
 
-// Import and use DatabaseStorage for production
+// Import DatabaseStorage - database.ts now gracefully handles missing DATABASE_URL
 import { DatabaseStorage } from './db-storage';
 
-// Use database storage in production, memory storage for development if needed
-export const storage = process.env.NODE_ENV === 'test' ? new MemStorage() : new DatabaseStorage();
+// Use database storage when DATABASE_URL is available, otherwise use in-memory fallback
+if (!process.env.DATABASE_URL && process.env.NODE_ENV !== 'test') {
+  console.warn('DATABASE_URL not set — using MemStorage (calculators work, admin/API features disabled)');
+}
+
+export const storage: IStorage = (process.env.DATABASE_URL && process.env.NODE_ENV !== 'test')
+  ? new DatabaseStorage()
+  : new MemStorage();
