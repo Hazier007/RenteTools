@@ -88,6 +88,7 @@ const slugToCategory: Record<string, SiloCategory> = {
   "rentevoet-vergelijker": "Overige",
   "over-ons": "Overige",
   "privacy": "Overige",
+  "privacybeleid": "Overige",
   "voorwaarden": "Overige",
   "sitemap": "Overige",
   "blog": "Overige",
@@ -415,6 +416,11 @@ export const seoConfigs: Record<string, SeoConfig> = {
     metaTitle: "Privacy & Cookie Policy - Interesten.be",
     metaDescription: "Privacy policy en cookie informatie van Interesten.be. Lees hoe wij omgaan met uw gegevens."
   },
+  "privacybeleid": {
+    slug: "privacybeleid",
+    metaTitle: "Privacybeleid - Interesten.be",
+    metaDescription: "Hoe Hazier persoonsgegevens verwerkt op Interesten.be. AVG/GDPR-conform, met verwerkingsverantwoordelijke, doeleinden, cookies en uw rechten."
+  },
   "voorwaarden": {
     slug: "voorwaarden",
     metaTitle: "Algemene Voorwaarden - Interesten.be",
@@ -578,7 +584,7 @@ function generateCalculatorSchema(seoConfig: SeoConfig, url: string): object | n
   const slug = seoConfig.slug;
   const category = slugToCategory[slug];
   
-  const nonCalculatorSlugs = ['home', 'over-ons', 'privacy', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'sparen', 'lenen', 'beleggen', 'planning', 'overige'];
+  const nonCalculatorSlugs = ['home', 'over-ons', 'privacy', 'privacybeleid', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'sparen', 'lenen', 'beleggen', 'planning', 'overige'];
   if (!category || nonCalculatorSlugs.includes(slug)) {
     return null;
   }
