@@ -3,7 +3,6 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import CookieConsentBanner from "@/components/ui/cookie-consent-banner";
 import Redirect from "@/components/Redirect";
 import Home from "@/pages/home";
 import OverOns from "@/pages/over-ons";
@@ -225,7 +224,6 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
-        <CookieConsentBanner />
       </TooltipProvider>
     </QueryClientProvider>
   );
