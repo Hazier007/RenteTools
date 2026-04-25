@@ -7,7 +7,6 @@ import CookieConsentBanner from "@/components/ui/cookie-consent-banner";
 import Redirect from "@/components/Redirect";
 import Home from "@/pages/home";
 import OverOns from "@/pages/over-ons";
-import Privacy from "@/pages/privacy";
 import Privacybeleid from "@/pages/privacybeleid";
 import Voorwaarden from "@/pages/voorwaarden";
 import Sitemap from "@/pages/sitemap";
@@ -48,7 +47,9 @@ function Router() {
 
       {/* Static Information Pages */}
       <Route path="/over-ons" component={OverOns} />
-      <Route path="/privacy" component={Privacy} />
+      <Route path="/privacy">
+        {() => <Redirect to="/privacybeleid" />}
+      </Route>
       <Route path="/privacybeleid" component={Privacybeleid} />
       <Route path="/voorwaarden" component={Voorwaarden} />
       <Route path="/sitemap" component={Sitemap} />
