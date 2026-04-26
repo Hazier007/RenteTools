@@ -292,7 +292,6 @@ export class DatabaseStorage implements IStorage {
         AND r.is_active = true
         AND p.is_active = true
         AND b.is_active = true
-        AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate DESC
     `;
 
@@ -335,7 +334,6 @@ export class DatabaseStorage implements IStorage {
         AND r.is_active = true
         AND p.is_active = true
         AND b.is_active = true
-        AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate ASC
     `;
 
@@ -378,7 +376,6 @@ export class DatabaseStorage implements IStorage {
         AND r.is_active = true
         AND p.is_active = true
         AND b.is_active = true
-        AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate ASC
     `;
 
