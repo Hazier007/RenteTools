@@ -10,9 +10,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area, ComposedChart } from 'recharts';
+import { useState, lazy, Suspense } from "react";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import FaqSchema from "@/components/seo/FaqSchema";
+
+const DollarCostAveragingChart = lazy(() => import("./dollar-cost-averaging-chart"));
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
@@ -548,25 +550,9 @@ export default function DollarCostAveragingCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-80">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <ComposedChart data={vergelijkingsData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="maand" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          `€${Math.round(value).toLocaleString()}`,
-                          name === 'dcaWaarde' ? 'DCA Portfolio' : 
-                          name === 'lumpSumWaarde' ? 'Lump Sum Portfolio' :
-                          name === 'dcaGeïnvesteerd' ? 'DCA Geïnvesteerd' : name
-                        ]}
-                        labelFormatter={(label) => `Maand ${label}`}
-                      />
-                      <Area type="monotone" dataKey="dcaGeïnvesteerd" fill="#e0e7ff" stroke="#6366f1" strokeWidth={1} fillOpacity={0.3} />
-                      <Line type="monotone" dataKey="dcaWaarde" stroke="#3b82f6" strokeWidth={2} name="DCA Portfolio" />
-                      <Line type="monotone" dataKey="lumpSumWaarde" stroke="#8b5cf6" strokeWidth={2} name="Lump Sum Portfolio" />
-                    </ComposedChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <DollarCostAveragingChart data={vergelijkingsData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
