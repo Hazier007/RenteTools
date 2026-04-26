@@ -13,7 +13,8 @@ import {
   FloatingNumber
 } from "@/components/design";
 import { staggerChildren, fadeInUp } from "@/lib/animations";
-import heroBackground from "@assets/Generated_Image_January_11,_2026_-_12_57AM_1768089450787.jpeg";
+import heroBackgroundWebp from "@assets/hero-2026-lg.webp";
+import heroBackgroundAvif from "@assets/hero-2026-lg.avif";
 
 export default function Home() {
   useSeoTags("home");
@@ -108,7 +109,7 @@ export default function Home() {
         variants={fadeInUp}
         data-testid="hero-section"
         style={{
-          backgroundImage: `url(${heroBackground})`,
+          backgroundImage: `image-set(url(${heroBackgroundAvif}) type("image/avif"), url(${heroBackgroundWebp}) type("image/webp"))`,
           backgroundSize: 'cover',
           backgroundPosition: 'center right',
           backgroundRepeat: 'no-repeat'
