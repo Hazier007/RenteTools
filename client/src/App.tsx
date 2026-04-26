@@ -1,31 +1,47 @@
 import { Switch, Route } from "wouter";
+import { lazy, Suspense } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Redirect from "@/components/Redirect";
+
+// Eager: home, category hubs, and the 404 fallback. These are entry points
+// for the bulk of traffic and prerendering, so we avoid a network round-trip.
 import Home from "@/pages/home";
-import OverOns from "@/pages/over-ons";
-import Privacybeleid from "@/pages/privacybeleid";
-import Voorwaarden from "@/pages/voorwaarden";
-import Sitemap from "@/pages/sitemap";
-import AdminPage from "@/pages/admin";
-import BlogAutomationPage from "@/pages/admin/blog-automation";
-import BlogPage from "@/pages/blog";
-import BlogDetailPage from "@/pages/blog-detail";
-import NieuwsPage from "@/pages/nieuws";
 import SparenPage from "@/pages/sparen";
 import LenenPage from "@/pages/lenen";
 import BeleggenPage from "@/pages/beleggen";
 import PlanningPage from "@/pages/planning";
 import OverigePage from "@/pages/overige";
-import DynamicCalculatorPage from "@/pages/DynamicCalculatorPage";
 import NotFound from "@/pages/not-found";
+
+// Lazy: rare or heavy routes. Admin pulls TipTap, blog-detail pulls marked +
+// DOMPurify, calculators are already lazy inside DynamicCalculatorPage.
+const DynamicCalculatorPage = lazy(() => import("@/pages/DynamicCalculatorPage"));
+const NieuwsPage = lazy(() => import("@/pages/nieuws"));
+const BlogPage = lazy(() => import("@/pages/blog"));
+const BlogDetailPage = lazy(() => import("@/pages/blog-detail"));
+const AdminPage = lazy(() => import("@/pages/admin"));
+const BlogAutomationPage = lazy(() => import("@/pages/admin/blog-automation"));
+const OverOns = lazy(() => import("@/pages/over-ons"));
+const Privacybeleid = lazy(() => import("@/pages/privacybeleid"));
+const Voorwaarden = lazy(() => import("@/pages/voorwaarden"));
+const Sitemap = lazy(() => import("@/pages/sitemap"));
+
+function RouteFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" />
+    </div>
+  );
+}
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
+    <Suspense fallback={<RouteFallback />}>
+      <Switch>
+        <Route path="/" component={Home} />
       
       {/* Nieuws Page */}
       <Route path="/nieuws" component={NieuwsPage} />
@@ -215,7 +231,8 @@ function Router() {
       
       {/* 404 Not Found */}
       <Route component={NotFound} />
-    </Switch>
+      </Switch>
+    </Suspense>
   );
 }
 
