@@ -20,8 +20,7 @@ import { useSeoTags } from "@/hooks/use-seo-tags";
 
 import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 
-const KredietcapaciteitChart1 = lazy(() => import("./kredietcapaciteit-chart-1"));
-const KredietcapaciteitChart2 = lazy(() => import("./kredietcapaciteit-chart-2"));
+const KredietcapaciteitPieChart = lazy(() => import("./kredietcapaciteit-pie-chart"));
 const KredietcapaciteitChart3 = lazy(() => import("./kredietcapaciteit-chart-3"));
 const KredietcapaciteitChart4 = lazy(() => import("./kredietcapaciteit-chart-4"));
 
@@ -488,7 +487,7 @@ export default function KredietcapaciteitCalculatorPage() {
                 <CardContent>
                   <div className="h-64">
                     <Suspense fallback={<ChartSkeleton />}>
-                      <KredietcapaciteitChart1 data={inkomstenverdeling} />
+                      <KredietcapaciteitPieChart data={inkomstenverdeling} />
                     </Suspense>
                   </div>
                   <div className="text-center mt-2">
@@ -504,7 +503,7 @@ export default function KredietcapaciteitCalculatorPage() {
                 <CardContent>
                   <div className="h-64">
                     <Suspense fallback={<ChartSkeleton />}>
-                      <KredietcapaciteitChart2 data={uitgavenverdeling} />
+                      <KredietcapaciteitPieChart data={uitgavenverdeling} />
                     </Suspense>
                   </div>
                   <div className="text-center mt-2">

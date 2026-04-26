@@ -1,11 +1,10 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-
-interface KredietcapaciteitChart2Props {
+interface KredietcapaciteitPieChartProps {
   data: any[];
 }
 
-export default function KredietcapaciteitChart2({ data }: KredietcapaciteitChart2Props) {
+export default function KredietcapaciteitPieChart({ data }: KredietcapaciteitPieChartProps) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart>
@@ -19,7 +18,7 @@ export default function KredietcapaciteitChart2({ data }: KredietcapaciteitChart
           fill="#8884d8"
           dataKey="value"
         >
-          {data.map((entry, index) => (
+          {data.map((entry: any, index: number) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
