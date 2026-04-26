@@ -204,11 +204,10 @@ export class DatabaseStorage implements IStorage {
       FROM rates r
       JOIN products p ON r.product_id = p.id
       JOIN banks b ON p.bank_id = b.id
-      WHERE p.product_type = $1 
-        AND r.is_active = true 
-        AND p.is_active = true 
+      WHERE p.product_type = $1
+        AND r.is_active = true
+        AND p.is_active = true
         AND b.is_active = true
-        AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate DESC
     `;
 
