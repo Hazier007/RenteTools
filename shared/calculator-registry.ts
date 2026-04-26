@@ -379,6 +379,17 @@ export const calculatorRegistry: Calculator[] = [
     )
   },
   {
+    slug: "crypto-belasting-calculator",
+    title: "Crypto Belasting Calculator",
+    description: "Bereken crypto belasting in België. Goede huisvader (belastingvrij), speculatief (33%) of staking (30%). Gratis Belgische crypto tax calculator.",
+    category: "Beleggen",
+    url: "/beleggen/crypto-belasting-calculator",
+    keywords: extractKeywords(
+      "Crypto Belasting Calculator",
+      "Bereken crypto belasting in België. Goede huisvader (belastingvrij), speculatief (33%) of staking (30%). Gratis Belgische crypto tax calculator."
+    )
+  },
+  {
     slug: "staking-apy-calculator",
     title: "Staking APY Calculator",
     description: "Bereken uw crypto staking rendement met APY naar APR conversie. Compound interest berekening voor staking rewards. Gratis Belgische staking calculator.",

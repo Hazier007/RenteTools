@@ -46,6 +46,7 @@ function Router() {
 
       {/* Static Information Pages */}
       <Route path="/over-ons" component={OverOns} />
+      <Route path="/contact" component={OverOns} />
       <Route path="/privacy">
         {() => <Redirect to="/privacybeleid" />}
       </Route>
