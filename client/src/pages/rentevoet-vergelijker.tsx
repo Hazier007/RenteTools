@@ -9,14 +9,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const RentevoetChart1 = lazy(() => import("./rentevoet-chart-1"));
+const RentevoetChart2 = lazy(() => import("./rentevoet-chart-2"));
+const RentevoetChart3 = lazy(() => import("./rentevoet-chart-3"));
+const RentevoetChart4 = lazy(() => import("./rentevoet-chart-4"));
 
 export default function RentevoetVergelijkerPage() {
   const seoConfig = getSeoConfig("rentevoet-vergelijker");
@@ -407,21 +413,9 @@ export default function RentevoetVergelijkerPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={hypotheek.simulatieData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number, name: string) => [
-                              `${value.toFixed(2)}%`,
-                              name === 'vasteRente' ? 'Vaste rente' : 'Variabele rente'
-                            ]}
-                          />
-                          <Line type="monotone" dataKey="vasteRente" stroke="#8884d8" name="vasteRente" strokeDasharray="5 5" />
-                          <Line type="monotone" dataKey="variabeleRente" stroke="#82ca9d" name="variabeleRente" />
-                        </LineChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <RentevoetChart1 data={hypotheek.simulatieData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -432,16 +426,9 @@ export default function RentevoetVergelijkerPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={hypotheek.simulatieData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          <Area type="monotone" dataKey="cumulatiefVast" stackId="1" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                          <Area type="monotone" dataKey="cumulatiefVariabel" stackId="2" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-                        </AreaChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <RentevoetChart2 data={hypotheek.simulatieData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -454,16 +441,9 @@ export default function RentevoetVergelijkerPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={hypotheek.simulatieData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value)}`]} />
-                          <Line type="monotone" dataKey="vasteMaandlast" stroke="#8884d8" name="Vaste maandlast" strokeDasharray="5 5" />
-                          <Line type="monotone" dataKey="variabeleMaandlast" stroke="#82ca9d" name="Variabele maandlast" />
-                        </LineChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <RentevoetChart3 data={hypotheek.simulatieData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -476,16 +456,9 @@ export default function RentevoetVergelijkerPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={scenarioVergelijking}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="scenario" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          <Bar dataKey="vasteTotaal" fill="#8884d8" name="Vaste rente totaal" />
-                          <Bar dataKey="variabeleTotaal" fill="#82ca9d" name="Variabele rente totaal" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <RentevoetChart4 data={scenarioVergelijking} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>

@@ -7,14 +7,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const GroepssparenChart1 = lazy(() => import("./groepssparen-chart-1"));
+const GroepssparenChart2 = lazy(() => import("./groepssparen-chart-2"));
 
 export default function GroepssparenCalculatorPage() {
   const seoConfig = getSeoConfig("groepssparen-calculator");
@@ -419,56 +423,18 @@ export default function GroepssparenCalculatorPage() {
                   <div>
                     <h4 className="font-semibold mb-3">Maandelijkse progressie naar doel</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={progressie}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="maand" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number, name: string) => [
-                              `€${value.toLocaleString()}`,
-                              name === 'bedrag' ? 'Gespaard bedrag' : 'Doel'
-                            ]}
-                            labelFormatter={(maand) => `Maand ${maand}`}
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="bedrag" 
-                            stroke="#22c55e" 
-                            strokeWidth={2}
-                            name="bedrag"
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="doel" 
-                            stroke="#ef4444" 
-                            strokeWidth={2}
-                            strokeDasharray="5 5"
-                            name="doel"
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <GroepssparenChart1 data={progressie} />
+                      </Suspense>
                     </div>
                   </div>
 
                   <div>
                     <h4 className="font-semibold mb-3">Vergelijking groepsgroottes</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={grootteVergelijking}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="grootte" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number, name: string) => [
-                              `€${value.toLocaleString()}`,
-                              name === 'perPersoon' ? 'Per persoon' : 'Winst per persoon'
-                            ]}
-                          />
-                          <Bar dataKey="perPersoon" fill="#3b82f6" name="perPersoon" />
-                          <Bar dataKey="winstPerPersoon" fill="#22c55e" name="winstPerPersoon" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <GroepssparenChart2 data={grootteVergelijking} />
+                      </Suspense>
                     </div>
                   </div>
                 </div>

@@ -8,14 +8,18 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const VoorschotChart1 = lazy(() => import("./voorschot-chart-1"));
+const VoorschotChart2 = lazy(() => import("./voorschot-chart-2"));
 
 export default function VoorschotCalculatorPage() {
   const seoConfig = getSeoConfig("voorschot-calculator");
@@ -415,25 +419,9 @@ export default function VoorschotCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={kostenBreakdown}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                      >
-                        {kostenBreakdown.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <VoorschotChart1 data={kostenBreakdown} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
@@ -448,16 +436,9 @@ export default function VoorschotCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={terugbetalingSchema}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="maand" />
-                      <YAxis />
-                      <Tooltip formatter={(value: number) => [`€${Math.round(value)}`]} />
-                      <Bar dataKey="rente" stackId="a" fill="#8884d8" name="Rente" />
-                      <Bar dataKey="aflossing" stackId="a" fill="#82ca9d" name="Aflossing" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <VoorschotChart2 data={terugbetalingSchema} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>

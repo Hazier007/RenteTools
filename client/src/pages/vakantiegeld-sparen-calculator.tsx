@@ -7,14 +7,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const VakantiegeldSparenChart1 = lazy(() => import("./vakantiegeld-sparen-chart-1"));
+const VakantiegeldSparenChart2 = lazy(() => import("./vakantiegeld-sparen-chart-2"));
 
 export default function VakantiegeldSparenCalculatorPage() {
   const seoConfig = getSeoConfig("vakantiegeld-sparen-calculator");
@@ -404,50 +408,18 @@ export default function VakantiegeldSparenCalculatorPage() {
                   <div>
                     <h4 className="font-semibold mb-3">Groei naar uw doel</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={projectie}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number) => [`€${value.toLocaleString()}`, 'Totale waarde']}
-                            labelFormatter={(jaar) => `Na ${jaar} jaar`}
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="waarde" 
-                            stroke="#22c55e" 
-                            strokeWidth={2}
-                            name="waarde"
-                          />
-                          {/* Goal line */}
-                          <Line 
-                            type="monotone" 
-                            dataKey={() => geselecteerdDoel.kosten}
-                            stroke="#ef4444" 
-                            strokeWidth={2}
-                            strokeDasharray="5 5"
-                            name="doel"
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <VakantiegeldSparenChart1 data={projectie} doelKosten={geselecteerdDoel.kosten} />
+                      </Suspense>
                     </div>
                   </div>
 
                   <div>
                     <h4 className="font-semibold mb-3">Strategieën vergelijking (5 jaar)</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={spaarStrategieen}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="naam" angle={-45} textAnchor="end" height={100} fontSize={10} />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`, 'Waarde na 5 jaar']}
-                          />
-                          <Bar dataKey="na5jaar" fill="#22c55e" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <VakantiegeldSparenChart2 data={spaarStrategieen} />
+                      </Suspense>
                     </div>
                   </div>
                 </div>

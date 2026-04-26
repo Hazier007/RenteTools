@@ -11,14 +11,19 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, AreaChart, Area, ComposedChart } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const CryptocurrencyChart1 = lazy(() => import("./cryptocurrency-chart-1"));
+const CryptocurrencyChart2 = lazy(() => import("./cryptocurrency-chart-2"));
+const CryptocurrencyChart3 = lazy(() => import("./cryptocurrency-chart-3"));
 
 interface CryptoAsset {
   symbol: string;
@@ -621,25 +626,9 @@ export default function CryptocurrencyCalculatorPage() {
                   </div>
                   
                   <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={cryptoAssets}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={({ symbol, allocatie }) => `${symbol} ${allocatie}%`}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="allocatie"
-                        >
-                          {cryptoAssets.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.kleur} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(value: number) => [`${value}%`]} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                    <Suspense fallback={<ChartSkeleton />}>
+                      <CryptocurrencyChart1 data={cryptoAssets} />
+                    </Suspense>
                   </div>
                 </div>
               </CardContent>
@@ -661,28 +650,9 @@ export default function CryptocurrencyCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <ComposedChart data={historicalData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="periode" />
-                          <YAxis yAxisId="left" />
-                          <YAxis yAxisId="right" orientation="right" />
-                          <Tooltip 
-                            formatter={(value: number, name: string) => [
-                              name === 'portfolioWaarde' ? `€${Math.round(value).toLocaleString()}` : 
-                              name === 'btcKoers' ? `€${Math.round(value).toLocaleString()}` :
-                              `${value.toFixed(1)}%`,
-                              name === 'portfolioWaarde' ? 'Portfolio Waarde' :
-                              name === 'btcKoers' ? 'Bitcoin Koers' :
-                              name === 'rendement' ? 'Rendement' : name
-                            ]}
-                            labelFormatter={(label) => `Maand ${label}`}
-                          />
-                          <Area yAxisId="left" type="monotone" dataKey="portfolioWaarde" fill="#8884d8" fillOpacity={0.3} />
-                          <Line yAxisId="right" type="monotone" dataKey="btcKoers" stroke="#F7931A" strokeWidth={2} />
-                          <Line yAxisId="right" type="monotone" dataKey="rendement" stroke="#82ca9d" strokeWidth={2} />
-                        </ComposedChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <CryptocurrencyChart2 data={historicalData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -840,23 +810,9 @@ export default function CryptocurrencyCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <RadarChart data={cryptoAssets.map(asset => ({
-                          naam: asset.symbol,
-                          volatiliteit: asset.volatiliteit,
-                          marktKap: Math.log10(asset.marktKap) * 10, // Log scale for better visualization
-                          yield: asset.yield * 5, // Scale up for visibility
-                          allocatie: asset.allocatie
-                        }))}>
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey="naam" />
-                          <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                          <Radar name="Volatiliteit" dataKey="volatiliteit" stroke="#ff7300" fill="#ff7300" fillOpacity={0.3} />
-                          <Radar name="Marktkapitalisatie" dataKey="marktKap" stroke="#8884d8" fill="#8884d8" fillOpacity={0.3} />
-                          <Radar name="Yield (x5)" dataKey="yield" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.3} />
-                          <Tooltip />
-                        </RadarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <CryptocurrencyChart3 data={cryptoAssets} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>

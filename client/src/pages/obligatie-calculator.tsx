@@ -10,14 +10,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const ObligatieChart1 = lazy(() => import("./obligatie-chart-1"));
+const ObligatieChart2 = lazy(() => import("./obligatie-chart-2"));
 
 interface Obligatie {
   naam: string;
@@ -567,16 +571,9 @@ export default function ObligatieCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={resultaat.cashFlowData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          <Area type="monotone" dataKey="nettoCouponBetaling" stackId="1" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                          <Area type="monotone" dataKey="principaalTerugbetaling" stackId="1" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-                        </AreaChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <ObligatieChart1 data={resultaat.cashFlowData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -623,18 +620,9 @@ export default function ObligatieCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={resultaat.rentescenarios}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="renteverandering" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number) => [`${value}%`, 'Prijsverandering']}
-                            labelFormatter={(label) => `Renteverandering: ${label}%`}
-                          />
-                          <Bar dataKey="prijsVeranderingPercentage" fill="#8884d8" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <ObligatieChart2 data={resultaat.rentescenarios} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>

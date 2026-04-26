@@ -9,14 +9,18 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const DoorlopendKredietChart1 = lazy(() => import("./doorlopend-krediet-chart-1"));
+const DoorlopendKredietChart2 = lazy(() => import("./doorlopend-krediet-chart-2"));
 
 export default function DoorlopendKredietCalculatorPage() {
   const seoConfig = getSeoConfig("doorlopend-krediet-calculator");
@@ -465,21 +469,9 @@ export default function DoorlopendKredietCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={utilizationData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="maand" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          `€${Math.round(value).toLocaleString()}`,
-                          name === 'restSchuld' ? 'Restschuld' : 'Beschikbaar'
-                        ]}
-                      />
-                      <Area type="monotone" dataKey="restSchuld" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                      <Area type="monotone" dataKey="beschikbaar" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                    </AreaChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <DoorlopendKredietChart1 data={utilizationData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
@@ -494,17 +486,9 @@ export default function DoorlopendKredietCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={kostenVergelijking}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="item" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]}
-                      />
-                      <Bar dataKey="jaarlijks" fill="#8884d8" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <DoorlopendKredietChart2 data={kostenVergelijking} />
+                  </Suspense>
                 </div>
                 <div className="mt-4 space-y-2 text-sm">
                   {kostenVergelijking.map((item, index) => (

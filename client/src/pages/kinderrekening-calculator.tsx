@@ -8,14 +8,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const KinderrekeningChart1 = lazy(() => import("./kinderrekening-chart-1"));
+const KinderrekeningChart2 = lazy(() => import("./kinderrekening-chart-2"));
 
 export default function KinderrekeningCalculatorPage() {
   const seoConfig = getSeoConfig("kinderrekening-calculator");
@@ -341,32 +345,9 @@ export default function KinderrekeningCalculatorPage() {
                     <div>
                       <h4 className="font-semibold mb-3">Groei van het spaargeld</h4>
                       <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={timeline}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="jaar" />
-                            <YAxis />
-                            <Tooltip 
-                              formatter={(value: number) => [`€${value.toLocaleString()}`, '']}
-                              labelFormatter={(jaar) => `Leeftijd: ${jaar} jaar`}
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="waarde" 
-                              stroke="#2563eb" 
-                              strokeWidth={2}
-                              name="Totale waarde"
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="ingelegd" 
-                              stroke="#64748b" 
-                              strokeWidth={2}
-                              strokeDasharray="5 5"
-                              name="Totaal ingelegd"
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <KinderrekeningChart1 data={timeline} />
+                        </Suspense>
                       </div>
                     </div>
 
@@ -374,23 +355,9 @@ export default function KinderrekeningCalculatorPage() {
                       <div>
                         <h4 className="font-semibold mb-3">Verdeling eindwaarde</h4>
                         <div className="h-48">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                              <Pie
-                                data={verdeling}
-                                cx="50%"
-                                cy="50%"
-                                innerRadius={30}
-                                outerRadius={70}
-                                dataKey="value"
-                              >
-                                {verdeling.map((entry, index) => (
-                                  <Cell key={`cell-${index}`} fill={entry.color} />
-                                ))}
-                              </Pie>
-                              <Tooltip formatter={(value: number) => `€${Math.round(value).toLocaleString()}`} />
-                            </PieChart>
-                          </ResponsiveContainer>
+                          <Suspense fallback={<ChartSkeleton />}>
+                            <KinderrekeningChart2 data={verdeling} />
+                          </Suspense>
                         </div>
                       </div>
                     )}

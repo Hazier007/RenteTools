@@ -7,14 +7,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const KredietkaartChart1 = lazy(() => import("./kredietkaart-chart-1"));
+const KredietkaartChart2 = lazy(() => import("./kredietkaart-chart-2"));
 
 export default function KredietkaartCalculatorPage() {
   const seoConfig = getSeoConfig("kredietkaart-calculator");
@@ -299,44 +303,18 @@ export default function KredietkaartCalculatorPage() {
                   <div>
                     <h4 className="font-semibold mb-3">Vergelijking scenario's</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={vergelijkingData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="scenario" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number, name: string) => [
-                              name === 'maanden' ? `${Math.floor(value / 12)}j ${value % 12}m` : `€${Math.round(value).toLocaleString()}`,
-                              name === 'maanden' ? 'Tijd' : 'Totale kosten'
-                            ]}
-                          />
-                          <Bar dataKey="totaleKosten" fill="#ef4444" name="totaleKosten" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <KredietkaartChart1 data={vergelijkingData} />
+                      </Suspense>
                     </div>
 
                     {gekozenBetalingResultaat.schema.length > 0 && (
                       <div className="mt-6">
                         <h4 className="font-semibold mb-3">Evolutie restschuld</h4>
                         <div className="h-48">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <LineChart data={gekozenBetalingResultaat.schema}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="jaar" />
-                              <YAxis />
-                              <Tooltip 
-                                formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`, '']}
-                                labelFormatter={(jaar) => `Jaar ${jaar}`}
-                              />
-                              <Line 
-                                type="monotone" 
-                                dataKey="restschuld" 
-                                stroke="#ef4444" 
-                                strokeWidth={2}
-                                name="Restschuld"
-                              />
-                            </LineChart>
-                          </ResponsiveContainer>
+                          <Suspense fallback={<ChartSkeleton />}>
+                            <KredietkaartChart2 data={gekozenBetalingResultaat.schema} />
+                          </Suspense>
                         </div>
                       </div>
                     )}

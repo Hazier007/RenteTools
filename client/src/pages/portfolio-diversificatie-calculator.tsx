@@ -11,14 +11,19 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, AreaChart, Area } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const PortfolioDiversificatieChart1 = lazy(() => import("./portfolio-diversificatie-chart-1"));
+const PortfolioDiversificatieChart2 = lazy(() => import("./portfolio-diversificatie-chart-2"));
+const PortfolioDiversificatieChart3 = lazy(() => import("./portfolio-diversificatie-chart-3"));
 
 interface AssetClass {
   naam: string;
@@ -544,25 +549,9 @@ export default function PortfolioDiversificatieCalculatorPage() {
                   </div>
                   
                   <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={assetClasses}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={({ naam, allocatie }) => `${naam.split(' ')[0]} ${allocatie}%`}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="allocatie"
-                        >
-                          {assetClasses.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.kleur} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(value: number) => [`${value}%`]} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                    <Suspense fallback={<ChartSkeleton />}>
+                      <PortfolioDiversificatieChart1 data={assetClasses} />
+                    </Suspense>
                   </div>
                 </div>
               </CardContent>
@@ -584,17 +573,9 @@ export default function PortfolioDiversificatieCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={portfolioMetrics.projectieData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          <Area type="monotone" dataKey="conservatief" stackId="1" stroke="#ff7300" fill="#ff7300" fillOpacity={0.3} />
-                          <Area type="monotone" dataKey="verwacht" stackId="2" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                          <Area type="monotone" dataKey="optimistisch" stackId="3" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.3} />
-                        </AreaChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <PortfolioDiversificatieChart2 data={portfolioMetrics.projectieData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -635,21 +616,9 @@ export default function PortfolioDiversificatieCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <RadarChart data={assetClasses.map(asset => ({
-                          naam: asset.naam.split(' ')[0],
-                          rendement: asset.verwachtRendement,
-                          volatiliteit: asset.volatiliteit,
-                          allocatie: asset.allocatie
-                        }))}>
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey="naam" />
-                          <PolarRadiusAxis angle={30} domain={[0, 30]} />
-                          <Radar name="Rendement" dataKey="rendement" stroke="#8884d8" fill="#8884d8" fillOpacity={0.3} />
-                          <Radar name="Volatiliteit" dataKey="volatiliteit" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.3} />
-                          <Tooltip />
-                        </RadarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <PortfolioDiversificatieChart3 data={assetClasses} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>

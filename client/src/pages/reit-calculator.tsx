@@ -11,14 +11,19 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, AreaChart, Area } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const ReitChart1 = lazy(() => import("./reit-chart-1"));
+const ReitChart2 = lazy(() => import("./reit-chart-2"));
+const ReitChart3 = lazy(() => import("./reit-chart-3"));
 
 interface REITData {
   naam: string;
@@ -624,18 +629,9 @@ export default function REITCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={reitMetrics.projectieData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          <Area type="monotone" dataKey="portfolioWaarde" stackId="1" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                          {!reitInvestering.dividendHerbelegging && (
-                            <Area type="monotone" dataKey="cumulatiefDividend" stackId="1" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.4} />
-                          )}
-                        </AreaChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <ReitChart1 data={reitMetrics.projectieData} dividendHerbelegging={reitInvestering.dividendHerbelegging} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -676,18 +672,9 @@ export default function REITCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={renteScenarios}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="rente" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number) => [`${value}%`, 'Impact op REIT prijs']}
-                            labelFormatter={(label) => `Rente: ${label}%`}
-                          />
-                          <Bar dataKey="verwachtImpact" fill="#8884d8" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <ReitChart2 data={renteScenarios} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -725,28 +712,9 @@ export default function REITCalculatorPage() {
                   <CardContent>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <PieChart>
-                            <Pie
-                              data={Object.entries(allocatieAdvies.aanbeveling).map(([sector, percentage]) => ({
-                                name: sector,
-                                value: percentage
-                              }))}
-                              cx="50%"
-                              cy="50%"
-                              labelLine={false}
-                              label={({ name, value }) => `${name} ${value}%`}
-                              outerRadius={80}
-                              fill="#8884d8"
-                              dataKey="value"
-                            >
-                              {Object.entries(allocatieAdvies.aanbeveling).map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={`hsl(${index * 72}, 70%, 50%)`} />
-                              ))}
-                            </Pie>
-                            <Tooltip formatter={(value: number) => [`${value}%`]} />
-                          </PieChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <ReitChart3 data={allocatieAdvies.aanbeveling} />
+                        </Suspense>
                       </div>
                       
                       <div className="space-y-3">
