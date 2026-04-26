@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,9 +9,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import NumberInput from "@/components/ui/number-input";
 import CalculationResult from "@/components/ui/calculation-result";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { calculateSavingsGrowth } from "@/lib/calculations";
 import { formatCurrency, formatPercentage } from "@/lib/formatters";
+
+const SpaarrenteChart = lazy(() => import("./spaarrente-chart"));
 
 const spaarrenteSchema = z.object({
   startbedrag: z.number().min(0, "Startbedrag moet positief zijn"),
@@ -235,23 +237,9 @@ export default function SpaarrenteCalculator() {
                   <Card>
                     <CardContent className="p-4">
                       <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="jaar" />
-                            <YAxis />
-                            <Tooltip 
-                              formatter={(value) => [formatCurrency(value as number), "Saldo"]}
-                              labelFormatter={(label) => `Jaar ${label}`}
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="eindsaldo" 
-                              stroke="hsl(var(--primary))" 
-                              strokeWidth={2}
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <SpaarrenteChart data={chartData} />
+                        </Suspense>
                       </div>
                     </CardContent>
                   </Card>
