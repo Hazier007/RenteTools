@@ -1,11 +1,9 @@
 User-agent: *
 Allow: /
 
+# Block admin areas from indexing
+Disallow: /admin
+Disallow: /admin/
+
 # Sitemap
 Sitemap: https://interesten.be/sitemap.xml
-
-# Disallow admin or private areas (none currently)
-# Disallow: /admin/
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1

@@ -26,11 +26,12 @@ interface MortgageInput {
 
 export function calculateSavingsGrowth(input: SavingsCalculationInput) {
   const { startbedrag, storting = 0, stortingFrequentie, rente, looptijd, kapitalisatie } = input;
-  
+
   const jaarlijkseRente = rente / 100;
   let currentBalance = startbedrag;
+  let totalSimpleInterest = 0;
   const yearlyBreakdown = [];
-  
+
   // Calculate yearly deposits
   let jaarlijkseStorting = 0;
   if (stortingFrequentie === "maandelijks") {
@@ -38,39 +39,40 @@ export function calculateSavingsGrowth(input: SavingsCalculationInput) {
   } else if (stortingFrequentie === "jaarlijks") {
     jaarlijkseStorting = storting;
   }
-  
+
   for (let jaar = 1; jaar <= looptijd; jaar++) {
     const beginsaldo = currentBalance;
-    
+
     // Add yearly deposit at beginning of year
     currentBalance += jaarlijkseStorting;
-    
+
     // Calculate interest
-    let renteVerdient;
+    const renteVerdient = currentBalance * jaarlijkseRente;
+
     if (kapitalisatie) {
-      // Compound interest: interest on the balance including deposits
-      renteVerdient = currentBalance * jaarlijkseRente;
+      // Compound interest: add interest to balance (interest-on-interest next year)
       currentBalance += renteVerdient;
     } else {
-      // Simple interest: only on original amount plus deposits
-      renteVerdient = currentBalance * jaarlijkseRente;
-      // Don't add to balance for simple interest
+      // Simple interest: track interest separately, do NOT add to balance
+      // Next year's interest is calculated on principal + deposits only
+      totalSimpleInterest += renteVerdient;
     }
-    
+
     yearlyBreakdown.push({
       jaar,
       beginsaldo,
       storting: jaarlijkseStorting,
       rente: renteVerdient,
-      eindsaldo: kapitalisatie ? currentBalance : currentBalance
+      eindsaldo: kapitalisatie ? currentBalance : currentBalance + totalSimpleInterest
     });
   }
-  
+
   const totalDeposits = startbedrag + (jaarlijkseStorting * looptijd);
-  const totalInterest = currentBalance - totalDeposits;
-  
+  const finalAmount = kapitalisatie ? currentBalance : currentBalance + totalSimpleInterest;
+  const totalInterest = finalAmount - totalDeposits;
+
   return {
-    eindbedrag: currentBalance,
+    eindbedrag: finalAmount,
     totaleInterest: totalInterest,
     inbreng: totalDeposits,
     yearlyBreakdown

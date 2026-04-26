@@ -12,7 +12,8 @@ const categoryUrls: Record<SiloCategory, string> = {
   "Sparen": "/hoogste-spaarrente-belgie",
   "Lenen": "/hypothecaire-lening-berekenen",
   "Beleggen": "/beleggingsrente-calculator",
-  "Planning": "/pensioensparen-calculator"
+  "Planning": "/pensioensparen-calculator",
+  "Overige": "/"
 };
 
 export default function PageBreadcrumb({ category, pageTitle }: PageBreadcrumbProps) {

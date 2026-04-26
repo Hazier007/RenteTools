@@ -7,9 +7,18 @@ import { marked } from 'marked';
 import { injectInnerLinks } from './innerlink-service';
 
 const rssParser = new Parser();
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-});
+
+// Lazy-initialize OpenAI client to avoid crashing when OPENAI_API_KEY is not set
+let _openai: OpenAI | null = null;
+function getOpenAI(): OpenAI {
+  if (!_openai) {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY environment variable is required for blog automation');
+    }
+    _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return _openai;
+}
 
 interface RSSItem {
   title?: string;
@@ -67,7 +76,7 @@ Geef je beoordeling terug in JSON formaat:
 
 Alleen JSON, geen extra tekst.`;
 
-      const completion = await openai.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
           {
@@ -180,7 +189,7 @@ INSTRUCTIES:
 
 Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
 
-      const completion = await openai.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
           {
@@ -315,7 +324,7 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
 
   private async generateTitle(originalTitle: string, category: string): Promise<string> {
     try {
-      const completion = await openai.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
           {
@@ -336,7 +345,7 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
 
   private async generateExcerpt(content: string): Promise<string> {
     try {
-      const completion = await openai.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
           {
@@ -360,7 +369,7 @@ Genereer ALLEEN de content in markdown formaat. Geen extra tekst.`;
     keywords: string[];
   }> {
     try {
-      const completion = await openai.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
           {

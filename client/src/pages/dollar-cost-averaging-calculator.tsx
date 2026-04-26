@@ -61,7 +61,7 @@ export default function DollarCostAveragingCalculatorPage() {
     const maandelijksRendement = dcaData.gemiddeldeRendement / 12 / 100;
     const maandelijkseVolatiliteit = dcaData.volatiliteit / Math.sqrt(12) / 100;
     
-    const marktData = [];
+    const marktData: MarketData[] = [];
     let huidigeKoers = dcaData.startKoers;
     
     // Add some historical-like patterns

@@ -23,6 +23,23 @@ export interface CalculatorSeoConfig {
   previewImage?: string;
 }
 
+function getCurrentMonth(): string {
+  const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+  return months[new Date().getMonth()];
+}
+
+function getCurrentYear(): number {
+  return new Date().getFullYear();
+}
+
+function getCurrentDateLabel(): string {
+  return `${getCurrentMonth()} ${getCurrentYear()}`;
+}
+
+function capitalizeFirst(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const defaultAuthorityLinks = {
   nbb: {
     title: "Nationale Bank van België (NBB)",
@@ -55,7 +72,7 @@ const defaultFaqsBySilo: Record<SiloCategory, FaqItem[]> = {
     },
     {
       question: "Tot welk bedrag is spaarrente belastingvrij?",
-      answer: "In 2026 is spaarrente belastingvrij tot 980 euro per jaar. Boven dit bedrag betaalt u 30% roerende voorheffing over het meerdere."
+      answer: `In ${getCurrentYear()} is spaarrente belastingvrij tot 980 euro per jaar. Boven dit bedrag betaalt u 30% roerende voorheffing over het meerdere.`
     },
     {
       question: "Wat is de hoogste spaarrente in België?",
@@ -126,20 +143,20 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "home": {
     slug: "home",
     category: "Overige",
-    pageTitle: "Hoogste Spaarrente België 2026 + 70+ Gratis Calculators",
+    pageTitle: `Hoogste Spaarrente België ${getCurrentYear()} + 70+ Gratis Calculators`,
     breadcrumbTitle: "Home",
-    metaTitle: "Hoogste Spaarrente België 2026 + 70+ Gratis Calculators",
-    metaDescription: "Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België 2026.",
+    metaTitle: `Hoogste Spaarrente België ${getCurrentYear()} + 70+ Gratis Calculators`,
+    metaDescription: `Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België ${getCurrentYear()}.`,
     faqs: [],
     authorityLinks: []
   },
   "hoogste-spaarrente-belgie": {
     slug: "hoogste-spaarrente-belgie",
     category: "Sparen",
-    pageTitle: "Hoogste Spaarrente België December 2026",
+    pageTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}`,
     breadcrumbTitle: "Hoogste Spaarrente",
-    metaTitle: "Hoogste Spaarrente België December 2026: Top Banken",
-    metaDescription: "Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update december 2026.",
+    metaTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}: Top Banken`,
+    metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update ${getCurrentDateLabel()}.`,
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -173,9 +190,9 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "samengestelde-interest-berekenen": {
     slug: "samengestelde-interest-berekenen",
     category: "Sparen",
-    pageTitle: "Samengestelde Interest Berekenen België 2026",
+    pageTitle: `Samengestelde Interest Berekenen België ${getCurrentYear()}`,
     breadcrumbTitle: "Samengestelde Interest",
-    metaTitle: "Samengestelde Interest Berekenen België 2026",
+    metaTitle: `Samengestelde Interest Berekenen België ${getCurrentYear()}`,
     metaDescription: "Zie hoe rente-op-rente je spaargeld laat groeien. Bereken incl. roerende voorheffing – gratis compound interest tool.",
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
@@ -195,8 +212,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Sparen",
     pageTitle: "Spaarrekening Vergelijker",
     breadcrumbTitle: "Spaarrekening Vergelijker",
-    metaTitle: "Spaarrekening Vergelijker België 2026 - Beste Rentes",
-    metaDescription: "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2026.",
+    metaTitle: `Spaarrekening Vergelijker België ${getCurrentYear()} - Beste Rentes`,
+    metaDescription: `Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente ${getCurrentYear()}.`,
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -223,10 +240,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "termijnrekening-calculator": {
     slug: "termijnrekening-calculator",
     category: "Sparen",
-    pageTitle: "Termijnrekening Hoogste Rente België 2026",
+    pageTitle: `Termijnrekening Hoogste Rente België ${getCurrentYear()}`,
     breadcrumbTitle: "Termijnrekening",
-    metaTitle: "Termijnrekening Hoogste Rente België 2026",
-    metaDescription: "Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool december 2026.",
+    metaTitle: `Termijnrekening Hoogste Rente België ${getCurrentYear()}`,
+    metaDescription: `Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool ${getCurrentDateLabel()}.`,
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
@@ -263,10 +280,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "hypothecaire-lening-berekenen": {
     slug: "hypothecaire-lening-berekenen",
     category: "Lenen",
-    pageTitle: "Hypotheek Berekenen België 2026",
+    pageTitle: `Hypotheek Berekenen België ${getCurrentYear()}`,
     breadcrumbTitle: "Hypothecaire Lening",
-    metaTitle: "Hypotheek Berekenen België 2026: Maandlasten & Kosten",
-    metaDescription: "Bereken je hypotheek maandlasten 2026 incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België.",
+    metaTitle: `Hypotheek Berekenen België ${getCurrentYear()}: Maandlasten & Kosten`,
+    metaDescription: `Bereken je hypotheek maandlasten ${getCurrentYear()} incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België.`,
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -275,7 +292,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Woningkrediet Simulator",
     breadcrumbTitle: "Woningkrediet Simulator",
-    metaTitle: "Woningkrediet Simulator België - Hoeveel Kan Ik Lenen 2026",
+    metaTitle: `Woningkrediet Simulator België - Hoeveel Kan Ik Lenen ${getCurrentYear()}`,
     metaDescription: "Simuleer uw woningkrediet in België. Bereken leencapaciteit, maandlast en vergelijk vaste vs variabele rente. Tot 90% LTV mogelijk.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
@@ -305,7 +322,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Lening Herfinancieren",
     breadcrumbTitle: "Lening Herfinancieren",
-    metaTitle: "Lening Herfinancieren België - Hypotheek Oversluiten 2026",
+    metaTitle: `Lening Herfinancieren België - Hypotheek Oversluiten ${getCurrentYear()}`,
     metaDescription: "Bereken of herfinancieren voordelig is. Vergelijk nieuwe rente met vervroegde terugbetalingskosten. Bespaar tot €10.000+ in België.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
@@ -335,7 +352,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Kredietvergelijker België",
     breadcrumbTitle: "Kredietvergelijker",
-    metaTitle: "Kredietvergelijker België 2026 - Beste Leningrentes",
+    metaTitle: `Kredietvergelijker België ${getCurrentYear()} - Beste Leningrentes`,
     metaDescription: "Vergelijk alle kredieten in België. Persoonlijke leningen, autokredieten en hypotheken. Vind de laagste rente en beste voorwaarden.",
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
@@ -405,8 +422,8 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Lenen",
     pageTitle: "Wettelijke Rentevoet België",
     breadcrumbTitle: "Wettelijke Rentevoet",
-    metaTitle: "Wettelijke Rentevoet België 2026 - Actuele Tarieven NBB",
-    metaDescription: "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2026.",
+    metaTitle: `Wettelijke Rentevoet België ${getCurrentYear()} - Actuele Tarieven NBB`,
+    metaDescription: `Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven ${getCurrentYear()}.`,
     faqs: defaultFaqsBySilo.Lenen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
@@ -435,7 +452,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "ETF Calculator",
     breadcrumbTitle: "ETF Calculator",
-    metaTitle: "ETF Calculator België - Index Fondsen Vergelijken 2026",
+    metaTitle: `ETF Calculator België - Index Fondsen Vergelijken ${getCurrentYear()}`,
     metaDescription: "Vergelijk ETF kosten en rendement. IWDA, VWCE en andere populaire index trackers. Bereken TER impact en verwacht rendement voor België.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.fodFinancien]
@@ -503,9 +520,9 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "roerende-voorheffing-calculator": {
     slug: "roerende-voorheffing-calculator",
     category: "Beleggen",
-    pageTitle: "Roerende Voorheffing Berekenen 2026 België",
+    pageTitle: `Roerende Voorheffing Berekenen ${getCurrentYear()} België`,
     breadcrumbTitle: "Roerende Voorheffing",
-    metaTitle: "Roerende Voorheffing Berekenen 2026 België",
+    metaTitle: `Roerende Voorheffing Berekenen ${getCurrentYear()} België`,
     metaDescription: "Bereken je roerende voorheffing op interest/dividenden + vrijstelling tot €1050. Tips om belasting te minimaliseren – gratis tool.",
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
@@ -515,7 +532,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Belgische Crypto Belasting Calculator",
     breadcrumbTitle: "Crypto Belasting",
-    metaTitle: "Crypto Belasting Calculator België - Hobby vs Professioneel 2026",
+    metaTitle: `Crypto Belasting Calculator België - Hobby vs Professioneel ${getCurrentYear()}`,
     metaDescription: "Bereken crypto belasting in België. Goede huisvader (belastingvrij), speculatief (33%) of staking (30%). Gratis Belgische crypto tax calculator.",
     faqs: [
       {
@@ -542,7 +559,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Staking APY Calculator",
     breadcrumbTitle: "Staking APY",
-    metaTitle: "Staking APY Calculator België - Crypto Staking Rendement 2026",
+    metaTitle: `Staking APY Calculator België - Crypto Staking Rendement ${getCurrentYear()}`,
     metaDescription: "Bereken uw crypto staking rendement met APY naar APR conversie. Compound interest berekening voor staking rewards. Gratis Belgische staking calculator.",
     faqs: [
       {
@@ -569,7 +586,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Beleggen",
     pageTitle: "Crypto Winst/Verlies Calculator",
     breadcrumbTitle: "Crypto Winst/Verlies",
-    metaTitle: "Crypto Winst/Verlies Calculator België - ROI Berekenen 2026",
+    metaTitle: `Crypto Winst/Verlies Calculator België - ROI Berekenen ${getCurrentYear()}`,
     metaDescription: "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator.",
     faqs: [
       {
@@ -594,10 +611,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "pensioensparen-calculator": {
     slug: "pensioensparen-calculator",
     category: "Planning",
-    pageTitle: "Pensioensparen Berekenen België 2026",
+    pageTitle: `Pensioensparen Berekenen België ${getCurrentYear()}`,
     breadcrumbTitle: "Pensioensparen",
-    metaTitle: "Pensioensparen Berekenen België 2026: Belastingvoordeel",
-    metaDescription: "Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor 2026 – gratis calculator.",
+    metaTitle: `Pensioensparen Berekenen België ${getCurrentYear()}: Belastingvoordeel`,
+    metaDescription: `Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor ${getCurrentYear()} – gratis calculator.`,
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -617,7 +634,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     pageTitle: "FIRE Calculator België",
     breadcrumbTitle: "FIRE Calculator",
     metaTitle: "FIRE Calculator België: Wanneer Financieel Onafhankelijk?",
-    metaDescription: "Bereken wanneer je FIRE bereikt (Lean/Fat) met Belgische fiscaliteit & roerende voorheffing. Gratis FIRE simulator 2026.",
+    metaDescription: `Bereken wanneer je FIRE bereikt (Lean/Fat) met Belgische fiscaliteit & roerende voorheffing. Gratis FIRE simulator ${getCurrentYear()}.`,
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -674,10 +691,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "inflatie-calculator-belgie": {
     slug: "inflatie-calculator-belgie",
     category: "Planning",
-    pageTitle: "Inflatie Calculator België 2026",
+    pageTitle: `Inflatie Calculator België ${getCurrentYear()}`,
     breadcrumbTitle: "Inflatie Calculator",
-    metaTitle: "Inflatie Calculator België 2026: Bescherm Je Spaargeld",
-    metaDescription: "Bereken hoe inflatie je spaargeld aantast + tips om je koopkracht te beschermen. Actueel voor 2026 – gratis tool België.",
+    metaTitle: `Inflatie Calculator België ${getCurrentYear()}: Bescherm Je Spaargeld`,
+    metaDescription: `Bereken hoe inflatie je spaargeld aantast + tips om je koopkracht te beschermen. Actueel voor ${getCurrentYear()} – gratis tool België.`,
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
@@ -706,7 +723,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     category: "Planning",
     pageTitle: "Rentevoet Vergelijker",
     breadcrumbTitle: "Rentevoet Vergelijker",
-    metaTitle: "Rentevoet Vergelijker België - Vast vs Variabel 2026",
+    metaTitle: `Rentevoet Vergelijker België - Vast vs Variabel ${getCurrentYear()}`,
     metaDescription: "Vergelijk vaste en variabele rentevoeten. Spaarrentes, hypotheekrentes en beleggingsrendementen in België. Vind de beste rente.",
     faqs: defaultFaqsBySilo.Planning,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]

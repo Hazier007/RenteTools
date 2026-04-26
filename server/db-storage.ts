@@ -1,5 +1,5 @@
 import { eq, and, desc, gte } from 'drizzle-orm';
-import { db, usersTable, banksTable, productsTable, ratesTable, rateHistoryTable, blogPostsTable, rssFeedsTable } from './database';
+import { db, client, usersTable, banksTable, productsTable, ratesTable, rateHistoryTable, blogPostsTable, rssFeedsTable } from './database';
 import type { IStorage } from './storage';
 import type { 
   User,
@@ -191,8 +191,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getCurrentRatesByType(productType: string): Promise<RateComparison> {
-    const query = `
-      SELECT 
+    const rawResults = await client`
+      SELECT
         b.name as bank_name,
         p.name as product_name,
         r.base_rate,
@@ -204,20 +204,15 @@ export class DatabaseStorage implements IStorage {
       FROM rates r
       JOIN products p ON r.product_id = p.id
       JOIN banks b ON p.bank_id = b.id
-      WHERE p.product_type = $1 
-        AND r.is_active = true 
-        AND p.is_active = true 
+      WHERE p.product_type = ${productType}
+        AND r.is_active = true
+        AND p.is_active = true
         AND b.is_active = true
         AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate DESC
     `;
 
-    const rawResults = await db.execute({
-      sql: query,
-      args: [productType]
-    });
-
-    const rates = rawResults.rows.map((row: any) => ({
+    const rates = rawResults.map((row: any) => ({
       bankName: row.bank_name,
       productName: row.product_name,
       baseRate: parseFloat(row.base_rate),
@@ -278,21 +273,8 @@ export class DatabaseStorage implements IStorage {
 
   // Comparison operations
   async compareSavingsRates(minAmount?: number, maxAmount?: number): Promise<RateComparison> {
-    let whereClause = "WHERE p.product_type = 'spaarrekening'";
-    const args: any[] = [];
-    
-    if (minAmount) {
-      whereClause += " AND (r.min_amount IS NULL OR r.min_amount <= $" + (args.length + 1) + ")";
-      args.push(minAmount);
-    }
-    
-    if (maxAmount) {
-      whereClause += " AND (r.max_amount IS NULL OR r.max_amount >= $" + (args.length + 1) + ")";
-      args.push(maxAmount);
-    }
-
-    const query = `
-      SELECT 
+    const rawResults = await client`
+      SELECT
         b.name as bank_name,
         p.name as product_name,
         r.base_rate,
@@ -304,20 +286,17 @@ export class DatabaseStorage implements IStorage {
       FROM rates r
       JOIN products p ON r.product_id = p.id
       JOIN banks b ON p.bank_id = b.id
-      ${whereClause}
-        AND r.is_active = true 
-        AND p.is_active = true 
+      WHERE p.product_type = 'spaarrekening'
+        ${minAmount ? client`AND (r.min_amount IS NULL OR r.min_amount <= ${minAmount})` : client``}
+        ${maxAmount ? client`AND (r.max_amount IS NULL OR r.max_amount >= ${maxAmount})` : client``}
+        AND r.is_active = true
+        AND p.is_active = true
         AND b.is_active = true
         AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate DESC
     `;
 
-    const rawResults = await db.execute({
-      sql: query,
-      args
-    });
-
-    const rates = rawResults.rows.map((row: any) => ({
+    const rates = rawResults.map((row: any) => ({
       bankName: row.bank_name,
       productName: row.product_name,
       baseRate: parseFloat(row.base_rate),
@@ -335,8 +314,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async compareMortgageRates(amount: number, term: number): Promise<RateComparison> {
-    const query = `
-      SELECT 
+    const rawResults = await client`
+      SELECT
         b.name as bank_name,
         p.name as product_name,
         r.base_rate,
@@ -349,23 +328,18 @@ export class DatabaseStorage implements IStorage {
       JOIN products p ON r.product_id = p.id
       JOIN banks b ON p.bank_id = b.id
       WHERE p.product_type = 'hypotheek'
-        AND (r.min_amount IS NULL OR r.min_amount <= $1)
-        AND (r.max_amount IS NULL OR r.max_amount >= $1)
-        AND (p.min_term IS NULL OR p.min_term <= $2)
-        AND (p.max_term IS NULL OR p.max_term >= $2)
-        AND r.is_active = true 
-        AND p.is_active = true 
+        AND (r.min_amount IS NULL OR r.min_amount <= ${amount})
+        AND (r.max_amount IS NULL OR r.max_amount >= ${amount})
+        AND (p.min_term IS NULL OR p.min_term <= ${term})
+        AND (p.max_term IS NULL OR p.max_term >= ${term})
+        AND r.is_active = true
+        AND p.is_active = true
         AND b.is_active = true
         AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate ASC
     `;
 
-    const rawResults = await db.execute({
-      sql: query,
-      args: [amount, term]
-    });
-
-    const rates = rawResults.rows.map((row: any) => ({
+    const rates = rawResults.map((row: any) => ({
       bankName: row.bank_name,
       productName: row.product_name,
       baseRate: parseFloat(row.base_rate),
@@ -383,8 +357,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async comparePersonalLoanRates(amount: number, term: number): Promise<RateComparison> {
-    const query = `
-      SELECT 
+    const rawResults = await client`
+      SELECT
         b.name as bank_name,
         p.name as product_name,
         r.base_rate,
@@ -397,23 +371,18 @@ export class DatabaseStorage implements IStorage {
       JOIN products p ON r.product_id = p.id
       JOIN banks b ON p.bank_id = b.id
       WHERE p.product_type = 'persoonlijke_lening'
-        AND (r.min_amount IS NULL OR r.min_amount <= $1)
-        AND (r.max_amount IS NULL OR r.max_amount >= $1)
-        AND (p.min_term IS NULL OR p.min_term <= $2)
-        AND (p.max_term IS NULL OR p.max_term >= $2)
-        AND r.is_active = true 
-        AND p.is_active = true 
+        AND (r.min_amount IS NULL OR r.min_amount <= ${amount})
+        AND (r.max_amount IS NULL OR r.max_amount >= ${amount})
+        AND (p.min_term IS NULL OR p.min_term <= ${term})
+        AND (p.max_term IS NULL OR p.max_term >= ${term})
+        AND r.is_active = true
+        AND p.is_active = true
         AND b.is_active = true
         AND (r.expiry_date IS NULL OR r.expiry_date > NOW())
       ORDER BY total_rate ASC
     `;
 
-    const rawResults = await db.execute({
-      sql: query,
-      args: [amount, term]
-    });
-
-    const rates = rawResults.rows.map((row: any) => ({
+    const rates = rawResults.map((row: any) => ({
       bankName: row.bank_name,
       productName: row.product_name,
       baseRate: parseFloat(row.base_rate),
