@@ -102,11 +102,8 @@ export default function Home() {
       <Header />
 
       {/* Hero Section with Background Image */}
-      <motion.section
+      <section
         className="relative min-h-[90vh] flex items-center justify-center py-24 px-4"
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
         data-testid="hero-section"
         style={{
           backgroundImage: `image-set(url(${heroBackgroundAvif}) type("image/avif"), url(${heroBackgroundWebp}) type("image/webp"))`,
@@ -117,7 +114,7 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
         <div className="relative max-w-7xl mx-auto text-center space-y-10">
-          <motion.div variants={fadeInUp} className="space-y-6">
+          <div className="space-y-6">
             <div className="inline-block bg-white/70 dark:bg-gray-900/70 backdrop-blur-md rounded-2xl px-6 py-4 md:px-10 md:py-6 shadow-lg border border-white/20 dark:border-white/10">
               <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight">
                 Hoogste Spaarrente België 2026 & 70+ Gratis Financiële Calculators
@@ -126,11 +123,14 @@ export default function Home() {
                 <strong>Krijg in 30 seconden duidelijkheid over je geldzaken.</strong> Van de actuele hoogste spaarrente vinden tot je hypotheek maandlast berekenen of wanneer je financieel onafhankelijk bent – alles gratis, anoniem en altijd up-to-date voor België.
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Stats Grid */}
-          <motion.div 
+          <motion.div
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
             variants={fadeInUp}
             data-testid="stats-grid"
           >
@@ -152,7 +152,7 @@ export default function Home() {
             </GlassCard>
           </motion.div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Featured Calculators Section */}
       <section className="py-20 px-4 relative" data-testid="featured-calculators-section">
