@@ -77,9 +77,8 @@ export function AnimatedMeshBackground({
     <motion.div
       aria-hidden
       className={wrapperClass}
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-green-500 animate-mesh-gradient" />
 

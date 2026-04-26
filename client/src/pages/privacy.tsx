@@ -211,7 +211,6 @@ export default function Privacy() {
               <ul>
                 <li><strong>Google Analytics:</strong> Voor website statistieken</li>
                 <li><strong>Google Ads:</strong> Voor advertentie-inkomsten</li>
-                <li><strong>Google Fonts:</strong> Voor website typografie</li>
               </ul>
 
               <h3>Data Delen</h3>
