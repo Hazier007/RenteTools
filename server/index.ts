@@ -6,6 +6,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { calculatorRegistry } from "../shared/calculator-registry";
 import { injectSeoMeta } from "./seo-config";
+import { bootstrapBankingDataIfEmpty } from "./bootstrap-data";
 
 const app = express();
 app.use(express.json());
@@ -140,6 +141,12 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  try {
+    await bootstrapBankingDataIfEmpty();
+  } catch (error) {
+    console.error('Failed to bootstrap banking data:', error);
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
