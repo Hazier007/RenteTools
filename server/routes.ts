@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { z } from "zod";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { 
   spaarrenteCalculationSchema, 
   samengesteldeRenteSchema, 
@@ -16,6 +16,7 @@ import { storage } from "./storage";
 import { submitToIndexNow, submitAllCalculators, getAllCanonicalUrls } from "./indexnow";
 import { blogAutomationService } from "./services/blog-automation";
 import { requireAdmin } from "./middleware/auth";
+import { generateCsrfToken, validateCsrfToken } from "./middleware/csrf";
 import { calculatorRegistry } from "../shared/calculator-registry";
 
 // Rate limiting for login endpoint
@@ -118,6 +119,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ authenticated: false });
     }
   });
+
+  // CSRF protection
+  app.use(generateCsrfToken);
+  app.get('/api/csrf-token', (req, res) => {
+    res.json({ token: req.session.csrfToken });
+  });
+
+  // Apply CSRF validation to all API state-changing routes (POST, PUT, PATCH, DELETE)
+  app.use('/api', validateCsrfToken);
 
   // Spaarrente calculation endpoint
   app.post("/api/calculate/spaarrente", async (req, res) => {

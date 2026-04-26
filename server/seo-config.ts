@@ -1,3 +1,5 @@
+import { calculatorRegistry, type CalculatorCategory } from "../shared/calculator-registry";
+
 export interface FaqItem {
   question: string;
   answer: string;
@@ -12,6 +14,23 @@ export interface SeoConfig {
 }
 
 export type SiloCategory = "Home" | "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
+
+function getCurrentMonth(): string {
+  const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+  return months[new Date().getMonth()];
+}
+
+function getCurrentYear(): number {
+  return new Date().getFullYear();
+}
+
+function getCurrentDateLabel(): string {
+  return `${getCurrentMonth()} ${getCurrentYear()}`;
+}
+
+function capitalizeFirst(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 const slugToCategory: Record<string, SiloCategory> = {
   "home": "Home",
@@ -69,6 +88,7 @@ const slugToCategory: Record<string, SiloCategory> = {
   "rentevoet-vergelijker": "Overige",
   "over-ons": "Overige",
   "privacy": "Overige",
+  "privacybeleid": "Overige",
   "voorwaarden": "Overige",
   "sitemap": "Overige",
   "blog": "Overige",
@@ -97,7 +117,7 @@ const categoryToPath: Record<SiloCategory, string> = {
 const defaultFaqs = {
   sparen: [
     { question: "Hoeveel interest krijg ik op een spaarrekening?", answer: "De gemiddelde spaarrente in België ligt rond 1,5-2,5%. Dit bestaat uit een basisrente en getrouwheidspremie. De getrouwheidspremie krijgt u na 12 maanden trouw blijven bij dezelfde bank." },
-    { question: "Tot welk bedrag is spaarrente belastingvrij?", answer: "In 2026 is spaarrente belastingvrij tot 1.050 euro per jaar. Boven dit bedrag betaalt u 30% roerende voorheffing over het meerdere." },
+    { question: "Tot welk bedrag is spaarrente belastingvrij?", answer: `In ${getCurrentYear()} is spaarrente belastingvrij tot 1.050 euro per jaar. Boven dit bedrag betaalt u 30% roerende voorheffing over het meerdere.` },
     { question: "Wat is de hoogste spaarrente in België?", answer: "De hoogste gecombineerde rentes liggen momenteel tussen 2% en 2,85% voor spaarrekeningen. Let wel op voorwaarden zoals maximumbedragen en looptijden." }
   ],
   lenen: [
@@ -120,9 +140,9 @@ const defaultFaqs = {
 export const seoConfigs: Record<string, SeoConfig> = {
   "home": {
     slug: "home",
-    pageTitle: "Hoogste Spaarrente België 2026 + 70+ Gratis Calculators",
-    metaTitle: "Hoogste Spaarrente België 2026 + 70+ Gratis Calculators",
-    metaDescription: "Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België 2026.",
+    pageTitle: `Hoogste Spaarrente België ${getCurrentYear()} + 70+ Gratis Calculators`,
+    metaTitle: `Hoogste Spaarrente België ${getCurrentYear()} + 70+ Gratis Calculators`,
+    metaDescription: `Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België ${getCurrentYear()}.`,
     faqs: [
       { question: "Wat kan ik doen op Interesten.be?", answer: "Op Interesten.be vindt u 70+ gratis financiële calculators voor sparen, lenen, beleggen en planning. Vergelijk spaarrentes, bereken uw hypotheek of plan uw FIRE-doel." },
       { question: "Zijn de calculators gratis?", answer: "Ja, alle calculators op Interesten.be zijn 100% gratis te gebruiken. U hoeft niet in te loggen en wij slaan geen persoonlijke gegevens op." }
@@ -130,9 +150,9 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "hoogste-spaarrente-belgie": {
     slug: "hoogste-spaarrente-belgie",
-    pageTitle: "Hoogste Spaarrente België December 2026",
-    metaTitle: "Hoogste Spaarrente België December 2026: Top Banken",
-    metaDescription: "Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update december 2026.",
+    pageTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}`,
+    metaTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}: Top Banken`,
+    metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update ${getCurrentDateLabel()}.`,
     faqs: defaultFaqs.sparen
   },
   "deposito-calculator": {
@@ -144,8 +164,8 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "samengestelde-interest-berekenen": {
     slug: "samengestelde-interest-berekenen",
-    pageTitle: "Samengestelde Interest Berekenen België 2026",
-    metaTitle: "Samengestelde Interest Berekenen België 2026",
+    pageTitle: `Samengestelde Interest Berekenen België ${getCurrentYear()}`,
+    metaTitle: `Samengestelde Interest Berekenen België ${getCurrentYear()}`,
     metaDescription: "Zie hoe rente-op-rente je spaargeld laat groeien. Bereken incl. roerende voorheffing – gratis compound interest tool.",
     faqs: defaultFaqs.sparen
   },
@@ -158,9 +178,9 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "spaarrekening-vergelijker": {
     slug: "spaarrekening-vergelijker",
-    pageTitle: "Spaarrekening Vergelijker België 2026",
-    metaTitle: "Spaarrekening Vergelijker België 2026 - Beste Rentes",
-    metaDescription: "Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente 2026.",
+    pageTitle: `Spaarrekening Vergelijker België ${getCurrentYear()}`,
+    metaTitle: `Spaarrekening Vergelijker België ${getCurrentYear()} - Beste Rentes`,
+    metaDescription: `Vergelijk alle Belgische spaarrekeningen. Basisrente, getrouwheidspremie en voorwaarden van alle banken. Vind de beste spaarrente ${getCurrentYear()}.`,
     faqs: defaultFaqs.sparen
   },
   "kinderrekening-calculator": {
@@ -175,8 +195,8 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "termijnrekening-calculator": {
     slug: "termijnrekening-calculator",
-    metaTitle: "Termijnrekening Hoogste Rente België 2026",
-    metaDescription: "Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool december 2026."
+    metaTitle: `Termijnrekening Hoogste Rente België ${getCurrentYear()}`,
+    metaDescription: `Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool ${getCurrentDateLabel()}.`
   },
   "groepssparen-calculator": {
     slug: "groepssparen-calculator",
@@ -195,14 +215,14 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "hypothecaire-lening-berekenen": {
     slug: "hypothecaire-lening-berekenen",
-    pageTitle: "Hypotheek Berekenen België 2026",
-    metaTitle: "Hypotheek Berekenen België 2026: Maandlasten & Kosten",
-    metaDescription: "Bereken je hypotheek maandlasten 2026 incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België.",
+    pageTitle: `Hypotheek Berekenen België ${getCurrentYear()}`,
+    metaTitle: `Hypotheek Berekenen België ${getCurrentYear()}: Maandlasten & Kosten`,
+    metaDescription: `Bereken je hypotheek maandlasten ${getCurrentYear()} incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België.`,
     faqs: defaultFaqs.lenen
   },
   "woningkrediet-simulator": {
     slug: "woningkrediet-simulator",
-    metaTitle: "Woningkrediet Simulator België - Hoeveel Kan Ik Lenen 2026",
+    metaTitle: `Woningkrediet Simulator België - Hoeveel Kan Ik Lenen ${getCurrentYear()}`,
     metaDescription: "Simuleer uw woningkrediet in België. Bereken leencapaciteit, maandlast en vergelijk vaste vs variabele rente. Tot 90% LTV mogelijk."
   },
   "persoonlijke-lening-berekenen": {
@@ -217,7 +237,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "lening-herfinancieren": {
     slug: "lening-herfinancieren",
-    metaTitle: "Lening Herfinancieren België - Hypotheek Oversluiten 2026",
+    metaTitle: `Lening Herfinancieren België - Hypotheek Oversluiten ${getCurrentYear()}`,
     metaDescription: "Bereken of herfinancieren voordelig is. Vergelijk nieuwe rente met vervroegde terugbetalingskosten. Bespaar tot €10.000+ in België."
   },
   "schuldenconsolidatie-calculator": {
@@ -232,7 +252,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "kredietvergelijker-belgie": {
     slug: "kredietvergelijker-belgie",
-    metaTitle: "Kredietvergelijker België 2026 - Beste Leningrentes",
+    metaTitle: `Kredietvergelijker België ${getCurrentYear()} - Beste Leningrentes`,
     metaDescription: "Vergelijk alle kredieten in België. Persoonlijke leningen, autokredieten en hypotheken. Vind de laagste rente en beste voorwaarden."
   },
   "doorlopend-krediet-calculator": {
@@ -267,8 +287,8 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "wettelijke-rentevoet-belgie": {
     slug: "wettelijke-rentevoet-belgie",
-    metaTitle: "Wettelijke Rentevoet België 2026 - Actuele Tarieven NBB",
-    metaDescription: "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2026."
+    metaTitle: `Wettelijke Rentevoet België ${getCurrentYear()} - Actuele Tarieven NBB`,
+    metaDescription: `Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven ${getCurrentYear()}.`
   },
   "beleggingsrente-calculator": {
     slug: "beleggingsrente-calculator",
@@ -283,7 +303,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "etf-calculator": {
     slug: "etf-calculator",
     pageTitle: "ETF Calculator België",
-    metaTitle: "ETF Calculator België - Index Fondsen Vergelijken 2026",
+    metaTitle: `ETF Calculator België - Index Fondsen Vergelijken ${getCurrentYear()}`,
     metaDescription: "Vergelijk ETF kosten en rendement. IWDA, VWCE en andere populaire index trackers. Bereken TER impact en verwacht rendement voor België.",
     faqs: defaultFaqs.beleggen
   },
@@ -319,14 +339,14 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "roerende-voorheffing-calculator": {
     slug: "roerende-voorheffing-calculator",
-    metaTitle: "Roerende Voorheffing Berekenen 2026 België",
+    metaTitle: `Roerende Voorheffing Berekenen ${getCurrentYear()} België`,
     metaDescription: "Bereken je roerende voorheffing op interest/dividenden + vrijstelling tot €1050. Tips om belasting te minimaliseren – gratis tool."
   },
   "pensioensparen-calculator": {
     slug: "pensioensparen-calculator",
-    pageTitle: "Pensioensparen Berekenen België 2026",
-    metaTitle: "Pensioensparen Berekenen België 2026: Belastingvoordeel",
-    metaDescription: "Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor 2026 – gratis calculator.",
+    pageTitle: `Pensioensparen Berekenen België ${getCurrentYear()}`,
+    metaTitle: `Pensioensparen Berekenen België ${getCurrentYear()}: Belastingvoordeel`,
+    metaDescription: `Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor ${getCurrentYear()} – gratis calculator.`,
     faqs: defaultFaqs.planning
   },
   "pensioen-calculator": {
@@ -338,7 +358,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
     slug: "fire-calculator",
     pageTitle: "FIRE Calculator België",
     metaTitle: "FIRE Calculator België: Wanneer Financieel Onafhankelijk?",
-    metaDescription: "Bereken wanneer je FIRE bereikt (Lean/Fat) met Belgische fiscaliteit & roerende voorheffing. Gratis FIRE simulator 2026.",
+    metaDescription: `Bereken wanneer je FIRE bereikt (Lean/Fat) met Belgische fiscaliteit & roerende voorheffing. Gratis FIRE simulator ${getCurrentYear()}.`,
     faqs: defaultFaqs.planning
   },
   "noodfonds-calculator": {
@@ -368,8 +388,8 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "inflatie-calculator-belgie": {
     slug: "inflatie-calculator-belgie",
-    metaTitle: "Inflatie Calculator België 2026: Bescherm Je Spaargeld",
-    metaDescription: "Bereken hoe inflatie je spaargeld aantast + tips om je koopkracht te beschermen. Actueel voor 2026 – gratis tool België."
+    metaTitle: `Inflatie Calculator België ${getCurrentYear()}: Bescherm Je Spaargeld`,
+    metaDescription: `Bereken hoe inflatie je spaargeld aantast + tips om je koopkracht te beschermen. Actueel voor ${getCurrentYear()} – gratis tool België.`
   },
   "geldontwaarding-calculator": {
     slug: "geldontwaarding-calculator",
@@ -383,7 +403,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "rentevoet-vergelijker": {
     slug: "rentevoet-vergelijker",
-    metaTitle: "Rentevoet Vergelijker België - Vast vs Variabel 2026",
+    metaTitle: `Rentevoet Vergelijker België - Vast vs Variabel ${getCurrentYear()}`,
     metaDescription: "Vergelijk vaste en variabele rentevoeten. Spaarrentes, hypotheekrentes en beleggingsrendementen in België. Vind de beste rente."
   },
   "over-ons": {
@@ -395,6 +415,11 @@ export const seoConfigs: Record<string, SeoConfig> = {
     slug: "privacy",
     metaTitle: "Privacy & Cookie Policy - Interesten.be",
     metaDescription: "Privacy policy en cookie informatie van Interesten.be. Lees hoe wij omgaan met uw gegevens."
+  },
+  "privacybeleid": {
+    slug: "privacybeleid",
+    metaTitle: "Privacybeleid - Interesten.be",
+    metaDescription: "Hoe Hazier persoonsgegevens verwerkt op Interesten.be. AVG/GDPR-conform, met verwerkingsverantwoordelijke, doeleinden, cookies en uw rechten."
   },
   "voorwaarden": {
     slug: "voorwaarden",
@@ -559,7 +584,7 @@ function generateCalculatorSchema(seoConfig: SeoConfig, url: string): object | n
   const slug = seoConfig.slug;
   const category = slugToCategory[slug];
   
-  const nonCalculatorSlugs = ['home', 'over-ons', 'privacy', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'sparen', 'lenen', 'beleggen', 'planning', 'overige'];
+  const nonCalculatorSlugs = ['home', 'over-ons', 'privacy', 'privacybeleid', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'sparen', 'lenen', 'beleggen', 'planning', 'overige'];
   if (!category || nonCalculatorSlugs.includes(slug)) {
     return null;
   }
@@ -729,7 +754,39 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
       <main>
         <p style="color:#666;">Loading calculator...</p>
       </main>`;
-  
+
+  // Home + category pages: render a crawlable nav with links to each sub-calculator
+  // so the raw HTML satisfies the SEO acceptance criterion (links before JS runs).
+  const isHub = slug === 'home';
+  const isCategoryHub = (['sparen', 'lenen', 'beleggen', 'planning'] as const).includes(slug as any);
+  if (isHub || isCategoryHub) {
+    const categoriesToRender: CalculatorCategory[] = isHub
+      ? ['Sparen', 'Lenen', 'Beleggen', 'Planning']
+      : [capitalizeFirst(slug) as CalculatorCategory];
+
+    content += `
+      <nav aria-label="Alle calculators" style="margin-top:2.5rem;">`;
+    for (const cat of categoriesToRender) {
+      const items = calculatorRegistry.filter(c => c.category === cat);
+      if (items.length === 0) continue;
+      content += `
+        <section style="margin-bottom:2rem;">
+          <h2 style="font-size:1.25rem;font-weight:600;margin-bottom:0.75rem;">
+            <a href="/${cat.toLowerCase()}" style="color:#1a1a1a;text-decoration:none;">${cat}</a>
+          </h2>
+          <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.5rem 1rem;">`;
+      for (const item of items) {
+        content += `
+            <li><a href="${escapeHtmlAttribute(item.url)}" style="color:#2563eb;text-decoration:none;">${escapeHtmlAttribute(item.title)}</a></li>`;
+      }
+      content += `
+          </ul>
+        </section>`;
+    }
+    content += `
+      </nav>`;
+  }
+
   // Add FAQ section if available
   if (seoConfig.faqs && seoConfig.faqs.length > 0) {
     content += `
@@ -748,7 +805,7 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
   
   content += `
       <footer style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e5e5;color:#666;font-size:0.875rem;">
-        <p>&copy; 2026 Interesten.be - Gratis Belgische financiële calculators</p>
+        <p>&copy; ${getCurrentYear()} Interesten.be - Gratis Belgische financiële calculators</p>
       </footer>
     </div>`;
   
