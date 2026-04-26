@@ -7,14 +7,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const NoodfondsChart1 = lazy(() => import("./noodfonds-chart-1"));
+const NoodfondsChart2 = lazy(() => import("./noodfonds-chart-2"));
 
 export default function NoodfondsCalculatorPage() {
   const seoConfig = getSeoConfig("noodfonds-calculator");
@@ -370,40 +374,18 @@ export default function NoodfondsCalculatorPage() {
                   <div>
                     <h4 className="font-semibold mb-3">Verdeling maanduitgaven</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                          <Pie
-                            data={uitgavenData.filter(item => item.bedrag > 0)}
-                            cx="50%"
-                            cy="50%"
-                            innerRadius={40}
-                            outerRadius={80}
-                            dataKey="bedrag"
-                          >
-                            {uitgavenData.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={entry.color} />
-                            ))}
-                          </Pie>
-                          <Tooltip formatter={(value: number) => `€${value.toLocaleString()}`} />
-                        </PieChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <NoodfondsChart1 data={uitgavenData} />
+                      </Suspense>
                     </div>
                   </div>
 
                   <div>
                     <h4 className="font-semibold mb-3">Risico scenarios</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={risicoVergelijking} layout="horizontal">
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis type="number" />
-                          <YAxis dataKey="scenario" type="category" width={100} />
-                          <Tooltip 
-                            formatter={(value: number) => [`€${value.toLocaleString()}`, 'Bedrag']}
-                          />
-                          <Bar dataKey="bedrag" fill="#3b82f6" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <NoodfondsChart2 data={risicoVergelijking} />
+                      </Suspense>
                     </div>
                   </div>
                 </div>

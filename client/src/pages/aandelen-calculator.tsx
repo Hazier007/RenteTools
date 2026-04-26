@@ -10,9 +10,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
+import { useState, lazy, Suspense } from "react";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import FaqSchema from "@/components/seo/FaqSchema";
+
+const AandelenChart = lazy(() => import("./aandelen-chart"));
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
@@ -493,16 +495,9 @@ export default function AandelenCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={resultaat.projectieData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          <Area type="monotone" dataKey="portfolioWaarde" stackId="1" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                          <Area type="monotone" dataKey="cumulatiefDividend" stackId="1" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-                        </AreaChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <AandelenChart data={resultaat.projectieData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>

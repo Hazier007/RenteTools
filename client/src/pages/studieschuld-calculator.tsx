@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useState, lazy, Suspense } from "react";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import FaqSchema from "@/components/seo/FaqSchema";
+
+const StudieschuldChart = lazy(() => import("./studieschuld-chart"));
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
@@ -253,31 +255,9 @@ export default function StudieschuldCalculatorPage() {
                   <div>
                     <h4 className="font-semibold mb-3">Evolutie van uw studieschuld</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={aflossingschema}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`, '']}
-                            labelFormatter={(jaar) => `Jaar ${jaar}`}
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="restschuld" 
-                            stroke="#ef4444" 
-                            strokeWidth={2}
-                            name="Restschuld"
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="afgbetaald" 
-                            stroke="#22c55e" 
-                            strokeWidth={2}
-                            name="Afbetaald"
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <StudieschuldChart data={aflossingschema} />
+                      </Suspense>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,11 +9,13 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import NumberInput from "@/components/ui/number-input";
 import CalculationResult from "@/components/ui/calculation-result";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { formatCurrency, formatPercentage } from "@/lib/formatters";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ExternalLink } from "lucide-react";
 import type { Product, Bank } from "@shared/schema";
+
+const StakingApyChart = lazy(() => import("./staking-apy-chart"));
 
 const stakingSchema = z.object({
   bedrag: z.number().min(0, "Bedrag moet positief zijn"),
@@ -419,29 +421,9 @@ export default function StakingApyCalculator() {
                     <CardContent className="p-4">
                       <h4 className="text-sm font-medium mb-2">Groei over tijd (netto)</h4>
                       <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={result.chartData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis
-                              dataKey="dag"
-                              tickFormatter={(v) => `${v}d`}
-                            />
-                            <YAxis
-                              tickFormatter={(v) => `€${v.toFixed(0)}`}
-                            />
-                            <Tooltip
-                              formatter={(value) => [formatCurrency(value as number), "Waarde"]}
-                              labelFormatter={(label) => `Dag ${label}`}
-                            />
-                            <Line
-                              type="monotone"
-                              dataKey="waarde"
-                              stroke="hsl(var(--primary))"
-                              strokeWidth={2}
-                              dot={false}
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <StakingApyChart data={result.chartData} />
+                        </Suspense>
                       </div>
                     </CardContent>
                   </Card>

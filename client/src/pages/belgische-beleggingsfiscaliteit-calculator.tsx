@@ -11,9 +11,11 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, ComposedChart } from 'recharts';
+import { useState, lazy, Suspense } from "react";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import FaqSchema from "@/components/seo/FaqSchema";
+
+const BelgischeBeleggingsfiscaliteitChart = lazy(() => import("./belgische-beleggingsfiscaliteit-chart"));
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
@@ -548,26 +550,9 @@ export default function BelgischeBeleggingsfiscaliteitCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <ComposedChart data={belastingVergelijkingData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="naam" angle={-45} textAnchor="end" height={80} />
-                      <YAxis yAxisId="left" />
-                      <YAxis yAxisId="right" orientation="right" />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          name === 'rate' ? `${value.toFixed(1)}%` : `€${Math.round(value).toLocaleString()}`,
-                          name === 'bruto' ? 'Bruto Dividend' :
-                          name === 'belasting' ? 'Belasting' :
-                          name === 'netto' ? 'Netto Dividend' :
-                          name === 'rate' ? 'Belastingtarief' : name
-                        ]}
-                      />
-                      <Bar yAxisId="left" dataKey="bruto" fill="#3b82f6" />
-                      <Bar yAxisId="left" dataKey="belasting" fill="#ef4444" />
-                      <Line yAxisId="right" type="monotone" dataKey="rate" stroke="#8b5cf6" strokeWidth={2} />
-                    </ComposedChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <BelgischeBeleggingsfiscaliteitChart data={belastingVergelijkingData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>

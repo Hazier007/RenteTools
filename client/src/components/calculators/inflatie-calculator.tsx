@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,8 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import NumberInput from "@/components/ui/number-input";
 import CalculationResult from "@/components/ui/calculation-result";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { formatCurrency, formatPercentage } from "@/lib/formatters";
+
+const InflatieChart = lazy(() => import("./inflatie-chart"));
 
 const inflatieSchema = z.object({
   bedragVandaag: z.number().min(1, "Bedrag moet positief zijn"),
@@ -298,35 +300,9 @@ export default function InflatieCalculator() {
                   <Card>
                     <CardContent className="p-4">
                       <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="jaar" />
-                            <YAxis />
-                            <Tooltip 
-                              formatter={(value, name) => [
-                                formatCurrency(value as number), 
-                                name === "waarde" ? "Nominale Waarde" : "Huidige Koopkracht"
-                              ]}
-                              labelFormatter={(label) => `Jaar ${label}`}
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="waarde" 
-                              stroke="hsl(var(--destructive))" 
-                              strokeWidth={2}
-                              name="waarde"
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="koopkracht" 
-                              stroke="hsl(var(--muted-foreground))" 
-                              strokeWidth={2}
-                              strokeDasharray="5 5"
-                              name="koopkracht"
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <InflatieChart data={chartData} />
+                        </Suspense>
                       </div>
                     </CardContent>
                   </Card>

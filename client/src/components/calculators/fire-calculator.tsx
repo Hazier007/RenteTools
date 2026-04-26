@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,8 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+const FireChart = lazy(() => import("./fire-chart"));
 
 interface FIREResult {
   fireNumber: number;
@@ -484,44 +486,11 @@ export default function FIRECalculator() {
                   <CardTitle>FIRE Progressie Projectie</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={400}>
-                    <LineChart data={result.scenarios}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="age" />
-                      <YAxis yAxisId="left" tickFormatter={(value) => `€${(value/1000).toFixed(0)}k`} />
-                      <YAxis yAxisId="right" orientation="right" tickFormatter={(value) => `${value.toFixed(0)}%`} />
-                      <Tooltip formatter={(value, name) => [
-                        name === 'netWorth' || name === 'annualIncome' ? formatCurrency(Number(value)) : `${Number(value).toFixed(1)}%`,
-                        name === 'netWorth' ? 'Net Vermogen' : 
-                        name === 'annualIncome' ? 'Jaarlijks Inkomen' : 'FIRE Voortgang'
-                      ]} />
-                      <Legend />
-                      <Line 
-                        yAxisId="left"
-                        type="monotone" 
-                        dataKey="netWorth" 
-                        stroke="#8884d8" 
-                        name="Net Vermogen"
-                        strokeWidth={2}
-                      />
-                      <Line 
-                        yAxisId="left"
-                        type="monotone" 
-                        dataKey="annualIncome" 
-                        stroke="#82ca9d" 
-                        name="FIRE Inkomen"
-                        strokeWidth={2}
-                      />
-                      <Line 
-                        yAxisId="right"
-                        type="monotone" 
-                        dataKey="fireProgress" 
-                        stroke="#ff7300" 
-                        name="FIRE Voortgang (%)"
-                        strokeWidth={2}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <div style={{ height: 400 }}>
+                    <Suspense fallback={<ChartSkeleton />}>
+                      <FireChart data={result.scenarios} />
+                    </Suspense>
+                  </div>
                 </CardContent>
               </Card>
 

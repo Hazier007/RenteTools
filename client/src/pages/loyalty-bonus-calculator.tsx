@@ -7,14 +7,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const LoyaltyBonusChart1 = lazy(() => import("./loyalty-bonus-chart-1"));
+const LoyaltyBonusChart2 = lazy(() => import("./loyalty-bonus-chart-2"));
 
 export default function LoyaltyBonusCalculatorPage() {
   const seoConfig = getSeoConfig("loyalty-bonus-calculator");
@@ -361,50 +365,18 @@ export default function LoyaltyBonusCalculatorPage() {
                   <div>
                     <h4 className="font-semibold mb-3">5-jaar vergelijking</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={timeline}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number, name: string) => [
-                              `€${value.toLocaleString()}`,
-                              name === 'huidigeBank' ? huidigeBank : nieuweBank
-                            ]}
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="huidigeBank" 
-                            stroke="#3b82f6" 
-                            strokeWidth={2}
-                            name="huidigeBank"
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="nieuweBank" 
-                            stroke="#22c55e" 
-                            strokeWidth={2}
-                            name="nieuweBank"
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <LoyaltyBonusChart1 data={timeline} huidigeBank={huidigeBank} nieuweBank={nieuweBank} />
+                      </Suspense>
                     </div>
                   </div>
 
                   <div>
                     <h4 className="font-semibold mb-3">Banken ranking (totale rente)</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={bankenRanking} layout="horizontal">
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis type="number" />
-                          <YAxis dataKey="naam" type="category" width={80} />
-                          <Tooltip 
-                            formatter={(value: number) => [`${value}%`, 'Totale rente']}
-                          />
-                          <Bar dataKey="totaleRente" fill="#22c55e" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <LoyaltyBonusChart2 data={bankenRanking} />
+                      </Suspense>
                     </div>
                   </div>
                 </div>

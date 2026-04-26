@@ -10,14 +10,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const EtfChart1 = lazy(() => import("./etf-chart-1"));
+const EtfChart2 = lazy(() => import("./etf-chart-2"));
+const EtfChart3 = lazy(() => import("./etf-chart-3"));
 
 interface ETF {
   id: string;
@@ -466,16 +471,9 @@ export default function ETFCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={resultaat.simulatieData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="jaar" />
-                      <YAxis />
-                      <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                      <Area type="monotone" dataKey="gestortBedrag" stackId="1" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                      <Area type="monotone" dataKey="nettoRendement" stackId="1" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-                    </AreaChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <EtfChart1 data={resultaat.simulatieData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
@@ -490,20 +488,9 @@ export default function ETFCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={kostenVergelijking}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="etf" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          name === 'ter' ? `${value}%` : `€${Math.round(value).toLocaleString()}`,
-                          name === 'ter' ? 'TER' : 'Jaarlijkse kosten'
-                        ]}
-                      />
-                      <Bar dataKey="jaarlijkseKosten" fill="#8884d8" name="jaarlijkseKosten" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <EtfChart2 data={kostenVergelijking} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
@@ -515,25 +502,9 @@ export default function ETFCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={sectorAllocatie}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ sector, percentage }) => `${sector} ${percentage}%`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="percentage"
-                      >
-                        {sectorAllocatie.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip formatter={(value: number) => [`${value}%`]} />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <EtfChart3 data={sectorAllocatie} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>

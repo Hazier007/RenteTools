@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,8 +7,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+const BelastingplanningInvestmentChart = lazy(() => import("./belastingplanning-investment-chart"));
+const BelastingplanningTimelineChart = lazy(() => import("./belastingplanning-timeline-chart"));
 
 interface TaxOptimization {
   currentTaxBurden: number;
@@ -692,23 +695,11 @@ export default function BelastingplanningCalculator() {
                   <CardTitle>Investment Vehicles Vergelijking</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={400}>
-                    <BarChart data={result.investmentComparison}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="vehicle" />
-                      <YAxis />
-                      <Tooltip formatter={(value, name) => [
-                        name === 'afterTaxValue' ? formatCurrency(Number(value)) : `${Number(value).toFixed(2)}%`,
-                        name === 'grossReturn' ? 'Bruto Rendement' :
-                        name === 'taxCost' ? 'Belastingkost' :
-                        name === 'netReturn' ? 'Netto Rendement' :
-                        'Na-belasting Waarde (10 jaar)'
-                      ]} />
-                      <Legend />
-                      <Bar dataKey="grossReturn" fill="#8884d8" name="Bruto Rendement" />
-                      <Bar dataKey="netReturn" fill="#82ca9d" name="Netto Rendement" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <div style={{ height: 400 }}>
+                    <Suspense fallback={<ChartSkeleton />}>
+                      <BelastingplanningInvestmentChart data={result.investmentComparison} />
+                    </Suspense>
+                  </div>
                 </CardContent>
               </Card>
             </>
@@ -754,42 +745,11 @@ export default function BelastingplanningCalculator() {
                     <CardTitle>Cumulatieve Besparingen Over Tijd</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ResponsiveContainer width="100%" height={400}>
-                      <LineChart data={result.timeline.slice(0, 15)}> {/* 15 jaar projectie */}
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis tickFormatter={(value) => `€${(value/1000).toFixed(0)}k`} />
-                        <Tooltip formatter={(value, name) => [
-                          formatCurrency(Number(value)),
-                          name === 'currentScenario' ? 'Huidige Scenario' :
-                          name === 'optimizedScenario' ? 'Geoptimaliseerd Scenario' :
-                          'Cumulatieve Besparingen'
-                        ]} />
-                        <Legend />
-                        <Line 
-                          type="monotone" 
-                          dataKey="currentScenario" 
-                          stroke="#ef4444" 
-                          name="Huidige Scenario"
-                          strokeWidth={2}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="optimizedScenario" 
-                          stroke="#10b981" 
-                          name="Geoptimaliseerd Scenario"
-                          strokeWidth={2}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="cumulativeSavings" 
-                          stroke="#3b82f6" 
-                          name="Cumulatieve Besparingen"
-                          strokeWidth={3}
-                          strokeDasharray="5 5"
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    <div style={{ height: 400 }}>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <BelastingplanningTimelineChart data={result.timeline.slice(0, 15)} />
+                      </Suspense>
+                    </div>
                   </CardContent>
                 </Card>
               )}

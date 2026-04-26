@@ -8,14 +8,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const TermijnrekeningChart1 = lazy(() => import("./termijnrekening-chart-1"));
+const TermijnrekeningChart2 = lazy(() => import("./termijnrekening-chart-2"));
 
 export default function TermijnrekeningCalculatorPage() {
   const seoConfig = getSeoConfig("termijnrekening-calculator");
@@ -306,43 +310,18 @@ export default function TermijnrekeningCalculatorPage() {
                     <div>
                       <h4 className="font-semibold mb-3">Vergelijking verschillende looptijden</h4>
                       <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={termijnVergelijking}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="looptijd" />
-                            <YAxis />
-                            <Tooltip 
-                              formatter={(value: number, name: string) => [
-                                `€${Math.round(value).toLocaleString()}`,
-                                name === 'rendement' ? 'Rendement' : 'Eindwaarde'
-                              ]}
-                            />
-                            <Bar dataKey="rendement" fill="#22c55e" name="rendement" />
-                          </BarChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <TermijnrekeningChart1 data={termijnVergelijking} />
+                        </Suspense>
                       </div>
                     </div>
 
                     <div>
                       <h4 className="font-semibold mb-3">Rente trend (2020-2026)</h4>
                       <div className="h-48">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={renteTrends}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="jaar" />
-                            <YAxis />
-                            <Tooltip 
-                              formatter={(value: number) => [`${value}%`, 'Gemiddelde rente']}
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="rente" 
-                              stroke="#2563eb" 
-                              strokeWidth={2}
-                              name="rente"
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <TermijnrekeningChart2 data={renteTrends} />
+                        </Suspense>
                       </div>
                     </div>
                   </div>

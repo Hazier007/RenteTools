@@ -10,14 +10,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
-import { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const KredietcapaciteitPieChart = lazy(() => import("./kredietcapaciteit-pie-chart"));
+const KredietcapaciteitChart3 = lazy(() => import("./kredietcapaciteit-chart-3"));
+const KredietcapaciteitChart4 = lazy(() => import("./kredietcapaciteit-chart-4"));
 
 export default function KredietcapaciteitCalculatorPage() {
   const seoConfig = getSeoConfig("kredietcapaciteit-calculator");
@@ -481,25 +486,9 @@ export default function KredietcapaciteitCalculatorPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={inkomstenverdeling}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                        >
-                          {inkomstenverdeling.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                    <Suspense fallback={<ChartSkeleton />}>
+                      <KredietcapaciteitPieChart data={inkomstenverdeling} />
+                    </Suspense>
                   </div>
                   <div className="text-center mt-2">
                     <strong>Totaal: €{capaciteit.totaalInkomen.toLocaleString()}</strong>
@@ -513,25 +502,9 @@ export default function KredietcapaciteitCalculatorPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={uitgavenverdeling}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                        >
-                          {uitgavenverdeling.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                    <Suspense fallback={<ChartSkeleton />}>
+                      <KredietcapaciteitPieChart data={uitgavenverdeling} />
+                    </Suspense>
                   </div>
                   <div className="text-center mt-2">
                     <strong>Totaal: €{capaciteit.totaalUitgaven.toLocaleString()}</strong>
@@ -572,20 +545,9 @@ export default function KredietcapaciteitCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={leningtypeVergelijking}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="type" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          name === 'limiet' ? `€${Math.round(value).toLocaleString()}` : `${value}%`,
-                          name === 'limiet' ? 'Max bedrag' : 'Typische rente'
-                        ]}
-                      />
-                      <Bar dataKey="limiet" fill="#8884d8" name="limiet" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <KredietcapaciteitChart3 data={leningtypeVergelijking} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
@@ -600,17 +562,9 @@ export default function KredietcapaciteitCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={loanScenarios}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="looptijd" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]}
-                      />
-                      <Line type="monotone" dataKey="totaalBedrag" stroke="#8884d8" name="Kredietbedrag" />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <KredietcapaciteitChart4 data={loanScenarios} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>

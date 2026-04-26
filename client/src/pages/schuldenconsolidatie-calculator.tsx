@@ -9,15 +9,20 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Trash2, Plus } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const SchuldenconsolidatieChart1 = lazy(() => import("./schuldenconsolidatie-chart-1"));
+const SchuldenconsolidatieChart2 = lazy(() => import("./schuldenconsolidatie-chart-2"));
+const SchuldenconsolidatieChart3 = lazy(() => import("./schuldenconsolidatie-chart-3"));
 
 interface Schuld {
   id: number;
@@ -448,25 +453,9 @@ export default function SchuldenconsolidatieCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={schuldBreakdown}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ naam, bedrag }) => `${naam}: €${Math.round(bedrag).toLocaleString()}`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="bedrag"
-                      >
-                        {schuldBreakdown.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <SchuldenconsolidatieChart1 data={schuldBreakdown} />
+                  </Suspense>
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
                   <div>
@@ -491,16 +480,9 @@ export default function SchuldenconsolidatieCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={vergelijkingData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="aspect" />
-                      <YAxis />
-                      <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                      <Bar dataKey="huidig" fill="#8884d8" name="Huidige situatie" />
-                      <Bar dataKey="nieuw" fill="#82ca9d" name="Na consolidatie" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <SchuldenconsolidatieChart2 data={vergelijkingData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
@@ -515,21 +497,9 @@ export default function SchuldenconsolidatieCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={timelineData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="maand" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          `€${Math.round(value)}`,
-                          name === 'huidig' ? 'Huidige situatie' : name === 'nieuw' ? 'Na consolidatie' : 'Besparing'
-                        ]}
-                      />
-                      <Line type="monotone" dataKey="huidig" stroke="#8884d8" name="huidig" />
-                      <Line type="monotone" dataKey="nieuw" stroke="#82ca9d" name="nieuw" />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <SchuldenconsolidatieChart3 data={timelineData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>

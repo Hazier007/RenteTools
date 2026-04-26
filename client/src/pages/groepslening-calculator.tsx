@@ -9,15 +9,19 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { UserPlus, Trash2 } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const GroepsleningChart1 = lazy(() => import("./groepslening-chart-1"));
+const GroepsleningChart2 = lazy(() => import("./groepslening-chart-2"));
 
 interface Deelnemer {
   id: number;
@@ -450,25 +454,9 @@ export default function GroepsleningCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={verdelingData}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ naam, aandeel }) => `${naam}: ${aandeel.toFixed(1)}%`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="aandeel"
-                      >
-                        {verdelingData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip formatter={(value: number) => [`${value.toFixed(1)}%`]} />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <GroepsleningChart1 data={verdelingData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>
@@ -483,20 +471,9 @@ export default function GroepsleningCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={risicoData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="naam" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          name === 'schuldRatio' ? `${value.toFixed(1)}%` : `€${Math.round(value).toLocaleString()}`,
-                          name === 'schuldRatio' ? 'Schuldgraad' : 'Inkomen'
-                        ]}
-                      />
-                      <Bar dataKey="schuldRatio" fill="#8884d8" name="schuldRatio" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <GroepsleningChart2 data={risicoData} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>

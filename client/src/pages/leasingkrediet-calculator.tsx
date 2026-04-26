@@ -10,14 +10,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const LeasingkredietChart1 = lazy(() => import("./leasingkrediet-chart-1"));
+const LeasingkredietChart2 = lazy(() => import("./leasingkrediet-chart-2"));
+const LeasingkredietChart3 = lazy(() => import("./leasingkrediet-chart-3"));
 
 export default function LeasingkredietCalculatorPage() {
   const seoConfig = getSeoConfig("leasingkrediet-calculator");
@@ -422,16 +427,9 @@ export default function LeasingkredietCalculatorPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={vergelijkingData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="aspect" />
-                          <YAxis />
-                          <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          <Bar dataKey="financial" fill="#8884d8" name="Financial Leasing" />
-                          <Bar dataKey="operational" fill="#82ca9d" name="Operational Leasing" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <LeasingkredietChart1 data={vergelijkingData} />
+                      </Suspense>
                     </div>
                   </CardContent>
                 </Card>
@@ -546,25 +544,9 @@ export default function LeasingkredietCalculatorPage() {
                   <CardContent>
                     <div className="space-y-4">
                       <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <PieChart>
-                            <Pie
-                              data={kostenBreakdown}
-                              cx="50%"
-                              cy="50%"
-                              labelLine={false}
-                              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                              outerRadius={80}
-                              fill="#8884d8"
-                              dataKey="value"
-                            >
-                              {kostenBreakdown.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.color} />
-                              ))}
-                            </Pie>
-                            <Tooltip formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]} />
-                          </PieChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <LeasingkredietChart2 data={kostenBreakdown} />
+                        </Suspense>
                       </div>
                       
                       <Alert>
@@ -592,21 +574,9 @@ export default function LeasingkredietCalculatorPage() {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={paymentEvolution}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="maand" />
-                      <YAxis />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          `€${Math.round(value)}`, 
-                          name === 'financial' ? 'Financial' : name === 'operational' ? 'Operational' : 'Verschil'
-                        ]}
-                      />
-                      <Line type="monotone" dataKey="financial" stroke="#8884d8" name="financial" />
-                      <Line type="monotone" dataKey="operational" stroke="#82ca9d" name="operational" />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <Suspense fallback={<ChartSkeleton />}>
+                    <LeasingkredietChart3 data={paymentEvolution} />
+                  </Suspense>
                 </div>
               </CardContent>
             </Card>

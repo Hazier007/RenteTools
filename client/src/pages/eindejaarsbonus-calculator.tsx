@@ -7,14 +7,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
+import { useState, lazy, Suspense } from "react";
 import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
+
+const EindejaarsbonusChart1 = lazy(() => import("./eindejaarsbonus-chart-1"));
+const EindejaarsbonusChart2 = lazy(() => import("./eindejaarsbonus-chart-2"));
 
 export default function EindejaarsbonosCalculatorPage() {
   const seoConfig = getSeoConfig("eindejaarsbonus-calculator");
@@ -459,52 +463,18 @@ export default function EindejaarsbonosCalculatorPage() {
                   <div>
                     <h4 className="font-semibold mb-3">Groei van uw gekozen strategie (10 jaar)</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={groeiProjectie}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="jaar" />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number, name: string) => [
-                              `€${value.toLocaleString()}`,
-                              name === 'waarde' ? 'Totale waarde' : name === 'winst' ? 'Winst' : 'Start bedrag'
-                            ]}
-                            labelFormatter={(jaar) => `Na ${jaar} jaar`}
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="waarde" 
-                            stroke="#22c55e" 
-                            strokeWidth={2}
-                            name="waarde"
-                          />
-                          <Line 
-                            type="monotone" 
-                            dataKey="startBedrag" 
-                            stroke="#64748b" 
-                            strokeWidth={2}
-                            strokeDasharray="5 5"
-                            name="startBedrag"
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <EindejaarsbonusChart1 data={groeiProjectie} />
+                      </Suspense>
                     </div>
                   </div>
 
                   <div>
                     <h4 className="font-semibold mb-3">Strategieën vergelijking (5 jaar)</h4>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={strategieen}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="naam" angle={-45} textAnchor="end" height={80} />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`, 'Waarde na 5 jaar']}
-                          />
-                          <Bar dataKey="rendement5jaar" fill="#22c55e" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <EindejaarsbonusChart2 data={strategieen} />
+                      </Suspense>
                     </div>
                   </div>
                 </div>
