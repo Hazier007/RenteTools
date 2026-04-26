@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,8 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+const LevensverzekeraarChart = lazy(() => import("./levensverzekeraar-chart"));
 
 interface InsuranceComparison {
   wholeLifeInsurance: {
@@ -541,50 +543,11 @@ export default function LevensverzekeraarCalculator() {
                   <CardTitle>Waarde Ontwikkeling Over Tijd</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={400}>
-                    <LineChart data={result.scenarios}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="age" />
-                      <YAxis tickFormatter={(value) => `€${(value/1000).toFixed(0)}k`} />
-                      <Tooltip formatter={(value, name) => [
-                        formatCurrency(Number(value)),
-                        name === 'wholeLifeCashValue' ? 'Hele Leven Cash Waarde' : 
-                        name === 'termInvestmentValue' ? 'Term + Beleggen Waarde' :
-                        name === 'wholeLifeDeathBenefit' ? 'Hele Leven Uitkering' : 'Term + Beleggen Uitkering'
-                      ]} />
-                      <Legend />
-                      <Line 
-                        type="monotone" 
-                        dataKey="wholeLifeCashValue" 
-                        stroke="#3b82f6" 
-                        name="Hele Leven Cash Waarde"
-                        strokeWidth={2}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="termInvestmentValue" 
-                        stroke="#10b981" 
-                        name="Term + Beleggen Waarde"
-                        strokeWidth={2}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="wholeLifeDeathBenefit" 
-                        stroke="#3b82f6" 
-                        strokeDasharray="5 5"
-                        name="Hele Leven Uitkering"
-                        strokeWidth={1}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="termDeathBenefit" 
-                        stroke="#10b981" 
-                        strokeDasharray="5 5"
-                        name="Term + Beleggen Uitkering"
-                        strokeWidth={1}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <div style={{ height: 400 }}>
+                    <Suspense fallback={<ChartSkeleton />}>
+                      <LevensverzekeraarChart data={result.scenarios} />
+                    </Suspense>
+                  </div>
                 </CardContent>
               </Card>
 

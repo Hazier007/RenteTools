@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,8 +7,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+const BudgetPieChart = lazy(() => import("./budget-pie-chart"));
+const BudgetBarChart = lazy(() => import("./budget-bar-chart"));
 
 interface BudgetCategory {
   name: string;
@@ -659,25 +662,11 @@ export default function BudgetPlanner() {
                     <CardTitle>Budget Verdeling</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <PieChart>
-                        <Pie
-                          data={pieData}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(1)}%`}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                        >
-                          {pieData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                    <div style={{ height: 300 }}>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <BudgetPieChart data={pieData} colors={COLORS} />
+                      </Suspense>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -686,20 +675,11 @@ export default function BudgetPlanner() {
                     <CardTitle>Uitgaven per Categorie</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <BarChart data={categoryData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="category" />
-                        <YAxis tickFormatter={(value) => `${value.toFixed(0)}%`} />
-                        <Tooltip 
-                          formatter={(value, name) => [
-                            name === 'amount' ? formatCurrency(Number(value)) : `${Number(value).toFixed(1)}%`,
-                            name === 'amount' ? 'Bedrag' : 'Percentage van inkomen'
-                          ]} 
-                        />
-                        <Bar dataKey="percentage" fill="#3b82f6" name="Percentage" />
-                      </BarChart>
-                    </ResponsiveContainer>
+                    <div style={{ height: 300 }}>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <BudgetBarChart data={categoryData} />
+                      </Suspense>
+                    </div>
                   </CardContent>
                 </Card>
               </div>

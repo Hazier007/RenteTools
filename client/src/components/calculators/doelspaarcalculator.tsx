@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,8 +7,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+const DoelspaarTimelineChart = lazy(() => import("./doelspaar-timeline-chart"));
+const DoelspaarCategoriesChart = lazy(() => import("./doelspaar-categories-chart"));
+const DoelspaarPriorityChart = lazy(() => import("./doelspaar-priority-chart"));
 
 interface SavingsGoal {
   id: string;
@@ -635,34 +639,11 @@ export default function DoelspaarcalculatorComponent() {
                     <CardTitle>Spaarprojektie Over Tijd</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ResponsiveContainer width="100%" height={400}>
-                      <LineChart data={result.scenarios.slice(0, 36)}> {/* 3 jaar projectie */}
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis tickFormatter={(value) => `€${(value/1000).toFixed(0)}k`} />
-                        <Tooltip formatter={(value, name) => [
-                          name === 'totalSaved' ? formatCurrency(Number(value)) : value,
-                          name === 'totalSaved' ? 'Totaal Gespaard' : 
-                          name === 'completedGoals' ? 'Voltooide Doelen' : 'Resterende Doelen'
-                        ]} />
-                        <Legend />
-                        <Line 
-                          type="monotone" 
-                          dataKey="totalSaved" 
-                          stroke="#8884d8" 
-                          name="Totaal Gespaard"
-                          strokeWidth={2}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="completedGoals" 
-                          stroke="#82ca9d" 
-                          name="Voltooide Doelen"
-                          strokeWidth={2}
-                          yAxisId="right"
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    <div style={{ height: 400 }}>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <DoelspaarTimelineChart data={result.scenarios.slice(0, 36)} />
+                      </Suspense>
+                    </div>
                   </CardContent>
                 </Card>
               )}
@@ -711,43 +692,33 @@ export default function DoelspaarcalculatorComponent() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h4 className="font-semibold mb-4">Per Categorie</h4>
-                      <ResponsiveContainer width="100%" height={300}>
-                        <PieChart>
-                          <Pie
+                      <div style={{ height: 300 }}>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <DoelspaarCategoriesChart
                             data={goals.map(goal => ({
                               name: GOAL_CATEGORIES[goal.category].name,
                               value: goal.targetAmount,
                               color: GOAL_CATEGORIES[goal.category].color
                             }))}
-                            cx="50%"
-                            cy="50%"
-                            outerRadius={80}
-                            dataKey="value"
-                          >
-                            {goals.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                          </Pie>
-                          <Tooltip formatter={(value: number) => formatCurrency(value)} />
-                        </PieChart>
-                      </ResponsiveContainer>
+                            colors={COLORS}
+                          />
+                        </Suspense>
+                      </div>
                     </div>
                     
                     <div>
                       <h4 className="font-semibold mb-4">Per Prioriteit</h4>
-                      <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={[
-                          { priority: 'Hoog', amount: goals.filter(g => g.priority === 'hoog').reduce((sum, g) => sum + g.targetAmount, 0) },
-                          { priority: 'Gemiddeld', amount: goals.filter(g => g.priority === 'gemiddeld').reduce((sum, g) => sum + g.targetAmount, 0) },
-                          { priority: 'Laag', amount: goals.filter(g => g.priority === 'laag').reduce((sum, g) => sum + g.targetAmount, 0) }
-                        ]}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="priority" />
-                          <YAxis tickFormatter={(value) => `€${(value/1000).toFixed(0)}k`} />
-                          <Tooltip formatter={(value: number) => formatCurrency(value)} />
-                          <Bar dataKey="amount" fill="#8884d8" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      <div style={{ height: 300 }}>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <DoelspaarPriorityChart
+                            data={[
+                              { priority: 'Hoog', amount: goals.filter(g => g.priority === 'hoog').reduce((sum, g) => sum + g.targetAmount, 0) },
+                              { priority: 'Gemiddeld', amount: goals.filter(g => g.priority === 'gemiddeld').reduce((sum, g) => sum + g.targetAmount, 0) },
+                              { priority: 'Laag', amount: goals.filter(g => g.priority === 'laag').reduce((sum, g) => sum + g.targetAmount, 0) }
+                            ]}
+                          />
+                        </Suspense>
+                      </div>
                     </div>
                   </div>
                 </CardContent>

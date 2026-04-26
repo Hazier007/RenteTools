@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,8 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+const PensioenPillarsChart = lazy(() => import("./pensioen-pillars-chart"));
+const PensioenScenariosChart = lazy(() => import("./pensioen-scenarios-chart"));
 
 interface PensioenResult {
   eersteEijler: number;
@@ -488,25 +491,11 @@ export default function PensioenCalculator() {
                     <CardTitle>Verdeling Pensioen Pijlers</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <PieChart>
-                        <Pie
-                          data={pieData}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          label={({ name, value, percent }) => `${name}: ${formatCurrency(value)} (${(percent * 100).toFixed(1)}%)`}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                        >
-                          {pieData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                    <div style={{ height: 300 }}>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <PensioenPillarsChart data={pieData} colors={COLORS} />
+                      </Suspense>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -556,36 +545,11 @@ export default function PensioenCalculator() {
                     <CardTitle>Spaardoel Scenario's</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <LineChart data={result.scenarios}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="jaar" />
-                        <YAxis tickFormatter={(value) => `€${(value/1000).toFixed(0)}k`} />
-                        <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                        <Legend />
-                        <Line 
-                          type="monotone" 
-                          dataKey="spaardoel" 
-                          stroke="#8884d8" 
-                          name="Benodigd Spaardoel"
-                          strokeWidth={2}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="werkelijk" 
-                          stroke="#82ca9d" 
-                          name="Huidige Opbouw"
-                          strokeWidth={2}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="tekort" 
-                          stroke="#ff7300" 
-                          name="Tekort"
-                          strokeWidth={2}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    <div style={{ height: 300 }}>
+                      <Suspense fallback={<ChartSkeleton />}>
+                        <PensioenScenariosChart data={result.scenarios} />
+                      </Suspense>
+                    </div>
                   </CardContent>
                 </Card>
               )}

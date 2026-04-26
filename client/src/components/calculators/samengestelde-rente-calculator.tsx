@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import NumberInput from "@/components/ui/number-input";
 import CalculationResult from "@/components/ui/calculation-result";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 import { calculateCompoundInterest } from "@/lib/calculations";
 import { formatCurrency, formatPercentage } from "@/lib/formatters";
+
+const SamengesteldeRenteChart = lazy(() => import("./samengestelde-rente-chart"));
 
 const samengesteldeSchema = z.object({
   kapitaal: z.number().min(0, "Kapitaal moet positief zijn"),
@@ -206,35 +208,9 @@ export default function SamengesteldeRenteCalculator() {
                   <Card>
                     <CardContent className="p-4">
                       <div className="h-48">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="jaar" />
-                            <YAxis />
-                            <Tooltip 
-                              formatter={(value, name) => [
-                                formatCurrency(value as number), 
-                                name === "samengesteld" ? "Samengesteld" : "Enkelvoudig"
-                              ]}
-                              labelFormatter={(label) => `Jaar ${label}`}
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="samengesteld" 
-                              stroke="hsl(var(--secondary))" 
-                              strokeWidth={2}
-                              name="samengesteld"
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="enkelvoudig" 
-                              stroke="hsl(var(--muted-foreground))" 
-                              strokeWidth={2}
-                              strokeDasharray="5 5"
-                              name="enkelvoudig"
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
+                        <Suspense fallback={<ChartSkeleton />}>
+                          <SamengesteldeRenteChart data={chartData} />
+                        </Suspense>
                       </div>
                     </CardContent>
                   </Card>
