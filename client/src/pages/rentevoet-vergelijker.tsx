@@ -541,7 +541,9 @@ export default function RentevoetVergelijkerPage() {
       </section>
 
       {/* Rate Comparison Widget */}
-      <RateComparisonWidget productType="hypotheek" title="Vergelijk Hypotheek Aanbiedingen" />
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RateComparisonWidget productType="hypotheek" title="Vergelijk Hypotheek Aanbiedingen" />
+      </section>
 
       {/* Bottom Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -553,7 +555,11 @@ export default function RentevoetVergelijkerPage() {
         <RelatedCalculators currentSlug="rentevoet-vergelijker" />
       </section>
 
-      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+      {seoConfig && (
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <AuthorityLinks links={seoConfig.authorityLinks} />
+        </section>
+      )}
 
       <Footer />
     </div>
