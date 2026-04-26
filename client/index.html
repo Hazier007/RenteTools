@@ -76,28 +76,13 @@
       gtag('config', 'G-P5BE4RN7QX');
     </script>
     
-    <!-- Google AdSense Auto Ads - loaded conditionally after cookie consent -->
-    <script>
-      (function() {
-        try {
-          var stored = localStorage.getItem('cookie-consent');
-          if (stored) {
-            var consent = JSON.parse(stored);
-            if (consent.advertising) {
-              var s = document.createElement('script');
-              s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864';
-              s.async = true;
-              s.crossOrigin = 'anonymous';
-              document.head.appendChild(s);
-            }
-          }
-        } catch(e) {}
-      })();
-    </script>
+    <!-- Google AdSense — unconditional loader. Consent Mode v2 defaults (denied) above gate cookie storage; FC banner updates consent signals after user choice. -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864" crossorigin="anonymous"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+      <script async src="https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="root"></div>
