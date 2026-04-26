@@ -67,6 +67,9 @@ const slugToCategory: Record<string, SiloCategory> = {
   "etf-calculator": "Beleggen",
   "obligatie-calculator": "Beleggen",
   "cryptocurrency-calculator": "Beleggen",
+  "crypto-belasting-calculator": "Beleggen",
+  "staking-apy-calculator": "Beleggen",
+  "crypto-winst-verlies-calculator": "Beleggen",
   "dollar-cost-averaging-calculator": "Beleggen",
   "portfolio-diversificatie-calculator": "Beleggen",
   "reit-calculator": "Beleggen",
@@ -90,6 +93,7 @@ const slugToCategory: Record<string, SiloCategory> = {
   "privacy": "Overige",
   "privacybeleid": "Overige",
   "voorwaarden": "Overige",
+  "contact": "Overige",
   "sitemap": "Overige",
   "blog": "Overige",
   "nieuws": "Overige",
@@ -317,6 +321,27 @@ export const seoConfigs: Record<string, SeoConfig> = {
     metaTitle: "Cryptocurrency Calculator België - Crypto Portfolio Analyse",
     metaDescription: "Bereken crypto rendement en risico. Bitcoin, Ethereum en altcoins analyseren. Belgische belastingregels voor crypto (33% meerwaarde)."
   },
+  "crypto-belasting-calculator": {
+    slug: "crypto-belasting-calculator",
+    pageTitle: "Belgische Crypto Belasting Calculator",
+    metaTitle: `Crypto Belasting Calculator België - Hobby vs Professioneel ${getCurrentYear()}`,
+    metaDescription: "Bereken crypto belasting in België. Goede huisvader (belastingvrij), speculatief (33%) of staking (30%). Gratis Belgische crypto tax calculator.",
+    faqs: defaultFaqs.beleggen
+  },
+  "staking-apy-calculator": {
+    slug: "staking-apy-calculator",
+    pageTitle: "Staking APY Calculator",
+    metaTitle: `Staking APY Calculator België - Crypto Staking Rendement ${getCurrentYear()}`,
+    metaDescription: "Bereken uw crypto staking rendement met APY naar APR conversie. Compound interest berekening voor staking rewards. Gratis Belgische staking calculator.",
+    faqs: defaultFaqs.beleggen
+  },
+  "crypto-winst-verlies-calculator": {
+    slug: "crypto-winst-verlies-calculator",
+    pageTitle: "Crypto Winst/Verlies Calculator",
+    metaTitle: `Crypto Winst/Verlies Calculator België - ROI Berekenen ${getCurrentYear()}`,
+    metaDescription: "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator.",
+    faqs: defaultFaqs.beleggen
+  },
   "dollar-cost-averaging-calculator": {
     slug: "dollar-cost-averaging-calculator",
     metaTitle: "Dollar Cost Averaging Calculator België - Periodiek Beleggen",
@@ -410,6 +435,12 @@ export const seoConfigs: Record<string, SeoConfig> = {
     slug: "over-ons",
     metaTitle: "Over Interesten.be - Financiële Calculators België",
     metaDescription: "Interesten.be helpt u slimme financiële beslissingen nemen met gratis calculators voor sparen, lenen, beleggen en planning in België."
+  },
+  "contact": {
+    slug: "contact",
+    pageTitle: "Contact - Interesten.be",
+    metaTitle: "Contact Interesten.be - Vragen, Feedback & Samenwerking",
+    metaDescription: "Neem contact op met Interesten.be. Stuur uw vraag, feedback of samenwerkingsvoorstel naar info@hazier.be. Achter Interesten.be staat Hazier."
   },
   "privacy": {
     slug: "privacy",
