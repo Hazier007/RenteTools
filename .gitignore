@@ -7,3 +7,7 @@ vite.config.ts.*
 .vercel
 # Generated API bundle (built from server/vercel-handler.ts)
 api/
+# Radar local SEO audit scratch directories
+.radar-ssr-check
+.radar-cal35
+prerender-routes-cal5.json

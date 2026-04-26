@@ -440,7 +440,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
     slug: "contact",
     pageTitle: "Contact - Interesten.be",
     metaTitle: "Contact Interesten.be - Vragen, Feedback & Samenwerking",
-    metaDescription: "Neem contact op met Interesten.be. Stuur uw vraag, feedback of samenwerkingsvoorstel naar info@hazier.be. Achter Interesten.be staat Hazier."
+    metaDescription: "Neem contact op met Interesten.be. Stuur uw vraag, feedback of samenwerkingsvoorstel naar info@interesten.be. Wij beantwoorden alle berichten binnen 2 werkdagen."
   },
   "privacy": {
     slug: "privacy",
