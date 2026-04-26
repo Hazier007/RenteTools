@@ -58,31 +58,75 @@
     }
     </script>
     
-    <!-- Google Analytics with Consent Mode -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5BE4RN7QX"></script>
+    <!--
+      Consent Mode v2 + GA4 / AdSense / Funding Choices CMP — deferred bootstrap.
+
+      Why: eager-loading these three scripts adds ~466 KB of network transfer
+      (~282 KB unused JS) onto the LCP critical path. CAL-45 defers the actual
+      script loaders past the LCP window without changing analytics behavior.
+
+      What stays eager (inline below):
+        - dataLayer + gtag() shim (so app-side gtag(...) calls buffer correctly)
+        - Consent Mode v2 defaults (all denied + wait_for_update: 500)
+        - gtag('js', ...) + gtag('config', ...) — both queue into dataLayer
+
+      What loads after `load` event + requestIdleCallback (or 2s setTimeout):
+        - googletagmanager.com/gtag/js (GA4)
+        - pagead2.googlesyndication.com/pagead/js/adsbygoogle.js (AdSense Auto Ads)
+        - fundingchoicesmessages.google.com/i/pub-... (Funding Choices CMP)
+
+      gtag.js drains the buffered dataLayer when it loads, so no analytics
+      events are lost. Consent banner appears ~2s after first paint on cold
+      visits; denied defaults keep cookies/storage gated until then.
+    -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
       gtag('js', new Date());
-      
-      // Set default consent mode
       gtag('consent', 'default', {
         'analytics_storage': 'denied',
         'ad_storage': 'denied',
         'ad_user_data': 'denied',
-        'ad_personalization': 'denied'
+        'ad_personalization': 'denied',
+        'wait_for_update': 500
       });
-      
       gtag('config', 'G-P5BE4RN7QX');
+
+      (function deferThirdParty() {
+        var loaded = false;
+        function injectScript(src, crossOrigin) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = src;
+          if (crossOrigin) s.crossOrigin = 'anonymous';
+          document.head.appendChild(s);
+        }
+        function loadDeferred() {
+          if (loaded) return;
+          loaded = true;
+          injectScript('https://www.googletagmanager.com/gtag/js?id=G-P5BE4RN7QX', false);
+          injectScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864', true);
+          injectScript('https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1', true);
+        }
+        function schedule() {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadDeferred, { timeout: 3000 });
+          } else {
+            setTimeout(loadDeferred, 2000);
+          }
+        }
+        if (document.readyState === 'complete') {
+          schedule();
+        } else {
+          window.addEventListener('load', schedule, { once: true });
+        }
+      })();
     </script>
-    
-    <!-- Google AdSense — unconditional loader. Consent Mode v2 defaults (denied) above gate cookie storage; FC banner updates consent signals after user choice. -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864" crossorigin="anonymous"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-      <script async src="https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="root"></div>
