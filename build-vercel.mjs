@@ -64,10 +64,13 @@ copyDirRecursive(publicDir, staticDir);
 console.log('   Copied static assets');
 
 // Step 5b: Prerender all routes from prerender-routes.json into static/
-// Overwrites /index.html and writes /<route>/index.html for subpages so
-// Vercel serves SEO'd HTML straight from CDN without invoking the function.
-console.log('\n[4/5] Prerendering routes via injectSeoMeta...');
-execSync('node scripts/ssg-prerender.mjs', { stdio: 'inherit', cwd: ROOT });
+// Eager routes (home, /sparen, /lenen, /beleggen, /planning, etc.) get a
+// full React renderToString into <div id="root">…</div> so the hero markup
+// reaches the browser as initial HTML — closes the LCP gate that
+// injectSeoMeta-only could not move past CAL-47. Calculator routes still
+// get meta-only prerender because they hit React.lazy boundaries.
+console.log('\n[4/5] Prerendering routes via SSG render-to-string...');
+execSync('node scripts/ssg-render.mjs', { stdio: 'inherit', cwd: ROOT });
 
 // Step 6: Create config.json (routing)
 // Filesystem handler picks up the prerendered /<route>/index.html files;
