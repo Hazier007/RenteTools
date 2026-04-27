@@ -434,7 +434,9 @@ export default function WoningkredietSimulatorPage() {
       </section>
 
       {/* Rate Comparison Widget */}
-      <RateComparisonWidget productType="hypotheek" title="Vergelijk Hypotheekaanbiedingen" />
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <RateComparisonWidget productType="hypotheek" title="Vergelijk Hypotheekaanbiedingen" />
+      </section>
 
       {/* Bottom Ad */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -446,7 +448,11 @@ export default function WoningkredietSimulatorPage() {
         <RelatedCalculators currentSlug="woningkrediet-simulator" />
       </section>
 
-      {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+      {seoConfig && (
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <AuthorityLinks links={seoConfig.authorityLinks} />
+        </section>
+      )}
 
       <Footer />
     </div>
