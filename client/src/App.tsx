@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Redirect from "@/components/Redirect";
+import { usePageViewTracking } from "@/hooks/use-page-view-tracking";
 
 // Eager: home and the 404 fallback. Home is the dominant entry point and
 // must render without an extra network round-trip.
@@ -39,6 +40,7 @@ function RouteFallback() {
 }
 
 function Router() {
+  usePageViewTracking();
   return (
     <Suspense fallback={<RouteFallback />}>
       <Switch>
