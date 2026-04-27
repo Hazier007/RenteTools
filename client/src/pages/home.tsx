@@ -103,15 +103,22 @@ export default function Home() {
 
       {/* Hero Section with Background Image */}
       <section
-        className="relative min-h-[90vh] flex items-center justify-center py-24 px-4"
+        className="relative min-h-[90vh] flex items-center justify-center py-24 px-4 overflow-hidden"
         data-testid="hero-section"
-        style={{
-          backgroundImage: `image-set(url(${heroBackgroundAvif}) type("image/avif"), url(${heroBackgroundWebp}) type("image/webp"))`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center right',
-          backgroundRepeat: 'no-repeat'
-        }}
       >
+        <picture>
+          <source type="image/avif" srcSet={heroBackgroundAvif} />
+          <source type="image/webp" srcSet={heroBackgroundWebp} />
+          <img
+            src={heroBackgroundWebp}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-[center_right] -z-10"
+            {...({ fetchpriority: "high" } as Record<string, string>)}
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
         <div className="relative max-w-7xl mx-auto text-center space-y-10">
           <div className="space-y-6">

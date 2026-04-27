@@ -653,13 +653,27 @@ function escapeHtmlAttribute(str: string): string {
     .replace(/>/g, '&gt;');
 }
 
+// Extracts the first <source type="image/avif" srcset="..."> URL from SSR'd
+// hero markup so we can emit a matching <link rel="preload"> in <head>.
+// Returns null when the hero <picture> isn't present in the HTML (runtime
+// fallback path, or non-home routes).
+function extractHeroAvifUrl(html: string): string | null {
+  const match = html.match(
+    /<source[^>]*\stype="image\/avif"[^>]*\ssrcset="([^"]+)"/i,
+  );
+  if (!match) return null;
+  // srcset may be a comma-separated list (e.g. "url 1x, url 2x"); preload's
+  // single-href form takes the first URL.
+  return match[1].split(',')[0].trim().split(/\s+/)[0];
+}
+
 export function injectSeoMeta(html: string, url: string): string {
   const seoConfig = getSeoConfigForUrl(url);
-  
+
   if (!seoConfig) {
     return html;
   }
-  
+
   let result = html;
   const escapedTitle = escapeHtmlAttribute(seoConfig.metaTitle);
   const escapedDescription = escapeHtmlAttribute(seoConfig.metaDescription);
@@ -713,8 +727,23 @@ export function injectSeoMeta(html: string, url: string): string {
     );
   }
   
+  // Hero LCP preload — only on `/`, where the hero <picture> is SSR'd. The
+  // CSS background variant we replaced couldn't carry fetchpriority; pairing a
+  // preload hint with the new <img fetchPriority="high"> moves the AVIF off
+  // the default-priority queue and into the LCP path (priorityHinted=true).
+  if (seoConfig.slug === 'home') {
+    const heroAvifUrl = extractHeroAvifUrl(result);
+    if (heroAvifUrl && result.includes('</head>')) {
+      const escapedHref = escapeHtmlAttribute(heroAvifUrl);
+      const preloadTag = `<link rel="preload" as="image" href="${escapedHref}" type="image/avif" fetchpriority="high" />`;
+      if (!result.includes(preloadTag)) {
+        result = result.replace('</head>', `  ${preloadTag}\n  </head>`);
+      }
+    }
+  }
+
   const structuredDataScripts: string[] = [];
-  
+
   if (seoConfig.slug === 'home') {
     const websiteJson = escapeJsonForHtml(JSON.stringify(generateWebSiteSchema(), null, 2));
     structuredDataScripts.push(`<script type="application/ld+json">\n${websiteJson}\n    </script>`);
