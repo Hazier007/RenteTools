@@ -6,18 +6,19 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Redirect from "@/components/Redirect";
 
-// Eager: home, category hubs, and the 404 fallback. These are entry points
-// for the bulk of traffic and prerendering, so we avoid a network round-trip.
+// Eager: home and the 404 fallback. Home is the dominant entry point and
+// must render without an extra network round-trip.
 import Home from "@/pages/home";
-import SparenPage from "@/pages/sparen";
-import LenenPage from "@/pages/lenen";
-import BeleggenPage from "@/pages/beleggen";
-import PlanningPage from "@/pages/planning";
-import OverigePage from "@/pages/overige";
 import NotFound from "@/pages/not-found";
 
-// Lazy: rare or heavy routes. Admin pulls TipTap, blog-detail pulls marked +
-// DOMPurify, calculators are already lazy inside DynamicCalculatorPage.
+// Lazy: category hubs (own chunks per route) + heavy/rare routes. Calculators
+// are already lazy inside DynamicCalculatorPage; admin pulls TipTap;
+// blog-detail pulls marked + DOMPurify.
+const SparenPage = lazy(() => import("@/pages/sparen"));
+const LenenPage = lazy(() => import("@/pages/lenen"));
+const BeleggenPage = lazy(() => import("@/pages/beleggen"));
+const PlanningPage = lazy(() => import("@/pages/planning"));
+const OverigePage = lazy(() => import("@/pages/overige"));
 const DynamicCalculatorPage = lazy(() => import("@/pages/DynamicCalculatorPage"));
 const NieuwsPage = lazy(() => import("@/pages/nieuws"));
 const BlogPage = lazy(() => import("@/pages/blog"));
