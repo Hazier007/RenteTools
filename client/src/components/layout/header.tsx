@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, ChevronDown, PiggyBank, CreditCard, TrendingUp, Calculator, Newspaper } from "lucide-react";
-import { getCalculatorsByCategory } from "@/lib/routeRegistry";
-import CalculatorSearch from "@/components/calculator-search";
+import { headerNavData } from "@/lib/headerNavData";
 import logoUrl from "../../assets/logo-new.png";
 
-const categories = [
+const CalculatorSearch = lazy(() => import("@/components/calculator-search"));
+
+const categories: Array<{
+  name: keyof typeof headerNavData;
+  path: string;
+  icon: typeof PiggyBank;
+}> = [
   { name: "Sparen", path: "/sparen", icon: PiggyBank },
   { name: "Lenen", path: "/lenen", icon: CreditCard },
   { name: "Beleggen", path: "/beleggen", icon: TrendingUp },
@@ -51,7 +56,7 @@ export default function Header() {
                       data-testid={`dropdown-${category.name.toLowerCase()}`}
                     >
                       <div className="space-y-1 max-h-96 overflow-y-auto scrollbar-hide">
-                        {getCalculatorsByCategory(category.name as any).slice(0, 6).map((calc) => (
+                        {headerNavData[category.name].map((calc) => (
                           <Link
                             key={calc.slug}
                             href={`${category.path}/${calc.slug}`}
@@ -59,10 +64,10 @@ export default function Header() {
                             data-testid={`dropdown-item-${calc.slug}`}
                           >
                             <div className="font-medium text-sm text-foreground">
-                              {calc.seoConfig.breadcrumbTitle}
+                              {calc.breadcrumbTitle}
                             </div>
                             <div className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
-                              {calc.seoConfig.metaDescription}
+                              {calc.metaDescription}
                             </div>
                           </Link>
                         ))}
@@ -79,7 +84,9 @@ export default function Header() {
                 </div>
               );
             })}
-            <CalculatorSearch compact className="mx-1" />
+            <Suspense fallback={<div className="w-9 h-9 mx-1" aria-hidden />}>
+              <CalculatorSearch compact className="mx-1" />
+            </Suspense>
             <Link
               href="/blog"
               className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-muted-foreground hover:text-primary hover:bg-accent/50 transition-all duration-200"
@@ -109,10 +116,12 @@ export default function Header() {
         <div className="md:hidden bg-background backdrop-blur-xl border-t border-border/50" role="navigation" aria-label="Mobiele navigatie">
           <div className="px-4 py-3 space-y-1 max-h-[70vh] overflow-y-auto">
             <div className="pb-2 mb-2 border-b border-border/50">
-              <CalculatorSearch
-                onNavigate={() => setMobileMenuOpen(false)}
-                placeholder="Zoek een calculator..."
-              />
+              <Suspense fallback={<div className="h-10" aria-hidden />}>
+                <CalculatorSearch
+                  onNavigate={() => setMobileMenuOpen(false)}
+                  placeholder="Zoek een calculator..."
+                />
+              </Suspense>
             </div>
             {categories.map((category) => {
               const IconComponent = category.icon;
@@ -128,7 +137,7 @@ export default function Header() {
                     {category.name}
                   </Link>
                   <div className="pl-6 space-y-1 pb-2">
-                    {getCalculatorsByCategory(category.name as any).slice(0, 4).map((calc) => (
+                    {headerNavData[category.name].slice(0, 4).map((calc) => (
                       <Link
                         key={calc.slug}
                         href={`${category.path}/${calc.slug}`}
@@ -136,7 +145,7 @@ export default function Header() {
                         onClick={() => setMobileMenuOpen(false)}
                         data-testid={`mobile-dropdown-item-${calc.slug}`}
                       >
-                        {calc.seoConfig.breadcrumbTitle}
+                        {calc.breadcrumbTitle}
                       </Link>
                     ))}
                   </div>
