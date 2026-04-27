@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Trophy, Home as HomeIcon, Flame, TrendingUp, Shield, MapPin, Heart, ArrowRight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import BolAffiliateCard from "@/components/BolAffiliateCard";
 import { Button } from "@/components/ui/button";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import { getNewRoutePath } from "@/lib/routeRegistry";
@@ -212,6 +213,13 @@ export default function Home() {
               );
             })}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Bol Affiliate Card (CAL-78) */}
+      <section className="py-10 px-4 relative">
+        <div className="max-w-7xl mx-auto">
+          <BolAffiliateCard />
         </div>
       </section>
 
