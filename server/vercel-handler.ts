@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import { registerRoutes } from "./routes";
 import { calculatorRegistry } from "../shared/calculator-registry";
 import { injectSeoMeta } from "./seo-config";
+import { bootstrapBankingDataIfEmpty } from "./bootstrap-data";
 
 // ESM-compatible __dirname (works on Node.js 20+)
 const __filename_esm = fileURLToPath(import.meta.url);
@@ -101,6 +102,15 @@ app.use((req, res, next) => {
 
 // Register API routes (registerRoutes is async but all route registrations are synchronous)
 registerRoutes(app);
+
+// Fire bootstrap once per cold-start. Fire-and-forget: idempotent (no-op when
+// data exists), doesn't block request handling, and any error is swallowed
+// because the route layer can survive on the existing data or fall back to
+// MemStorage. Without this, a fresh DATABASE_URL points at empty tables and
+// /api/banks returns [] until something seeds it manually (CAL-39).
+bootstrapBankingDataIfEmpty().catch((error) => {
+  console.error("Failed to bootstrap banking data on cold-start:", error);
+});
 
 // Error handler
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
