@@ -716,7 +716,7 @@ function deriveFallbackSeo(url: string): { metaTitle: string; metaDescription: s
     : '';
   const context = parentPretty ? ` (${parentPretty})` : '';
   return {
-    metaTitle: `${pretty} - Interesten.be${context ? ' ' + context : ''}`,
+    metaTitle: `${pretty} - Interesten.be${context}`,
     metaDescription:
       `${pretty}${context} op Interesten.be: gratis Belgische rekentool met actuele cijfers, ` +
       `transparante formules en bronvermelding voor sparen, lenen en beleggen ${getCurrentYear()}.`,
