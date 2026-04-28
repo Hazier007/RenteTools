@@ -17,6 +17,10 @@ export interface BlogPost {
     description: string;
     keywords: string[];
   };
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -511,6 +515,282 @@ Let op de **beurstaks bij aan/verkoop**:
       description: "Complete gids voor fiscale voordelen in België: pensioensparen, spaarrente vrijstelling, beleggingsfondsen en meer. Maximaliseer uw netto-rendement.",
       keywords: ["belastingvoordelen belgië", "pensioensparen", "roerende voorheffing", "fiscale optimalisatie", "sparen belastingvrij"]
     }
+  },
+  {
+    slug: "registratierechten-berekenen-2026",
+    title: "Registratierechten Berekenen 2026 — Vlaanderen, Wallonië & Brussel",
+    excerpt: "Bereken de registratierechten voor uw woningaankoop in 2026: tarieven per gewest, abattement, klein beschrijf en concrete voorbeelden.",
+    category: "Lenen",
+    author: {
+      name: "Marc Dubois",
+      bio: "Hypotheekadviseur en financieel planner gespecialiseerd in woningfinanciering en vermogensopbouw",
+      avatar: "https://ui-avatars.com/api/?name=Marc+Dubois&background=10b981&color=fff&size=200"
+    },
+    publishDate: "2026-04-28",
+    readTime: 9,
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=675&fit=crop",
+    content: `
+# Registratierechten Berekenen 2026 — Vlaanderen, Wallonië & Brussel
+
+Bij de aankoop van een woning in België komt er meer kijken dan de prijsovereenkomst met de verkoper. Eén van de grootste extra kosten zijn de **registratierechten**, een gewestelijke belasting op de overdracht van onroerend goed. In 2026 verschillen de tarieven aanzienlijk tussen Vlaanderen, Wallonië en Brussel — en het gewest waar u koopt bepaalt rechtstreeks wat u extra betaalt.
+
+In deze gids leest u alles over de registratierechten in 2026, met concrete tarieven, voorbeeldberekeningen en de voorwaarden om voordelen zoals het abattement of klein beschrijf te benutten.
+
+## Wat zijn registratierechten en wanneer betaalt u ze?
+
+Registratierechten — voluit *registratie- en hypotheekrechten* — zijn de belasting die u verschuldigd bent zodra een notariële akte van vastgoedoverdracht wordt geregistreerd. Concreet betaalt u registratierechten:
+
+- bij de **aankoop van een bestaande woning** of bouwgrond;
+- bij **schenking** van onroerend goed (al gelden hier andere tarieven);
+- bij **erfpacht** of overdracht van zakelijke rechten op vastgoed.
+
+Belangrijk: bij de aankoop van een **nieuwbouwwoning met btw** betaalt u 21% btw op het gebouwgedeelte en enkel registratierechten op het grondaandeel. Voor bestaande woningen betaalt u volle registratierechten op de totale aankoopprijs.
+
+De rechten worden berekend op de **verkoopwaarde** of de **prijs**, afhankelijk van wat het hoogste is. De koper betaalt; de notaris int de rechten en stort ze door naar de gewestelijke fiscus.
+
+## Tarieven 2026 per gewest
+
+De drie gewesten hebben sinds 2018 elk eigen tarieven. De verschillen zijn groot, vooral voor de gezinswoning.
+
+### Vlaanderen
+
+In het Vlaams Gewest geldt sinds 1 januari 2025 een hervormd tarief, dat ook in 2026 doorloopt:
+
+- **3% voor de eigen, enige gezinswoning** (hoofdverblijfplaats);
+- **12% voor andere woningen** (tweede verblijf, opbrengsteigendom, zakelijk vastgoed);
+- **12% voor bouwgronden** waar geen woonst op gepland is.
+
+De koper moet binnen drie jaar na de akte zijn domicilie vestigen op het adres om recht te behouden op het 3%-tarief.
+
+### Wallonië
+
+Het Waals Gewest hanteert een algemeen tarief van **12,5%** op de aankoop van vastgoed in 2026. Voor een **bescheiden woning** (klein beschrijf) geldt een verlaagd tarief van **6%**. Wie zijn enige gezinswoning koopt, kan ook genieten van een **abattement** op de eerste schijf van de aankoopprijs. Sinds 2026 is de regelgeving rond klein beschrijf vereenvoudigd, met duidelijker drempels op het kadastraal inkomen.
+
+### Brussels Hoofdstedelijk Gewest
+
+In Brussel geldt eveneens **12,5%** als standaardtarief in 2026. De koper kan profiteren van een **abattement van €200.000** op de aankoopprijs voor de eigen, enige gezinswoning, mits de woning maximaal €600.000 kost en de koper er minstens 5 jaar zijn hoofdverblijfplaats vestigt. Concreet betekent dit een belastingbesparing van **€25.000** op de registratierechten.
+
+## Abattement & klein beschrijf — komt u in aanmerking?
+
+Beide voordelen zijn populaire instrumenten om de aankoopkost te drukken, maar de voorwaarden verschillen per gewest.
+
+**Brussel — Abattement van €200.000:**
+- Het moet uw enige eigendom zijn op het moment van de akte.
+- Maximale aankoopprijs: €600.000 (excl. kosten).
+- Domicilie binnen 2 jaar, behoud gedurende minstens 5 jaar.
+- Eerste €200.000 vrijgesteld → besparing van €25.000 (12,5% × €200.000).
+
+**Wallonië — Klein beschrijf (verlaagd tarief 6%):**
+- Maximaal kadastraal inkomen €745 (verhoogd voor gezinnen met meerdere kinderen ten laste).
+- Geen ander onroerend goed in volle eigendom op moment van aankoop.
+- Domicilie binnen 3 jaar, behoud gedurende 3 jaar.
+
+**Vlaanderen — 3%-tarief vervangt het oude abattement:**
+Sinds 2025 is er geen apart abattement meer in Vlaanderen; het lage 3%-tarief vormt zelf het voordeel voor de gezinswoning. Voldoet u niet aan de voorwaarden, dan vervalt u terug op 12%.
+
+## Rekenvoorbeeld: woning van €350.000
+
+Stel u koopt een bestaande gezinswoning van €350.000 in 2026. U bent eerstkoper en zal er domicilie nemen.
+
+| Gewest | Tarief | Registratierechten | Toelichting |
+|---|---|---|---|
+| **Vlaanderen** | 3% | **€10.500** | Eigen gezinswoning, domicilie binnen 3 jaar |
+| **Wallonië (klein beschrijf)** | 6% | **€21.000** | KI ≤ €745, eerste woning |
+| **Wallonië (standaard)** | 12,5% | **€43.750** | Bij niet-vervulling van voorwaarden |
+| **Brussel (met abattement)** | 12,5% min €25.000 | **€18.750** | Eerste woning, prijs ≤ €600.000 |
+| **Brussel (standaard)** | 12,5% | **€43.750** | Tweede verblijf, vakantiehuis |
+
+Het verschil is opvallend: voor dezelfde woning betaalt u in Vlaanderen €10.500, terwijl u in Wallonië bij een standaardtarief tot €43.750 kwijt bent. Dit gewestelijk verschil is een wezenlijke overweging bij de keuze van uw aankooplocatie.
+
+## Notariskosten + ereloon: de totale aankoopkost
+
+Naast de registratierechten betaalt u nog:
+
+- **Ereloon notaris**: een wettelijk geregeld percentage van de aankoopprijs, vaak rond **1% tot 1,5%** (degressief vanaf hogere prijzen).
+- **Aktekosten en administratieve kosten**: doorgaans **€800 tot €1.500** voor uittreksels, hypotheekrecherches en publicaties.
+- **21% btw op het ereloon** — let op: niet op de registratierechten zelf.
+- **Hypotheekrechten** indien u een lening afsluit: 1% van het ontleende bedrag voor de hypothecaire inschrijving.
+
+**Voorbeeld totale bijkomende kosten** voor een Vlaamse gezinswoning van €350.000:
+
+- Registratierechten: €10.500
+- Ereloon notaris: ±€4.500 (1,3%) + 21% btw → €5.445
+- Akte- en administratiekosten: €1.200
+- Hypotheekrechten (lening van €280.000): €2.800
+
+**Totaal extra kosten ≈ €19.945**, oftewel ongeveer 5,7% bovenop de aankoopprijs. Wie een hypothecair krediet plant, kan met onze [hypotheek calculator](/lenen/hypothecaire-lening-berekenen) eenvoudig de maandlast inclusief deze bijkomende kosten simuleren. Voor een ruimere doorrekening van uw leencapaciteit en LTV-grenzen gebruikt u onze [woningkrediet simulator](/lenen/woningkrediet-simulator).
+
+## Tips om uw registratierechten te beperken
+
+1. **Domicilie tijdig vestigen** — vergeet niet om binnen de gestelde termijn (3 jaar in Vlaanderen, 2 jaar in Brussel) uw hoofdverblijfplaats over te brengen, anders wordt het lage tarief teruggevorderd.
+2. **Plan uw aankoopgewest** — als u flexibel bent in regio, kan een Vlaamse aankoop u tienduizenden euro's besparen tegenover Wallonië of Brussel.
+3. **Onderzoek meeneembaarheid** — in sommige gewesten kunt u eerder betaalde registratierechten gedeeltelijk meenemen naar een volgende aankoop, binnen specifieke termijnen.
+4. **Combineer met fiscale optimalisatie** — overweeg of u na de aankoop beter aflost dan belegt; lees hierover onze gids [hypotheek aflossen of beleggen](/blog/hypotheek-aflossen-of-beleggen).
+5. **Vraag de berekening op voorhand** — uw notaris stelt vrijblijvend een afrekening op van alle bijkomende kosten, zodat u uw budget realistisch kunt plannen.
+
+## Conclusie
+
+Registratierechten vormen in 2026 een aanzienlijk deel van uw vastgoedbudget. Het Vlaamse tarief van 3% voor de gezinswoning blijft uitzonderlijk gunstig, terwijl Wallonië en Brussel met 12,5% standaard duurder uitvallen — al verzachten het abattement (Brussel) en klein beschrijf (Wallonië) de pijn aanzienlijk. Reken altijd door op uw eigen situatie en houd rekening met notariskosten, aktekosten en hypotheekrechten om een eerlijk beeld van de totale aankoopkost te krijgen.
+
+*Disclaimer: Tarieven en voorwaarden kunnen wijzigen. Raadpleeg altijd uw notaris of een fiscaal adviseur voor uw concrete situatie.*
+    `,
+    seo: {
+      title: "Registratierechten Berekenen 2026 | Per Gewest",
+      description: "Bereken registratierechten 2026 voor je woning in België: tarieven Vlaanderen 3-12%, Wallonië en Brussel 12,5%, abattement, klein beschrijf, voorbeelden.",
+      keywords: ["registratierechten 2026", "registratierechten berekenen", "registratierechten vlaanderen", "registratierechten brussel", "registratierechten wallonië", "abattement brussel", "klein beschrijf wallonië", "notariskosten woning"]
+    },
+    faqs: [
+      {
+        question: "Wat is het registratierechten-tarief voor de gezinswoning in Vlaanderen 2026?",
+        answer: "Het tarief bedraagt 3% voor de aankoop van uw eigen, enige gezinswoning, mits u binnen drie jaar uw hoofdverblijfplaats vestigt op het adres. Voor andere woningen (tweede verblijf, opbrengsteigendom) geldt 12%."
+      },
+      {
+        question: "Wat is het verschil tussen abattement en klein beschrijf?",
+        answer: "Het abattement is een vrijstelling op de eerste schijf van de aankoopprijs (in Brussel €200.000), terwijl klein beschrijf een verlaagd tarief van 6% is in Wallonië voor bescheiden woningen met een kadastraal inkomen onder €745."
+      },
+      {
+        question: "Betaal ik registratierechten op een nieuwbouwwoning?",
+        answer: "Bij een nieuwbouw met btw betaalt u 21% btw op het gebouwgedeelte en alleen registratierechten op het grondaandeel. Bij een bestaande woning betaalt u volle registratierechten op de hele aankoopprijs."
+      },
+      {
+        question: "Hoeveel registratierechten betaal ik op een woning van €350.000 in Brussel?",
+        answer: "Met abattement betaalt u €18.750 (12,5% × €350.000 = €43.750, verminderd met €25.000 abattement). Zonder abattement betaalt u €43.750."
+      },
+      {
+        question: "Welke kosten komen er nog bovenop de registratierechten?",
+        answer: "Naast de registratierechten betaalt u het ereloon van de notaris (±1-1,5%), aktekosten (€800-€1.500), 21% btw op het ereloon, en hypotheekrechten (1% van het leenbedrag) als u een lening afsluit. Reken op 5-6% extra bovenop de aankoopprijs."
+      }
+    ]
+  },
+  {
+    slug: "etf-beleggen-belgie-2026",
+    title: "ETF Beleggen België 2026 — Beste ETF's, Brokers & TOB",
+    excerpt: "Start met ETF beleggen in België 2026: beste ETF's (IWDA, EMIM, VWCE, S&P 500), broker-vergelijking, TOB-tarieven en de fiscale impact van Reynders-tax.",
+    category: "Beleggen",
+    author: {
+      name: "Sophie Janssens",
+      bio: "Financieel expert met 15 jaar ervaring in persoonlijke financiën en vermogensbeheer in België",
+      avatar: "https://ui-avatars.com/api/?name=Sophie+Janssens&background=2563eb&color=fff&size=200"
+    },
+    publishDate: "2026-04-28",
+    readTime: 10,
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=675&fit=crop",
+    content: `
+# ETF Beleggen België 2026 — Beste ETF's, Brokers & TOB
+
+ETF's blijven in 2026 het populairste beleggingsinstrument voor Belgische beleggers die op een eenvoudige, gediversifieerde manier willen sparen voor de lange termijn. In één transactie krijgt u toegang tot honderden of duizenden aandelen, met lage kosten en een transparante structuur. Toch maakt de Belgische fiscaliteit — TOB, Reynders-tax, roerende voorheffing — de keuze van de juiste ETF en broker complexer dan elders. Deze gids zet alles op een rij voor 2026: de beste ETF's, broker-tarieven, TOB-percentages en hoe u optimaal start.
+
+## Wat is een ETF en waarom net voor Belgische beleggers?
+
+Een ETF (*Exchange Traded Fund*) is een beleggingsfonds dat als één aandeel op de beurs verhandeld wordt. Een wereldwijde ETF zoals IWDA volgt automatisch ±1.500 grote aandelen verspreid over 23 ontwikkelde landen — u hoeft zelf niets te selecteren of te herbalanceren.
+
+Voor Belgische beleggers zijn ETF's bijzonder aantrekkelijk omdat:
+
+- **Meerwaarden 0% belast** zijn bij normaal beheer (geen meerwaardebelasting op aandelen-ETF's).
+- **Kapitaliserende ETF's** geen jaarlijkse dividenduitkering doen, dus geen 30% roerende voorheffing op herinvesteerde winst.
+- De **lopende kosten (TER)** vaak <0,20% per jaar bedragen, tegenover 1,5-2% bij actieve fondsen.
+- **Wereldwijde spreiding** beschikbaar is vanaf €25 per maand, perfect voor pensioenopbouw.
+
+## Beste ETF's voor België in 2026
+
+| ETF | Ticker | Index | TER | Distributie | Geschikt voor |
+|---|---|---|---|---|---|
+| **iShares Core MSCI World** | IWDA | MSCI World | 0,20% | Kapitaliserend | Wereldwijde core-belegging |
+| **iShares Core MSCI EM IMI** | EMIM | MSCI Emerging Markets | 0,18% | Kapitaliserend | Emerging markets exposure |
+| **Vanguard FTSE All-World** | VWCE | FTSE All-World | 0,22% | Kapitaliserend | All-in-one wereldfonds |
+| **SPDR S&P 500** | SPYI | S&P 500 | 0,03% | Kapitaliserend | US-focus, laagste kosten |
+
+De klassieke **88/12 portefeuille** combineert IWDA (88%) + EMIM (12%) om een wereldwijde dekking te benaderen. Wie liever één-fonds-belegt, kiest VWCE als alles-in-één oplossing. Belangrijk: kies altijd de **kapitaliserende (acc) varianten** in plaats van uitkerende (dist), zodat u de 30% roerende voorheffing op dividenden vermijdt en de winst belastingvrij blijft herbeleggen.
+
+## Broker-vergelijking 2026
+
+| Broker | Aankoopkost ETF | Maandelijks DCA | TOB-aangifte | Best voor |
+|---|---|---|---|---|
+| **DEGIRO** | €1 (Core Selection: gratis*) | Ja, gratis kernselectie | Zelf in te dienen | Lage kosten, ervaren beleggers |
+| **Bolero** (KBC) | ±€7,50 | Beperkt | Automatisch | Belgische comfort |
+| **Saxo** | Vanaf €3,00 | Ja | Automatisch | Brede selectie producten |
+| **Trade Republic** | €1 | Ja, gratis | Zelf in te dienen | Mobiele DCA, instappers |
+| **Lynx** | €5,00 | Ja | Automatisch | Actieve traders |
+
+*\* DEGIRO Core Selection: één gratis transactie per maand per ETF, mits voldoen aan de voorwaarden.*
+
+Voor de meeste beginnende ETF-beleggers in België blijft **DEGIRO** of **Bolero** de eerste keuze: DEGIRO voor minimale kosten, Bolero voor wie volledig automatische TOB-aangifte wil.
+
+## TOB (Beurstaks) — wanneer 0,12% of 1,32%?
+
+De Belgische beurstaks (Taks op Beursverrichtingen, TOB) wordt geheven bij elke aan- en verkoop van fondsen en ETF's. Voor ETF's gelden in 2026 drie belangrijke tarieven:
+
+- **0,12%** voor uitkerende ETF's geregistreerd in België of een EER-lidstaat (distributievariant).
+- **1,32%** voor **kapitaliserende ETF's** geregistreerd in een EER-lidstaat (zoals Ierland of Luxemburg) — met een maximum van €4.000 per transactie.
+- **0,35%** voor ETF's die niet onder de andere categorieën vallen (max €1.600 per transactie).
+
+**Praktisch voorbeeld:** een aankoop van €5.000 in IWDA (kapitaliserende ETF, geregistreerd in Ierland) kost u **€66 TOB** (1,32%). Een gelijkwaardige aankoop in een uitkerende variant kost slechts **€6 TOB** (0,12%) — maar dan betaalt u nadien wél 30% roerende voorheffing op alle uitgekeerde dividenden, wat over 10+ jaar veel duurder uitvalt voor wie herbelegt.
+
+Wie bij DEGIRO of Trade Republic belegt, dient de TOB **zelf** aan te geven via het FOD Financiën-portaal — anders volgen boetes. Bolero, Saxo en Lynx regelen dit automatisch op uw afrekening.
+
+## Reynders-tax — let op uw obligatie-ETF's
+
+De **Reynders-tax** is een 30% meerwaardebelasting bij verkoop van fondsen die **meer dan 10% in obligaties of vastrentende effecten** beleggen. Praktisch:
+
+- **Pure aandelen-ETF's** (IWDA, VWCE, SPYI) → **niet** onderworpen aan Reynders-tax.
+- **Obligatie-ETF's** (b.v. iShares Global Aggregate Bond, AGGG) → **wel** belast op de meerwaarde van het obligatiegedeelte bij verkoop.
+- **Mixed-portfolio-ETF's** (b.v. VNGA60 met 40% obligaties) → **wel** belast, want > 10%-drempel.
+
+**Hoe vermijden?**
+
+1. Beleg het obligatiegedeelte via **individuele staatsobligaties of kasbons** (vrijgesteld van Reynders-tax).
+2. Houd uw aandelen-ETF's en obligatie-ETF's bewust gescheiden in de portefeuille en calculeer de fiscale impact in.
+3. Hoger aandelenpercentage en risico spreiden via een veiligheidsbuffer op een spaarrekening.
+
+## DCA-voorbeeld: €200/maand in IWDA — 10 jaar
+
+Dollar-Cost Averaging (DCA) spreidt aankopen over de tijd om timing-risico te vermijden. Stel u belegt €200 per maand in IWDA via DEGIRO Core Selection (gratis kerntransactie) over 10 jaar, met een verwacht jaarrendement van 7%:
+
+| Jaar | Cumulatieve inleg | Eindwaarde (7%) |
+|---|---|---|
+| 1 | €2.400 | €2.494 |
+| 5 | €12.000 | €14.347 |
+| 10 | €24.000 | €34.819 |
+
+Na 10 jaar staat er ±**€34.800** tegenover een inleg van €24.000 — een meerwaarde van bijna **€11.000 belastingvrij** (geen meerwaardebelasting op aandelen-ETF). Reken hier wel ±€317 TOB (1,32% × 120 aankopen) op af. Wie de impact van rente-op-rente over verschillende periodes wil simuleren, gebruikt onze [samengestelde interest calculator](/sparen/samengestelde-interest-berekenen). Voor een doorgedreven DCA-simulatie met variabele rendementen en TOB-impact gebruikt u onze [Dollar Cost Averaging calculator](/beleggen/dollar-cost-averaging-calculator).
+
+## Of liever uw hypotheek versneld aflossen?
+
+Wie ETF-beleggen overweegt naast een lopend hypothecair krediet, staat voor een afweging: wat levert meer op — vervroegd aflossen of beleggen? Het antwoord hangt af van uw hypotheekrente, fiscale aftrek en risicoprofiel. Lees de volledige analyse in onze gids [Hypotheek aflossen of beleggen](/blog/hypotheek-aflossen-of-beleggen) met een rekenvoorbeeld over 20 jaar.
+
+## Conclusie
+
+ETF's blijven in 2026 dé hefboom voor Belgische beleggers die wereldwijde spreiding willen tegen minimale kosten. Door te kiezen voor **kapitaliserende aandelen-ETF's** (IWDA, EMIM, VWCE), een **lage-kosten broker** (DEGIRO of Bolero) en een **gedisciplineerde DCA-strategie** bouwt u op 10-20 jaar een fors vermogen op zonder meerwaardebelasting. Let goed op de **TOB van 1,32%** voor kapitaliserende ETF's en de **Reynders-tax** bij obligatiefondsen — twee fiscale valkuilen die u eenvoudig vermijdt door bewust te kiezen.
+
+*Disclaimer: dit artikel is louter informatief en vormt geen beleggingsadvies. Tarieven en regelgeving kunnen wijzigen; raadpleeg uw makelaar of een onafhankelijke financieel adviseur voor uw concrete situatie.*
+    `,
+    seo: {
+      title: "ETF Beleggen België 2026 | Brokers, TOB & Beste ETF's",
+      description: "Start met ETF beleggen in België 2026: beste ETF's (IWDA, EMIM, S&P 500), brokers (DEGIRO, Bolero, Saxo), TOB-tarieven en fiscale impact.",
+      keywords: ["etf beleggen", "etf belgië 2026", "iwda", "emim", "vwce", "tob etf", "beurstaks etf", "reynders tax", "degiro belgië", "bolero etf", "dca etf"]
+    },
+    faqs: [
+      {
+        question: "Wat is het verschil tussen TOB 0,12% en 1,32% op ETF's?",
+        answer: "Het lage tarief van 0,12% geldt voor uitkerende (distributie) ETF's geregistreerd in België of de EER. Het hoge tarief van 1,32% geldt voor kapitaliserende ETF's geregistreerd in een EER-lidstaat zoals Ierland of Luxemburg. Voor langetermijnbeleggen blijft de kapitaliserende variant doorgaans voordeliger, ondanks de hogere TOB, omdat u 30% roerende voorheffing op dividenden vermijdt."
+      },
+      {
+        question: "Welke is de beste wereldwijde ETF voor Belgische beleggers in 2026?",
+        answer: "Voor wereldwijde spreiding is iShares Core MSCI World (IWDA) een populaire keuze met een TER van 0,20% en exposure aan ±1.500 ontwikkelde-markten-aandelen. Wie ook emerging markets wil meenemen, combineert IWDA (88%) met EMIM (12%), of kiest Vanguard FTSE All-World (VWCE) als one-stop alles-in-één oplossing."
+      },
+      {
+        question: "Geldt de Reynders-tax op IWDA?",
+        answer: "Nee. De Reynders-tax (30% meerwaardebelasting) geldt enkel voor fondsen die meer dan 10% in obligaties of vastrentende effecten beleggen. IWDA is een pure aandelen-ETF en valt dus volledig buiten dit regime. De meerwaarde bij verkoop blijft belastingvrij bij normaal beheer."
+      },
+      {
+        question: "Bij welke broker is ETF-beleggen het goedkoopst voor een Belg?",
+        answer: "DEGIRO biedt met de Core Selection één gratis aankoop per maand per ETF, ideaal voor maandelijkse DCA. Trade Republic rekent een vaste €1 per transactie. Bolero en Saxo zijn duurder (±€7,50 en vanaf €3,00) maar regelen automatisch de TOB-aangifte, wat administratief comfort biedt."
+      },
+      {
+        question: "Hoeveel betaal ik aan TOB per maand voor een DCA van €200 in IWDA?",
+        answer: "Bij een maandelijkse aankoop van €200 in IWDA (kapitaliserende ETF, 1,32% TOB) betaalt u €2,64 per transactie aan beurstaks. Over 10 jaar van DCA komt dat neer op ±€317 in totaal. Bij DEGIRO of Trade Republic moet u deze TOB zelf aangeven via FOD Financiën; bij Bolero of Saxo gebeurt het automatisch."
+      }
+    ]
   }
 ];
 
