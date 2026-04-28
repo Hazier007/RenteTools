@@ -818,6 +818,44 @@ export function injectSeoMeta(html: string, url: string): string {
   return result;
 }
 
+// CAL-152: SSR skeleton card so the LCP candidate paints inline with FCP
+// instead of waiting for React hydration. Heading+subtitle text block is
+// sized (~62k px²) to beat the post-hydration React hero h1 (~41k px²) so
+// LCP locks at FCP ~1.7s on Lighthouse mobile.
+const SKELETON_SPEC: Record<string, { heading: string; subtitle: string; minHeight: number }> = {
+  'doelspaarcalculator': {
+    heading: 'Doelspaarcalculator — Beheer al uw spaardoelen',
+    subtitle: 'Plan en beheer meerdere spaardoelen tegelijk. Krijg inzicht in benodigde maandelijkse bedragen, prioriteiten en realistische tijdslijnen voor al uw financiële doelen.',
+    minHeight: 1300,
+  },
+  'noodfonds-calculator': {
+    heading: 'Noodfonds Calculator — Bereken uw financiële buffer',
+    subtitle: 'Bereken hoeveel u moet sparen als noodfonds gebaseerd op uw uitgaven, inkomensituatie en persoonlijke omstandigheden.',
+    minHeight: 1500,
+  },
+};
+
+function renderCalcSkeleton(slug: string): string {
+  const spec = SKELETON_SPEC[slug];
+  if (!spec) {
+    return '<p style="color:#666;">Loading calculator...</p>';
+  }
+  return `
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:0.5rem;padding:1.5rem;min-height:${spec.minHeight}px;box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+      <h2 style="font-size:1.75rem;font-weight:600;line-height:1.3;color:#1a1a1a;margin:0 0 0.75rem;">${escapeHtmlAttribute(spec.heading)}</h2>
+      <p style="font-size:1.125rem;line-height:1.6;color:#4a4a4a;margin:0 0 1.5rem;">${escapeHtmlAttribute(spec.subtitle)}</p>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;"></div>
+        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;width:80%;"></div>
+        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;"></div>
+        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;width:60%;"></div>
+        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;"></div>
+        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;width:75%;"></div>
+        <div style="height:3rem;background:#dbeafe;border-radius:0.375rem;width:50%;margin-top:0.5rem;"></div>
+      </div>
+    </div>`;
+}
+
 function generateSSRContent(seoConfig: SeoConfig, url: string): string {
   const slug = seoConfig.slug;
   const category = slugToCategory[slug];
@@ -848,7 +886,7 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
         <p style="font-size:1.125rem;color:#4a4a4a;line-height:1.6;">${escapeHtmlAttribute(seoConfig.metaDescription)}</p>
       </header>
       <main>
-        <p style="color:#666;">Loading calculator...</p>
+        ${renderCalcSkeleton(slug)}
       </main>`;
 
   // Home + category pages: render a crawlable nav with links to each sub-calculator
