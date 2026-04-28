@@ -9,6 +9,8 @@ import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
+import EducationalDeepDive from "@/seo/EducationalDeepDive";
+import { cryptoWinstVerliesCalculatorContent } from "@/seo/calculator-content/crypto-winst-verlies-calculator";
 import { TrendingUp, Calculator, Target, AlertTriangle } from "lucide-react";
 
 export default function CryptoWinstVerliesCalculatorPage() {
@@ -133,6 +135,17 @@ export default function CryptoWinstVerliesCalculatorPage() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Educational Deep-Dive (CAL-139) */}
+          <EducationalDeepDive
+            title="Crypto winst/verlies in detail — formules, fiscaliteit en FAQ"
+            content={cryptoWinstVerliesCalculatorContent}
+            related={[
+              { href: "/beleggen/crypto-belasting-calculator", label: "Crypto Belasting Calculator" },
+              { href: "/beleggen/cryptocurrency-calculator", label: "Cryptocurrency Calculator" },
+              { href: "/beleggen/staking-apy-calculator", label: "Staking APY Calculator" },
+            ]}
+          />
 
           {seoConfig && seoConfig.authorityLinks.length > 0 && (
             <AuthorityLinks links={seoConfig.authorityLinks} />
