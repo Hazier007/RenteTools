@@ -661,6 +661,123 @@ Registratierechten vormen in 2026 een aanzienlijk deel van uw vastgoedbudget. He
         answer: "Naast de registratierechten betaalt u het ereloon van de notaris (±1-1,5%), aktekosten (€800-€1.500), 21% btw op het ereloon, en hypotheekrechten (1% van het leenbedrag) als u een lening afsluit. Reken op 5-6% extra bovenop de aankoopprijs."
       }
     ]
+  },
+  {
+    slug: "beste-termijnrekening-belgie-2026",
+    title: "Beste Termijnrekening België 2026 — Vergelijking Top Banken",
+    excerpt: "Welke termijnrekening biedt in 2026 de hoogste rente in België? Vergelijk looptijden van 1 maand tot 10 jaar, voorwaarden en uw netto rendement na 30% roerende voorheffing.",
+    category: "Sparen",
+    author: {
+      name: "Sophie Janssens",
+      bio: "Financieel expert met 15 jaar ervaring in persoonlijke financiën en vermogensbeheer in België",
+      avatar: "https://ui-avatars.com/api/?name=Sophie+Janssens&background=2563eb&color=fff&size=200"
+    },
+    publishDate: "2026-04-28",
+    readTime: 9,
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=675&fit=crop",
+    content: `
+# Beste Termijnrekening België 2026 — Vergelijking Top Banken
+
+Op zoek naar de hoogste rente op uw spaargeld voor de komende 1 tot 10 jaar? Een **termijnrekening** (ook wel deposito of termijndeposito) biedt in 2026 vaak een beter bruto rendement dan een gewoon spaarboekje, in ruil voor het feit dat u uw geld een vaste periode vastzet. In deze gids vergelijken we de top termijnrekeningen in België in 2026 — looptijden, voorwaarden en wat u écht overhoudt na 30% roerende voorheffing.
+
+## Termijnrekening vs spaarboekje — wanneer kiezen wat?
+
+Een gewone gereglementeerde **spaarrekening** combineert basisrente en getrouwheidspremie en geeft u **op elk moment toegang** tot uw geld. De eerste €1.020 aan interest (2026-tarief) is bovendien vrijgesteld van roerende voorheffing.
+
+Een **termijnrekening** zet uw kapitaal vast voor een vooraf afgesproken periode — typisch tussen 1 maand en 10 jaar. In ruil daarvoor krijgt u:
+
+- Een **gegarandeerde, vaste rente** voor de hele looptijd
+- Vaak een **hoger bruto tarief** dan op een spaarboekje, zeker bij looptijden van 2 jaar of meer
+- **Geen RV-vrijstelling**: alle interest valt onder 30% roerende voorheffing
+
+Vuistregel: spaarboekje voor uw noodfonds en geld dat u binnen 12 maanden mogelijk nodig hebt; termijnrekening voor het kapitaal waar u zonder problemen 1 tot 5 jaar af kan blijven.
+
+## Top 10 termijnrekeningen 2026 — overzicht looptijden
+
+De Belgische termijnrentes zijn sinds de ECB-piek van 2024 afgekoeld, maar liggen begin 2026 nog altijd ruim boven het niveau van 2019-2022. Indicatieve bruto-tarieven die je terugvindt bij de actiefste banken (april 2026):
+
+| Looptijd | Top tarief (bruto) | Voorwaarden |
+|---|---|---|
+| 1 maand | ~2,30% | Vaak min. €100 |
+| 3 maanden | ~2,40% | — |
+| 6 maanden | ~2,55% | — |
+| 1 jaar | ~2,75% | — |
+| 2 jaar | ~2,90% | — |
+| 3 jaar | ~3,00% | — |
+| 5 jaar | ~3,10% | — |
+| 8 jaar | ~3,15% | — |
+| 10 jaar | ~3,20% | Soms via kasbon |
+
+Tarieven veranderen wekelijks. Controleer altijd de actuele voorwaarden bij de bank vóór onderschrijving. Onze [vergelijker hoogste spaarrente België](/sparen/hoogste-spaarrente-belgie) wordt dagelijks bijgewerkt en helpt u termijn- en spaarrekeningen naast elkaar te zetten.
+
+## Looptijd-strategie: 6m, 1j, 2j, 5j — voor- en nadelen
+
+Welke looptijd is voor u optimaal? Dat hangt af van uw rentevisie en uw liquiditeitsbehoefte.
+
+- **6 maanden of korter**: ideaal als u verwacht dat de ECB de rente opnieuw verhoogt of als u de termijnrekening gebruikt als parkeerplek tussen een vastgoedaankoop of belegging in. Nadeel: lager tarief en herinvesteringsrisico.
+- **1 tot 2 jaar**: de "sweet spot" voor de meeste Belgische spaarders — voldoende rendementspremie boven het spaarboekje, beperkte renterisico-blootstelling. Goede match voor concrete doelen binnen 24 maanden.
+- **3 tot 5 jaar**: vergrendelt vandaag het hogere tarief, ideaal als u verwacht dat de ECB-rente verder daalt. Past bij middellangetermijndoelen zoals een autoaankoop, verbouwing of studiekapitaal voor de kinderen.
+- **8 tot 10 jaar**: kasbon-territorium. Hier concurreert de termijnrekening rechtstreeks met staatsbons en bedrijfskasbons. De renteopslag is beperkt tegenover 5 jaar, terwijl uw geld dubbel zo lang vastzit.
+
+**Ladderstrategie** (sterk aanbevolen): spreid uw geld over 4 looptijden — bijvoorbeeld €10.000 op 1 jaar, €10.000 op 2 jaar, €10.000 op 3 jaar en €10.000 op 5 jaar. Elk jaar valt één deel vrij dat u tegen het dan-geldende tarief opnieuw vastlegt. Zo combineert u liquiditeit met het hogere rendement van langere looptijden, zonder dat u afhankelijk bent van één rentemoment.
+
+## Bruto vs netto: wat blijft er over na 30% roerende voorheffing?
+
+Op termijnrekeningen geldt **geen RV-vrijstelling** zoals op een gereglementeerd spaarboekje. Op elke euro interest betaalt u **30% roerende voorheffing**, automatisch ingehouden door uw bank en doorgestort aan de fiscus.
+
+**Rekenvoorbeeld** — €25.000 op een 3-jarige termijnrekening aan 3,00% bruto, samengestelde rente:
+
+- Bruto eindkapitaal: €25.000 × (1,03)³ = €27.318
+- Bruto interest: €2.318
+- Roerende voorheffing (30%): −€695
+- **Netto interest: €1.623**
+- Netto effectief rendement: ~2,12% per jaar
+
+Wilt u uw eigen scenario doorrekenen voor een ander bedrag, looptijd of tarief? Gebruik onze [calculator samengestelde interest](/sparen/samengestelde-interest-berekenen) — die houdt automatisch rekening met de 30% roerende voorheffing en toont u direct het verschil tussen bruto en netto.
+
+## Vergelijk met staatsbon, kasbon en Bons d'État
+
+Voor langere looptijden is een termijnrekening niet altijd de beste keuze. Drie alternatieven in 2026:
+
+- **Staatsbon (Bon d'État)**: uitgegeven door het Belgisch Federaal Agentschap van de Schuld. De vermaarde 1-jarige staatsbon van september 2023 ("Van Peteghem-bon") betaalde 2,81% netto dankzij verlaagde RV (15% i.p.v. 30%). Recentere uitgiftes vallen meestal terug op de standaard 30% roerende voorheffing.
+- **Kasbon**: uitgegeven door banken, fiscaal identiek aan een termijnrekening (30% RV). Voordeel tegenover een termijnrekening: vrij verhandelbaar op de secundaire markt vóór einddatum, al kan dat met koersverlies gebeuren.
+- **Bedrijfsobligatie**: hoger bruto rendement (typisch 4-5% in 2026), maar ook expliciet kredietrisico op de uitgever. Geen depositogarantie.
+
+Voor zuivere veiligheid plus voorspelbaarheid blijft een termijnrekening bij een Belgische bank — gedekt door het **Belgisch Garantiefonds tot €100.000 per bank per persoon** — de eenvoudigste keuze voor het defensieve deel van uw vermogen.
+
+## Conclusie
+
+In 2026 vindt u in België termijnrekeningen tot **3,20% bruto** voor looptijden van 8 à 10 jaar, en rond **2,75-2,90%** op de meest gangbare 1- tot 2-jaars looptijden. Vergeet niet de 30% roerende voorheffing in te calculeren bij uw netto rendementsvergelijking. Combineer een laddering-strategie met een geoptimaliseerd spaarboekje (eerste €1.020 RV-vrij) voor het beste totaalrendement op uw cashportefeuille.
+
+*Vergelijk vandaag nog termijn- én spaarrekeningen op onze gratis [hoogste spaarrente vergelijker België](/sparen/hoogste-spaarrente-belgie) of bereken uw exacte eindkapitaal met de [samengestelde interest calculator](/sparen/samengestelde-interest-berekenen).*
+    `,
+    seo: {
+      title: "Beste Termijnrekening België 2026 | Top 10 Vergelijking",
+      description: "Welke termijnrekening biedt de hoogste rente in België in 2026? Vergelijk looptijden 1m–10j, voorwaarden en bruto/netto rendement na 30% RV.",
+      keywords: ["termijnrekening", "termijnrekening belgië", "beste termijnrekening 2026", "deposito vergelijking", "kasbon", "staatsbon", "spaarrente belgië"]
+    },
+    faqs: [
+      {
+        question: "Wat is het verschil tussen een termijnrekening en een deposito?",
+        answer: "In België worden de termen termijnrekening, termijndeposito en deposito door elkaar gebruikt en betekenen ze in de praktijk hetzelfde: u zet een vast bedrag voor een vooraf afgesproken looptijd vast bij een bank tegen een gegarandeerde rente. Op de eindvervaldag krijgt u uw kapitaal plus interest, na inhouding van 30% roerende voorheffing."
+      },
+      {
+        question: "Wat is de hoogste termijnrekening rente in België in 2026?",
+        answer: "Begin 2026 ligt het hoogste bruto tarief op de Belgische markt rond 3,20% voor looptijden van 8 tot 10 jaar. Voor de meest gevraagde 1- en 2-jaars termijnrekeningen liggen de toptarieven tussen 2,75% en 2,90% bruto. Tarieven worden wekelijks bijgesteld; vergelijk daarom altijd actuele cijfers vóór u onderschrijft."
+      },
+      {
+        question: "Moet ik roerende voorheffing betalen op een termijnrekening?",
+        answer: "Ja. In tegenstelling tot een gereglementeerde spaarrekening (waar de eerste €1.020 aan interest in 2026 vrijgesteld is) geldt voor een termijnrekening geen vrijstelling. Op elke euro interest betaalt u 30% roerende voorheffing, automatisch ingehouden door uw bank en doorgestort aan de Belgische fiscus."
+      },
+      {
+        question: "Kan ik mijn geld vroeger opnemen van een termijnrekening?",
+        answer: "Vervroegde opname is in principe niet mogelijk of enkel mits boete. De meeste Belgische banken laten een vervroegde uitstap toe in uitzonderlijke omstandigheden, maar rekenen daarvoor een renteboete (vaak 3 tot 6 maanden gederfde interest) en/of een administratiekost aan. Lees daarom altijd het detailcontract vóór u onderschrijft."
+      },
+      {
+        question: "Is een termijnrekening veilig?",
+        answer: "Termijnrekeningen geopend bij een Belgische bank vallen onder het Belgisch Garantiefonds tot €100.000 per bank per persoon, identiek aan gewone spaar- en zichtrekeningen. Spreid uw kapitaal over meerdere instellingen als uw saldo de €100.000-grens overschrijdt en kies bij voorkeur banken met een goede kredietrating."
+      }
+    ]
   }
 ];
 
