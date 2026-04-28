@@ -17,6 +17,10 @@ export interface BlogPost {
     description: string;
     keywords: string[];
   };
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -511,6 +515,160 @@ Let op de **beurstaks bij aan/verkoop**:
       description: "Complete gids voor fiscale voordelen in België: pensioensparen, spaarrente vrijstelling, beleggingsfondsen en meer. Maximaliseer uw netto-rendement.",
       keywords: ["belastingvoordelen belgië", "pensioensparen", "roerende voorheffing", "fiscale optimalisatie", "sparen belastingvrij"]
     }
+  },
+  {
+    slug: "roerende-voorheffing-dividenden-2026-vrijstelling",
+    title: "Roerende Voorheffing Dividenden 2026 — Vrijstelling tot €833",
+    excerpt: "Hoeveel roerende voorheffing betaalt u op dividenden in 2026? Ontdek de vrijstelling tot €833 per persoon, hoe u ze terugvraagt en hoe u uw beleggingsinkomsten optimaliseert.",
+    category: "Beleggen",
+    author: {
+      name: "Lien Vermeulen",
+      bio: "Fiscaal adviseur gespecialiseerd in persoonlijke financiën en vermogensoptimalisatie in België",
+      avatar: "https://ui-avatars.com/api/?name=Lien+Vermeulen&background=f59e0b&color=fff&size=200"
+    },
+    publishDate: "2026-04-28",
+    readTime: 9,
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=675&fit=crop",
+    content: `
+# Roerende Voorheffing Dividenden 2026 — Vrijstelling tot €833
+
+Wie in België aandelen of beleggingsfondsen aanhoudt, krijgt op zijn dividenden bijna altijd te maken met **30% roerende voorheffing**. Toch hoeft niet elke euro dividend belast te zijn: in 2026 kunt u tot **€833 aan dividenden per persoon belastingvrij** ontvangen via de fiscale vrijstelling. Deze gids legt uit hoe u die vrijstelling correct toepast, terugvraagt via uw personenbelasting en combineert met andere fiscale voordelen.
+
+## Wat is roerende voorheffing en waarom 30%?
+
+De roerende voorheffing (RV) is een **bronheffing** die uw bank of broker rechtstreeks afhoudt op roerende inkomsten — dividenden, interesten en sommige meerwaarden — voordat het geld op uw rekening komt. Voor de meeste Belgische beleggers ligt het algemene tarief sinds 2017 op **30%**.
+
+Concreet: ontvangt u €1.000 brutodividend, dan betaalt uw broker €300 RV door aan de fiscus en komt er **€700 netto** op uw rekening. Voor de fiscus is die heffing in principe **bevrijdend** — u hoeft de inkomsten niet meer aan te geven in uw personenbelasting, tenzij u een vrijstelling of teruggave wil claimen.
+
+In bepaalde gevallen geldt een verlaagd tarief:
+- **15%** voor dividenden van **VVPR-bis-aandelen** (KMO's die aan strikte reservevoorwaarden voldoen);
+- **20% of 25%** als tussenstap naar de definitieve **5%** in een **liquidatiereserve**-uitkering;
+- **15%** voor uitkeringen uit een **gereglementeerde vastgoedvennootschap (GVV)** met sociaal oogmerk.
+
+Voor het overgrote deel van Belgische beleggers blijft 30% echter de norm op gewone dividenden.
+
+## Vrijstelling 2026: €833 dividenden per persoon
+
+Sinds 2018 mag elke Belgische belegger jaarlijks een schijf dividenden **vrijstellen** van roerende voorheffing. Voor inkomstenjaar **2026** bedraagt die vrijstelling **€833 brutodividenden per persoon**, wat overeenkomt met **€249,90 effectief teruggevorderde belasting** (€833 × 30%).
+
+Belangrijk: deze vrijstelling is een **persoonlijke** vrijstelling. Een gehuwd of wettelijk samenwonend koppel kan dus tot **€1.666 brutodividenden per jaar** belastingvrij ontvangen, op voorwaarde dat de aandelen aan beide partners toebehoren of de dividenden afzonderlijk per partner worden aangegeven.
+
+**Voorbeeld:**
+- U ontvangt €600 brutodividend op uw individuele effectenrekening.
+- Uw broker houdt automatisch €180 (30%) RV in → u ontvangt €420 netto.
+- Via vak VII van uw personenbelasting vraagt u **€180 terug**, omdat het volledige bedrag onder de vrijstellingsdrempel valt.
+
+**Voorbeeld 2 — koppel:**
+- Twee partners ontvangen samen €1.500 dividend op hun gemeenschappelijke effectenrekening.
+- Banken hielden €450 RV in.
+- Aangifte: elke partner geeft €750 dividend aan en claimt teruggave → samen krijgen ze **€450 terug**, omdat het bedrag onder 2 × €833 = €1.666 blijft.
+
+Let op: de vrijstelling geldt **niet** voor dividenden uit beleggingsfondsen (DBI-fondsen, ETF's), tenzij die fondsen rechtstreeks aandelen uitkeren. Voor de meeste **kapitaliserende ETF's** is er sowieso geen dividenduitkering, en daar moet u dus geen vrijstelling claimen — de fiscale logica loopt daar via TOB en eventueel meerwaarde-belasting.
+
+## Hoe vraag ik de vrijstelling terug? Vak VII van de aangifte
+
+De vrijstelling is **niet automatisch**. U moet de teruggave actief claimen in uw personenbelasting via **vak VII — Inkomsten van kapitalen en roerende goederen**, codes **1437/2437**.
+
+Stappen:
+
+1. **Verzamel bewijsstukken** van uw broker: jaaroverzicht of fiscale fiche met brutodividenden en ingehouden RV per uitkering.
+2. **Tel de brutodividenden op** waarvoor u vrijstelling wil claimen (maximum €833 per partner).
+3. **Vermeld het bedrag** in code 1437 (echtgenoot/zelfde aangifte: code 2437) van vak VII.
+4. **Bewaar de stavingsdocumenten** minstens 7 jaar voor mogelijke controle door de fiscus.
+5. Tax-on-Web berekent automatisch de teruggave en verrekent ze met uw saldo.
+
+**Belangrijk:** vraagt u meer dividenden vrij dan toegelaten, dan wordt het surplus belast aan **30%** — er is geen sanctie, maar u verliest het verschil. Vraagt u te weinig terug, dan kunt u tot **5 jaar achteraf** uw aangifte rechtzetten via een bezwaarprocedure.
+
+## Voor wie loont het? Rekenvoorbeeld 1 vs 2 partners
+
+De vrijstelling is een persoonlijk maximum. Voor koppels met een gemeenschappelijke effectenrekening of dividendportefeuille is het slim om de aandelen **gezamenlijk te beheren** en de dividenden per partner aan te geven.
+
+**Scenario A — alleenstaande belegger:**
+- Portefeuille: €25.000 in dividend-aandelen met gemiddeld 4% bruto-dividendrendement → €1.000 dividend/jaar.
+- Vrijstelling: €833 → terug te vorderen RV = €249,90.
+- Belastbaar surplus: €167 → blijft belast aan 30% = €50,10 RV definitief.
+- **Netto fiscaal voordeel: €249,90/jaar**.
+
+**Scenario B — koppel met gemeenschappelijke rekening:**
+- Zelfde portefeuille van €25.000 met €1.000 dividend/jaar.
+- Beide partners claimen elk €500 → blijft volledig binnen 2 × €833 = €1.666.
+- Volledige RV (€300) terugvorderbaar.
+- **Netto fiscaal voordeel: €300/jaar**.
+
+Voor wie zijn dividendrendement laat aangroeien via herinvestering, voegt deze jaarlijkse teruggave merkbaar toe aan het **samengestelde rendement** op lange termijn — gebruik onze [samengestelde interest calculator](/sparen/samengestelde-interest-berekenen) om het effect van extra €250 per jaar over 20 jaar te zien.
+
+## Verschil met spaarrente-vrijstelling (€1.020) en interesten-RV
+
+De dividend-vrijstelling wordt vaak verward met de **spaarrente-vrijstelling**. Beide zijn fiscaal nuttig, maar gelden voor verschillende inkomstencategorieën:
+
+| Vrijstelling | Drempel 2026 | Tarief boven drempel | Bron |
+|---|---|---|---|
+| **Spaarrente** (gereglementeerde rekening) | €1.020/persoon | 15% RV | Belgische gereglementeerde spaarrekeningen |
+| **Dividenden** | €833/persoon | 30% RV | Dividenden uit aandelen (geen ETF's) |
+| **Interesten** (kasbon, termijnrekening, obligatie) | geen vrijstelling | 30% RV | Interest op obligaties, kasbons, termijndeposito's |
+
+Belangrijk:
+- De spaarrente-vrijstelling is **automatisch** door de bank toegepast — geen aangifte nodig tot de drempel.
+- De dividend-vrijstelling moet u **actief terugvragen** via vak VII.
+- **Interesten** uit kasbons, obligaties of termijnrekeningen kennen geen vrijstelling: 30% RV is meteen definitief.
+
+Vergelijk uw spaarrente-rendement na vrijstelling met onze [spaarrente vergelijker](/sparen/spaarrekening-vergelijker), en simuleer de impact van de 30% roerende voorheffing op uw beleggingsfondsen via de [roerende voorheffing calculator](/beleggen/roerende-voorheffing-calculator).
+
+## Veelgemaakte fouten + checklist 2026
+
+**Fout 1 — Vrijstelling vergeten claimen.** Banken houden RV automatisch in, ook onder de drempel. Wie vak VII niet invult, **laat €100 tot €250 per jaar liggen**.
+
+**Fout 2 — Vrijstelling claimen op ETF-dividenden.** Distributie van DBI-bevek of klassieke ETF valt **niet** onder dezelfde regeling. Lees uw fiscale fiche zorgvuldig.
+
+**Fout 3 — Surplus niet aangeven bij buitenlandse broker.** Bij brokers zonder Belgische RV-inhouding (bv. Degiro Basic, Interactive Brokers) bent u **zelf verplicht** de aangifte te doen, ook voor het deel boven de vrijstelling. Niet aangeven = fiscale fraude.
+
+**Fout 4 — Vrijstelling delen over meerdere jaren.** De vrijstelling is **per kalenderjaar** en niet overdraagbaar. Niet-benut = verloren.
+
+**Fout 5 — Geen bewijsstukken bewaren.** Bij controle moet u brutobedragen kunnen aantonen met **brokerstatements**.
+
+### Checklist 2026
+
+- ✅ Verzamel jaaroverzichten van alle brokers (Belgisch + buitenlands).
+- ✅ Bereken totaal brutodividend per partner.
+- ✅ Vul code 1437/2437 in vak VII in (max €833 per persoon).
+- ✅ Geef dividenden boven de drempel apart aan, ook bij buitenlandse brokers.
+- ✅ Bewaar fiscale fiches en transactie-overzichten 7 jaar.
+
+## Conclusie
+
+De vrijstelling van **€833 per persoon op dividenden** is een van de eenvoudigste fiscale optimalisaties voor Belgische beleggers in 2026. Wie ze systematisch claimt, wint **€250 tot €500 per jaar** terug — geld dat samengesteld over 20 jaar bij een 6% rendement aangroeit tot meer dan €10.000 extra netto vermogen.
+
+Combineer de teruggave met een doordachte spreiding tussen **kapitaliserende fondsen** (geen dividenduitkering) en **dividend-aandelen** binnen de vrijstelling, en u verlaagt uw fiscale druk zonder uw beleggingsstrategie te wijzigen.
+
+*Disclaimer: Drempels en tarieven kunnen wijzigen door wetswijzigingen. Raadpleeg altijd uw boekhouder of fiscaal adviseur voor uw concrete situatie.*
+    `,
+    seo: {
+      title: "Roerende Voorheffing Dividenden 2026 | Vrijstelling tot €833",
+      description: "Hoeveel roerende voorheffing betaal je op dividenden in 2026? Bereken de vrijstelling tot €833 per persoon en optimaliseer je beleggingsinkomsten.",
+      keywords: ["roerende voorheffing dividenden", "dividend vrijstelling 2026", "vak VII personenbelasting", "RV terugvragen", "dividend belasting belgië", "roerende voorheffing 30%", "beleggingsinkomsten optimaliseren"]
+    },
+    faqs: [
+      {
+        question: "Hoeveel dividenden zijn vrijgesteld van roerende voorheffing in 2026?",
+        answer: "In 2026 mag elke belastingplichtige tot €833 brutodividenden per jaar belastingvrij ontvangen. Voor een gehuwd of wettelijk samenwonend koppel komt dat neer op €1.666 per jaar, mits beide partners de dividenden in hun aangifte vermelden."
+      },
+      {
+        question: "Hoe vraag ik de roerende voorheffing op dividenden terug?",
+        answer: "U vraagt de teruggave aan via vak VII van uw personenbelasting, codes 1437 (uzelf) of 2437 (echtgenoot/wettelijk samenwonende partner). Vermeld het brutodividend (max €833 per persoon) en bewaar de jaaroverzichten van uw broker als bewijsstuk."
+      },
+      {
+        question: "Geldt de dividend-vrijstelling ook voor ETF's en beleggingsfondsen?",
+        answer: "Nee, niet automatisch. Klassieke distributie-ETF's en DBI-beveks vallen meestal niet onder dezelfde regeling. Kapitaliserende ETF's keren geen dividend uit en zijn dus niet relevant. Controleer altijd de fiscale fiche van uw broker."
+      },
+      {
+        question: "Wat is het verschil tussen de dividend-vrijstelling en de spaarrente-vrijstelling?",
+        answer: "De spaarrente-vrijstelling (€1.020 per persoon in 2026) wordt automatisch toegepast door uw Belgische bank op gereglementeerde spaarrekeningen, met 15% RV op het surplus. De dividend-vrijstelling (€833) moet u actief terugvragen in uw aangifte, en het surplus is belast aan 30%."
+      },
+      {
+        question: "Wat als mijn buitenlandse broker geen roerende voorheffing inhoudt?",
+        answer: "Bij brokers zonder Belgische RV-inhouding (zoals Degiro Basic of Interactive Brokers) bent u zelf verplicht de dividenden aan te geven en de RV bij te betalen. Het niet-aangeven is fiscale fraude. U kunt nog wel tot €833 per persoon vrijstellen via vak VII."
+      }
+    ]
   }
 ];
 
