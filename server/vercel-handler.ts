@@ -7,6 +7,7 @@ import { registerRoutes } from "./routes";
 import { calculatorRegistry } from "../shared/calculator-registry";
 import { injectSeoMeta } from "./seo-config";
 import { bootstrapBankingDataIfEmpty } from "./bootstrap-data";
+import { registerBlogGoneHandler } from "./blog-gone-handler";
 
 // ESM-compatible __dirname (works on Node.js 20+)
 const __filename_esm = fileURLToPath(import.meta.url);
@@ -102,6 +103,11 @@ app.use((req, res, next) => {
 
 // Register API routes (registerRoutes is async but all route registrations are synchronous)
 registerRoutes(app);
+
+// Return 410 Gone for /blog/:slug when the slug is not in the DB. Must come
+// after /api routes (so /api/blog/posts/:slug still works) and before the SPA
+// catch-all (so unknown slugs don't return a 200 shell). CAL-137.
+registerBlogGoneHandler(app);
 
 // Fire bootstrap once per cold-start. Fire-and-forget: idempotent (no-op when
 // data exists), doesn't block request handling, and any error is swallowed
