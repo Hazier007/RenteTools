@@ -145,6 +145,19 @@ app.use("*", (req, res) => {
     }
 
     html = injectSeoMeta(html, req.originalUrl);
+
+    // Admin pages must never appear in Bing/Google index. Without this,
+    // Bing happily crawls /admin and /admin/blog-automation and counts them
+    // toward the "identical meta descriptions" duplicate set (CAL-157).
+    const cleanPath = req.originalUrl.split('?')[0].split('#')[0];
+    if (cleanPath === '/admin' || cleanPath.startsWith('/admin/')) {
+      res.set('X-Robots-Tag', 'noindex, nofollow');
+      const noindexMeta = '<meta name="robots" content="noindex, nofollow" />';
+      if (!html.includes(noindexMeta) && html.includes('</head>')) {
+        html = html.replace('</head>', `  ${noindexMeta}\n  </head>`);
+      }
+    }
+
     res.set("Content-Type", "text/html").send(html);
   } catch (error) {
     console.error("Error serving HTML:", error);
