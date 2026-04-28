@@ -62,3 +62,36 @@ export function registerBlogGoneHandler(app: Express): void {
     }
   });
 }
+
+// Single-segment top-level paths that are real pages or category indexes
+// (mirrors the wouter <Route path="/<x>"> entries in client/src/App.tsx).
+// Bare-slug calculator URLs (/<calc>-calculator) are 301'd to their category
+// canonical by the slugToCanonical middleware *before* this handler runs, so
+// they never reach here. Anything that lands on `/:slug` and is NOT in this
+// set is a phantom and gets 410'd. CAL-137 (widened from /blog/:slug after
+// CMO Tier-1 audit found /vastgoed-calculator is also a phantom — comment
+// ea002f53 on CAL-138).
+const VALID_TOP_LEVEL_SLUGS = new Set([
+  // Category indexes
+  'sparen', 'lenen', 'beleggen', 'planning', 'overige',
+  // Static pages
+  'blog', 'nieuws', 'over-ons', 'contact', 'privacy', 'privacybeleid',
+  'voorwaarden', 'sitemap', 'admin',
+]);
+
+export function registerUnknownTopLevelHandler(app: Express): void {
+  app.get('/:slug', (req, res, next) => {
+    const slug = req.params.slug;
+    if (!slug) return next();
+    // Files (sitemap.xml, robots.txt, favicons, legacy *.html) are not
+    // single-segment top-level *page* slugs — let express.static / the
+    // existing .html-404 handler / Vite handle them.
+    if (slug.includes('.')) return next();
+    if (VALID_TOP_LEVEL_SLUGS.has(slug)) return next();
+    return res
+      .status(410)
+      .type('text/html')
+      .set('Cache-Control', 'public, max-age=300, s-maxage=3600')
+      .send(GONE_HTML);
+  });
+}

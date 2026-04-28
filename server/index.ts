@@ -7,7 +7,7 @@ import { setupVite, serveStatic, log } from "./vite";
 import { calculatorRegistry } from "../shared/calculator-registry";
 import { injectSeoMeta } from "./seo-config";
 import { bootstrapBankingDataIfEmpty } from "./bootstrap-data";
-import { registerBlogGoneHandler } from "./blog-gone-handler";
+import { registerBlogGoneHandler, registerUnknownTopLevelHandler } from "./blog-gone-handler";
 
 const app = express();
 app.use(express.json());
@@ -150,10 +150,13 @@ app.use((req, res, next) => {
 
   const server = await registerRoutes(app);
 
-  // Return 410 Gone for /blog/:slug when the slug is not in the DB. Must come
-  // after /api routes and before the SPA catch-all / Vite dev middleware.
-  // CAL-137.
+  // Return 410 Gone for /blog/:slug when the slug is not in the DB, plus
+  // 410 for any unknown single-segment top-level slug (catches /vastgoed-
+  // calculator and similar phantoms). Must come after /api routes and the
+  // slug-to-canonical 301 redirect, and before the SPA catch-all / Vite dev
+  // middleware. CAL-137.
   registerBlogGoneHandler(app);
+  registerUnknownTopLevelHandler(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
