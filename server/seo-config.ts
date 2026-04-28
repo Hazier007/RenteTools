@@ -3,6 +3,7 @@ import { doelspaarcalculatorContent } from "../client/src/seo/calculator-content
 import { noodfondsCalculatorContent } from "../client/src/seo/calculator-content/noodfonds-calculator";
 import { reeleRenteBerekenenContent } from "../client/src/seo/calculator-content/reele-rente-berekenen";
 import type { EducationalSection } from "../client/src/seo/calculator-content/types";
+import { blogPosts } from "../client/src/data/blogPosts";
 
 export interface FaqItem {
   question: string;
@@ -16,6 +17,8 @@ export interface SeoConfig {
   pageTitle?: string;
   faqs?: FaqItem[];
   educationalSections?: EducationalSection[];
+  robots?: string;
+  ogImage?: string;
 }
 
 export type SiloCategory = "Home" | "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
@@ -527,7 +530,36 @@ export function getSlugFromUrl(url: string): string {
   return segments[segments.length - 1];
 }
 
+// Resolves /blog/<slug> nested routes that single-segment getSlugFromUrl misses.
+// Known slug -> SeoConfig from post.seo.*; unknown slug -> noindex,nofollow shell.
+function getBlogPostSeoFromUrl(url: string): SeoConfig | null {
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  const segments = cleanUrl.split('/').filter(Boolean);
+  if (segments.length !== 2 || segments[0] !== 'blog') {
+    return null;
+  }
+  const postSlug = segments[1];
+  const post = blogPosts.find(p => p.slug === postSlug);
+  if (!post) {
+    return {
+      slug: 'blog-not-found',
+      metaTitle: 'Blog niet gevonden | Interesten.be',
+      metaDescription: 'De blogpost die u zoekt bestaat niet of is verplaatst. Bekijk al onze artikelen op de Interesten.be blog.',
+      robots: 'noindex,nofollow',
+    };
+  }
+  return {
+    slug: `blog/${post.slug}`,
+    pageTitle: post.title,
+    metaTitle: post.seo.title,
+    metaDescription: post.seo.description,
+    ogImage: post.image,
+  };
+}
+
 export function getSeoConfigForUrl(url: string): SeoConfig | null {
+  const blogConfig = getBlogPostSeoFromUrl(url);
+  if (blogConfig) return blogConfig;
   const slug = getSlugFromUrl(url);
   return seoConfigs[slug] || null;
 }
@@ -551,7 +583,7 @@ function generateBreadcrumbSchema(url: string, seoConfig: SeoConfig): object {
   const cleanUrl = url.split('?')[0].split('#')[0];
   const slug = seoConfig.slug;
   const category = slugToCategory[slug];
-  
+
   const breadcrumbItems: { "@type": string; position: number; name: string; item: string }[] = [
     {
       "@type": "ListItem",
@@ -560,7 +592,27 @@ function generateBreadcrumbSchema(url: string, seoConfig: SeoConfig): object {
       item: "https://interesten.be/"
     }
   ];
-  
+
+  if (slug.startsWith('blog/')) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: "Blog",
+      item: "https://interesten.be/blog"
+    });
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 3,
+      name: seoConfig.pageTitle || seoConfig.metaTitle.split(' | ')[0],
+      item: `https://interesten.be${cleanUrl}`
+    });
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbItems
+    };
+  }
+
   if (category && category !== 'Home' && slug !== 'home') {
     const isCategoryPage = ['sparen', 'lenen', 'beleggen', 'planning', 'overige'].includes(slug);
     
@@ -768,7 +820,29 @@ export function injectSeoMeta(html: string, url: string): string {
   if (twitterDescRegex.test(result)) {
     result = result.replace(twitterDescRegex, `<meta name="twitter:description" content="${escapedDescription}" />`);
   }
-  
+
+  if (seoConfig.robots) {
+    const escapedRobots = escapeHtmlAttribute(seoConfig.robots);
+    const robotsRegex = /<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i;
+    if (robotsRegex.test(result)) {
+      result = result.replace(robotsRegex, `<meta name="robots" content="${escapedRobots}" />`);
+    } else if (result.includes('</head>')) {
+      result = result.replace('</head>', `  <meta name="robots" content="${escapedRobots}" />\n  </head>`);
+    }
+  }
+
+  if (seoConfig.ogImage) {
+    const escapedImage = escapeHtmlAttribute(seoConfig.ogImage);
+    const ogImageRegex = /<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/i;
+    if (ogImageRegex.test(result)) {
+      result = result.replace(ogImageRegex, `<meta property="og:image" content="${escapedImage}" />`);
+    }
+    const twitterImageRegex = /<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/?>/i;
+    if (twitterImageRegex.test(result)) {
+      result = result.replace(twitterImageRegex, `<meta name="twitter:image" content="${escapedImage}" />`);
+    }
+  }
+
   const cleanPath = url.split('?')[0].split('#')[0];
   const canonicalUrl = cleanPath === '/' || cleanPath === '' 
     ? 'https://interesten.be/' 
@@ -897,14 +971,20 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
   
   // Generate breadcrumb HTML
   const cleanPath = url.split('?')[0].split('#')[0];
+  const isBlogPost = slug.startsWith('blog/');
   let breadcrumbHtml = '<nav aria-label="breadcrumb" style="margin-bottom:1rem;font-size:0.875rem;color:#666;">';
   breadcrumbHtml += '<a href="/" style="color:#2563eb;text-decoration:none;">Home</a>';
-  
-  if (category && category !== 'Home' && category !== 'Overige' && slug !== category.toLowerCase()) {
-    breadcrumbHtml += ` &gt; <a href="/${category.toLowerCase()}" style="color:#2563eb;text-decoration:none;">${categoryName}</a>`;
-  }
-  if (slug !== 'home') {
-    breadcrumbHtml += ` &gt; <span>${seoConfig.metaTitle.split(' - ')[0].split(' | ')[0]}</span>`;
+
+  if (isBlogPost) {
+    breadcrumbHtml += ' &gt; <a href="/blog" style="color:#2563eb;text-decoration:none;">Blog</a>';
+    breadcrumbHtml += ` &gt; <span>${escapeHtmlAttribute(seoConfig.pageTitle || seoConfig.metaTitle.split(' | ')[0])}</span>`;
+  } else {
+    if (category && category !== 'Home' && category !== 'Overige' && slug !== category.toLowerCase()) {
+      breadcrumbHtml += ` &gt; <a href="/${category.toLowerCase()}" style="color:#2563eb;text-decoration:none;">${categoryName}</a>`;
+    }
+    if (slug !== 'home') {
+      breadcrumbHtml += ` &gt; <span>${seoConfig.metaTitle.split(' - ')[0].split(' | ')[0]}</span>`;
+    }
   }
   breadcrumbHtml += '</nav>';
   
