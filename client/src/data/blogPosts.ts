@@ -17,6 +17,10 @@ export interface BlogPost {
     description: string;
     keywords: string[];
   };
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -511,6 +515,152 @@ Let op de **beurstaks bij aan/verkoop**:
       description: "Complete gids voor fiscale voordelen in België: pensioensparen, spaarrente vrijstelling, beleggingsfondsen en meer. Maximaliseer uw netto-rendement.",
       keywords: ["belastingvoordelen belgië", "pensioensparen", "roerende voorheffing", "fiscale optimalisatie", "sparen belastingvrij"]
     }
+  },
+  {
+    slug: "registratierechten-berekenen-2026",
+    title: "Registratierechten Berekenen 2026 — Vlaanderen, Wallonië & Brussel",
+    excerpt: "Bereken de registratierechten voor uw woningaankoop in 2026: tarieven per gewest, abattement, klein beschrijf en concrete voorbeelden.",
+    category: "Lenen",
+    author: {
+      name: "Marc Dubois",
+      bio: "Hypotheekadviseur en financieel planner gespecialiseerd in woningfinanciering en vermogensopbouw",
+      avatar: "https://ui-avatars.com/api/?name=Marc+Dubois&background=10b981&color=fff&size=200"
+    },
+    publishDate: "2026-04-28",
+    readTime: 9,
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=675&fit=crop",
+    content: `
+# Registratierechten Berekenen 2026 — Vlaanderen, Wallonië & Brussel
+
+Bij de aankoop van een woning in België komt er meer kijken dan de prijsovereenkomst met de verkoper. Eén van de grootste extra kosten zijn de **registratierechten**, een gewestelijke belasting op de overdracht van onroerend goed. In 2026 verschillen de tarieven aanzienlijk tussen Vlaanderen, Wallonië en Brussel — en het gewest waar u koopt bepaalt rechtstreeks wat u extra betaalt.
+
+In deze gids leest u alles over de registratierechten in 2026, met concrete tarieven, voorbeeldberekeningen en de voorwaarden om voordelen zoals het abattement of klein beschrijf te benutten.
+
+## Wat zijn registratierechten en wanneer betaalt u ze?
+
+Registratierechten — voluit *registratie- en hypotheekrechten* — zijn de belasting die u verschuldigd bent zodra een notariële akte van vastgoedoverdracht wordt geregistreerd. Concreet betaalt u registratierechten:
+
+- bij de **aankoop van een bestaande woning** of bouwgrond;
+- bij **schenking** van onroerend goed (al gelden hier andere tarieven);
+- bij **erfpacht** of overdracht van zakelijke rechten op vastgoed.
+
+Belangrijk: bij de aankoop van een **nieuwbouwwoning met btw** betaalt u 21% btw op het gebouwgedeelte en enkel registratierechten op het grondaandeel. Voor bestaande woningen betaalt u volle registratierechten op de totale aankoopprijs.
+
+De rechten worden berekend op de **verkoopwaarde** of de **prijs**, afhankelijk van wat het hoogste is. De koper betaalt; de notaris int de rechten en stort ze door naar de gewestelijke fiscus.
+
+## Tarieven 2026 per gewest
+
+De drie gewesten hebben sinds 2018 elk eigen tarieven. De verschillen zijn groot, vooral voor de gezinswoning.
+
+### Vlaanderen
+
+In het Vlaams Gewest geldt sinds 1 januari 2025 een hervormd tarief, dat ook in 2026 doorloopt:
+
+- **3% voor de eigen, enige gezinswoning** (hoofdverblijfplaats);
+- **12% voor andere woningen** (tweede verblijf, opbrengsteigendom, zakelijk vastgoed);
+- **12% voor bouwgronden** waar geen woonst op gepland is.
+
+De koper moet binnen drie jaar na de akte zijn domicilie vestigen op het adres om recht te behouden op het 3%-tarief.
+
+### Wallonië
+
+Het Waals Gewest hanteert een algemeen tarief van **12,5%** op de aankoop van vastgoed in 2026. Voor een **bescheiden woning** (klein beschrijf) geldt een verlaagd tarief van **6%**. Wie zijn enige gezinswoning koopt, kan ook genieten van een **abattement** op de eerste schijf van de aankoopprijs. Sinds 2026 is de regelgeving rond klein beschrijf vereenvoudigd, met duidelijker drempels op het kadastraal inkomen.
+
+### Brussels Hoofdstedelijk Gewest
+
+In Brussel geldt eveneens **12,5%** als standaardtarief in 2026. De koper kan profiteren van een **abattement van €200.000** op de aankoopprijs voor de eigen, enige gezinswoning, mits de woning maximaal €600.000 kost en de koper er minstens 5 jaar zijn hoofdverblijfplaats vestigt. Concreet betekent dit een belastingbesparing van **€25.000** op de registratierechten.
+
+## Abattement & klein beschrijf — komt u in aanmerking?
+
+Beide voordelen zijn populaire instrumenten om de aankoopkost te drukken, maar de voorwaarden verschillen per gewest.
+
+**Brussel — Abattement van €200.000:**
+- Het moet uw enige eigendom zijn op het moment van de akte.
+- Maximale aankoopprijs: €600.000 (excl. kosten).
+- Domicilie binnen 2 jaar, behoud gedurende minstens 5 jaar.
+- Eerste €200.000 vrijgesteld → besparing van €25.000 (12,5% × €200.000).
+
+**Wallonië — Klein beschrijf (verlaagd tarief 6%):**
+- Maximaal kadastraal inkomen €745 (verhoogd voor gezinnen met meerdere kinderen ten laste).
+- Geen ander onroerend goed in volle eigendom op moment van aankoop.
+- Domicilie binnen 3 jaar, behoud gedurende 3 jaar.
+
+**Vlaanderen — 3%-tarief vervangt het oude abattement:**
+Sinds 2025 is er geen apart abattement meer in Vlaanderen; het lage 3%-tarief vormt zelf het voordeel voor de gezinswoning. Voldoet u niet aan de voorwaarden, dan vervalt u terug op 12%.
+
+## Rekenvoorbeeld: woning van €350.000
+
+Stel u koopt een bestaande gezinswoning van €350.000 in 2026. U bent eerstkoper en zal er domicilie nemen.
+
+| Gewest | Tarief | Registratierechten | Toelichting |
+|---|---|---|---|
+| **Vlaanderen** | 3% | **€10.500** | Eigen gezinswoning, domicilie binnen 3 jaar |
+| **Wallonië (klein beschrijf)** | 6% | **€21.000** | KI ≤ €745, eerste woning |
+| **Wallonië (standaard)** | 12,5% | **€43.750** | Bij niet-vervulling van voorwaarden |
+| **Brussel (met abattement)** | 12,5% min €25.000 | **€18.750** | Eerste woning, prijs ≤ €600.000 |
+| **Brussel (standaard)** | 12,5% | **€43.750** | Tweede verblijf, vakantiehuis |
+
+Het verschil is opvallend: voor dezelfde woning betaalt u in Vlaanderen €10.500, terwijl u in Wallonië bij een standaardtarief tot €43.750 kwijt bent. Dit gewestelijk verschil is een wezenlijke overweging bij de keuze van uw aankooplocatie.
+
+## Notariskosten + ereloon: de totale aankoopkost
+
+Naast de registratierechten betaalt u nog:
+
+- **Ereloon notaris**: een wettelijk geregeld percentage van de aankoopprijs, vaak rond **1% tot 1,5%** (degressief vanaf hogere prijzen).
+- **Aktekosten en administratieve kosten**: doorgaans **€800 tot €1.500** voor uittreksels, hypotheekrecherches en publicaties.
+- **21% btw op het ereloon** — let op: niet op de registratierechten zelf.
+- **Hypotheekrechten** indien u een lening afsluit: 1% van het ontleende bedrag voor de hypothecaire inschrijving.
+
+**Voorbeeld totale bijkomende kosten** voor een Vlaamse gezinswoning van €350.000:
+
+- Registratierechten: €10.500
+- Ereloon notaris: ±€4.500 (1,3%) + 21% btw → €5.445
+- Akte- en administratiekosten: €1.200
+- Hypotheekrechten (lening van €280.000): €2.800
+
+**Totaal extra kosten ≈ €19.945**, oftewel ongeveer 5,7% bovenop de aankoopprijs. Wie een hypothecair krediet plant, kan met onze [hypotheek calculator](/lenen/hypothecaire-lening-berekenen) eenvoudig de maandlast inclusief deze bijkomende kosten simuleren. Voor een ruimere doorrekening van uw leencapaciteit en LTV-grenzen gebruikt u onze [woningkrediet simulator](/lenen/woningkrediet-simulator).
+
+## Tips om uw registratierechten te beperken
+
+1. **Domicilie tijdig vestigen** — vergeet niet om binnen de gestelde termijn (3 jaar in Vlaanderen, 2 jaar in Brussel) uw hoofdverblijfplaats over te brengen, anders wordt het lage tarief teruggevorderd.
+2. **Plan uw aankoopgewest** — als u flexibel bent in regio, kan een Vlaamse aankoop u tienduizenden euro's besparen tegenover Wallonië of Brussel.
+3. **Onderzoek meeneembaarheid** — in sommige gewesten kunt u eerder betaalde registratierechten gedeeltelijk meenemen naar een volgende aankoop, binnen specifieke termijnen.
+4. **Combineer met fiscale optimalisatie** — overweeg of u na de aankoop beter aflost dan belegt; lees hierover onze gids [hypotheek aflossen of beleggen](/blog/hypotheek-aflossen-of-beleggen).
+5. **Vraag de berekening op voorhand** — uw notaris stelt vrijblijvend een afrekening op van alle bijkomende kosten, zodat u uw budget realistisch kunt plannen.
+
+## Conclusie
+
+Registratierechten vormen in 2026 een aanzienlijk deel van uw vastgoedbudget. Het Vlaamse tarief van 3% voor de gezinswoning blijft uitzonderlijk gunstig, terwijl Wallonië en Brussel met 12,5% standaard duurder uitvallen — al verzachten het abattement (Brussel) en klein beschrijf (Wallonië) de pijn aanzienlijk. Reken altijd door op uw eigen situatie en houd rekening met notariskosten, aktekosten en hypotheekrechten om een eerlijk beeld van de totale aankoopkost te krijgen.
+
+*Disclaimer: Tarieven en voorwaarden kunnen wijzigen. Raadpleeg altijd uw notaris of een fiscaal adviseur voor uw concrete situatie.*
+    `,
+    seo: {
+      title: "Registratierechten Berekenen 2026 | Per Gewest",
+      description: "Bereken registratierechten 2026 voor je woning in België: tarieven Vlaanderen 3-12%, Wallonië en Brussel 12,5%, abattement, klein beschrijf, voorbeelden.",
+      keywords: ["registratierechten 2026", "registratierechten berekenen", "registratierechten vlaanderen", "registratierechten brussel", "registratierechten wallonië", "abattement brussel", "klein beschrijf wallonië", "notariskosten woning"]
+    },
+    faqs: [
+      {
+        question: "Wat is het registratierechten-tarief voor de gezinswoning in Vlaanderen 2026?",
+        answer: "Het tarief bedraagt 3% voor de aankoop van uw eigen, enige gezinswoning, mits u binnen drie jaar uw hoofdverblijfplaats vestigt op het adres. Voor andere woningen (tweede verblijf, opbrengsteigendom) geldt 12%."
+      },
+      {
+        question: "Wat is het verschil tussen abattement en klein beschrijf?",
+        answer: "Het abattement is een vrijstelling op de eerste schijf van de aankoopprijs (in Brussel €200.000), terwijl klein beschrijf een verlaagd tarief van 6% is in Wallonië voor bescheiden woningen met een kadastraal inkomen onder €745."
+      },
+      {
+        question: "Betaal ik registratierechten op een nieuwbouwwoning?",
+        answer: "Bij een nieuwbouw met btw betaalt u 21% btw op het gebouwgedeelte en alleen registratierechten op het grondaandeel. Bij een bestaande woning betaalt u volle registratierechten op de hele aankoopprijs."
+      },
+      {
+        question: "Hoeveel registratierechten betaal ik op een woning van €350.000 in Brussel?",
+        answer: "Met abattement betaalt u €18.750 (12,5% × €350.000 = €43.750, verminderd met €25.000 abattement). Zonder abattement betaalt u €43.750."
+      },
+      {
+        question: "Welke kosten komen er nog bovenop de registratierechten?",
+        answer: "Naast de registratierechten betaalt u het ereloon van de notaris (±1-1,5%), aktekosten (€800-€1.500), 21% btw op het ereloon, en hypotheekrechten (1% van het leenbedrag) als u een lening afsluit. Reken op 5-6% extra bovenop de aankoopprijs."
+      }
+    ]
   }
 ];
 
