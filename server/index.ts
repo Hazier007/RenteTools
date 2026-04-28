@@ -169,10 +169,10 @@ app.use((req, res, next) => {
     
     app.use("*", (req, res) => {
       const urlPath = req.originalUrl.split('?')[0];
-      
+
       // Check for pre-rendered HTML at /route/index.html
       const prerenderedPath = path.join(distPath, urlPath, "index.html");
-      
+
       let html: string;
       if (fs.existsSync(prerenderedPath)) {
         // Serve pre-rendered HTML (already has full content)
@@ -183,7 +183,17 @@ app.use((req, res, next) => {
         html = fs.readFileSync(indexPath, "utf-8");
         html = injectSeoMeta(html, req.originalUrl);
       }
-      
+
+      // Admin pages must never appear in Bing/Google index (CAL-157).
+      const cleanPath = urlPath;
+      if (cleanPath === '/admin' || cleanPath.startsWith('/admin/')) {
+        res.set('X-Robots-Tag', 'noindex, nofollow');
+        const noindexMeta = '<meta name="robots" content="noindex, nofollow" />';
+        if (!html.includes(noindexMeta) && html.includes('</head>')) {
+          html = html.replace('</head>', `  ${noindexMeta}\n  </head>`);
+        }
+      }
+
       res.set("Content-Type", "text/html").send(html);
     });
   }

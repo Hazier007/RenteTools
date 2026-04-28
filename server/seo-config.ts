@@ -457,7 +457,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "privacy": {
     slug: "privacy",
     metaTitle: "Privacy & Cookie Policy - Interesten.be",
-    metaDescription: "Privacy policy en cookie informatie van Interesten.be. Lees hoe wij omgaan met uw gegevens."
+    metaDescription: "Privacy- en cookiebeleid van Interesten.be: welke data we verzamelen, hoe Consent Mode v2 werkt en welke rechten u heeft onder de AVG/GDPR in België."
   },
   "privacybeleid": {
     slug: "privacybeleid",
@@ -467,37 +467,37 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "voorwaarden": {
     slug: "voorwaarden",
     metaTitle: "Algemene Voorwaarden - Interesten.be",
-    metaDescription: "Algemene voorwaarden en disclaimer voor het gebruik van Interesten.be calculators en informatie."
+    metaDescription: "Algemene voorwaarden en disclaimer van Interesten.be: hoe u onze gratis Belgische calculators mag gebruiken, aansprakelijkheid en bron-attributie van rentegegevens."
   },
   "sitemap": {
     slug: "sitemap",
     metaTitle: "Sitemap - Alle Calculators Interesten.be",
-    metaDescription: "Volledig overzicht van alle financiële calculators en pagina's op Interesten.be voor België."
+    metaDescription: "Sitemap met alle 60+ financiële calculators op Interesten.be: spaartools, kredietsimulators, beleggingscalculators en planningstools voor België in één overzicht."
   },
   "sparen": {
     slug: "sparen",
     metaTitle: "Spaarrekening Calculators België - 11+ Gratis Tools",
-    metaDescription: "Vergelijk de beste spaarrekeningen, deposito's en termijnrekeningen in België. Bereken uw rendement met onze gratis tools."
+    metaDescription: `Vergelijk spaarrentes (basis + getrouwheidspremie tot 2,85%), deposito's, kasbons en kinderrekeningen in België. 11+ gratis spaarcalculators ${getCurrentYear()}.`
   },
   "lenen": {
     slug: "lenen",
     metaTitle: "Lening Calculators België - Hypotheek & Krediet",
-    metaDescription: "Bereken uw hypotheek, autolening of persoonlijke lening. Vergelijk rentes en vind de beste kredietvoorwaarden."
+    metaDescription: `Bereken hypotheek, autolening of persoonlijke lening in België. 16+ kredietsimulators met actuele rentes, TAEG en aflossingsplan – gratis ${getCurrentYear()}.`
   },
   "beleggen": {
     slug: "beleggen",
     metaTitle: "Beleggings Calculators België - Aandelen, ETF, Crypto",
-    metaDescription: "Bereken rendement op aandelen, ETF's, obligaties en crypto. Optimaliseer uw beleggingsportefeuille."
+    metaDescription: `Bereken rendement op aandelen, ETF's, obligaties, crypto en REITs. 13+ gratis beleggingstools met Belgische fiscaliteit (RV, TOB) – ${getCurrentYear()}.`
   },
   "planning": {
     slug: "planning",
     metaTitle: "Financiële Planning Tools - Pensioen & FIRE",
-    metaDescription: "Plan uw pensioen, budget en financiële toekomst. FIRE calculator, noodfonds en belastingplanning."
+    metaDescription: `Plan uw pensioen, FIRE-doel, noodfonds en budget met 12+ gratis tools voor België. Belastingplanning en inflatiebescherming voor ${getCurrentYear()}.`
   },
   "overige": {
     slug: "overige",
     metaTitle: "Informatie - Interesten.be",
-    metaDescription: "Meer informatie over Interesten.be, privacy beleid en gebruiksvoorwaarden."
+    metaDescription: "Over Interesten.be, privacybeleid, algemene voorwaarden en sitemap. Meer info over hoe wij Belgen helpen met gratis financiële calculators en transparante data."
   },
   "blog": {
     slug: "blog",
@@ -507,7 +507,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "nieuws": {
     slug: "nieuws",
     metaTitle: "Financieel Nieuws België | Interesten.be",
-    metaDescription: "Het laatste financieel nieuws voor België. Updates over spaarrentes, hypotheekrentes en beleggingen."
+    metaDescription: `Belgisch financieel nieuws ${getCurrentDateLabel()}: spaarrentes, hypotheekrentes, ECB-beslissingen, beleggingsupdates en fiscaal nieuws – kort, neutraal en bronvermeld.`
   }
 };
 
@@ -697,16 +697,43 @@ function extractHeroAvifUrl(html: string): string | null {
   return match[1].split(',')[0].trim().split(/\s+/)[0];
 }
 
+// Derive a unique meta description from the URL when no explicit seoConfig
+// matches. Without this, every off-map route (admin pages, /blog/<unknown>,
+// stale Bing-indexed paths) inherits the index.html default and shows up in
+// Bing Webmaster Tools as "identical meta descriptions" (CAL-157, 38 pages).
+// The slug is humanized so each route gets a distinct, content-aware string.
+function deriveFallbackSeo(url: string): { metaTitle: string; metaDescription: string } {
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  const segments = cleanUrl.split('/').filter(Boolean);
+  const lastSeg = segments[segments.length - 1] || 'home';
+  const pretty = lastSeg
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+  const parentSeg = segments.length > 1 ? segments[0] : '';
+  const parentPretty = parentSeg
+    ? parentSeg.charAt(0).toUpperCase() + parentSeg.slice(1)
+    : '';
+  const context = parentPretty ? ` (${parentPretty})` : '';
+  return {
+    metaTitle: `${pretty} - Interesten.be${context ? ' ' + context : ''}`,
+    metaDescription:
+      `${pretty}${context} op Interesten.be: gratis Belgische rekentool met actuele cijfers, ` +
+      `transparante formules en bronvermelding voor sparen, lenen en beleggen ${getCurrentYear()}.`,
+  };
+}
+
 export function injectSeoMeta(html: string, url: string): string {
   const seoConfig = getSeoConfigForUrl(url);
-
-  if (!seoConfig) {
-    return html;
-  }
+  const fallback = seoConfig ? null : deriveFallbackSeo(url);
 
   let result = html;
-  const escapedTitle = escapeHtmlAttribute(seoConfig.metaTitle);
-  const escapedDescription = escapeHtmlAttribute(seoConfig.metaDescription);
+  const escapedTitle = escapeHtmlAttribute(
+    seoConfig ? seoConfig.metaTitle : fallback!.metaTitle,
+  );
+  const escapedDescription = escapeHtmlAttribute(
+    seoConfig ? seoConfig.metaDescription : fallback!.metaDescription,
+  );
   
   const titleRegex = /<title>[^<]*<\/title>/;
   if (titleRegex.test(result)) {
@@ -757,6 +784,13 @@ export function injectSeoMeta(html: string, url: string): string {
     );
   }
   
+  // Off-map routes (/admin, /blog/<unknown>, etc.): unique meta is now in
+  // place — skip the structured-data, hero-preload and SSR-content branches
+  // since those only apply to known calculator/silo pages.
+  if (!seoConfig) {
+    return result;
+  }
+
   // Hero LCP preload — only on `/`, where the hero <picture> is SSR'd. The
   // CSS background variant we replaced couldn't carry fetchpriority; pairing a
   // preload hint with the new <img fetchPriority="high"> moves the AVIF off
@@ -780,7 +814,7 @@ export function injectSeoMeta(html: string, url: string): string {
   } else {
     const breadcrumbJson = escapeJsonForHtml(JSON.stringify(generateBreadcrumbSchema(url, seoConfig), null, 2));
     structuredDataScripts.push(`<script type="application/ld+json">\n${breadcrumbJson}\n    </script>`);
-    
+
     const calculatorSchema = generateCalculatorSchema(seoConfig, url);
     if (calculatorSchema) {
       const calculatorJson = escapeJsonForHtml(JSON.stringify(calculatorSchema, null, 2));
@@ -793,7 +827,7 @@ export function injectSeoMeta(html: string, url: string): string {
       structuredDataScripts.push(`<script type="application/ld+json">\n${faqJson}\n    </script>`);
     }
   }
-  
+
   if (structuredDataScripts.length > 0) {
     const existingLdJsonRegex = /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/;
     if (existingLdJsonRegex.test(result)) {
@@ -805,7 +839,7 @@ export function injectSeoMeta(html: string, url: string): string {
       );
     }
   }
-  
+
   // Inject static content into <div id="root"> for SEO crawlers
   const ssrContent = generateSSRContent(seoConfig, url);
   if (ssrContent) {
@@ -814,7 +848,7 @@ export function injectSeoMeta(html: string, url: string): string {
       `<div id="root">${ssrContent}</div>`
     );
   }
-  
+
   return result;
 }
 
