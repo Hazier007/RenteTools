@@ -1,4 +1,8 @@
 import { calculatorRegistry, type CalculatorCategory } from "../shared/calculator-registry";
+import { doelspaarcalculatorContent } from "../client/src/seo/calculator-content/doelspaarcalculator";
+import { noodfondsCalculatorContent } from "../client/src/seo/calculator-content/noodfonds-calculator";
+import { reeleRenteBerekenenContent } from "../client/src/seo/calculator-content/reele-rente-berekenen";
+import type { EducationalSection } from "../client/src/seo/calculator-content/types";
 
 export interface FaqItem {
   question: string;
@@ -11,6 +15,7 @@ export interface SeoConfig {
   metaDescription: string;
   pageTitle?: string;
   faqs?: FaqItem[];
+  educationalSections?: EducationalSection[];
 }
 
 export type SiloCategory = "Home" | "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
@@ -178,7 +183,8 @@ export const seoConfigs: Record<string, SeoConfig> = {
     pageTitle: "Doelspaar Calculator België",
     metaTitle: "Doelspaarcalculator België - Meerdere Spaardoelen Beheren",
     metaDescription: "Plan al uw spaardoelen tegelijk. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer. Smart goal planning.",
-    faqs: defaultFaqs.sparen
+    faqs: doelspaarcalculatorContent.faqs,
+    educationalSections: doelspaarcalculatorContent.sections
   },
   "spaarrekening-vergelijker": {
     slug: "spaarrekening-vergelijker",
@@ -388,8 +394,11 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "noodfonds-calculator": {
     slug: "noodfonds-calculator",
+    pageTitle: "Noodfonds Calculator België",
     metaTitle: "Noodfonds Calculator België - Emergency Fund Berekenen",
-    metaDescription: "Bereken uw ideale noodfonds. 3-6 maanden vaste kosten opzij zetten. Financiële zekerheid en bescherming tegen onverwachte uitgaven."
+    metaDescription: "Bereken uw ideale noodfonds. 3-6 maanden vaste kosten opzij zetten. Financiële zekerheid en bescherming tegen onverwachte uitgaven.",
+    faqs: noodfondsCalculatorContent.faqs,
+    educationalSections: noodfondsCalculatorContent.sections
   },
   "budget-planner": {
     slug: "budget-planner",
@@ -423,8 +432,11 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "reele-rente-berekenen": {
     slug: "reele-rente-berekenen",
+    pageTitle: "Reële Rente Berekenen",
     metaTitle: "Reële Rente Berekenen - Nominale Rente Min Inflatie",
-    metaDescription: "Bereken reële rente (nominaal minus inflatie). Ontdek of uw spaarrente inflatie verslaat. Realistisch rendement berekenen voor België."
+    metaDescription: "Bereken reële rente (nominaal minus inflatie). Ontdek of uw spaarrente inflatie verslaat. Realistisch rendement berekenen voor België.",
+    faqs: reeleRenteBerekenenContent.faqs,
+    educationalSections: reeleRenteBerekenenContent.sections
   },
   "rentevoet-vergelijker": {
     slug: "rentevoet-vergelijker",
@@ -644,6 +656,24 @@ function generateCalculatorSchema(seoConfig: SeoConfig, url: string): object | n
   };
 }
 
+function generateFaqPageSchema(seoConfig: SeoConfig): object | null {
+  if (!seoConfig.faqs || seoConfig.faqs.length === 0) {
+    return null;
+  }
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": seoConfig.faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  };
+}
+
 function escapeHtmlAttribute(str: string): string {
   return str
     .replace(/&/g, '&amp;')
@@ -756,6 +786,12 @@ export function injectSeoMeta(html: string, url: string): string {
       const calculatorJson = escapeJsonForHtml(JSON.stringify(calculatorSchema, null, 2));
       structuredDataScripts.push(`<script type="application/ld+json">\n${calculatorJson}\n    </script>`);
     }
+
+    const faqPageSchema = generateFaqPageSchema(seoConfig);
+    if (faqPageSchema) {
+      const faqJson = escapeJsonForHtml(JSON.stringify(faqPageSchema, null, 2));
+      structuredDataScripts.push(`<script type="application/ld+json">\n${faqJson}\n    </script>`);
+    }
   }
   
   if (structuredDataScripts.length > 0) {
@@ -845,6 +881,36 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
     }
     content += `
       </nav>`;
+  }
+
+  // Add educational deep-dive sections (CAL-138) so raw HTML reaches the
+  // ≥500-word body target for SEO crawlers before React hydrates.
+  if (seoConfig.educationalSections && seoConfig.educationalSections.length > 0) {
+    content += `
+      <section style="margin-top:3rem;">`;
+    for (const section of seoConfig.educationalSections) {
+      content += `
+        <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:1rem;">${escapeHtmlAttribute(section.heading)}</h2>`;
+      for (const block of section.blocks) {
+        if (block.kind === 'p') {
+          content += `
+        <p style="color:#4a4a4a;line-height:1.6;margin-bottom:1rem;">${escapeHtmlAttribute(block.text)}</p>`;
+        } else if (block.kind === 'formula') {
+          content += `
+        <p style="background:#f3f4f6;padding:0.75rem 1rem;border-radius:0.375rem;font-family:ui-monospace,monospace;font-size:0.875rem;line-height:1.5;margin-bottom:1rem;">${escapeHtmlAttribute(block.text)}</p>`;
+        } else {
+          content += `
+        <ul style="list-style:disc;padding-left:1.5rem;color:#4a4a4a;line-height:1.6;margin-bottom:1rem;">`;
+          for (const item of block.items) {
+            content += `
+          <li>${escapeHtmlAttribute(item)}</li>`;
+          }
+          content += `
+        </ul>`;
+        }
+      }
+    }
+    content += '</section>';
   }
 
   // Add FAQ section if available

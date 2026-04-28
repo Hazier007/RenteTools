@@ -204,7 +204,24 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Doelspaar Calculator",
     metaTitle: "Doelspaarcalculator België - Meerdere Spaardoelen Beheren",
     metaDescription: "Plan al uw spaardoelen tegelijk. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer. Smart goal planning.",
-    faqs: defaultFaqsBySilo.Sparen,
+    faqs: [
+      {
+        question: "Hoeveel doelen kan ik tegelijk plannen?",
+        answer: "Er is geen technisch maximum, maar in de praktijk werken de meeste Belgische gezinnen het best met 3-5 actieve spaardoelen. Te veel doelen versnippert uw maandbudget en maakt elk doel traag haalbaar."
+      },
+      {
+        question: "Met welke spaarrente moet ik rekenen?",
+        answer: `Voor gereglementeerde Belgische spaarrekeningen ligt de gemiddelde rente in ${getCurrentYear()} tussen 1,5% en 3,5%. Voor termijnrekeningen op 1-3 jaar tot 3,75%. Reken voor doelen onder de 2 jaar best zonder rendement, want de getrouwheidspremie krijgt u dan niet volledig.`
+      },
+      {
+        question: "Wat als mijn maandbudget niet alle doelen dekt?",
+        answer: "De calculator markeert dit en stelt drie oplossingen voor: (1) deadlines verlengen, (2) niet-essentiële doelen pauzeren, of (3) prioriteit geven aan doelen met de hoogste urgentie (bv. noodfonds eerst)."
+      },
+      {
+        question: "Tellen werkgeversbonus en vakantiegeld mee?",
+        answer: "Ja, in de \"extra storting\"-velden. Eindejaarspremie en vakantiegeld zijn ideale boosters voor langetermijndoelen die anders te zwaar wegen op uw maandbudget."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
   "spaarrekening-vergelijker": {
@@ -645,7 +662,28 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Noodfonds",
     metaTitle: "Noodfonds Calculator België - Emergency Fund Berekenen",
     metaDescription: "Bereken uw ideale noodfonds. 3-6 maanden vaste kosten opzij zetten. Financiële zekerheid en bescherming tegen onverwachte uitgaven.",
-    faqs: defaultFaqsBySilo.Planning,
+    faqs: [
+      {
+        question: "Hoe groot moet mijn noodfonds minimaal zijn?",
+        answer: "Voor de meeste Belgische gezinnen: minimaal 3 maanden vaste uitgaven (huur of hypotheek, voeding, energie, verzekeringen, transport). Singles, freelancers of mensen met lage werkzekerheid: 6 maanden of meer."
+      },
+      {
+        question: "Op welke rekening zet ik mijn noodfonds?",
+        answer: "Op een gereglementeerde Belgische spaarrekening. Direct beschikbaar, gedeeltelijk belastingvrij, en gedekt door het depositogarantiestelsel tot €100.000 per bank. Vermijd termijnrekeningen of beleggingen voor dit specifieke doel."
+      },
+      {
+        question: "Wat als ik nog geen noodfonds heb?",
+        answer: "Begin klein: mik eerst op €1.000-€2.000 als startbuffer voor onmiddellijke noodgevallen. Bouw daarna geleidelijk op tot het volledige aanbevolen bedrag, met een vast maandelijks spaarbedrag."
+      },
+      {
+        question: "Tellen schulden mee in de berekening?",
+        answer: "Ja — vaste afbetalingen (hypotheek, autolening, persoonlijke lening) horen bij uw maandelijkse vaste uitgaven, want die moeten ook tijdens werkverlies doorbetaald worden."
+      },
+      {
+        question: "Mag ik mijn noodfonds gebruiken voor geplande grote uitgaven?",
+        answer: "Nee. Voor geplande uitgaven (vakantie, nieuwe wagen) gebruikt u de Doelspaarcalculator. Het noodfonds blijft uitsluitend gereserveerd voor onverwachte gebeurtenissen."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "budget-planner": {
@@ -715,7 +753,28 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Reële Rente",
     metaTitle: "Reële Rente Berekenen - Nominale Rente Min Inflatie",
     metaDescription: "Bereken reële rente (nominaal minus inflatie). Ontdek of uw spaarrente inflatie verslaat. Realistisch rendement berekenen voor België.",
-    faqs: defaultFaqsBySilo.Planning,
+    faqs: [
+      {
+        question: "Wat is reële rente precies?",
+        answer: "De reële rente is uw rendement na inflatie — de echte groei van uw koopkracht. Nominale rente is wat de bank u op papier biedt; reële rente is wat u er na inflatie effectief mee koopt."
+      },
+      {
+        question: "Welke inflatie moet ik invullen?",
+        answer: "Voor België: gebruik de geharmoniseerde consumptieprijsindex (HICP) van Statbel. Het Belgische gemiddelde voor 2025 lag rond 2,1%. Voor langetermijnplanning kunt u rekenen met een gemiddelde 2-2,5% — de doelinflatie van de ECB."
+      },
+      {
+        question: "Kan reële rente negatief zijn?",
+        answer: "Ja. Wanneer inflatie hoger is dan uw nominale spaarrente, verliest uw geld koopkracht ondanks groei in euro's. In 2022-2023 was dat het geval voor de meeste Belgische spaarrekeningen — inflatie >9% tegenover spaarrente <1%."
+      },
+      {
+        question: "Hoe versla ik inflatie?",
+        answer: "Drie opties: (1) hogere nominale rente zoeken via vergelijking, (2) langere looptijd vastleggen via een termijnrekening of staatsbon, (3) deels beleggen in aandelen of ETF's voor de lange termijn (>10 jaar) — historisch hoger reëel rendement, maar met volatiliteit."
+      },
+      {
+        question: "Houdt de calculator rekening met belasting?",
+        answer: "De basisversie rekent met brutorendement. Voor netto reële rente trekt u eerst de roerende voorheffing af (15% of 30%) van uw nominale rente, vóór u die invult."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
   "rentevoet-vergelijker": {

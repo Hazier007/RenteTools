@@ -365,11 +365,63 @@ export default function ReeleRenteBerekenen() {
                   <div>
                     <h3 className="font-semibold mb-2">Is mijn geld veilig bij negatieve reële rente?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Uw geld is nominaal veilig, maar koopkracht daalt. €1000 blijft €1000, 
+                      Uw geld is nominaal veilig, maar koopkracht daalt. €1000 blijft €1000,
                       maar kan minder kopen door inflatie. Dit is een geleidelijk proces.
                     </p>
                   </div>
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Educational Deep-Dive (CAL-138) */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">Reële rente in detail — Fisher-formule, fiscaliteit en FAQ</CardTitle>
+              </CardHeader>
+              <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-4">
+                <p>
+                  De Reële Rente Calculator toont u de werkelijke koopkracht van uw spaargeld na inflatie. Een nominale spaarrente van 2,5% ziet er goed uit — maar bij 2,1% inflatie is uw reële rendement amper 0,4%. Bij hogere inflatie kan uw spaargeld zelfs koopkracht verliezen ondanks rentegroei. Deze tool berekent uw reële rente, projecteert hoe uw kapitaal in echte koopkracht evolueert over 1 tot 30 jaar, en helpt u beslissen of een spaarrekening volstaat of dat u moet beleggen om inflatie te verslaan.
+                </p>
+
+                <h3>Hoe werkt het?</h3>
+                <p>
+                  De calculator gebruikt de <strong>Fisher-vergelijking</strong>, de standaardformule voor reële rente in de financiële wetenschap: <strong>Reële rente ≈ (1 + nominale rente) ÷ (1 + inflatie) − 1</strong>.
+                </p>
+                <p>
+                  Een snelle benadering die bij lage percentages ook goed werkt is: <em>Reële rente ≈ Nominale rente − Inflatie</em>. Bij 2,5% spaarrente en 2,1% inflatie: 2,5 − 2,1 = 0,4% reële rente. Of via Fisher: (1,025 ÷ 1,021) − 1 = 0,392%.
+                </p>
+                <p>De tool projecteert vervolgens drie kapitaalcurves:</p>
+                <ul>
+                  <li><strong>Nominaal eindkapitaal</strong>: wat de bank op uw rekening toont.</li>
+                  <li><strong>Koopkracht-eindkapitaal</strong>: wat dat geld in échte aankoopwaarde voorstelt.</li>
+                  <li><strong>Reëel rendement</strong>: het verschil — winst of verlies aan koopkracht.</li>
+                </ul>
+                <p>
+                  Voorbeeld: €10.000 op 2,5% spaarrente over 10 jaar = €12.801 nominaal, maar slechts €10.395 in koopkracht van vandaag (bij 2,1% inflatie). Uw werkelijke winst over 10 jaar: €395, of ±0,4% per jaar.
+                </p>
+
+                <h3>Belgisch fiscaal kader 2026</h3>
+                <p>
+                  In België wordt op spaarrenten <strong>roerende voorheffing</strong> geheven: 15% op interest van gereglementeerde spaarrekeningen (boven de jaarlijkse vrijstelling van €1.020 per persoon in 2026), en 30% op termijnrekeningen, kasbons en spaarverzekeringen Tak 21. Dat heeft een direct effect op uw reële rente: een nominale 3% rente op een termijnrekening wordt na 30% voorheffing slechts 2,1% <strong>vóór inflatie</strong>. Bij 2,1% inflatie: reële rente = ±0%. Op de gereglementeerde spaarrekening blijft van 2,5% rente meestal de volledige 2,5% over (binnen vrijstelling), waardoor het netto-reëel rendement vaak hoger ligt dan op een termijnrekening — ondanks de schijnbaar lagere nominale rente. Reken altijd <strong>netto na voorheffing</strong> vs. inflatie om uw werkelijke koopkrachtevolutie te kennen.
+                </p>
+
+                <h3>Veelgestelde vragen — uitgebreid</h3>
+                <h4>Wat is reële rente precies?</h4>
+                <p>De reële rente is uw rendement na inflatie — de echte groei van uw koopkracht. Nominale rente is wat de bank u op papier biedt; reële rente is wat u er na inflatie effectief mee koopt.</p>
+                <h4>Welke inflatie moet ik invullen?</h4>
+                <p>Voor België: gebruik de geharmoniseerde consumptieprijsindex (HICP) van Statbel. Het Belgische gemiddelde voor 2025 lag rond 2,1%. Voor langetermijnplanning kunt u rekenen met een gemiddelde 2-2,5% — de doelinflatie van de ECB.</p>
+                <h4>Kan reële rente negatief zijn?</h4>
+                <p>Ja. Wanneer inflatie hoger is dan uw nominale spaarrente, verliest uw geld koopkracht ondanks groei in euro's. In 2022-2023 was dat het geval voor de meeste Belgische spaarrekeningen — inflatie &gt;9% tegenover spaarrente &lt;1%.</p>
+                <h4>Hoe versla ik inflatie?</h4>
+                <p>Drie opties: (1) hogere nominale rente zoeken via vergelijking, (2) langere looptijd vastleggen via een termijnrekening of staatsbon, (3) deels beleggen in aandelen of ETF's voor de lange termijn (&gt;10 jaar) — historisch hoger reëel rendement, maar met volatiliteit.</p>
+                <h4>Houdt de calculator rekening met belasting?</h4>
+                <p>De basisversie rekent met brutorendement. Voor netto reële rente trekt u eerst de roerende voorheffing af (15% of 30%) van uw nominale rente, vóór u die invult.</p>
+
+                <p className="text-sm text-muted-foreground">
+                  Verder rekenen: <a href="/sparen/spaarrekening-vergelijker">Spaarrekening Vergelijker</a> ·{" "}
+                  <a href="/sparen/termijnrekening-calculator">Termijnrekening Calculator</a> ·{" "}
+                  <a href="/planning/inflatie-calculator-belgie">Inflatie Calculator België</a>.
+                </p>
               </CardContent>
             </Card>
 
