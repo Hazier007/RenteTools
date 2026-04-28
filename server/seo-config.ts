@@ -513,23 +513,133 @@ export const seoConfigs: Record<string, SeoConfig> = {
 
 export function getSlugFromUrl(url: string): string {
   const cleanUrl = url.split('?')[0].split('#')[0];
-  
+
   if (cleanUrl === '/' || cleanUrl === '') {
     return 'home';
   }
-  
+
   const segments = cleanUrl.split('/').filter(Boolean);
-  
+
   if (segments.length === 0) {
     return 'home';
   }
-  
+
   return segments[segments.length - 1];
 }
 
+// Paths the SSR meta layer treats as canonical SEO surfaces. Mirrors
+// prerender-routes.json (kept in sync manually — both files must list the
+// same set so SSG output and runtime output agree). A URL outside this set
+// gets a path-derived fallback title to keep duplicate-title clusters from
+// forming on phantom or last-segment-collision URLs (CAL-158).
+const KNOWN_SEO_PATHS = new Set<string>([
+  '/',
+  '/blog',
+  '/nieuws',
+  '/sparen',
+  '/lenen',
+  '/beleggen',
+  '/planning',
+  '/over-ons',
+  '/privacybeleid',
+  '/voorwaarden',
+  '/contact',
+  '/sparen/hoogste-spaarrente-belgie',
+  '/sparen/deposito-calculator',
+  '/sparen/samengestelde-interest-berekenen',
+  '/sparen/doelspaarcalculator',
+  '/sparen/spaarrekening-vergelijker',
+  '/sparen/kinderrekening-calculator',
+  '/sparen/kasbon-calculator',
+  '/sparen/termijnrekening-calculator',
+  '/sparen/groepssparen-calculator',
+  '/sparen/loyalty-bonus-calculator',
+  '/sparen/vakantiegeld-sparen-calculator',
+  '/lenen/hypothecaire-lening-berekenen',
+  '/lenen/woningkrediet-simulator',
+  '/lenen/persoonlijke-lening-berekenen',
+  '/lenen/autolening-berekenen',
+  '/lenen/lening-herfinancieren',
+  '/lenen/schuldenconsolidatie-calculator',
+  '/lenen/kredietcapaciteit-calculator',
+  '/lenen/kredietvergelijker-belgie',
+  '/lenen/doorlopend-krediet-calculator',
+  '/lenen/kredietkaart-calculator',
+  '/lenen/leasingkrediet-calculator',
+  '/lenen/voorschot-calculator',
+  '/lenen/studieschuld-calculator',
+  '/lenen/groepslening-calculator',
+  '/lenen/wettelijke-rentevoet-belgie',
+  '/beleggen/beleggingsrente-calculator',
+  '/beleggen/aandelen-calculator',
+  '/beleggen/etf-calculator',
+  '/beleggen/obligatie-calculator',
+  '/beleggen/cryptocurrency-calculator',
+  '/beleggen/crypto-belasting-calculator',
+  '/beleggen/staking-apy-calculator',
+  '/beleggen/crypto-winst-verlies-calculator',
+  '/beleggen/dollar-cost-averaging-calculator',
+  '/beleggen/portfolio-diversificatie-calculator',
+  '/beleggen/reit-calculator',
+  '/beleggen/belgische-beleggingsfiscaliteit-calculator',
+  '/beleggen/roerende-voorheffing-calculator',
+  '/planning/pensioensparen-calculator',
+  '/planning/pensioen-calculator',
+  '/planning/fire-calculator',
+  '/planning/noodfonds-calculator',
+  '/planning/budget-planner',
+  '/planning/belastingplanning-calculator',
+  '/planning/levensverzekeraar-calculator',
+  '/planning/eindejaarsbonus-calculator',
+  '/planning/inflatie-calculator-belgie',
+  '/planning/geldontwaarding-calculator',
+  '/planning/reele-rente-berekenen',
+  '/planning/rentevoet-vergelijker',
+]);
+
+function normalizeUrlPath(url: string): string {
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  if (cleanUrl === '' || cleanUrl === '/') return '/';
+  // Strip trailing slash so '/sparen/' matches '/sparen'.
+  return cleanUrl.endsWith('/') ? cleanUrl.slice(0, -1) : cleanUrl;
+}
+
 export function getSeoConfigForUrl(url: string): SeoConfig | null {
-  const slug = getSlugFromUrl(url);
+  const path = normalizeUrlPath(url);
+  if (!KNOWN_SEO_PATHS.has(path)) {
+    return null;
+  }
+  const slug = getSlugFromUrl(path);
   return seoConfigs[slug] || null;
+}
+
+// For unknown / phantom paths Bing or other crawlers may still hit, derive
+// a unique title and description from the URL itself so two unrelated
+// unknown URLs never collide on the default static title (root cause of
+// CAL-158's "38 pages with identical titles" cluster).
+export function generateFallbackSeo(url: string): { metaTitle: string; metaDescription: string } {
+  const path = normalizeUrlPath(url);
+  const segments = path.split('/').filter(Boolean);
+  if (segments.length === 0) {
+    return {
+      metaTitle: 'Interesten.be - Belgische Financiele Calculators',
+      metaDescription: 'Gratis Belgische financiele calculators voor sparen, lenen en beleggen.',
+    };
+  }
+  const lastSegment = segments[segments.length - 1];
+  const pretty = lastSegment
+    .split('-')
+    .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
+    .join(' ');
+  const breadcrumb = segments
+    .slice(0, -1)
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(' / ');
+  const titleSuffix = breadcrumb ? `${breadcrumb} | Interesten.be` : 'Interesten.be';
+  return {
+    metaTitle: `${pretty} - ${titleSuffix}`,
+    metaDescription: `Pagina ${pretty} op Interesten.be - Belgische financiele calculators voor sparen, lenen en beleggen.`,
+  };
 }
 
 function slugToPrettyName(slug: string): string {
@@ -699,14 +809,13 @@ function extractHeroAvifUrl(html: string): string | null {
 
 export function injectSeoMeta(html: string, url: string): string {
   const seoConfig = getSeoConfigForUrl(url);
-
-  if (!seoConfig) {
-    return html;
-  }
+  const fallback = seoConfig ? null : generateFallbackSeo(url);
+  const metaTitle = seoConfig?.metaTitle ?? fallback!.metaTitle;
+  const metaDescription = seoConfig?.metaDescription ?? fallback!.metaDescription;
 
   let result = html;
-  const escapedTitle = escapeHtmlAttribute(seoConfig.metaTitle);
-  const escapedDescription = escapeHtmlAttribute(seoConfig.metaDescription);
+  const escapedTitle = escapeHtmlAttribute(metaTitle);
+  const escapedDescription = escapeHtmlAttribute(metaDescription);
   
   const titleRegex = /<title>[^<]*<\/title>/;
   if (titleRegex.test(result)) {
@@ -761,7 +870,7 @@ export function injectSeoMeta(html: string, url: string): string {
   // CSS background variant we replaced couldn't carry fetchpriority; pairing a
   // preload hint with the new <img fetchPriority="high"> moves the AVIF off
   // the default-priority queue and into the LCP path (priorityHinted=true).
-  if (seoConfig.slug === 'home') {
+  if (seoConfig?.slug === 'home') {
     const heroAvifUrl = extractHeroAvifUrl(result);
     if (heroAvifUrl && result.includes('</head>')) {
       const escapedHref = escapeHtmlAttribute(heroAvifUrl);
@@ -772,49 +881,53 @@ export function injectSeoMeta(html: string, url: string): string {
     }
   }
 
-  const structuredDataScripts: string[] = [];
+  // Structured data and rich SSR content require a known SEO config; for
+  // unknown/fallback paths we ship the unique title + description only.
+  if (seoConfig) {
+    const structuredDataScripts: string[] = [];
 
-  if (seoConfig.slug === 'home') {
-    const websiteJson = escapeJsonForHtml(JSON.stringify(generateWebSiteSchema(), null, 2));
-    structuredDataScripts.push(`<script type="application/ld+json">\n${websiteJson}\n    </script>`);
-  } else {
-    const breadcrumbJson = escapeJsonForHtml(JSON.stringify(generateBreadcrumbSchema(url, seoConfig), null, 2));
-    structuredDataScripts.push(`<script type="application/ld+json">\n${breadcrumbJson}\n    </script>`);
-    
-    const calculatorSchema = generateCalculatorSchema(seoConfig, url);
-    if (calculatorSchema) {
-      const calculatorJson = escapeJsonForHtml(JSON.stringify(calculatorSchema, null, 2));
-      structuredDataScripts.push(`<script type="application/ld+json">\n${calculatorJson}\n    </script>`);
+    if (seoConfig.slug === 'home') {
+      const websiteJson = escapeJsonForHtml(JSON.stringify(generateWebSiteSchema(), null, 2));
+      structuredDataScripts.push(`<script type="application/ld+json">\n${websiteJson}\n    </script>`);
+    } else {
+      const breadcrumbJson = escapeJsonForHtml(JSON.stringify(generateBreadcrumbSchema(url, seoConfig), null, 2));
+      structuredDataScripts.push(`<script type="application/ld+json">\n${breadcrumbJson}\n    </script>`);
+
+      const calculatorSchema = generateCalculatorSchema(seoConfig, url);
+      if (calculatorSchema) {
+        const calculatorJson = escapeJsonForHtml(JSON.stringify(calculatorSchema, null, 2));
+        structuredDataScripts.push(`<script type="application/ld+json">\n${calculatorJson}\n    </script>`);
+      }
+
+      const faqPageSchema = generateFaqPageSchema(seoConfig);
+      if (faqPageSchema) {
+        const faqJson = escapeJsonForHtml(JSON.stringify(faqPageSchema, null, 2));
+        structuredDataScripts.push(`<script type="application/ld+json">\n${faqJson}\n    </script>`);
+      }
     }
 
-    const faqPageSchema = generateFaqPageSchema(seoConfig);
-    if (faqPageSchema) {
-      const faqJson = escapeJsonForHtml(JSON.stringify(faqPageSchema, null, 2));
-      structuredDataScripts.push(`<script type="application/ld+json">\n${faqJson}\n    </script>`);
+    if (structuredDataScripts.length > 0) {
+      const existingLdJsonRegex = /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/;
+      if (existingLdJsonRegex.test(result)) {
+        result = result.replace(existingLdJsonRegex, structuredDataScripts.join('\n    '));
+      } else if (result.includes('</head>')) {
+        result = result.replace(
+          '</head>',
+          `${structuredDataScripts.join('\n    ')}\n  </head>`
+        );
+      }
     }
-  }
-  
-  if (structuredDataScripts.length > 0) {
-    const existingLdJsonRegex = /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/;
-    if (existingLdJsonRegex.test(result)) {
-      result = result.replace(existingLdJsonRegex, structuredDataScripts.join('\n    '));
-    } else if (result.includes('</head>')) {
+
+    // Inject static content into <div id="root"> for SEO crawlers
+    const ssrContent = generateSSRContent(seoConfig, url);
+    if (ssrContent) {
       result = result.replace(
-        '</head>',
-        `${structuredDataScripts.join('\n    ')}\n  </head>`
+        '<div id="root"></div>',
+        `<div id="root">${ssrContent}</div>`
       );
     }
   }
-  
-  // Inject static content into <div id="root"> for SEO crawlers
-  const ssrContent = generateSSRContent(seoConfig, url);
-  if (ssrContent) {
-    result = result.replace(
-      '<div id="root"></div>',
-      `<div id="root">${ssrContent}</div>`
-    );
-  }
-  
+
   return result;
 }
 
