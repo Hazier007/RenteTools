@@ -18,6 +18,7 @@ import { blogAutomationService } from "./services/blog-automation";
 import { requireAdmin } from "./middleware/auth";
 import { generateCsrfToken, validateCsrfToken } from "./middleware/csrf";
 import { calculatorRegistry } from "../shared/calculator-registry";
+import { blogPosts as staticBlogPosts } from "../client/src/data/blogPosts";
 
 // Rate limiting for login endpoint
 interface LoginAttempt {
@@ -668,9 +669,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   </url>\n`;
       }
       
+      const seenBlogSlugs = new Set<string>();
+      for (const post of staticBlogPosts) {
+        const lastmod = post.publishDate ? new Date(post.publishDate).toISOString().split('T')[0] : today;
+        xml += `  <url>
+    <loc>https://interesten.be/blog/${post.slug}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>\n`;
+        seenBlogSlugs.add(post.slug);
+      }
+
       try {
         const publishedPosts = await storage.getBlogPosts('published');
         for (const post of publishedPosts) {
+          if (seenBlogSlugs.has(post.slug)) continue;
           const lastmod = post.publishDate ? new Date(post.publishDate).toISOString().split('T')[0] : today;
           xml += `  <url>
     <loc>https://interesten.be/blog/${post.slug}</loc>
