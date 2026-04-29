@@ -10,6 +10,14 @@
          client/src/index.css. -->
     <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 
+    <!-- Warm the gstatic connection used by the FundingChoices consent
+         dialog's Open Sans webfont. Preconnect only — no fetch — so it does
+         not compete with the LCP critical path, but eliminates the DNS+TLS
+         RTT when the dialog mounts (~300 ms saved on mobile/4G), removing
+         the prod-only 0.030 CLS attributed to fc-dialog-restricted-content
+         reflowing on font swap. -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -65,25 +73,29 @@
     </script>
     
     <!--
-      Consent Mode v2 + GA4 / AdSense / Funding Choices CMP — deferred bootstrap.
-
-      Why: eager-loading these three scripts adds ~466 KB of network transfer
-      (~282 KB unused JS) onto the LCP critical path. CAL-45 defers the actual
-      script loaders past the LCP window without changing analytics behavior.
+      Consent Mode v2 + GA4 / AdSense / Funding Choices CMP — LCP-gated bootstrap.
 
       What stays eager (inline below):
         - dataLayer + gtag() shim (so app-side gtag(...) calls buffer correctly)
         - Consent Mode v2 defaults (all denied + wait_for_update: 500)
         - gtag('js', ...) + gtag('config', ...) — both queue into dataLayer
 
-      What loads after `load` event + requestIdleCallback (or 2s setTimeout):
+      What is deferred until AFTER the first LCP candidate fires:
         - googletagmanager.com/gtag/js (GA4)
         - pagead2.googlesyndication.com/pagead/js/adsbygoogle.js (AdSense Auto Ads)
         - fundingchoicesmessages.google.com/i/pub-... (Funding Choices CMP)
 
+      Why LCP-gated and not just `load`+idle: under simulated mobile/4G the
+      idle callback can fire inside the FCP→LCP window on small SSG pages,
+      letting CMP main-thread + network work (~150 ms script + Open Sans
+      fetch + dialog reflow) push LCP past the 2.0 s gate. CAL-51 closed
+      hero levers; CAL-52 closes the residual 0.119 s gap by waiting on a
+      `largest-contentful-paint` PerformanceObserver entry before scheduling
+      the loaders. Hard fallbacks: `load` event + 4 s timeout if no LCP
+      entry ever arrives (hidden tab, no LCP element).
+
       gtag.js drains the buffered dataLayer when it loads, so no analytics
-      events are lost. Consent banner appears ~2s after first paint on cold
-      visits; denied defaults keep cookies/storage gated until then.
+      events are lost. Consent dialog still appears within ~2 s of LCP.
     -->
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -115,18 +127,33 @@
           injectScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864', true);
           injectScript('https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1', true);
         }
-        function schedule() {
+        function scheduleIdle() {
           if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(loadDeferred, { timeout: 3000 });
+            window.requestIdleCallback(loadDeferred, { timeout: 2000 });
           } else {
-            setTimeout(loadDeferred, 2000);
+            setTimeout(loadDeferred, 500);
           }
         }
-        if (document.readyState === 'complete') {
-          schedule();
-        } else {
-          window.addEventListener('load', schedule, { once: true });
+        var lcpFired = false;
+        if ('PerformanceObserver' in window) {
+          try {
+            var po = new PerformanceObserver(function() {
+              if (lcpFired) return;
+              lcpFired = true;
+              po.disconnect();
+              scheduleIdle();
+            });
+            po.observe({ type: 'largest-contentful-paint', buffered: true });
+          } catch (e) {
+            // LCP entry type not supported — fall through to load-event fallback.
+          }
         }
+        // Hard fallback: fire 4 s after window.load if no LCP entry ever arrives
+        // (e.g. background tab, no LCP element). Guarantees CMP eventually boots
+        // so analytics/AdSense/consent UI are never silently dropped.
+        window.addEventListener('load', function() {
+          setTimeout(loadDeferred, 4000);
+        }, { once: true });
       })();
     </script>
   </head>
