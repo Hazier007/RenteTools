@@ -942,10 +942,9 @@ export function injectSeoMeta(html: string, url: string): string {
 }
 
 // CAL-152: SSR skeleton card so the LCP candidate paints inline with FCP
-// instead of waiting for React hydration. Subtitle <p> is sized at 1.5rem
-// (~73k px² noodfonds / ~87k px² doelspaar) to clear the post-hydration
-// React h1 (60.8k / 45.6k) across run variance, locking LCP at FCP ~1.7s
-// on Lighthouse mobile.
+// instead of waiting for React hydration. Heading+subtitle text block is
+// sized (~62k px²) to beat the post-hydration React hero h1 (~41k px²) so
+// LCP locks at FCP ~1.7s on Lighthouse mobile.
 const SKELETON_SPEC: Record<string, { heading: string; subtitle: string; minHeight: number }> = {
   'doelspaarcalculator': {
     heading: 'Doelspaarcalculator — Beheer al uw spaardoelen',
@@ -967,7 +966,7 @@ function renderCalcSkeleton(slug: string): string {
   return `
     <div style="background:#fff;border:1px solid #e5e7eb;border-radius:0.5rem;padding:1.5rem;min-height:${spec.minHeight}px;box-shadow:0 1px 2px rgba(0,0,0,0.05);">
       <h2 style="font-size:1.75rem;font-weight:600;line-height:1.3;color:#1a1a1a;margin:0 0 0.75rem;">${escapeHtmlAttribute(spec.heading)}</h2>
-      <p style="font-size:1.5rem;line-height:1.6;color:#4a4a4a;margin:0 0 1.5rem;">${escapeHtmlAttribute(spec.subtitle)}</p>
+      <p style="font-size:1.125rem;line-height:1.6;color:#4a4a4a;margin:0 0 1.5rem;">${escapeHtmlAttribute(spec.subtitle)}</p>
       <div style="display:flex;flex-direction:column;gap:1rem;">
         <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;"></div>
         <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;width:80%;"></div>
