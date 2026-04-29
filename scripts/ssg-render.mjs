@@ -101,12 +101,23 @@ async function main() {
     if (FULL_SSG_ROUTES.has(route)) {
       try {
         const appHtml = render(route);
-        html = baseHtml.replace(
-          ROOT_PLACEHOLDER,
-          `<div id="root">${appHtml}</div>`,
-        );
-        html = injectSeoMeta(html, route);
-        fullCount++;
+        // Suspense boundaries inside <Switch> don't throw — they emit a
+        // partial tree with a placeholder. If the partial lost the <h1>,
+        // the page ships H1-less to Bing/Google. Fall back to the
+        // meta-only path which uses generateSSRContent (static H1 +
+        // breadcrumb + crawlable nav) so every hub still has an H1.
+        if (/<h1[\s>]/i.test(appHtml)) {
+          html = baseHtml.replace(
+            ROOT_PLACEHOLDER,
+            `<div id="root">${appHtml}</div>`,
+          );
+          html = injectSeoMeta(html, route);
+          fullCount++;
+        } else {
+          console.warn(`[ssg] full SSR for ${route} produced no <h1> (Suspense bail?), falling back to meta-only`);
+          html = injectSeoMeta(baseHtml, route);
+          fallbackCount++;
+        }
       } catch (err) {
         console.warn(`[ssg] full SSR failed for ${route}, falling back to meta-only:`, err.message);
         html = injectSeoMeta(baseHtml, route);
