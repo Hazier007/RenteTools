@@ -11,6 +11,7 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import { SKELETON_SPEC } from "@shared/skeleton-spec";
 
 export default function DoelspaarcalculatorPage() {
   useCanonical();
@@ -54,9 +55,15 @@ export default function DoelspaarcalculatorPage() {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* CAL-182: min-height matches the SSR skeleton so the post-hydration
+          calculator section reserves the same vertical space the skeleton
+          reserved, eliminating the wrapper-height-mismatch CLS shift. */}
+      <section
+        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+        style={{ minHeight: SKELETON_SPEC.doelspaarcalculator.minHeight }}
+      >
         <div className="space-y-8">
-            
+
             {/* Calculator */}
             <Card>
               <CardHeader>

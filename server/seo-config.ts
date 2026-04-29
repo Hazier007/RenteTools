@@ -1,4 +1,5 @@
 import { calculatorRegistry, type CalculatorCategory } from "../shared/calculator-registry";
+import { SKELETON_SPEC } from "../shared/skeleton-spec";
 import { doelspaarcalculatorContent } from "../client/src/seo/calculator-content/doelspaarcalculator";
 import { noodfondsCalculatorContent } from "../client/src/seo/calculator-content/noodfonds-calculator";
 import { reeleRenteBerekenenContent } from "../client/src/seo/calculator-content/reele-rente-berekenen";
@@ -945,19 +946,8 @@ export function injectSeoMeta(html: string, url: string): string {
 // instead of waiting for React hydration. Heading+subtitle text block is
 // sized (~62k px²) to beat the post-hydration React hero h1 (~41k px²) so
 // LCP locks at FCP ~1.7s on Lighthouse mobile.
-const SKELETON_SPEC: Record<string, { heading: string; subtitle: string; minHeight: number }> = {
-  'doelspaarcalculator': {
-    heading: 'Doelspaarcalculator — Beheer al uw spaardoelen',
-    subtitle: 'Plan en beheer meerdere spaardoelen tegelijk. Krijg inzicht in benodigde maandelijkse bedragen, prioriteiten en realistische tijdslijnen voor al uw financiële doelen.',
-    minHeight: 1300,
-  },
-  'noodfonds-calculator': {
-    heading: 'Noodfonds Calculator — Bereken uw financiële buffer',
-    subtitle: 'Bereken hoeveel u moet sparen als noodfonds gebaseerd op uw uitgaven, inkomensituatie en persoonlijke omstandigheden.',
-    minHeight: 1500,
-  },
-};
-
+// Spec lives in shared/skeleton-spec.ts so the React calculator <section>
+// can pin a matching min-height (CAL-182).
 function renderCalcSkeleton(slug: string): string {
   const spec = SKELETON_SPEC[slug];
   if (!spec) {
