@@ -568,6 +568,7 @@ function getBlogPostSeoFromUrl(url: string): SeoConfig | null {
     metaTitle: post.seo.title,
     metaDescription: post.seo.description,
     ogImage: post.image,
+    faqs: post.faqs,
   };
 }
 
