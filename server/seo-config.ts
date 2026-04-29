@@ -2,6 +2,10 @@ import { calculatorRegistry, type CalculatorCategory } from "../shared/calculato
 import { doelspaarcalculatorContent } from "../client/src/seo/calculator-content/doelspaarcalculator";
 import { noodfondsCalculatorContent } from "../client/src/seo/calculator-content/noodfonds-calculator";
 import { reeleRenteBerekenenContent } from "../client/src/seo/calculator-content/reele-rente-berekenen";
+import { doorlopendKredietCalculatorContent } from "../client/src/seo/calculator-content/doorlopend-krediet-calculator";
+import { leasingkredietCalculatorContent } from "../client/src/seo/calculator-content/leasingkrediet-calculator";
+import { voorschotCalculatorContent } from "../client/src/seo/calculator-content/voorschot-calculator";
+import { cryptoWinstVerliesCalculatorContent } from "../client/src/seo/calculator-content/crypto-winst-verlies-calculator";
 import type { EducationalSection } from "../client/src/seo/calculator-content/types";
 import { blogPosts } from "../client/src/data/blogPosts";
 
@@ -270,8 +274,11 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "doorlopend-krediet-calculator": {
     slug: "doorlopend-krediet-calculator",
+    pageTitle: "Doorlopend Krediet Calculator",
     metaTitle: "Doorlopend Krediet Calculator België - Revolving Credit",
-    metaDescription: "Bereken kosten van doorlopend krediet. Rentes van 7-12% op kredietlijnen in België. Vergelijk met persoonlijke leningen."
+    metaDescription: "Bereken kosten van doorlopend krediet. Rentes van 7-12% op kredietlijnen in België. Vergelijk met persoonlijke leningen.",
+    faqs: doorlopendKredietCalculatorContent.faqs,
+    educationalSections: doorlopendKredietCalculatorContent.sections
   },
   "kredietkaart-calculator": {
     slug: "kredietkaart-calculator",
@@ -280,13 +287,19 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "leasingkrediet-calculator": {
     slug: "leasingkrediet-calculator",
+    pageTitle: "Leasingkrediet Calculator",
     metaTitle: "Leasingkrediet Calculator België - Financial vs Operational",
-    metaDescription: "Vergelijk financial en operational leasing in België. Bereken maandlast, restwaarde en totale kosten. Autoleasing calculator voor bedrijven."
+    metaDescription: "Vergelijk financial en operational leasing in België. Bereken maandlast, restwaarde en totale kosten. Autoleasing calculator voor bedrijven.",
+    faqs: leasingkredietCalculatorContent.faqs,
+    educationalSections: leasingkredietCalculatorContent.sections
   },
   "voorschot-calculator": {
     slug: "voorschot-calculator",
+    pageTitle: "Voorschot Calculator",
     metaTitle: "Voorschot Calculator België - Cash Advance & Bridge Loans",
-    metaDescription: "Bereken voorschot kosten en overbruggingskrediet. Korte termijn financiering in België. Cash advance rentes en voorwaarden vergelijken."
+    metaDescription: "Bereken voorschot kosten en overbruggingskrediet. Korte termijn financiering in België. Cash advance rentes en voorwaarden vergelijken.",
+    faqs: voorschotCalculatorContent.faqs,
+    educationalSections: voorschotCalculatorContent.sections
   },
   "studieschuld-calculator": {
     slug: "studieschuld-calculator",
@@ -349,7 +362,8 @@ export const seoConfigs: Record<string, SeoConfig> = {
     pageTitle: "Crypto Winst/Verlies Calculator",
     metaTitle: `Crypto Winst/Verlies Calculator België - ROI Berekenen ${getCurrentYear()}`,
     metaDescription: "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator.",
-    faqs: defaultFaqs.beleggen
+    faqs: cryptoWinstVerliesCalculatorContent.faqs,
+    educationalSections: cryptoWinstVerliesCalculatorContent.sections
   },
   "dollar-cost-averaging-calculator": {
     slug: "dollar-cost-averaging-calculator",

@@ -15,6 +15,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalDeepDive from "@/seo/EducationalDeepDive";
+import { voorschotCalculatorContent } from "@/seo/calculator-content/voorschot-calculator";
 
 import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 
@@ -517,6 +519,19 @@ export default function VoorschotCalculatorPage() {
             </Card>
           </div>
         </div>
+      </section>
+
+      {/* Educational Deep-Dive (CAL-139) */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <EducationalDeepDive
+          title="Voorschot & overbruggingskrediet in detail — formule, fiscaliteit en FAQ"
+          content={voorschotCalculatorContent}
+          related={[
+            { href: "/lenen/persoonlijke-lening-berekenen", label: "Persoonlijke Lening Calculator" },
+            { href: "/lenen/doorlopend-krediet-calculator", label: "Doorlopend Krediet Calculator" },
+            { href: "/lenen/leasingkrediet-calculator", label: "Leasingkrediet Calculator" },
+          ]}
+        />
       </section>
 
       {/* Rate Comparison Widget */}
