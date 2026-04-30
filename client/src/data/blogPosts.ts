@@ -664,8 +664,14 @@ Registratierechten vormen in 2026 een aanzienlijk deel van uw vastgoedbudget. He
   }
 ];
 
+const blogSlugAliases: Record<string, string> = {
+  "roerende-voorheffing-dividenden-2026-vrijstelling": "belgische-belastingvoordelen-spaarders-beleggers",
+  "spaarrente-prognose-belgie-2026": "hoogste-spaarrente-verdienen-2026"
+};
+
 export function getBlogPost(slug: string): BlogPost | undefined {
-  return blogPosts.find(post => post.slug === slug);
+  const resolvedSlug = blogSlugAliases[slug] ?? slug;
+  return blogPosts.find(post => post.slug === resolvedSlug);
 }
 
 export function getBlogPostsByCategory(category: string): BlogPost[] {
