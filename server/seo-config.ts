@@ -544,6 +544,11 @@ export function getSlugFromUrl(url: string): string {
   return segments[segments.length - 1];
 }
 
+const blogSlugAliases: Record<string, string> = {
+  "roerende-voorheffing-dividenden-2026-vrijstelling": "belgische-belastingvoordelen-spaarders-beleggers",
+  "spaarrente-prognose-belgie-2026": "hoogste-spaarrente-verdienen-2026"
+};
+
 // Resolves /blog/<slug> nested routes that single-segment getSlugFromUrl misses.
 // Known slug -> SeoConfig from post.seo.*; unknown slug -> noindex,nofollow shell.
 function getBlogPostSeoFromUrl(url: string): SeoConfig | null {
@@ -553,7 +558,8 @@ function getBlogPostSeoFromUrl(url: string): SeoConfig | null {
     return null;
   }
   const postSlug = segments[1];
-  const post = blogPosts.find(p => p.slug === postSlug);
+  const resolvedPostSlug = blogSlugAliases[postSlug] ?? postSlug;
+  const post = blogPosts.find(p => p.slug === resolvedPostSlug);
   if (!post) {
     return {
       slug: 'blog-not-found',
