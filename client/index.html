@@ -111,6 +111,14 @@
       });
       gtag('config', 'G-P5BE4RN7QX');
 
+      // CAL-471 prod-build defer-pad invariant: every third-party <script>
+      // injected here MUST set `async = true` and is appended via DOM only
+      // AFTER `loadDeferred()` runs. There is no `document.write`, no
+      // `<script src=... defer/async>` written into the parser, and no
+      // synchronous `XMLHttpRequest` boot path. Even the no-rIC fallback
+      // schedules via `setTimeout(2000)` — strictly post-LCP, never on the
+      // critical path. The 4 s `load`+timeout hard fallback below is the
+      // last-resort safety net for hidden tabs / no-LCP-element pages.
       (function deferThirdParty() {
         var loaded = false;
         function injectScript(src, crossOrigin) {
@@ -131,7 +139,11 @@
           if ('requestIdleCallback' in window) {
             window.requestIdleCallback(loadDeferred, { timeout: 2000 });
           } else {
-            setTimeout(loadDeferred, 500);
+            // Older Safari (<17) lacks rIC. Fire 2 s post-LCP — same upper
+            // bound as the rIC `timeout: 2000` so consent-dialog mount stays
+            // within the AC <2 s after LCP without stealing TBT from the
+            // hydration burst that follows LCP.
+            setTimeout(loadDeferred, 2000);
           }
         }
         var lcpFired = false;
