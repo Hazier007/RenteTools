@@ -2,12 +2,7 @@ import { calculatorRegistry, type CalculatorCategory } from "../shared/calculato
 import { doelspaarcalculatorContent } from "../client/src/seo/calculator-content/doelspaarcalculator";
 import { noodfondsCalculatorContent } from "../client/src/seo/calculator-content/noodfonds-calculator";
 import { reeleRenteBerekenenContent } from "../client/src/seo/calculator-content/reele-rente-berekenen";
-import { doorlopendKredietCalculatorContent } from "../client/src/seo/calculator-content/doorlopend-krediet-calculator";
-import { leasingkredietCalculatorContent } from "../client/src/seo/calculator-content/leasingkrediet-calculator";
-import { voorschotCalculatorContent } from "../client/src/seo/calculator-content/voorschot-calculator";
-import { cryptoWinstVerliesCalculatorContent } from "../client/src/seo/calculator-content/crypto-winst-verlies-calculator";
 import type { EducationalSection } from "../client/src/seo/calculator-content/types";
-import { blogPosts } from "../client/src/data/blogPosts";
 
 export interface FaqItem {
   question: string;
@@ -21,8 +16,6 @@ export interface SeoConfig {
   pageTitle?: string;
   faqs?: FaqItem[];
   educationalSections?: EducationalSection[];
-  robots?: string;
-  ogImage?: string;
 }
 
 export type SiloCategory = "Home" | "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
@@ -274,11 +267,8 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "doorlopend-krediet-calculator": {
     slug: "doorlopend-krediet-calculator",
-    pageTitle: "Doorlopend Krediet Calculator",
     metaTitle: "Doorlopend Krediet Calculator België - Revolving Credit",
-    metaDescription: "Bereken kosten van doorlopend krediet. Rentes van 7-12% op kredietlijnen in België. Vergelijk met persoonlijke leningen.",
-    faqs: doorlopendKredietCalculatorContent.faqs,
-    educationalSections: doorlopendKredietCalculatorContent.sections
+    metaDescription: "Bereken kosten van doorlopend krediet. Rentes van 7-12% op kredietlijnen in België. Vergelijk met persoonlijke leningen."
   },
   "kredietkaart-calculator": {
     slug: "kredietkaart-calculator",
@@ -287,19 +277,13 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "leasingkrediet-calculator": {
     slug: "leasingkrediet-calculator",
-    pageTitle: "Leasingkrediet Calculator",
     metaTitle: "Leasingkrediet Calculator België - Financial vs Operational",
-    metaDescription: "Vergelijk financial en operational leasing in België. Bereken maandlast, restwaarde en totale kosten. Autoleasing calculator voor bedrijven.",
-    faqs: leasingkredietCalculatorContent.faqs,
-    educationalSections: leasingkredietCalculatorContent.sections
+    metaDescription: "Vergelijk financial en operational leasing in België. Bereken maandlast, restwaarde en totale kosten. Autoleasing calculator voor bedrijven."
   },
   "voorschot-calculator": {
     slug: "voorschot-calculator",
-    pageTitle: "Voorschot Calculator",
     metaTitle: "Voorschot Calculator België - Cash Advance & Bridge Loans",
-    metaDescription: "Bereken voorschot kosten en overbruggingskrediet. Korte termijn financiering in België. Cash advance rentes en voorwaarden vergelijken.",
-    faqs: voorschotCalculatorContent.faqs,
-    educationalSections: voorschotCalculatorContent.sections
+    metaDescription: "Bereken voorschot kosten en overbruggingskrediet. Korte termijn financiering in België. Cash advance rentes en voorwaarden vergelijken."
   },
   "studieschuld-calculator": {
     slug: "studieschuld-calculator",
@@ -362,8 +346,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
     pageTitle: "Crypto Winst/Verlies Calculator",
     metaTitle: `Crypto Winst/Verlies Calculator België - ROI Berekenen ${getCurrentYear()}`,
     metaDescription: "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator.",
-    faqs: cryptoWinstVerliesCalculatorContent.faqs,
-    educationalSections: cryptoWinstVerliesCalculatorContent.sections
+    faqs: defaultFaqs.beleggen
   },
   "dollar-cost-averaging-calculator": {
     slug: "dollar-cost-averaging-calculator",
@@ -474,7 +457,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "privacy": {
     slug: "privacy",
     metaTitle: "Privacy & Cookie Policy - Interesten.be",
-    metaDescription: "Privacy- en cookiebeleid van Interesten.be: welke data we verzamelen, hoe Consent Mode v2 werkt en welke rechten u heeft onder de AVG/GDPR in België."
+    metaDescription: "Privacy policy en cookie informatie van Interesten.be. Lees hoe wij omgaan met uw gegevens."
   },
   "privacybeleid": {
     slug: "privacybeleid",
@@ -484,37 +467,37 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "voorwaarden": {
     slug: "voorwaarden",
     metaTitle: "Algemene Voorwaarden - Interesten.be",
-    metaDescription: "Algemene voorwaarden en disclaimer van Interesten.be: hoe u onze gratis Belgische calculators mag gebruiken, aansprakelijkheid en bron-attributie van rentegegevens."
+    metaDescription: "Algemene voorwaarden en disclaimer voor het gebruik van Interesten.be calculators en informatie."
   },
   "sitemap": {
     slug: "sitemap",
     metaTitle: "Sitemap - Alle Calculators Interesten.be",
-    metaDescription: "Sitemap met alle 60+ financiële calculators op Interesten.be: spaartools, kredietsimulators, beleggingscalculators en planningstools voor België in één overzicht."
+    metaDescription: "Volledig overzicht van alle financiële calculators en pagina's op Interesten.be voor België."
   },
   "sparen": {
     slug: "sparen",
     metaTitle: "Spaarrekening Calculators België - 11+ Gratis Tools",
-    metaDescription: `Vergelijk spaarrentes (basis + getrouwheidspremie tot 2,85%), deposito's, kasbons en kinderrekeningen in België. 11+ gratis spaarcalculators ${getCurrentYear()}.`
+    metaDescription: "Vergelijk de beste spaarrekeningen, deposito's en termijnrekeningen in België. Bereken uw rendement met onze gratis tools."
   },
   "lenen": {
     slug: "lenen",
     metaTitle: "Lening Calculators België - Hypotheek & Krediet",
-    metaDescription: `Bereken hypotheek, autolening of persoonlijke lening in België. 16+ kredietsimulators met actuele rentes, TAEG en aflossingsplan – gratis ${getCurrentYear()}.`
+    metaDescription: "Bereken uw hypotheek, autolening of persoonlijke lening. Vergelijk rentes en vind de beste kredietvoorwaarden."
   },
   "beleggen": {
     slug: "beleggen",
     metaTitle: "Beleggings Calculators België - Aandelen, ETF, Crypto",
-    metaDescription: `Bereken rendement op aandelen, ETF's, obligaties, crypto en REITs. 13+ gratis beleggingstools met Belgische fiscaliteit (RV, TOB) – ${getCurrentYear()}.`
+    metaDescription: "Bereken rendement op aandelen, ETF's, obligaties en crypto. Optimaliseer uw beleggingsportefeuille."
   },
   "planning": {
     slug: "planning",
     metaTitle: "Financiële Planning Tools - Pensioen & FIRE",
-    metaDescription: `Plan uw pensioen, FIRE-doel, noodfonds en budget met 12+ gratis tools voor België. Belastingplanning en inflatiebescherming voor ${getCurrentYear()}.`
+    metaDescription: "Plan uw pensioen, budget en financiële toekomst. FIRE calculator, noodfonds en belastingplanning."
   },
   "overige": {
     slug: "overige",
     metaTitle: "Informatie - Interesten.be",
-    metaDescription: "Over Interesten.be, privacybeleid, algemene voorwaarden en sitemap. Meer info over hoe wij Belgen helpen met gratis financiële calculators en transparante data."
+    metaDescription: "Meer informatie over Interesten.be, privacy beleid en gebruiksvoorwaarden."
   },
   "blog": {
     slug: "blog",
@@ -524,65 +507,139 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "nieuws": {
     slug: "nieuws",
     metaTitle: "Financieel Nieuws België | Interesten.be",
-    metaDescription: `Belgisch financieel nieuws ${getCurrentDateLabel()}: spaarrentes, hypotheekrentes, ECB-beslissingen, beleggingsupdates en fiscaal nieuws – kort, neutraal en bronvermeld.`
+    metaDescription: "Het laatste financieel nieuws voor België. Updates over spaarrentes, hypotheekrentes en beleggingen."
   }
 };
 
 export function getSlugFromUrl(url: string): string {
   const cleanUrl = url.split('?')[0].split('#')[0];
-  
+
   if (cleanUrl === '/' || cleanUrl === '') {
     return 'home';
   }
-  
+
   const segments = cleanUrl.split('/').filter(Boolean);
-  
+
   if (segments.length === 0) {
     return 'home';
   }
-  
+
   return segments[segments.length - 1];
 }
 
-const blogSlugAliases: Record<string, string> = {
-  "roerende-voorheffing-dividenden-2026-vrijstelling": "belgische-belastingvoordelen-spaarders-beleggers",
-  "spaarrente-prognose-belgie-2026": "hoogste-spaarrente-verdienen-2026"
-};
+// Paths the SSR meta layer treats as canonical SEO surfaces. Mirrors
+// prerender-routes.json (kept in sync manually — both files must list the
+// same set so SSG output and runtime output agree). A URL outside this set
+// gets a path-derived fallback title to keep duplicate-title clusters from
+// forming on phantom or last-segment-collision URLs (CAL-158).
+const KNOWN_SEO_PATHS = new Set<string>([
+  '/',
+  '/blog',
+  '/nieuws',
+  '/sparen',
+  '/lenen',
+  '/beleggen',
+  '/planning',
+  '/over-ons',
+  '/privacybeleid',
+  '/voorwaarden',
+  '/contact',
+  '/sparen/hoogste-spaarrente-belgie',
+  '/sparen/deposito-calculator',
+  '/sparen/samengestelde-interest-berekenen',
+  '/sparen/doelspaarcalculator',
+  '/sparen/spaarrekening-vergelijker',
+  '/sparen/kinderrekening-calculator',
+  '/sparen/kasbon-calculator',
+  '/sparen/termijnrekening-calculator',
+  '/sparen/groepssparen-calculator',
+  '/sparen/loyalty-bonus-calculator',
+  '/sparen/vakantiegeld-sparen-calculator',
+  '/lenen/hypothecaire-lening-berekenen',
+  '/lenen/woningkrediet-simulator',
+  '/lenen/persoonlijke-lening-berekenen',
+  '/lenen/autolening-berekenen',
+  '/lenen/lening-herfinancieren',
+  '/lenen/schuldenconsolidatie-calculator',
+  '/lenen/kredietcapaciteit-calculator',
+  '/lenen/kredietvergelijker-belgie',
+  '/lenen/doorlopend-krediet-calculator',
+  '/lenen/kredietkaart-calculator',
+  '/lenen/leasingkrediet-calculator',
+  '/lenen/voorschot-calculator',
+  '/lenen/studieschuld-calculator',
+  '/lenen/groepslening-calculator',
+  '/lenen/wettelijke-rentevoet-belgie',
+  '/beleggen/beleggingsrente-calculator',
+  '/beleggen/aandelen-calculator',
+  '/beleggen/etf-calculator',
+  '/beleggen/obligatie-calculator',
+  '/beleggen/cryptocurrency-calculator',
+  '/beleggen/crypto-belasting-calculator',
+  '/beleggen/staking-apy-calculator',
+  '/beleggen/crypto-winst-verlies-calculator',
+  '/beleggen/dollar-cost-averaging-calculator',
+  '/beleggen/portfolio-diversificatie-calculator',
+  '/beleggen/reit-calculator',
+  '/beleggen/belgische-beleggingsfiscaliteit-calculator',
+  '/beleggen/roerende-voorheffing-calculator',
+  '/planning/pensioensparen-calculator',
+  '/planning/pensioen-calculator',
+  '/planning/fire-calculator',
+  '/planning/noodfonds-calculator',
+  '/planning/budget-planner',
+  '/planning/belastingplanning-calculator',
+  '/planning/levensverzekeraar-calculator',
+  '/planning/eindejaarsbonus-calculator',
+  '/planning/inflatie-calculator-belgie',
+  '/planning/geldontwaarding-calculator',
+  '/planning/reele-rente-berekenen',
+  '/planning/rentevoet-vergelijker',
+]);
 
-// Resolves /blog/<slug> nested routes that single-segment getSlugFromUrl misses.
-// Known slug -> SeoConfig from post.seo.*; unknown slug -> noindex,nofollow shell.
-function getBlogPostSeoFromUrl(url: string): SeoConfig | null {
+function normalizeUrlPath(url: string): string {
   const cleanUrl = url.split('?')[0].split('#')[0];
-  const segments = cleanUrl.split('/').filter(Boolean);
-  if (segments.length !== 2 || segments[0] !== 'blog') {
-    return null;
-  }
-  const postSlug = segments[1];
-  const resolvedPostSlug = blogSlugAliases[postSlug] ?? postSlug;
-  const post = blogPosts.find(p => p.slug === resolvedPostSlug);
-  if (!post) {
-    return {
-      slug: 'blog-not-found',
-      metaTitle: 'Blog niet gevonden | Interesten.be',
-      metaDescription: 'De blogpost die u zoekt bestaat niet of is verplaatst. Bekijk al onze artikelen op de Interesten.be blog.',
-      robots: 'noindex,nofollow',
-    };
-  }
-  return {
-    slug: `blog/${post.slug}`,
-    pageTitle: post.title,
-    metaTitle: post.seo.title,
-    metaDescription: post.seo.description,
-    ogImage: post.image,
-    faqs: post.faqs,
-  };
+  if (cleanUrl === '' || cleanUrl === '/') return '/';
+  // Strip trailing slash so '/sparen/' matches '/sparen'.
+  return cleanUrl.endsWith('/') ? cleanUrl.slice(0, -1) : cleanUrl;
 }
 
 export function getSeoConfigForUrl(url: string): SeoConfig | null {
-  const blogConfig = getBlogPostSeoFromUrl(url);
-  if (blogConfig) return blogConfig;
-  const slug = getSlugFromUrl(url);
+  const path = normalizeUrlPath(url);
+  if (!KNOWN_SEO_PATHS.has(path)) {
+    return null;
+  }
+  const slug = getSlugFromUrl(path);
   return seoConfigs[slug] || null;
+}
+
+// For unknown / phantom paths Bing or other crawlers may still hit, derive
+// a unique title and description from the URL itself so two unrelated
+// unknown URLs never collide on the default static title (root cause of
+// CAL-158's "38 pages with identical titles" cluster).
+export function generateFallbackSeo(url: string): { metaTitle: string; metaDescription: string } {
+  const path = normalizeUrlPath(url);
+  const segments = path.split('/').filter(Boolean);
+  if (segments.length === 0) {
+    return {
+      metaTitle: 'Interesten.be - Belgische Financiele Calculators',
+      metaDescription: 'Gratis Belgische financiele calculators voor sparen, lenen en beleggen.',
+    };
+  }
+  const lastSegment = segments[segments.length - 1];
+  const pretty = lastSegment
+    .split('-')
+    .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
+    .join(' ');
+  const breadcrumb = segments
+    .slice(0, -1)
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(' / ');
+  const titleSuffix = breadcrumb ? `${breadcrumb} | Interesten.be` : 'Interesten.be';
+  return {
+    metaTitle: `${pretty} - ${titleSuffix}`,
+    metaDescription: `Pagina ${pretty} op Interesten.be - Belgische financiele calculators voor sparen, lenen en beleggen.`,
+  };
 }
 
 function slugToPrettyName(slug: string): string {
@@ -604,7 +661,7 @@ function generateBreadcrumbSchema(url: string, seoConfig: SeoConfig): object {
   const cleanUrl = url.split('?')[0].split('#')[0];
   const slug = seoConfig.slug;
   const category = slugToCategory[slug];
-
+  
   const breadcrumbItems: { "@type": string; position: number; name: string; item: string }[] = [
     {
       "@type": "ListItem",
@@ -613,27 +670,7 @@ function generateBreadcrumbSchema(url: string, seoConfig: SeoConfig): object {
       item: "https://interesten.be/"
     }
   ];
-
-  if (slug.startsWith('blog/')) {
-    breadcrumbItems.push({
-      "@type": "ListItem",
-      position: 2,
-      name: "Blog",
-      item: "https://interesten.be/blog"
-    });
-    breadcrumbItems.push({
-      "@type": "ListItem",
-      position: 3,
-      name: seoConfig.pageTitle || seoConfig.metaTitle.split(' | ')[0],
-      item: `https://interesten.be${cleanUrl}`
-    });
-    return {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbItems
-    };
-  }
-
+  
   if (category && category !== 'Home' && slug !== 'home') {
     const isCategoryPage = ['sparen', 'lenen', 'beleggen', 'planning', 'overige'].includes(slug);
     
@@ -770,43 +807,15 @@ function extractHeroAvifUrl(html: string): string | null {
   return match[1].split(',')[0].trim().split(/\s+/)[0];
 }
 
-// Derive a unique meta description from the URL when no explicit seoConfig
-// matches. Without this, every off-map route (admin pages, /blog/<unknown>,
-// stale Bing-indexed paths) inherits the index.html default and shows up in
-// Bing Webmaster Tools as "identical meta descriptions" (CAL-157, 38 pages).
-// The slug is humanized so each route gets a distinct, content-aware string.
-function deriveFallbackSeo(url: string): { metaTitle: string; metaDescription: string } {
-  const cleanUrl = url.split('?')[0].split('#')[0];
-  const segments = cleanUrl.split('/').filter(Boolean);
-  const lastSeg = segments[segments.length - 1] || 'home';
-  const pretty = lastSeg
-    .split('-')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-  const parentSeg = segments.length > 1 ? segments[0] : '';
-  const parentPretty = parentSeg
-    ? parentSeg.charAt(0).toUpperCase() + parentSeg.slice(1)
-    : '';
-  const context = parentPretty ? ` (${parentPretty})` : '';
-  return {
-    metaTitle: `${pretty} - Interesten.be${context ? ' ' + context : ''}`,
-    metaDescription:
-      `${pretty}${context} op Interesten.be: gratis Belgische rekentool met actuele cijfers, ` +
-      `transparante formules en bronvermelding voor sparen, lenen en beleggen ${getCurrentYear()}.`,
-  };
-}
-
 export function injectSeoMeta(html: string, url: string): string {
   const seoConfig = getSeoConfigForUrl(url);
-  const fallback = seoConfig ? null : deriveFallbackSeo(url);
+  const fallback = seoConfig ? null : generateFallbackSeo(url);
+  const metaTitle = seoConfig?.metaTitle ?? fallback!.metaTitle;
+  const metaDescription = seoConfig?.metaDescription ?? fallback!.metaDescription;
 
   let result = html;
-  const escapedTitle = escapeHtmlAttribute(
-    seoConfig ? seoConfig.metaTitle : fallback!.metaTitle,
-  );
-  const escapedDescription = escapeHtmlAttribute(
-    seoConfig ? seoConfig.metaDescription : fallback!.metaDescription,
-  );
+  const escapedTitle = escapeHtmlAttribute(metaTitle);
+  const escapedDescription = escapeHtmlAttribute(metaDescription);
   
   const titleRegex = /<title>[^<]*<\/title>/;
   if (titleRegex.test(result)) {
@@ -841,29 +850,7 @@ export function injectSeoMeta(html: string, url: string): string {
   if (twitterDescRegex.test(result)) {
     result = result.replace(twitterDescRegex, `<meta name="twitter:description" content="${escapedDescription}" />`);
   }
-
-  if (seoConfig.robots) {
-    const escapedRobots = escapeHtmlAttribute(seoConfig.robots);
-    const robotsRegex = /<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i;
-    if (robotsRegex.test(result)) {
-      result = result.replace(robotsRegex, `<meta name="robots" content="${escapedRobots}" />`);
-    } else if (result.includes('</head>')) {
-      result = result.replace('</head>', `  <meta name="robots" content="${escapedRobots}" />\n  </head>`);
-    }
-  }
-
-  if (seoConfig.ogImage) {
-    const escapedImage = escapeHtmlAttribute(seoConfig.ogImage);
-    const ogImageRegex = /<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/i;
-    if (ogImageRegex.test(result)) {
-      result = result.replace(ogImageRegex, `<meta property="og:image" content="${escapedImage}" />`);
-    }
-    const twitterImageRegex = /<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/?>/i;
-    if (twitterImageRegex.test(result)) {
-      result = result.replace(twitterImageRegex, `<meta name="twitter:image" content="${escapedImage}" />`);
-    }
-  }
-
+  
   const cleanPath = url.split('?')[0].split('#')[0];
   const canonicalUrl = cleanPath === '/' || cleanPath === '' 
     ? 'https://interesten.be/' 
@@ -879,18 +866,11 @@ export function injectSeoMeta(html: string, url: string): string {
     );
   }
   
-  // Off-map routes (/admin, /blog/<unknown>, etc.): unique meta is now in
-  // place — skip the structured-data, hero-preload and SSR-content branches
-  // since those only apply to known calculator/silo pages.
-  if (!seoConfig) {
-    return result;
-  }
-
   // Hero LCP preload — only on `/`, where the hero <picture> is SSR'd. The
   // CSS background variant we replaced couldn't carry fetchpriority; pairing a
   // preload hint with the new <img fetchPriority="high"> moves the AVIF off
   // the default-priority queue and into the LCP path (priorityHinted=true).
-  if (seoConfig.slug === 'home') {
+  if (seoConfig?.slug === 'home') {
     const heroAvifUrl = extractHeroAvifUrl(result);
     if (heroAvifUrl && result.includes('</head>')) {
       const escapedHref = escapeHtmlAttribute(heroAvifUrl);
@@ -901,88 +881,54 @@ export function injectSeoMeta(html: string, url: string): string {
     }
   }
 
-  const structuredDataScripts: string[] = [];
+  // Structured data and rich SSR content require a known SEO config; for
+  // unknown/fallback paths we ship the unique title + description only.
+  if (seoConfig) {
+    const structuredDataScripts: string[] = [];
 
-  if (seoConfig.slug === 'home') {
-    const websiteJson = escapeJsonForHtml(JSON.stringify(generateWebSiteSchema(), null, 2));
-    structuredDataScripts.push(`<script type="application/ld+json">\n${websiteJson}\n    </script>`);
-  } else {
-    const breadcrumbJson = escapeJsonForHtml(JSON.stringify(generateBreadcrumbSchema(url, seoConfig), null, 2));
-    structuredDataScripts.push(`<script type="application/ld+json">\n${breadcrumbJson}\n    </script>`);
+    if (seoConfig.slug === 'home') {
+      const websiteJson = escapeJsonForHtml(JSON.stringify(generateWebSiteSchema(), null, 2));
+      structuredDataScripts.push(`<script type="application/ld+json">\n${websiteJson}\n    </script>`);
+    } else {
+      const breadcrumbJson = escapeJsonForHtml(JSON.stringify(generateBreadcrumbSchema(url, seoConfig), null, 2));
+      structuredDataScripts.push(`<script type="application/ld+json">\n${breadcrumbJson}\n    </script>`);
 
-    const calculatorSchema = generateCalculatorSchema(seoConfig, url);
-    if (calculatorSchema) {
-      const calculatorJson = escapeJsonForHtml(JSON.stringify(calculatorSchema, null, 2));
-      structuredDataScripts.push(`<script type="application/ld+json">\n${calculatorJson}\n    </script>`);
+      const calculatorSchema = generateCalculatorSchema(seoConfig, url);
+      if (calculatorSchema) {
+        const calculatorJson = escapeJsonForHtml(JSON.stringify(calculatorSchema, null, 2));
+        structuredDataScripts.push(`<script type="application/ld+json">\n${calculatorJson}\n    </script>`);
+      }
+
+      const faqPageSchema = generateFaqPageSchema(seoConfig);
+      if (faqPageSchema) {
+        const faqJson = escapeJsonForHtml(JSON.stringify(faqPageSchema, null, 2));
+        structuredDataScripts.push(`<script type="application/ld+json">\n${faqJson}\n    </script>`);
+      }
     }
 
-    const faqPageSchema = generateFaqPageSchema(seoConfig);
-    if (faqPageSchema) {
-      const faqJson = escapeJsonForHtml(JSON.stringify(faqPageSchema, null, 2));
-      structuredDataScripts.push(`<script type="application/ld+json">\n${faqJson}\n    </script>`);
+    if (structuredDataScripts.length > 0) {
+      const existingLdJsonRegex = /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/;
+      if (existingLdJsonRegex.test(result)) {
+        result = result.replace(existingLdJsonRegex, structuredDataScripts.join('\n    '));
+      } else if (result.includes('</head>')) {
+        result = result.replace(
+          '</head>',
+          `${structuredDataScripts.join('\n    ')}\n  </head>`
+        );
+      }
     }
-  }
 
-  if (structuredDataScripts.length > 0) {
-    const existingLdJsonRegex = /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/;
-    if (existingLdJsonRegex.test(result)) {
-      result = result.replace(existingLdJsonRegex, structuredDataScripts.join('\n    '));
-    } else if (result.includes('</head>')) {
+    // Inject static content into <div id="root"> for SEO crawlers
+    const ssrContent = generateSSRContent(seoConfig, url);
+    if (ssrContent) {
       result = result.replace(
-        '</head>',
-        `${structuredDataScripts.join('\n    ')}\n  </head>`
+        '<div id="root"></div>',
+        `<div id="root">${ssrContent}</div>`
       );
     }
   }
 
-  // Inject static content into <div id="root"> for SEO crawlers
-  const ssrContent = generateSSRContent(seoConfig, url);
-  if (ssrContent) {
-    result = result.replace(
-      '<div id="root"></div>',
-      `<div id="root">${ssrContent}</div>`
-    );
-  }
-
   return result;
-}
-
-// CAL-152: SSR skeleton card so the LCP candidate paints inline with FCP
-// instead of waiting for React hydration. Heading+subtitle text block is
-// sized (~62k px²) to beat the post-hydration React hero h1 (~41k px²) so
-// LCP locks at FCP ~1.7s on Lighthouse mobile.
-const SKELETON_SPEC: Record<string, { heading: string; subtitle: string; minHeight: number }> = {
-  'doelspaarcalculator': {
-    heading: 'Doelspaarcalculator — Beheer al uw spaardoelen',
-    subtitle: 'Plan en beheer meerdere spaardoelen tegelijk. Krijg inzicht in benodigde maandelijkse bedragen, prioriteiten en realistische tijdslijnen voor al uw financiële doelen.',
-    minHeight: 1300,
-  },
-  'noodfonds-calculator': {
-    heading: 'Noodfonds Calculator — Bereken uw financiële buffer',
-    subtitle: 'Bereken hoeveel u moet sparen als noodfonds gebaseerd op uw uitgaven, inkomensituatie en persoonlijke omstandigheden.',
-    minHeight: 1500,
-  },
-};
-
-function renderCalcSkeleton(slug: string): string {
-  const spec = SKELETON_SPEC[slug];
-  if (!spec) {
-    return '<p style="color:#666;">Loading calculator...</p>';
-  }
-  return `
-    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:0.5rem;padding:1.5rem;min-height:${spec.minHeight}px;box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-      <h2 style="font-size:1.75rem;font-weight:600;line-height:1.3;color:#1a1a1a;margin:0 0 0.75rem;">${escapeHtmlAttribute(spec.heading)}</h2>
-      <p style="font-size:1.125rem;line-height:1.6;color:#4a4a4a;margin:0 0 1.5rem;">${escapeHtmlAttribute(spec.subtitle)}</p>
-      <div style="display:flex;flex-direction:column;gap:1rem;">
-        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;"></div>
-        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;width:80%;"></div>
-        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;"></div>
-        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;width:60%;"></div>
-        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;"></div>
-        <div style="height:2.5rem;background:#f3f4f6;border-radius:0.375rem;width:75%;"></div>
-        <div style="height:3rem;background:#dbeafe;border-radius:0.375rem;width:50%;margin-top:0.5rem;"></div>
-      </div>
-    </div>`;
 }
 
 function generateSSRContent(seoConfig: SeoConfig, url: string): string {
@@ -992,20 +938,14 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
   
   // Generate breadcrumb HTML
   const cleanPath = url.split('?')[0].split('#')[0];
-  const isBlogPost = slug.startsWith('blog/');
   let breadcrumbHtml = '<nav aria-label="breadcrumb" style="margin-bottom:1rem;font-size:0.875rem;color:#666;">';
   breadcrumbHtml += '<a href="/" style="color:#2563eb;text-decoration:none;">Home</a>';
-
-  if (isBlogPost) {
-    breadcrumbHtml += ' &gt; <a href="/blog" style="color:#2563eb;text-decoration:none;">Blog</a>';
-    breadcrumbHtml += ` &gt; <span>${escapeHtmlAttribute(seoConfig.pageTitle || seoConfig.metaTitle.split(' | ')[0])}</span>`;
-  } else {
-    if (category && category !== 'Home' && category !== 'Overige' && slug !== category.toLowerCase()) {
-      breadcrumbHtml += ` &gt; <a href="/${category.toLowerCase()}" style="color:#2563eb;text-decoration:none;">${categoryName}</a>`;
-    }
-    if (slug !== 'home') {
-      breadcrumbHtml += ` &gt; <span>${seoConfig.metaTitle.split(' - ')[0].split(' | ')[0]}</span>`;
-    }
+  
+  if (category && category !== 'Home' && category !== 'Overige' && slug !== category.toLowerCase()) {
+    breadcrumbHtml += ` &gt; <a href="/${category.toLowerCase()}" style="color:#2563eb;text-decoration:none;">${categoryName}</a>`;
+  }
+  if (slug !== 'home') {
+    breadcrumbHtml += ` &gt; <span>${seoConfig.metaTitle.split(' - ')[0].split(' | ')[0]}</span>`;
   }
   breadcrumbHtml += '</nav>';
   
@@ -1021,7 +961,7 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
         <p style="font-size:1.125rem;color:#4a4a4a;line-height:1.6;">${escapeHtmlAttribute(seoConfig.metaDescription)}</p>
       </header>
       <main>
-        ${renderCalcSkeleton(slug)}
+        <p style="color:#666;">Loading calculator...</p>
       </main>`;
 
   // Home + category pages: render a crawlable nav with links to each sub-calculator
