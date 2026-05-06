@@ -11,3 +11,4 @@ api/
 .radar-ssr-check
 .radar-cal35
 prerender-routes-cal5.json
+.env*.local

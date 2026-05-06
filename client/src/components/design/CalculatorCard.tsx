@@ -4,8 +4,15 @@ import { cn } from '@/lib/utils';
 import { Calculator } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
-import { getNewRoutePath } from '@/lib/routeRegistry';
 import { useLocation } from 'wouter';
+
+function calculatorRouteFor(slug: string, category: string): string {
+  const normalized = category.toLowerCase();
+  if (normalized === 'overige') {
+    return `/${slug}`;
+  }
+  return `/${normalized}/${slug}`;
+}
 
 interface CalculatorCardProps {
   title: string;
@@ -32,7 +39,7 @@ export function CalculatorCard({
     if (onClick) {
       onClick();
     } else {
-      setLocation(getNewRoutePath(slug));
+      setLocation(calculatorRouteFor(slug, category));
     }
   };
   

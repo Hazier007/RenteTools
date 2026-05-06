@@ -72,6 +72,13 @@ console.log('   Copied static assets');
 console.log('\n[4/5] Prerendering routes via SSG render-to-string...');
 execSync('node scripts/ssg-render.mjs', { stdio: 'inherit', cwd: ROOT });
 
+// Step 5b: Bake /lenen calculator list + intro into the prerendered shell so
+// crawlers (Bing) see ≥12 internal links + a category intro instead of a
+// JS-only render. Lazy route boundary means renderToString can't do this
+// inline. CAL-137.
+console.log('\n[4b/5] Baking /lenen calculator list into prerendered HTML...');
+execSync('node scripts/lenen-bake.mjs', { stdio: 'inherit', cwd: ROOT });
+
 // Step 6: Create config.json (routing)
 // Filesystem handler picks up the prerendered /<route>/index.html files;
 // anything not prerendered (e.g. /api/*, blog posts, admin) falls through

@@ -1,15 +1,14 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Trophy, Home as HomeIcon, Flame, TrendingUp, Shield, MapPin, Heart, ArrowRight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { useSeoTags } from "@/hooks/use-seo-tags";
-import { getNewRoutePath } from "@/lib/routeRegistry";
-import { 
-  AnimatedMeshBackground, 
-  GlassCard, 
-  GradientText, 
+import {
+  AnimatedMeshBackground,
+  GlassCard,
+  GradientText,
   FloatingNumber
 } from "@/components/design";
 import { staggerChildren, fadeInUp } from "@/lib/animations";
@@ -32,8 +31,22 @@ const HERO_AVIF_SRCSET = `${heroBackground360Avif} 360w, ${heroBackground414Avif
 const HERO_WEBP_SRCSET = `${heroBackground360Webp} 360w, ${heroBackground414Webp} 414w, ${heroBackground480Webp} 480w, ${heroBackgroundWebp} 1408w`;
 const HERO_SIZES = "(max-width: 480px) 100vw, 1408px";
 
+const HOME_TITLE = `Hoogste Spaarrente België ${new Date().getFullYear()} + 70+ Gratis Calculators`;
+const HOME_DESCRIPTION = `Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België ${new Date().getFullYear()}.`;
+
 export default function Home() {
-  useSeoTags("home");
+  useEffect(() => {
+    document.title = HOME_TITLE;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute("content", HOME_DESCRIPTION);
+    } else {
+      const el = document.createElement("meta");
+      el.name = "description";
+      el.content = HOME_DESCRIPTION;
+      document.head.appendChild(el);
+    }
+  }, []);
 
   const featuredCalculators = [
     {
@@ -203,7 +216,7 @@ export default function Home() {
               const IconComponent = calc.icon;
               return (
                 <motion.div key={calc.slug} variants={fadeInUp}>
-                  <Link href={getNewRoutePath(calc.slug)} data-testid={`link-featured-${calc.slug}`}>
+                  <Link href={`/${calc.category}/${calc.slug}`} data-testid={`link-featured-${calc.slug}`}>
                     <GlassCard hover tilt className="p-6 md:p-8 h-full cursor-pointer group" data-testid={`card-featured-${calc.slug}`}>
                       <div className="flex items-start gap-4">
                         <div className="p-3 rounded-xl bg-primary/10 text-primary shrink-0">

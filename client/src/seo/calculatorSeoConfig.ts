@@ -204,7 +204,24 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Doelspaar Calculator",
     metaTitle: "Doelspaarcalculator België - Meerdere Spaardoelen Beheren",
     metaDescription: "Plan al uw spaardoelen tegelijk. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer. Smart goal planning.",
-    faqs: defaultFaqsBySilo.Sparen,
+    faqs: [
+      {
+        question: "Hoeveel doelen kan ik tegelijk plannen?",
+        answer: "Er is geen technisch maximum, maar in de praktijk werken de meeste Belgische gezinnen het best met 3-5 actieve spaardoelen. Te veel doelen versnippert uw maandbudget en maakt elk doel traag haalbaar."
+      },
+      {
+        question: "Met welke spaarrente moet ik rekenen?",
+        answer: `Voor gereglementeerde Belgische spaarrekeningen ligt de gemiddelde rente in ${getCurrentYear()} tussen 1,5% en 3,5%. Voor termijnrekeningen op 1-3 jaar tot 3,75%. Reken voor doelen onder de 2 jaar best zonder rendement, want de getrouwheidspremie krijgt u dan niet volledig.`
+      },
+      {
+        question: "Wat als mijn maandbudget niet alle doelen dekt?",
+        answer: "De calculator markeert dit en stelt drie oplossingen voor: (1) deadlines verlengen, (2) niet-essentiële doelen pauzeren, of (3) prioriteit geven aan doelen met de hoogste urgentie (bv. noodfonds eerst)."
+      },
+      {
+        question: "Tellen werkgeversbonus en vakantiegeld mee?",
+        answer: "Ja, in de \"extra storting\"-velden. Eindejaarspremie en vakantiegeld zijn ideale boosters voor langetermijndoelen die anders te zwaar wegen op uw maandbudget."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
   "spaarrekening-vergelijker": {
@@ -364,7 +381,28 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Doorlopend Krediet",
     metaTitle: "Doorlopend Krediet Calculator België - Revolving Credit",
     metaDescription: "Bereken kosten van doorlopend krediet. Rentes van 7-12% op kredietlijnen in België. Vergelijk met persoonlijke leningen.",
-    faqs: defaultFaqsBySilo.Lenen,
+    faqs: [
+      {
+        question: "Wat is het verschil met een persoonlijke lening?",
+        answer: "Een persoonlijke lening heeft een vast bedrag, vaste maandlast en vaste einddatum. Een doorlopend krediet is een herbruikbare kredietlijn met variabele rente: u kunt herhaaldelijk opnemen tot de limiet, en de rente kan tijdens de looptijd wijzigen."
+      },
+      {
+        question: "Is een doorlopend krediet duurder dan een persoonlijke lening?",
+        answer: "Meestal wel. Persoonlijke leningen in België zitten in 2026 typisch tussen 4% en 8% JKP; doorlopende kredieten tussen 7% en 12% JKP. Voor een gepland eenmalig project is een persoonlijke lening doorgaans goedkoper."
+      },
+      {
+        question: "Wat gebeurt er als ik enkel het minimum aflos?",
+        answer: "Bij minimale aflossing dekt u soms amper de maandelijkse rente. Het saldo daalt traag of niet, en de totale rentekost loopt sterk op. Reken altijd door wat u écht betaalt over de volledige looptijd."
+      },
+      {
+        question: "Komt mijn kredietlijn op de zwarte lijst van de Nationale Bank?",
+        answer: "Elke kredietopening wordt geregistreerd bij de CKP — dat is geen \"zwarte lijst\", maar een neutrale registratie. Een betalingsachterstand van meer dan drie maanden komt wél op de negatieve lijst en blijft daar tot 1 jaar na regularisatie zichtbaar."
+      },
+      {
+        question: "Mag ik vervroegd terugbetalen zonder boete?",
+        answer: "Voor consumentenkredieten onder €75.000 is een vergoeding van maximaal 0,5% (of 1% bij looptijd >1 jaar) van het vervroegd terugbetaalde bedrag toegelaten. Voor revolving credits is vervroegde terugbetaling vaak boetevrij — controleer uw contract."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "kredietkaart-calculator": {
@@ -384,7 +422,28 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Leasingkrediet",
     metaTitle: "Leasingkrediet Calculator België - Financial vs Operational",
     metaDescription: "Vergelijk financial en operational leasing in België. Bereken maandlast, restwaarde en totale kosten. Autoleasing calculator voor bedrijven.",
-    faqs: defaultFaqsBySilo.Lenen,
+    faqs: [
+      {
+        question: "Wat is het verschil tussen financial en operational leasing?",
+        answer: "Bij financial leasing huurt u met de bedoeling om eigenaar te worden — er is een aankoopoptie aan het einde (vaak 1-15% van de oorspronkelijke prijs). Bij operational leasing huurt u zonder eigendomsambitie; de wagen of het materieel keert terug naar de leasingmaatschappij."
+      },
+      {
+        question: "Wat is een leasingfactor?",
+        answer: "De leasingfactor is een Belgische sectorstandaard: het maandelijks leasingbedrag uitgedrukt als percentage van de cataloguswaarde. Een factor van 1,75% op een wagen van €40.000 = €700/maand. Vergelijk leasingaanbiedingen vooral op leasingfactor en op de JKP-equivalent, niet op het brute maandbedrag alleen."
+      },
+      {
+        question: "Is leasen voordeliger dan kopen?",
+        answer: "Voor zelfstandigen en BTW-plichtige ondernemingen vaak wel, dankzij BTW-aftrek en gespreide kosten. Voor particulieren: zelden — een klassieke autolening of contante aankoop is doorgaans goedkoper over de volledige eigendomsperiode."
+      },
+      {
+        question: "Wat als ik vroegtijdig de leasing wil stopzetten?",
+        answer: "Vroegtijdige stopzetting kost een vergoeding op basis van resterende looptijd en restwaarde. Bij operational leasing is dat doorgaans 50-80% van de resterende huurfactuur. Lees uw contract goed vóór te tekenen."
+      },
+      {
+        question: "Tellen onderhoudskosten mee in operational lease?",
+        answer: "Vaak wel — het is precies het kenmerk van full operational lease (FOL): all-in maandlast inclusief onderhoud, banden, verzekering en pechbijstand. Vraag de exacte servicelijst op vóór te ondertekenen."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "voorschot-calculator": {
@@ -394,7 +453,28 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Voorschot Berekenen",
     metaTitle: "Voorschot Calculator België - Cash Advance & Bridge Loans",
     metaDescription: "Bereken voorschot kosten en overbruggingskrediet. Korte termijn financiering in België. Cash advance rentes en voorwaarden vergelijken.",
-    faqs: defaultFaqsBySilo.Lenen,
+    faqs: [
+      {
+        question: "Wat is het verschil tussen een voorschot en een overbruggingskrediet?",
+        answer: "Een voorschot is meestal kortlopend (3-12 maanden) en overbrugt een tijdelijke kasvraag. Een overbruggingskrediet is een specifiek type voorschot dat de periode tussen verkoop en aankoop van vastgoed overbrugt — typisch 6-24 maanden, met de oude woning als onderpand."
+      },
+      {
+        question: "Hoe lang mag een overbruggingskrediet duren?",
+        answer: "Belgische banken hanteren doorgaans 12 tot 24 maanden, met soms een verlengingsmogelijkheid van 6 maanden. Loopt het krediet langer dan voorzien, dan stijgt de rente meestal en kan een herfinanciering verplicht worden."
+      },
+      {
+        question: "Welke documenten heb ik nodig voor een overbruggingskrediet?",
+        answer: "Verkoopovereenkomst van uw oude woning of een schatting van een erkend vastgoedmakelaar, aankoopovereenkomst van de nieuwe woning, recente loonfiches of inkomensbewijzen, en een notariële volmacht voor het hypotheekdossier."
+      },
+      {
+        question: "Wat als mijn oude woning niet binnen de looptijd verkocht raakt?",
+        answer: "Dan wordt het voorschot bij vervaldag opeisbaar. Bij goede communicatie met de bank zijn een verlenging of een omzetting in een klassieke hypothecaire lening mogelijk — maar tegen vaak hogere rente. Begin het verkoopproces dus liefst vóór de aanvraag van het overbruggingskrediet."
+      },
+      {
+        question: "Is een cash advance op mijn kredietkaart een goed alternatief?",
+        answer: "Zelden. Cash advance JKP's liggen in België typisch tussen 15% en 25% en starten vaak vanaf dag 1 (geen renteloze periode). Een persoonlijke lening op 6-8% JKP is bij gelijke looptijd vrijwel altijd goedkoper."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.nbb]
   },
   "studieschuld-calculator": {
@@ -590,20 +670,24 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     metaDescription: "Bereken uw crypto winst of verlies inclusief transactiekosten. ROI, break-even prijs en cost basis berekening. Gratis Belgische crypto calculator.",
     faqs: [
       {
-        question: "Hoe bereken ik mijn crypto winst of verlies?",
-        answer: "Trek uw totale investering (aankoopprijs + kosten) af van de huidige waarde. Vergeet niet om verkoopkosten mee te nemen voor een accurate netto winst/verlies berekening."
+        question: "Hoe bereken ik mijn cost basis bij meerdere aankopen?",
+        answer: "Met FIFO (first-in-first-out): de oudste aankopen worden als eerste verkocht voor fiscale doeleinden. Houd alle aankoopprijzen en hoeveelheden bij — exchange-CSV's zijn de bron van waarheid."
       },
       {
-        question: "Wat is cost basis bij crypto?",
-        answer: "Cost basis is uw totale investering per coin, inclusief aankoopprijs en alle bijkomende kosten zoals transactiefees. Dit is belangrijk voor belastingaangifte en ROI berekening."
+        question: "Tellen transactiekosten mee voor de Belgische fiscus?",
+        answer: "Ja. Aankoop- en verkoopkosten verlagen uw belastbare meerwaarde in alle drie de regimes. Bewaar dus elke fee-bevestiging."
       },
       {
-        question: "Hoe bereken ik mijn break-even prijs?",
-        answer: "Break-even is de prijs waarvoor u moet verkopen om geen winst of verlies te maken. Dit is uw cost basis plus eventuele verkoopkosten, gedeeld door het aantal coins."
+        question: "Wanneer ben ik \"speculatief\" volgens de FOD Financiën?",
+        answer: "Er is geen vaste numerieke drempel — de DVB kijkt naar het geheel van indicatoren: frequentie, omvang versus inkomen, gebruik van krediet, professionele tools, holding period. Ruwweg geldt: meer dan een handvol transacties per jaar, gecombineerd met korte holding periods of leverage, leunt richting speculatief."
       },
       {
-        question: "Welke kosten moet ik meerekenen bij crypto handel?",
-        answer: "Reken met: exchange trading fees (0,1-0,5%), network fees (gas fees), spread kosten, en eventuele stortings- of opnamekosten. Deze kunnen significant zijn bij kleinere bedragen."
+        question: "Moet ik mijn crypto aangeven in de personenbelasting?",
+        answer: "Het bezit zelf niet (geen vermogensbelasting in België), maar gerealiseerde meerwaarden wel zodra het regime \"speculatief\" of \"beroepsmatig\" is. Buitenlandse exchange-rekeningen moeten sowieso aan het Centraal Aanspreekpunt (CAP) van de Nationale Bank gemeld worden, ongeacht het bedrag."
+      },
+      {
+        question: "Wat met staking, lending en airdrops?",
+        answer: "Inkomsten uit staking en lending worden doorgaans als roerende inkomsten beschouwd (30% roerende voorheffing). Airdrops zonder tegenprestatie kunnen onder diverse inkomsten vallen. Voor DeFi-constructies is een DVB-ruling aangeraden."
       }
     ],
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
@@ -645,7 +729,28 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Noodfonds",
     metaTitle: "Noodfonds Calculator België - Emergency Fund Berekenen",
     metaDescription: "Bereken uw ideale noodfonds. 3-6 maanden vaste kosten opzij zetten. Financiële zekerheid en bescherming tegen onverwachte uitgaven.",
-    faqs: defaultFaqsBySilo.Planning,
+    faqs: [
+      {
+        question: "Hoe groot moet mijn noodfonds minimaal zijn?",
+        answer: "Voor de meeste Belgische gezinnen: minimaal 3 maanden vaste uitgaven (huur of hypotheek, voeding, energie, verzekeringen, transport). Singles, freelancers of mensen met lage werkzekerheid: 6 maanden of meer."
+      },
+      {
+        question: "Op welke rekening zet ik mijn noodfonds?",
+        answer: "Op een gereglementeerde Belgische spaarrekening. Direct beschikbaar, gedeeltelijk belastingvrij, en gedekt door het depositogarantiestelsel tot €100.000 per bank. Vermijd termijnrekeningen of beleggingen voor dit specifieke doel."
+      },
+      {
+        question: "Wat als ik nog geen noodfonds heb?",
+        answer: "Begin klein: mik eerst op €1.000-€2.000 als startbuffer voor onmiddellijke noodgevallen. Bouw daarna geleidelijk op tot het volledige aanbevolen bedrag, met een vast maandelijks spaarbedrag."
+      },
+      {
+        question: "Tellen schulden mee in de berekening?",
+        answer: "Ja — vaste afbetalingen (hypotheek, autolening, persoonlijke lening) horen bij uw maandelijkse vaste uitgaven, want die moeten ook tijdens werkverlies doorbetaald worden."
+      },
+      {
+        question: "Mag ik mijn noodfonds gebruiken voor geplande grote uitgaven?",
+        answer: "Nee. Voor geplande uitgaven (vakantie, nieuwe wagen) gebruikt u de Doelspaarcalculator. Het noodfonds blijft uitsluitend gereserveerd voor onverwachte gebeurtenissen."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "budget-planner": {
@@ -715,7 +820,28 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Reële Rente",
     metaTitle: "Reële Rente Berekenen - Nominale Rente Min Inflatie",
     metaDescription: "Bereken reële rente (nominaal minus inflatie). Ontdek of uw spaarrente inflatie verslaat. Realistisch rendement berekenen voor België.",
-    faqs: defaultFaqsBySilo.Planning,
+    faqs: [
+      {
+        question: "Wat is reële rente precies?",
+        answer: "De reële rente is uw rendement na inflatie — de echte groei van uw koopkracht. Nominale rente is wat de bank u op papier biedt; reële rente is wat u er na inflatie effectief mee koopt."
+      },
+      {
+        question: "Welke inflatie moet ik invullen?",
+        answer: "Voor België: gebruik de geharmoniseerde consumptieprijsindex (HICP) van Statbel. Het Belgische gemiddelde voor 2025 lag rond 2,1%. Voor langetermijnplanning kunt u rekenen met een gemiddelde 2-2,5% — de doelinflatie van de ECB."
+      },
+      {
+        question: "Kan reële rente negatief zijn?",
+        answer: "Ja. Wanneer inflatie hoger is dan uw nominale spaarrente, verliest uw geld koopkracht ondanks groei in euro's. In 2022-2023 was dat het geval voor de meeste Belgische spaarrekeningen — inflatie >9% tegenover spaarrente <1%."
+      },
+      {
+        question: "Hoe versla ik inflatie?",
+        answer: "Drie opties: (1) hogere nominale rente zoeken via vergelijking, (2) langere looptijd vastleggen via een termijnrekening of staatsbon, (3) deels beleggen in aandelen of ETF's voor de lange termijn (>10 jaar) — historisch hoger reëel rendement, maar met volatiliteit."
+      },
+      {
+        question: "Houdt de calculator rekening met belasting?",
+        answer: "De basisversie rekent met brutorendement. Voor netto reële rente trekt u eerst de roerende voorheffing af (15% of 30%) van uw nominale rente, vóór u die invult."
+      }
+    ],
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
   },
   "rentevoet-vergelijker": {

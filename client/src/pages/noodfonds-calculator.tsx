@@ -461,6 +461,56 @@ export default function NoodfondsCalculatorPage() {
               </CardContent>
             </Card>
 
+            {/* Educational Deep-Dive (CAL-138) */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">Noodfonds in detail — formule, fiscaliteit en FAQ</CardTitle>
+              </CardHeader>
+              <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-4">
+                <p>
+                  De Noodfonds Calculator berekent hoe groot uw financiële buffer moet zijn om onverwachte tegenslagen op te vangen — werkverlies, ziekte, een defecte verwarmingsketel of onverwachte herstellingen. De tool houdt rekening met uw vaste maandelijkse uitgaven, gezinssituatie, werkzekerheid en inkomensbron (single, dubbel, freelance) en geeft u een persoonlijk aanbevolen spaarbedrag, plus een tijdslijn voor wanneer u dat doel haalt op basis van uw huidige spaartempo. Ideaal voor wie financiële gemoedsrust wil zonder te overdrijven met overbodig grote reserves.
+                </p>
+
+                <h3>Hoe werkt het?</h3>
+                <p>
+                  Het basisprincipe is eenvoudig: <strong>Aanbevolen noodfonds = Vaste maandelijkse uitgaven × Aantal aanbevolen maanden</strong>. De aanbevolen periode (3 tot 12 maanden) wordt aangepast op basis van uw risicoprofiel:
+                </p>
+                <ul>
+                  <li><strong>Basis: 3 maanden</strong> voor tweeverdieners met stabiele tewerkstelling</li>
+                  <li><strong>+2 maanden</strong> voor singles of eenverdieners (geen vangnet via partner)</li>
+                  <li><strong>+3 maanden</strong> voor zelfstandigen of freelancers (variabel inkomen, geen werkloosheidsuitkering)</li>
+                  <li><strong>+1-2 maanden</strong> bij lage werkzekerheid (tijdelijk contract, krimpende sector)</li>
+                  <li><strong>+1 maand</strong> met kinderen ten laste</li>
+                </ul>
+                <p>
+                  De calculator vertaalt dit ook naar <strong>tijd-tot-doel</strong>: (Aanbevolen bedrag − Huidige reserve) ÷ Maandelijks spaarbedrag = Aantal maanden. Voorbeeld: een Belgisch tweeverdienergezin met €2.600 vaste uitgaven en hoge werkzekerheid heeft een buffer van €7.800 nodig (3 maanden). Een freelancer met dezelfde uitgaven mikt op €15.600 (6 maanden) of meer.
+                </p>
+
+                <h3>Belgisch fiscaal kader 2026</h3>
+                <p>
+                  Een noodfonds moet <strong>liquide</strong> zijn — direct beschikbaar zonder boetes. De gereglementeerde Belgische spaarrekening is hiervoor de standaardkeuze: rente is gedeeltelijk vrijgesteld (€1.020 per persoon in 2026) en geld is direct opvraagbaar. Termijnrekeningen, kasbons en Tak 21-verzekeringen zijn ongeschikt: een vroegtijdige opname kost rente of een uitstapboete. Beleggingen (ETF's, aandelen) zijn ook af te raden voor het noodfonds — bij een crash kan u net moeten verkopen wanneer de markt daalt. Voor een buffer boven €100.000 is het verstandig om te spreiden over twee Belgische banken: het Belgisch depositogarantiestelsel dekt <strong>maximaal €100.000 per persoon per bank</strong> bij faillissement.
+                </p>
+
+                <h3>Veelgestelde vragen</h3>
+                <h4>Hoe groot moet mijn noodfonds minimaal zijn?</h4>
+                <p>Voor de meeste Belgische gezinnen: minimaal 3 maanden vaste uitgaven (huur of hypotheek, voeding, energie, verzekeringen, transport). Singles, freelancers of mensen met lage werkzekerheid: 6 maanden of meer.</p>
+                <h4>Op welke rekening zet ik mijn noodfonds?</h4>
+                <p>Op een gereglementeerde Belgische spaarrekening. Direct beschikbaar, gedeeltelijk belastingvrij, en gedekt door het depositogarantiestelsel tot €100.000 per bank. Vermijd termijnrekeningen of beleggingen voor dit specifieke doel.</p>
+                <h4>Wat als ik nog geen noodfonds heb?</h4>
+                <p>Begin klein: mik eerst op €1.000-€2.000 als startbuffer voor onmiddellijke noodgevallen. Bouw daarna geleidelijk op tot het volledige aanbevolen bedrag, met een vast maandelijks spaarbedrag.</p>
+                <h4>Tellen schulden mee in de berekening?</h4>
+                <p>Ja — vaste afbetalingen (hypotheek, autolening, persoonlijke lening) horen bij uw maandelijkse vaste uitgaven, want die moeten ook tijdens werkverlies doorbetaald worden.</p>
+                <h4>Mag ik mijn noodfonds gebruiken voor geplande grote uitgaven?</h4>
+                <p>Nee. Voor geplande uitgaven (vakantie, nieuwe wagen) gebruikt u de Doelspaarcalculator. Het noodfonds blijft uitsluitend gereserveerd voor onverwachte gebeurtenissen.</p>
+
+                <p className="text-sm text-muted-foreground">
+                  Verder rekenen: <a href="/sparen/doelspaarcalculator">Doelspaarcalculator</a> ·{" "}
+                  <a href="/sparen/spaarrekening-vergelijker">Spaarrekening Vergelijker</a> ·{" "}
+                  <a href="/planning/budget-planner">Budget Planner</a>.
+                </p>
+              </CardContent>
+            </Card>
+
         </div>
       </section>
 
