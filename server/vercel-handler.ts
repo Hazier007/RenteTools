@@ -7,6 +7,7 @@ import { registerRoutes } from "./routes";
 import { calculatorRegistry } from "../shared/calculator-registry";
 import { injectSeoMeta } from "./seo-config";
 import { bootstrapBankingDataIfEmpty } from "./bootstrap-data";
+import { registerBlogGoneHandler, registerUnknownTopLevelHandler } from "./blog-gone-handler";
 
 // ESM-compatible __dirname (works on Node.js 20+)
 const __filename_esm = fileURLToPath(import.meta.url);
@@ -103,6 +104,16 @@ app.use((req, res, next) => {
 // Register API routes (registerRoutes is async but all route registrations are synchronous)
 registerRoutes(app);
 
+// Return 410 Gone for /blog/:slug when the slug is not in the DB, plus 410
+// for any unknown single-segment top-level slug (catches /vastgoed-calculator
+// and similar phantoms — see CMO comment ea002f53 on CAL-138). Must come
+// after /api routes (so /api/* still works) and the slug-to-canonical 301
+// redirect (so legitimate bare-slug calculator URLs are 301'd first), and
+// before the SPA catch-all (so unknown slugs don't return a 200 shell).
+// CAL-137.
+registerBlogGoneHandler(app);
+registerUnknownTopLevelHandler(app);
+
 // Fire bootstrap once per cold-start. Fire-and-forget: idempotent (no-op when
 // data exists), doesn't block request handling, and any error is swallowed
 // because the route layer can survive on the existing data or fall back to
@@ -145,6 +156,19 @@ app.use("*", (req, res) => {
     }
 
     html = injectSeoMeta(html, req.originalUrl);
+
+    // Admin pages must never appear in Bing/Google index. Without this,
+    // Bing happily crawls /admin and /admin/blog-automation and counts them
+    // toward the "identical meta descriptions" duplicate set (CAL-157).
+    const cleanPath = req.originalUrl.split('?')[0].split('#')[0];
+    if (cleanPath === '/admin' || cleanPath.startsWith('/admin/')) {
+      res.set('X-Robots-Tag', 'noindex, nofollow');
+      const noindexMeta = '<meta name="robots" content="noindex, nofollow" />';
+      if (!html.includes(noindexMeta) && html.includes('</head>')) {
+        html = html.replace('</head>', `  ${noindexMeta}\n  </head>`);
+      }
+    }
+
     res.set("Content-Type", "text/html").send(html);
   } catch (error) {
     console.error("Error serving HTML:", error);

@@ -56,11 +56,21 @@ const routes = [
 // Add calculator routes with category prefix
 for (const [category, slugs] of Object.entries(categories)) {
   if (category === 'Overige') continue;
-  
+
   const categoryPath = category.toLowerCase();
   for (const slug of slugs) {
     routes.push(`/${categoryPath}/${slug}`);
   }
+}
+
+// Add blog post routes for SSG so each post gets unique <title>/og:* meta
+// (CAL-162). Parses slug literals from blogPosts.ts; when posts are added
+// there, regenerate prerender-routes.json before the next deploy.
+const blogPostsPath = path.join(__dirname, '../client/src/data/blogPosts.ts');
+const blogPostsContent = fs.readFileSync(blogPostsPath, 'utf8');
+const blogSlugMatches = blogPostsContent.matchAll(/^\s*slug:\s*"([^"]+)"/gm);
+for (const match of blogSlugMatches) {
+  routes.push(`/blog/${match[1]}`);
 }
 
 // Output as JSON

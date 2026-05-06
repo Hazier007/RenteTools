@@ -17,6 +17,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalDeepDive from "@/seo/EducationalDeepDive";
+import { leasingkredietCalculatorContent } from "@/seo/calculator-content/leasingkrediet-calculator";
 
 import { ChartSkeleton } from "@/components/ui/chart-skeleton";
 
@@ -606,6 +608,19 @@ export default function LeasingkredietCalculatorPage() {
             </Card>
           </div>
         </div>
+      </section>
+
+      {/* Educational Deep-Dive (CAL-139) */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <EducationalDeepDive
+          title="Leasingkrediet in detail — formule, fiscaliteit en FAQ"
+          content={leasingkredietCalculatorContent}
+          related={[
+            { href: "/lenen/persoonlijke-lening-berekenen", label: "Persoonlijke Lening Calculator" },
+            { href: "/lenen/doorlopend-krediet-calculator", label: "Doorlopend Krediet Calculator" },
+            { href: "/lenen/voorschot-calculator", label: "Voorschot Calculator" },
+          ]}
+        />
       </section>
 
       {/* Rate Comparison Widget */}

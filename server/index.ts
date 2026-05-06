@@ -7,6 +7,7 @@ import { setupVite, serveStatic, log } from "./vite";
 import { calculatorRegistry } from "../shared/calculator-registry";
 import { injectSeoMeta } from "./seo-config";
 import { bootstrapBankingDataIfEmpty } from "./bootstrap-data";
+import { registerBlogGoneHandler, registerUnknownTopLevelHandler } from "./blog-gone-handler";
 
 const app = express();
 app.use(express.json());
@@ -149,6 +150,14 @@ app.use((req, res, next) => {
 
   const server = await registerRoutes(app);
 
+  // Return 410 Gone for /blog/:slug when the slug is not in the DB, plus
+  // 410 for any unknown single-segment top-level slug (catches /vastgoed-
+  // calculator and similar phantoms). Must come after /api routes and the
+  // slug-to-canonical 301 redirect, and before the SPA catch-all / Vite dev
+  // middleware. CAL-137.
+  registerBlogGoneHandler(app);
+  registerUnknownTopLevelHandler(app);
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -169,10 +178,10 @@ app.use((req, res, next) => {
     
     app.use("*", (req, res) => {
       const urlPath = req.originalUrl.split('?')[0];
-      
+
       // Check for pre-rendered HTML at /route/index.html
       const prerenderedPath = path.join(distPath, urlPath, "index.html");
-      
+
       let html: string;
       if (fs.existsSync(prerenderedPath)) {
         // Serve pre-rendered HTML (already has full content)
@@ -183,7 +192,17 @@ app.use((req, res, next) => {
         html = fs.readFileSync(indexPath, "utf-8");
         html = injectSeoMeta(html, req.originalUrl);
       }
-      
+
+      // Admin pages must never appear in Bing/Google index (CAL-157).
+      const cleanPath = urlPath;
+      if (cleanPath === '/admin' || cleanPath.startsWith('/admin/')) {
+        res.set('X-Robots-Tag', 'noindex, nofollow');
+        const noindexMeta = '<meta name="robots" content="noindex, nofollow" />';
+        if (!html.includes(noindexMeta) && html.includes('</head>')) {
+          html = html.replace('</head>', `  ${noindexMeta}\n  </head>`);
+        }
+      }
+
       res.set("Content-Type", "text/html").send(html);
     });
   }
