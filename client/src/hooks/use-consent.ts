@@ -10,6 +10,7 @@ interface ConsentState {
 }
 
 const STORAGE_KEY = 'cookie-consent';
+const CONSENT_EVENT = 'cookie-consent-updated';
 
 export function useConsent() {
   const [consent, setConsent] = useState<ConsentState>({
@@ -19,6 +20,10 @@ export function useConsent() {
   });
 
   const [showBanner, setShowBanner] = useState(false);
+
+  const broadcastConsentUpdate = (consentState: ConsentState) => {
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: consentState }));
+  };
 
   const updateGoogleConsent = (consentState: ConsentState) => {
     if (!window.gtag) {
@@ -65,6 +70,7 @@ export function useConsent() {
         setShowBanner(false);
         // Apply stored consent to Google services
         updateGoogleConsent(parsed);
+        broadcastConsentUpdate(parsed);
       } else {
         setShowBanner(true);
       }
@@ -88,6 +94,7 @@ export function useConsent() {
     
     // Update Google Analytics consent immediately
     updateGoogleConsent(newConsent);
+    broadcastConsentUpdate(newConsent);
   };
 
   const rejectAll = () => {
@@ -104,16 +111,21 @@ export function useConsent() {
     
     // Update Google consent to denied
     updateGoogleConsent(newConsent);
+    broadcastConsentUpdate(newConsent);
   };
 
   const resetConsent = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    setConsent({
+    const resetState: ConsentState = {
       status: 'pending',
       analytics: false,
       advertising: false,
-    });
+    };
+
+    localStorage.removeItem(STORAGE_KEY);
+    setConsent(resetState);
     setShowBanner(true);
+    updateGoogleConsent(resetState);
+    broadcastConsentUpdate(resetState);
   };
 
 

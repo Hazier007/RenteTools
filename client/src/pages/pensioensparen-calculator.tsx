@@ -51,6 +51,10 @@ export default function PensioenspaarCalculatorPage() {
       {/* Main Content */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
+            {/* In-content Ad: Above Fold (Long-Form) */}
+            <div className="flex justify-center">
+              <GoogleAdsense slot="article" className="w-full max-w-3xl" />
+            </div>
             
             {/* Calculator */}
             <Card>
@@ -71,7 +75,7 @@ export default function PensioenspaarCalculatorPage() {
 
             {/* Ad After Calculator */}
             <div className="flex justify-center py-4">
-              <GoogleAdsense slot="banner" />
+              <GoogleAdsense slot="rectangle" className="w-full max-w-3xl" />
             </div>
 
             {/* Content */}
@@ -205,6 +209,11 @@ export default function PensioenspaarCalculatorPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* In-content Ad: Before FAQ / Related Tools */}
+            <div className="flex justify-center py-2">
+              <GoogleAdsense slot="rectangle" className="w-full max-w-3xl" />
+            </div>
 
             {/* FAQ */}
             <Card>
