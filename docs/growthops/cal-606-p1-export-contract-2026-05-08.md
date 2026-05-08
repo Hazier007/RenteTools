@@ -86,17 +86,29 @@ Use this exact naming pattern:
 Example:
 - `interesten_ga4_56d_2026-05-08.csv`
 
-## Delivery SLA
-- P1 target deadline: 2026-05-12 (end of day Europe/Brussels)
+## Delivery SLA (staged)
+### Stage 1: Fast-lane pilot intake
+- Deadline: **2026-05-09 18:00 Europe/Brussels (CEST, UTC+2)**
+- Required sites for stage 1:
+  1. interesten
+  2. huurrendementcalculator
+  3. goedkoopstroom
+
+### Stage 2: Full P1 completion
+- Deadline: **2026-05-12 end of day Europe/Brussels**
+- Required sites: all 6 P1 sites
 
 ## After delivery (GrowthOps actions)
-Within 24h after all P1 packs are valid:
-1. Compute baseline KPI table per site (`RPV`, `RPM`, `CTR`, `CVR`, `EPC`)
-2. Select first 3 pilot pages with highest commercial intent
-3. Publish pilot launch brief with guardrails (UX/CWV/policy)
+### After stage 1 (within 24h)
+1. Compute provisional baseline for 3 fast-lane sites (`RPV`, `RPM`, `CTR`, `CVR`, `EPC`)
+2. Lock first 3 pilot pages and variants
+3. Publish pilot handoff brief for implementation lanes
+
+### After stage 2 (within 24h)
+1. Compute complete P1 baseline table for all 6 sites
+2. Re-rank pilot rollout priority on full data
+3. Publish board-ready baseline snapshot + next rollout actions
 
 ## Escalation rule
-If P1 packs are still incomplete after 2026-05-12:
-- Mark status as blocked
-- Escalate to board with missing owner/site matrix
-- Freeze new monetization launches until baseline is complete
+- If stage 1 is missed (after 2026-05-09 18:00 CEST), escalate risk of next-week pilot window loss.
+- If stage 2 is missed (after 2026-05-12 EOD), mark status blocked and freeze new monetization launches until baseline is complete.
