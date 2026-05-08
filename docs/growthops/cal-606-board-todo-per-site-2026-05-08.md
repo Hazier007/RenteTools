@@ -57,7 +57,21 @@ Legenda prioriteit:
 3. Pilot livezetten op 3 hoog-intent pagina's met guardrails uit de runbook.
 4. Eerste weekly board report posten met go/no-go per site cluster.
 
-## 5) Definition of done voor deze fase
+## 5) Daisycon update - extra taken
+
+1. Bevestig dat alle P1 sites correct gekoppeld zijn in het Daisycon publisher-account.
+2. Deel per P1 site de tracking-aanpak (`subid`-conventie + placement mapping).
+3. Selecteer per vertical minimaal 3 actieve campagnes (finance, energy, mobility).
+4. Lever per campagne de kernvoorwaarden: payout model, cookie window, reversal policy.
+5. Markeer campagnes met compliance-risico of beperkte claim-toestemming vooraf.
+
+## 6) Communication cadence
+
+1. Board ontvangt een wekelijkse mail-samenvatting met open taken en blockers.
+2. Ad-hoc update per mail zodra P1 baseline compleet is.
+3. Elke mail bevat expliciet: owner, deadline, afhankelijkheid, volgende actie.
+
+## 7) Definition of done voor deze fase
 
 - Voor alle 13 sites staat de export pack compleet.
 - Voor alle P1 sites staat baseline berekend en pilot-ready.
