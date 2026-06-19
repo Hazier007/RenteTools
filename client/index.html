@@ -78,8 +78,10 @@
 
       What loads after `load` event + requestIdleCallback (or 2s setTimeout):
         - googletagmanager.com/gtag/js (GA4)
-        - pagead2.googlesyndication.com/pagead/js/adsbygoogle.js (AdSense Auto Ads)
         - fundingchoicesmessages.google.com/i/pub-... (Funding Choices CMP)
+      AdSense loader is additionally gated by local consent:
+        - pagead2.googlesyndication.com/pagead/js/adsbygoogle.js only loads
+          when `cookie-consent.advertising === true`.
 
       gtag.js drains the buffered dataLayer when it loads, so no analytics
       events are lost. Consent banner appears ~2s after first paint on cold
@@ -100,32 +102,81 @@
       gtag('config', 'G-P5BE4RN7QX');
 
       (function deferThirdParty() {
-        var loaded = false;
-        function injectScript(src, crossOrigin) {
+        var gaLoaded = false;
+        var cmpLoaded = false;
+        var adSenseLoaded = false;
+
+        function injectScript(id, src, crossOrigin) {
+          if (id && document.getElementById(id)) return;
           var s = document.createElement('script');
+          if (id) s.id = id;
           s.async = true;
           s.src = src;
           if (crossOrigin) s.crossOrigin = 'anonymous';
           document.head.appendChild(s);
         }
-        function loadDeferred() {
-          if (loaded) return;
-          loaded = true;
-          injectScript('https://www.googletagmanager.com/gtag/js?id=G-P5BE4RN7QX', false);
-          injectScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864', true);
-          injectScript('https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1', true);
-        }
-        function schedule() {
-          if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(loadDeferred, { timeout: 3000 });
-          } else {
-            setTimeout(loadDeferred, 2000);
+
+        function hasAdvertisingConsent() {
+          try {
+            var stored = localStorage.getItem('cookie-consent');
+            if (!stored) return false;
+            var parsed = JSON.parse(stored);
+            return !!(parsed && parsed.advertising);
+          } catch (e) {
+            return false;
           }
         }
+
+        function loadGaAndCmp() {
+          if (!gaLoaded) {
+            gaLoaded = true;
+            injectScript('ga4-script', 'https://www.googletagmanager.com/gtag/js?id=G-P5BE4RN7QX', false);
+          }
+          if (!cmpLoaded) {
+            cmpLoaded = true;
+            injectScript('funding-choices-script', 'https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1', true);
+          }
+        }
+
+        function loadAdSenseIfAllowed() {
+          if (adSenseLoaded || !hasAdvertisingConsent()) return;
+          adSenseLoaded = true;
+          injectScript('adsense-script', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864', true);
+        }
+
+        function schedule(cb) {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(cb, { timeout: 3000 });
+          } else {
+            setTimeout(cb, 2000);
+          }
+        }
+
+        function scheduleBaseLoad() {
+          schedule(loadGaAndCmp);
+        }
+
+        function scheduleAdSenseLoad() {
+          schedule(loadAdSenseIfAllowed);
+        }
+
+        function onConsentUpdated(event) {
+          var detail = event && event.detail;
+          if (detail && detail.advertising) {
+            scheduleAdSenseLoad();
+          }
+        }
+
+        window.addEventListener('cookie-consent-updated', onConsentUpdated);
+
         if (document.readyState === 'complete') {
-          schedule();
+          scheduleBaseLoad();
+          scheduleAdSenseLoad();
         } else {
-          window.addEventListener('load', schedule, { once: true });
+          window.addEventListener('load', function () {
+            scheduleBaseLoad();
+            scheduleAdSenseLoad();
+          }, { once: true });
         }
       })();
     </script>

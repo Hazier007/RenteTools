@@ -85,6 +85,10 @@ export default function HoogsteSpaarrenteBelgie() {
       {/* Main Content with Calculator */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
+            {/* In-content Ad: Above Fold (Long-Form) */}
+            <div className="flex justify-center">
+              <GoogleAdsense slot="article" className="w-full max-w-3xl" />
+            </div>
             
             {/* Live Rate Comparison */}
             <RateComparisonWidget 
@@ -128,7 +132,7 @@ export default function HoogsteSpaarrenteBelgie() {
 
             {/* Ad After Calculator */}
             <div className="flex justify-center py-4">
-              <GoogleAdsense slot="banner" />
+              <GoogleAdsense slot="rectangle" className="w-full max-w-3xl" />
             </div>
 
             {/* Hoogste Spaarrente */}
@@ -192,6 +196,11 @@ export default function HoogsteSpaarrenteBelgie() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* In-content Ad: Before FAQ / Related Tools */}
+              <div className="flex justify-center py-2">
+                <GoogleAdsense slot="rectangle" className="w-full max-w-3xl" />
+              </div>
 
               {/* FAQ Section */}
               <Card>
