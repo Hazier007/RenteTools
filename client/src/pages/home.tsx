@@ -14,6 +14,22 @@ import {
 import { staggerChildren, fadeInUp } from "@/lib/animations";
 import heroBackgroundWebp from "@assets/hero-2026-lg.webp";
 import heroBackgroundAvif from "@assets/hero-2026-lg.avif";
+import heroBackground360Avif from "@assets/hero-2026-360.avif";
+import heroBackground414Avif from "@assets/hero-2026-414.avif";
+import heroBackground480Avif from "@assets/hero-2026-480.avif";
+import heroBackground360Webp from "@assets/hero-2026-360.webp";
+import heroBackground414Webp from "@assets/hero-2026-414.webp";
+import heroBackground480Webp from "@assets/hero-2026-480.webp";
+
+// LCP hero is rendered at 100vw under all viewports (object-cover spans the
+// hero section). Browsers pick the smallest variant whose width descriptor
+// satisfies sizes; on cold-cache mobile/4G this trims the LCP candidate from
+// the 1408w master to a 360–480w variant (~3-5 KB AVIF instead of ~12 KB).
+// The selector mirror is duplicated in server/seo-config.ts hero preload so
+// the responsive <link rel="preload"> matches the <picture> srcset/sizes.
+const HERO_AVIF_SRCSET = `${heroBackground360Avif} 360w, ${heroBackground414Avif} 414w, ${heroBackground480Avif} 480w, ${heroBackgroundAvif} 1408w`;
+const HERO_WEBP_SRCSET = `${heroBackground360Webp} 360w, ${heroBackground414Webp} 414w, ${heroBackground480Webp} 480w, ${heroBackgroundWebp} 1408w`;
+const HERO_SIZES = "(max-width: 480px) 100vw, 1408px";
 
 const HOME_TITLE = `Hoogste Spaarrente België ${new Date().getFullYear()} + 70+ Gratis Calculators`;
 const HOME_DESCRIPTION = `Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België ${new Date().getFullYear()}.`;
@@ -120,8 +136,8 @@ export default function Home() {
         data-testid="hero-section"
       >
         <picture>
-          <source type="image/avif" srcSet={heroBackgroundAvif} />
-          <source type="image/webp" srcSet={heroBackgroundWebp} />
+          <source type="image/avif" srcSet={HERO_AVIF_SRCSET} sizes={HERO_SIZES} />
+          <source type="image/webp" srcSet={HERO_WEBP_SRCSET} sizes={HERO_SIZES} />
           <img
             src={heroBackgroundWebp}
             alt=""

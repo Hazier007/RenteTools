@@ -793,18 +793,23 @@ function escapeHtmlAttribute(str: string): string {
     .replace(/>/g, '&gt;');
 }
 
-// Extracts the first <source type="image/avif" srcset="..."> URL from SSR'd
-// hero markup so we can emit a matching <link rel="preload"> in <head>.
+// Extracts the AVIF <source> srcset + sizes from SSR'd hero markup so we can
+// emit a responsive <link rel="preload" imagesrcset imagesizes>. The browser
+// then picks the smallest covering variant before <picture> is parsed
+// (CAL-471: 360/414/480w mobile variants ride the LCP fast-path on 4G).
 // Returns null when the hero <picture> isn't present in the HTML (runtime
 // fallback path, or non-home routes).
-function extractHeroAvifUrl(html: string): string | null {
+function extractHeroAvifSource(
+  html: string,
+): { srcset: string; sizes: string | null; firstUrl: string } | null {
   const match = html.match(
-    /<source[^>]*\stype="image\/avif"[^>]*\ssrcset="([^"]+)"/i,
+    /<source[^>]*\stype="image\/avif"[^>]*\ssrcset="([^"]+)"(?:[^>]*\ssizes="([^"]+)")?[^>]*>/i,
   );
   if (!match) return null;
-  // srcset may be a comma-separated list (e.g. "url 1x, url 2x"); preload's
-  // single-href form takes the first URL.
-  return match[1].split(',')[0].trim().split(/\s+/)[0];
+  const srcset = match[1];
+  const sizes = match[2] ?? null;
+  const firstUrl = srcset.split(',')[0].trim().split(/\s+/)[0];
+  return { srcset, sizes, firstUrl };
 }
 
 export function injectSeoMeta(html: string, url: string): string {
@@ -870,11 +875,20 @@ export function injectSeoMeta(html: string, url: string): string {
   // CSS background variant we replaced couldn't carry fetchpriority; pairing a
   // preload hint with the new <img fetchPriority="high"> moves the AVIF off
   // the default-priority queue and into the LCP path (priorityHinted=true).
+  // CAL-471: emit imagesrcset/imagesizes so the preload matches the responsive
+  // <picture> srcset, letting the browser pick the 360/414/480w mobile variant
+  // before <picture> is parsed (single-href preload would force the master).
   if (seoConfig?.slug === 'home') {
-    const heroAvifUrl = extractHeroAvifUrl(result);
-    if (heroAvifUrl && result.includes('</head>')) {
-      const escapedHref = escapeHtmlAttribute(heroAvifUrl);
-      const preloadTag = `<link rel="preload" as="image" href="${escapedHref}" type="image/avif" fetchpriority="high" />`;
+    const heroAvif = extractHeroAvifSource(result);
+    if (heroAvif && result.includes('</head>')) {
+      const escapedSrcset = escapeHtmlAttribute(heroAvif.srcset);
+      const escapedSizes = heroAvif.sizes
+        ? escapeHtmlAttribute(heroAvif.sizes)
+        : null;
+      const escapedHref = escapeHtmlAttribute(heroAvif.firstUrl);
+      const preloadTag = escapedSizes
+        ? `<link rel="preload" as="image" href="${escapedHref}" imagesrcset="${escapedSrcset}" imagesizes="${escapedSizes}" type="image/avif" fetchpriority="high" />`
+        : `<link rel="preload" as="image" href="${escapedHref}" type="image/avif" fetchpriority="high" />`;
       if (!result.includes(preloadTag)) {
         result = result.replace('</head>', `  ${preloadTag}\n  </head>`);
       }

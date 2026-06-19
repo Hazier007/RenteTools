@@ -27,6 +27,19 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // CAL-471: keep hero LCP variants as files (don't base64-inline them).
+    // Vite's default 4096-byte threshold would bake the smallest mobile
+    // hero variants into the bundle, which (a) inflates the SSR HTML +
+    // route JS the browser must parse before LCP, and (b) breaks the
+    // <link rel="preload"> path because data: URLs can't be preloaded
+    // — exactly the case we ship variants to optimise. Other small assets
+    // keep the default behaviour.
+    assetsInlineLimit(filePath) {
+      if (/hero-2026-(360|414|480)\.(avif|webp)$/.test(filePath)) {
+        return false;
+      }
+      return undefined;
+    },
     rollupOptions: {
       output: {
         // Split the React runtime into its own long-cacheable chunk so the

@@ -11,6 +11,41 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* CAL-471: Open Sans fallback metric overrides for the FundingChoices CMP
+ * dialog. Production Lighthouse runs (CAL-434 5-run evidence) showed CLS
+ * 0.03 on `/`, 0.02 of which traced to .fc-footer.fc-dialog-restricted-content
+ * reflowing when the gstatic Open Sans (font-display: swap default) replaced
+ * the system fallback. We can't change gstatic's @font-face descriptors, but
+ * we can add a local "Open Sans Fallback" family that wraps Arial with
+ * metric overrides matching Open Sans, then inject it into FC dialog
+ * elements ahead of the fallback chain. The swap from fallback to gstatic
+ * Open Sans then produces no layout shift because the box dimensions match.
+ *
+ * Override values are taken from Next.js' next/font automatic-fallback
+ * output for Open Sans (computed once from the actual Open Sans font
+ * metrics — they don't drift). size-adjust scales the em square; the
+ * ascent/descent/line-gap percentages re-baseline the line box.
+ */
+@font-face {
+  font-family: 'Open Sans Fallback';
+  src: local('Arial');
+  ascent-override: 101.05%;
+  descent-override: 27.69%;
+  line-gap-override: 0%;
+  size-adjust: 105.78%;
+}
+
+[class^="fc-"],
+[class*=" fc-"] {
+  font-family:
+    'Open Sans',
+    'Open Sans Fallback',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
