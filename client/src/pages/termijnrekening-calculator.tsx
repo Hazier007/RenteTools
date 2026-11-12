@@ -339,7 +339,7 @@ export default function TermijnrekeningCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Termijnrekening vs andere spaarproducten</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
                     <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">💎 Termijnrekening</h4>
@@ -391,7 +391,7 @@ export default function TermijnrekeningCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Slimme termijnrekening strategieën</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <h3>💡 Tips voor optimaal gebruik van termijnrekeningen:</h3>
                 
                 <div className="grid md:grid-cols-2 gap-6">

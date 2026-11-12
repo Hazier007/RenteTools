@@ -3,40 +3,20 @@ interface GoogleAdsenseProps {
   className?: string;
 }
 
-// Simple Auto Ads anchor component
-// With Auto Ads enabled in index.html, Google automatically places ads throughout your site
-// This component serves as an anchor point where ads are preferred
-export default function GoogleAdsense({ 
+// Ankerpunt voor AdSense Auto Ads (ingeschakeld in index.html). Google kiest
+// zelf waar advertenties komen en gebruikt dit element niet als slot; daarom
+// reserveert het geen hoogte meer. De oude vaste min-height (90/250 px) stond
+// als leeg wit blok op elke pagina, 3 tot 5 keer per pagina.
+export default function GoogleAdsense({
   slot = 'banner',
-  className = '' 
+  className = '',
 }: GoogleAdsenseProps) {
-  // No initialization needed - Auto Ads handles everything automatically from index.html
-
-  // Define min-height based on slot type for layout stability
-  const getMinHeight = (): string => {
-    switch (slot) {
-      case 'banner':
-        return '90px';
-      case 'rectangle':
-        return '250px';
-      case 'article':
-        return '250px';
-      default:
-        return '90px';
-    }
-  };
-
   return (
-    <div 
-      className={`auto-ads-anchor ${className}`} 
-      data-testid={`google-ad-${slot}`} 
-      style={{ minHeight: getMinHeight(), display: 'block', width: '100%' }}
-    >
-      {/* Auto Ads anchor point - Google will automatically fill this space */}
-      <div 
-        style={{ display: 'block', minHeight: getMinHeight() }}
-        data-ad-slot-type={slot}
-      />
-    </div>
+    <div
+      className={`auto-ads-anchor w-full ${className}`}
+      data-testid={`google-ad-${slot}`}
+      data-ad-slot-type={slot}
+      aria-hidden="true"
+    />
   );
 }

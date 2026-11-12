@@ -312,7 +312,7 @@ export default function DoelspaarcalculatorPage() {
                   Doelsparen in detail — formule, fiscaliteit en FAQ
                 </CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-4">
+              <CardContent className="prose space-y-4">
                 <p>
                   De Doelspaarcalculator helpt u meerdere financiële doelen tegelijk plannen — van een nieuwe wagen tot een droomvakantie of de aanbetaling op een woning. De tool berekent voor elk doel hoeveel u maandelijks opzij moet leggen om het binnen uw gewenste tijdslijn te halen, en helpt u prioriteiten stellen wanneer uw spaarbudget beperkt is. Ideaal voor wie een gestructureerd spaarplan wil opbouwen in plaats van willekeurig te sparen zonder helder eindresultaat.
                 </p>

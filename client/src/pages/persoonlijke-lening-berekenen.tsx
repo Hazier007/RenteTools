@@ -83,7 +83,7 @@ export default function PersoonlijkeLeningBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is een persoonlijke lening?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Een persoonlijke lening is een krediet waarbij u een vast bedrag leent 
                   en dit in maandelijkse termijnen terugbetaalt. U hoeft geen onderpand 
@@ -115,7 +115,7 @@ export default function PersoonlijkeLeningBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">JKP uitgelegd - Wat kost een lening écht?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Het Jaarlijkse Kostenpercentage (JKP) is het belangrijkste getal bij het 
                   vergelijken van leningen. Het toont de werkelijke kosten inclusief alle verborgen kosten.
@@ -159,7 +159,7 @@ export default function PersoonlijkeLeningBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Lening herfinancieren - Wanneer loont het?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Herfinancieren betekent uw bestaande lening vervangen door een nieuwe 
                   met betere voorwaarden. Dit kan u honderden euro's besparen.

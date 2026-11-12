@@ -27,7 +27,7 @@
   --secondary: hsl(174 56% 47%);
   --secondary-foreground: hsl(0 0% 98%);
   --muted: hsl(215 25% 96%);
-  --muted-foreground: hsl(215 10% 46%);
+  --muted-foreground: hsl(215 12% 42%);
   --accent: hsl(38 92% 50%);
   --accent-foreground: hsl(215 25% 15%);
   --destructive: hsl(0 84% 60%);
@@ -56,7 +56,7 @@
   --secondary: hsl(174 56% 47%);
   --secondary-foreground: hsl(0 0% 98%);
   --muted: hsl(215 25% 16%);
-  --muted-foreground: hsl(215 10% 54%);
+  --muted-foreground: hsl(215 12% 66%);
   --accent: hsl(38 92% 50%);
   --accent-foreground: hsl(215 25% 15%);
   --destructive: hsl(0 84% 60%);
@@ -71,14 +71,72 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    line-height: 1.65;
+  }
+
+  /* Koppen: lange Nederlandse samenstellingen mogen nooit buiten hun kolom lopen. */
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+
+  p, li, dd, dt, td, th, label {
+    overflow-wrap: break-word;
+  }
+
+  /* Cijfers in tabellen en resultaten lijnen uit. */
+  table, [data-testid^="result-"] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Grid-items krijgen min-width:0: zonder dit rekt een impliciete kolom
+   * (bv. "grid md:grid-cols-2" onder 768 px) mee met de breedste inhoud en
+   * scrolt de hele pagina horizontaal. */
+  .grid > * {
+    min-width: 0;
+  }
+
+  /* Font Awesome wordt nergens geladen; de <i class="fas ..."> uit oude
+   * kaarttitels zijn lege elementen met enkel een rechtermarge. */
+  i.fas, i.far, i.fab, i.fa {
+    display: none;
+  }
+
+  /* AdSense Auto Ads: een niet-gevulde automatische plaatsing mag geen leeg blok laten. */
+  .google-auto-placed:has(> ins[data-ad-status="unfilled"]) {
+    display: none;
   }
 }
 
 @layer components {
+  /* Hero-gradient. Donkerder dan primary/secondary: wit op de oude teal-kant haalde
+   * maar 2,4:1; nu >= 6:1 (en >= 5,5:1 met opacity-90). */
   .gradient-bg {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: linear-gradient(135deg, hsl(214 80% 40%) 0%, hsl(176 52% 28%) 100%);
+  }
+
+  /* Hero-typografie voor alle calculatorpagina's (section.gradient-bg > div > h1/p):
+   * h1 schaalt mee met de breedte (36 px brak lange woorden op 375 px), de intro
+   * blijft binnen een leesbare regelbreedte. */
+  .gradient-bg h1 {
+    font-size: clamp(1.75rem, 1.05rem + 3.2vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .gradient-bg > div > p {
+    max-width: 65ch;
+  }
+  .gradient-bg > div > p.text-xl {
+    font-size: clamp(1.0625rem, 0.95rem + 0.55vw, 1.25rem);
+    line-height: 1.6;
   }
   
   .calculator-input:focus {

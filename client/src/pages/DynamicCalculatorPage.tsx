@@ -1,14 +1,11 @@
 import { Suspense } from 'react';
-import { useParams, useLocation } from 'wouter';
+import { useParams } from 'wouter';
 import { getCalculatorBySlug } from '@/lib/routeRegistry';
 import { getCalculatorComponent } from '@/lib/calculatorComponentRegistry';
-import CalculatorBreadcrumb from '@/components/calculator-breadcrumb';
-import RelatedCalculators from '@/components/related-calculators';
 import NotFound from '@/pages/not-found';
 
 export default function DynamicCalculatorPage() {
   const params = useParams();
-  const [location] = useLocation();
   const slug = params.slug as string;
 
   const calculatorRoute = getCalculatorBySlug(slug);
@@ -23,17 +20,12 @@ export default function DynamicCalculatorPage() {
     return <NotFound />;
   }
 
-  const categoryPath = `/${calculatorRoute.category.toLowerCase()}`;
-
+  // Geen aparte breadcrumb of "Gerelateerde tools" hier: elke calculatorpagina
+  // rendert zelf Header, PageBreadcrumb (in de hero), RelatedCalculators en
+  // Footer. De extra exemplaren kwamen boven de sticky header en onder de
+  // footer terecht.
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <CalculatorBreadcrumb
-          category={calculatorRoute.category}
-          categoryPath={categoryPath}
-          currentTitle={calculatorRoute.seoConfig.breadcrumbTitle}
-        />
-      </div>
       <Suspense fallback={
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
@@ -44,12 +36,6 @@ export default function DynamicCalculatorPage() {
       }>
         <CalculatorComponent />
       </Suspense>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <RelatedCalculators
-          currentSlug={slug}
-          category={calculatorRoute.category}
-        />
-      </div>
     </>
   );
 }

@@ -209,7 +209,7 @@ export default function Home() {
                 <motion.div key={calc.slug} variants={fadeInUp}>
                   <Link href={`/${calc.category}/${calc.slug}`} data-testid={`link-featured-${calc.slug}`}>
                     <GlassCard hover tilt className="p-6 md:p-8 h-full cursor-pointer group" data-testid={`card-featured-${calc.slug}`}>
-                      <div className="flex items-start gap-4">
+                      <div className="flex flex-col sm:flex-row items-start gap-4">
                         <div className="p-3 rounded-xl bg-primary/10 text-primary shrink-0">
                           <IconComponent className="w-8 h-8" />
                         </div>

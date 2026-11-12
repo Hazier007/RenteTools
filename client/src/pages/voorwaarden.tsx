@@ -31,7 +31,7 @@ export default function Voorwaarden() {
                 Algemene Informatie
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p className="text-lg">
                 Deze algemene voorwaarden zijn van toepassing op het gebruik van de website 
                 Interesten.be en alle bijbehorende diensten. Door onze website te gebruiken, 
@@ -53,7 +53,7 @@ export default function Voorwaarden() {
                 Onze Diensten
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <h3>Wat Bieden Wij?</h3>
               <ul>
                 <li><strong>Financiële Calculators:</strong> Gratis online rekenhulpen voor sparen, lenen en beleggen</li>
@@ -78,7 +78,7 @@ export default function Voorwaarden() {
                 Gebruiksregels
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <h3>Toegestaan Gebruik</h3>
               <div className="grid gap-4">
                 <div className="flex items-start">
@@ -139,7 +139,7 @@ export default function Voorwaarden() {
                 Disclaimer & Aansprakelijkheid
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <div className="bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 p-4 rounded-lg mb-6">
                 <h4 className="font-semibold mb-2 flex items-center">
                   <i className="fas fa-warning mr-2"></i>
@@ -179,7 +179,7 @@ export default function Voorwaarden() {
                 Intellectueel Eigendom
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <h3>Auteursrechten</h3>
               <p>
                 Alle content op Interesten.be, inclusief teksten, afbeeldingen, logo's en calculator code, 
@@ -210,7 +210,7 @@ export default function Voorwaarden() {
                 Links naar Derde Partijen
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Onze website kan links bevatten naar externe websites. Wij zijn niet verantwoordelijk 
                 voor de content, privacy beleid of praktijken van deze externe sites.
@@ -232,7 +232,7 @@ export default function Voorwaarden() {
                 Wijzigingen in Voorwaarden
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Wij behouden ons het recht voor om deze algemene voorwaarden te wijzigen. 
                 Belangrijke wijzigingen zullen worden aangekondigd op onze website.
@@ -255,7 +255,7 @@ export default function Voorwaarden() {
                 Toepasselijk Recht
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Deze algemene voorwaarden vallen onder Belgisch recht. 
                 Geschillen zullen worden behandeld door de bevoegde Belgische rechtbanken.
@@ -277,7 +277,7 @@ export default function Voorwaarden() {
                 Contact Informatie
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Voor vragen over deze algemene voorwaarden kunt u contact met ons opnemen:
               </p>

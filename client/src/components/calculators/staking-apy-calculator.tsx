@@ -221,6 +221,13 @@ export default function StakingApyCalculator() {
     setResult(calculationResult);
   };
 
+  // Eerste berekening met de standaardwaarden, zodat het resultaatpaneel
+  // nooit als leeg blok verschijnt; daarna rekent form.watch live door.
+  useEffect(() => {
+    onSubmit(form.getValues());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const subscription = form.watch((data) => {
       if (data.bedrag && data.apy !== undefined && data.duur) {
@@ -438,7 +445,7 @@ export default function StakingApyCalculator() {
         <CardHeader>
           <CardTitle>APY vs APR: Wat is het verschil?</CardTitle>
         </CardHeader>
-        <CardContent className="prose prose-sm max-w-none text-muted-foreground">
+        <CardContent className="prose prose-sm">
           <p>
             <strong>APY (Annual Percentage Yield)</strong> is het effectieve jaarlijkse rendement 
             inclusief het effect van compounding (rente-op-rente). Dit is wat u daadwerkelijk verdient.

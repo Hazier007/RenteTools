@@ -223,7 +223,7 @@ export default function RoerendeVoorheffingCalculator() {
               <CardHeader>
                 <CardTitle className="text-xl">Belastingvrije Interest België - Hoeveel Spaarrente Belastingvrij?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   In België heeft elke belastingplichtige recht op een belastingvrij bedrag voor 
                   interest inkomsten. Dit bedrag wordt jaarlijks aangepast en geldt per persoon.
@@ -275,7 +275,7 @@ export default function RoerendeVoorheffingCalculator() {
               <CardHeader>
                 <CardTitle className="text-xl">Roerende Voorheffing Berekenen - Dividenden vs Interest</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   De roerende voorheffing wordt anders berekend voor verschillende soorten 
                   kapitaalinkomsten. Het is belangrijk om het onderscheid te kennen.

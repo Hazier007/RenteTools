@@ -81,7 +81,7 @@ export default function PensioenspaarCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is pensioensparen (derde pijler)?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Pensioensparen is de derde pijler van het Belgische pensioenstelsel. 
                   Het is een aanvullende manier om te sparen voor uw pensioen met 
@@ -122,7 +122,7 @@ export default function PensioenspaarCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Belastingvoordeel pensioensparen uitgelegd</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Het grootste voordeel van pensioensparen is de directe belastingvermindering. 
                   U krijgt 30% van uw inleg terug via uw belastingaangifte.
@@ -170,7 +170,7 @@ export default function PensioenspaarCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Uitkeringsbetaling - 8% of 16,5%?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Bij uitkering betaalt u belasting op uw pensioenkapitaal. Het tarief 
                   hangt af van wanneer u uitkeert en hoe lang u heeft gespaard.

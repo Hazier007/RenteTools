@@ -259,7 +259,7 @@ export default function GeldontwaardigCalculator() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is Geldontwaarding? - Inflatie Correctie Berekenen</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Geldontwaarding is het verlies van koopkracht van geld door inflatie. 
                   Hetzelfde geldbedrag kan in de toekomst minder goederen en diensten kopen.
@@ -312,7 +312,7 @@ export default function GeldontwaardigCalculator() {
               <CardHeader>
                 <CardTitle className="text-xl">Koopkrachtverlies Inflatie - Bescherming tegen Geldontwaarding</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   U kunt zich beschermen tegen geldontwaarding door te investeren in assets 
                   die mee stijgen met of sneller groeien dan inflatie.

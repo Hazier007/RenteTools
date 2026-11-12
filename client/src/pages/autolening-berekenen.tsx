@@ -83,7 +83,7 @@ export default function AutoleningBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Hoe werkt een autolening in België?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Een autolening is een persoonlijke lening specifiek voor de aankoop van een voertuig. 
                   In België kunt u kiezen tussen verschillende financieringsvormen.
@@ -113,7 +113,7 @@ export default function AutoleningBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Goedkoopste autolening vinden - Tips</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   De kosten van uw autolening hangen af van verschillende factoren. 
                   Met de juiste strategie bespaart u honderden euro's.

@@ -376,7 +376,7 @@ export default function KinderrekeningCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Voordelen van kinderrekeningen in België</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h3>💰 Financiële Voordelen</h3>

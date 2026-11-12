@@ -31,7 +31,7 @@ export default function OverOns() {
                 Onze Missie
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p className="text-lg">
                 Interesten.be is ontstaan uit de behoefte aan betrouwbare, Nederlandstalige financiële calculators, 
                 specifiek afgestemd op de Belgische markt. Het platform combineert technologie, praktijkervaring 
@@ -49,7 +49,7 @@ export default function OverOns() {
                 De Oprichter
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Achter interesten.be staat{" "}
                 <a 
@@ -96,7 +96,7 @@ export default function OverOns() {
                 Gastschrijvers & Experts
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Naast eigen content werkt interesten.be samen met gastschrijvers en financiële professionals 
                 die hun kennis en ervaring delen via artikelen en analyses. Elke bijdrage wordt inhoudelijk 
@@ -114,7 +114,7 @@ export default function OverOns() {
                 Kwaliteit & Actualiteit
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Onze calculators en artikels worden ontwikkeld met oog voor nauwkeurigheid, transparantie 
                 en actuele Belgische regelgeving, en worden regelmatig bijgewerkt volgens de nieuwste rentes, 
@@ -131,7 +131,7 @@ export default function OverOns() {
                 Methodologie &amp; Bronnen
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Elke calculator vertrekt van de officiële cijfers en de wettelijke rekenregels, niet van schattingen.
                 De belangrijkste bronnen:
@@ -158,7 +158,7 @@ export default function OverOns() {
                 Disclaimer
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 De informatie en berekeningen op Interesten.be zijn algemeen en informatief. Ze vormen geen financieel,
                 fiscaal, juridisch of beleggingsadvies en vervangen geen advies op maat van een bank, boekhouder, advocaat
@@ -211,7 +211,7 @@ export default function OverOns() {
                 Contact
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Heeft u vragen, suggesties of feedback over onze calculators? 
                 We horen graag van u! Uw input helpt ons om onze tools te verbeteren 

@@ -66,7 +66,7 @@ export default function CryptoWinstVerliesCalculatorPage() {
                 Hoe bereken je crypto winst correct?
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Bij het berekenen van crypto winst of verlies is het belangrijk om alle kosten 
                 mee te nemen. Veel beleggers vergeten transactiekosten waardoor ze hun 
@@ -97,7 +97,7 @@ export default function CryptoWinstVerliesCalculatorPage() {
                 Cost basis en belastingaangifte
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Uw cost basis is cruciaal voor de belastingaangifte. In België wordt crypto 
                 belast afhankelijk van uw classificatie (goede huisvader, speculatief of professioneel).

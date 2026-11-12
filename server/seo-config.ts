@@ -1002,11 +1002,11 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
 
   // Build static content shell
   let content = `
-    <div style="max-width:1200px;margin:0 auto;padding:2rem;font-family:system-ui,-apple-system,sans-serif;">
+    <div style="max-width:56rem;margin:0 auto;padding:2rem 1rem;font-family:Inter,system-ui,-apple-system,sans-serif;line-height:1.65;">
       ${breadcrumbHtml}
       <header style="margin-bottom:2rem;">
-        <h1 style="font-size:2rem;font-weight:700;color:#1a1a1a;margin-bottom:1rem;">${escapeHtmlAttribute(h1Title)}</h1>
-        <p style="font-size:1.125rem;color:#4a4a4a;line-height:1.6;">${escapeHtmlAttribute(seoConfig.metaDescription)}</p>
+        <h1 style="font-size:clamp(1.75rem,1.05rem + 3.2vw,3rem);line-height:1.15;font-weight:700;color:#1a1a1a;margin-bottom:1rem;overflow-wrap:anywhere;">${escapeHtmlAttribute(h1Title)}</h1>
+        <p style="font-size:1.125rem;color:#4a4a4a;line-height:1.6;max-width:65ch;">${escapeHtmlAttribute(seoConfig.metaDescription)}</p>
       </header>
       <main>${calculatorNoteHtml}</main>`;
 
@@ -1051,13 +1051,13 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
       for (const block of section.blocks) {
         if (block.kind === 'p') {
           content += `
-        <p style="color:#4a4a4a;line-height:1.6;margin-bottom:1rem;">${escapeHtmlAttribute(block.text)}</p>`;
+        <p style="color:#1f2937;font-size:1.0625rem;line-height:1.65;max-width:66ch;margin-bottom:1.1em;">${escapeHtmlAttribute(block.text)}</p>`;
         } else if (block.kind === 'formula') {
           content += `
-        <p style="background:#f3f4f6;padding:0.75rem 1rem;border-radius:0.375rem;font-family:ui-monospace,monospace;font-size:0.875rem;line-height:1.5;margin-bottom:1rem;">${escapeHtmlAttribute(block.text)}</p>`;
+        <p style="background:#f3f4f6;padding:0.75rem 1rem;border-radius:0.375rem;font-family:ui-monospace,monospace;font-size:0.875rem;line-height:1.6;max-width:66ch;margin-bottom:1.1em;">${escapeHtmlAttribute(block.text)}</p>`;
         } else {
           content += `
-        <ul style="list-style:disc;padding-left:1.5rem;color:#4a4a4a;line-height:1.6;margin-bottom:1rem;">`;
+        <ul style="list-style:disc;padding-left:1.4em;color:#1f2937;font-size:1.0625rem;line-height:1.65;max-width:66ch;margin-bottom:1.1em;">`;
           for (const item of block.items) {
             content += `
           <li>${escapeHtmlAttribute(item)}</li>`;
@@ -1080,7 +1080,7 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
       content += `
         <div style="margin-bottom:1.5rem;">
           <h3 style="font-size:1.125rem;font-weight:600;margin-bottom:0.5rem;">${escapeHtmlAttribute(faq.question)}</h3>
-          <p style="color:#4a4a4a;line-height:1.6;">${escapeHtmlAttribute(faq.answer)}</p>
+          <p style="color:#4a4a4a;line-height:1.65;max-width:66ch;">${escapeHtmlAttribute(faq.answer)}</p>
         </div>`;
     }
     content += '</section>';

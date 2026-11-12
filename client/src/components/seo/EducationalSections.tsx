@@ -19,12 +19,12 @@ export default function EducationalSections({ content, faqTitle = "Veelgestelde 
           <CardHeader>
             <CardTitle className="text-xl">{section.heading}</CardTitle>
           </CardHeader>
-          <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+          <CardContent className="prose">
             {section.blocks.map((block, index) => {
               if (block.kind === "p") return <p key={index}>{block.text}</p>;
               if (block.kind === "formula") {
                 return (
-                  <p key={index} className="bg-muted rounded-md px-4 py-3 font-mono text-sm">
+                  <p key={index} className="bg-muted rounded-md px-4 py-3 font-mono text-sm leading-relaxed">
                     {block.text}
                   </p>
                 );
@@ -47,11 +47,11 @@ export default function EducationalSections({ content, faqTitle = "Veelgestelde 
             <CardTitle className="text-xl">{faqTitle}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-[66ch]">
               {content.faqs.map((faq) => (
                 <div key={faq.question}>
-                  <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                  <h3 className="font-semibold leading-snug mb-2">{faq.question}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                 </div>
               ))}
             </div>

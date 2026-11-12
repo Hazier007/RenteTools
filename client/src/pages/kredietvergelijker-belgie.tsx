@@ -81,7 +81,7 @@ export default function KredietvergelijkerBelgie() {
               <CardHeader>
                 <CardTitle className="text-xl">Waarom krediet vergelijken zo belangrijk is</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Het verschil tussen de duurste en goedkoopste lening kan honderden of 
                   zelfs duizenden euro's bedragen. Door goed te vergelijken bespaart u 
@@ -136,7 +136,7 @@ export default function KredietvergelijkerBelgie() {
               <CardHeader>
                 <CardTitle className="text-xl">Hoe krediet effectief vergelijken?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Effectief vergelijken gaat verder dan alleen kijken naar de rentevoet. 
                   Het JKP (Jaarlijkse Kostenpercentage) is het belangrijkste vergelijkingsgetal.
@@ -179,7 +179,7 @@ export default function KredietvergelijkerBelgie() {
               <CardHeader>
                 <CardTitle className="text-xl">Tips voor de beste kredietonderhandeling</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Met de juiste strategie kunt u vaak betere voorwaarden onderhandelen 
                   dan de standaard aanbiedingen. Banken willen graag goede klanten binnenhalen.

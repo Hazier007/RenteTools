@@ -48,6 +48,13 @@ export default function SpaarrenteCalculator() {
     setChartData(calculationResult.yearlyBreakdown);
   };
 
+  // Eerste berekening met de standaardwaarden, zodat het resultaatpaneel
+  // nooit als leeg blok verschijnt; daarna rekent form.watch live door.
+  useEffect(() => {
+    onSubmit(form.getValues());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Real-time calculation
   useEffect(() => {
     const subscription = form.watch((data) => {
