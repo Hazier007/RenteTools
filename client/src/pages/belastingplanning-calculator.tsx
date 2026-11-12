@@ -36,7 +36,7 @@ export default function BelastingplanningCalculatorPage() {
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
             <p className="text-lg font-semibold mb-2">💰 Belgische Belasting Optimalisatie:</p>
             <ul className="space-y-1 text-sm opacity-90">
-              <li>• Spaarbonus: €2.290 - €4.580 belastingvrij</li>
+              <li>• Spaarbonus: €1.020 - €2.040 belastingvrij</li>
               <li>• Pensioensparen: 30% belastingvoordeel</li>
               <li>• ETFs: Geen tussentijdse belasting</li>
               <li>• Meerwaarden: Belastingvrij voor particulieren</li>
@@ -105,10 +105,10 @@ export default function BelastingplanningCalculatorPage() {
                       <div className="p-3 bg-orange-50 dark:bg-orange-950 rounded-lg">
                         <div className="font-medium text-orange-900 dark:text-orange-100">Interest (boven vrijstelling)</div>
                         <div className="text-sm text-orange-700 dark:text-orange-300">
-                          30% roerende voorheffing op interest boven spaarbonus
+                          15% roerende voorheffing op spaarrente boven de vrijstelling
                         </div>
                         <div className="text-xs text-orange-600 dark:text-orange-400 mt-1">
-                          Vrijstelling: €2.290 (alleenstaand) / €4.580 (gehuwd)
+                          Vrijstelling: €1.020 (alleenstaand) / €2.040 (gehuwd), 2026
                         </div>
                       </div>
                       
@@ -187,7 +187,7 @@ export default function BelastingplanningCalculatorPage() {
                         <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-3 font-bold text-sm">2</div>
                         <div>
                           <div className="font-medium">Spaarbonus Optimaliseren</div>
-                          <div className="text-sm text-muted-foreground">€2.290 - €4.580 belastingvrij per jaar</div>
+                          <div className="text-sm text-muted-foreground">€1.020 - €2.040 belastingvrij per jaar</div>
                         </div>
                       </div>
                       

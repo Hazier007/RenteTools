@@ -10,6 +10,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { persoonlijkeLeningBerekenenContent } from "@/seo/calculator-content/persoonlijke-lening-berekenen";
 
 export default function PersoonlijkeLeningBerekenen() {
   const seoConfig = getSeoConfig("persoonlijke-lening-berekenen");
@@ -182,49 +184,8 @@ export default function PersoonlijkeLeningBerekenen() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde vragen over persoonlijke leningen</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoeveel kan ik maximaal lenen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      De meeste banken lenen tot €75.000. Het exacte bedrag hangt af van uw 
-                      inkomen, uitgaven en kredietgeschiedenis.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoe snel krijg ik het geld?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Bij goedkeuring krijgt u het geld meestal binnen 1-3 werkdagen op uw rekening. 
-                      Online aanvragen gaan vaak sneller dan in de bank.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat als mijn aanvraag wordt afgewezen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      U kunt proberen bij een andere bank of een kleiner bedrag aanvragen. 
-                      Wacht eerst enkele weken voordat u opnieuw aanvraagt.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Is een persoonlijke lening belastbaar aftrekbaar?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Nee, rente op persoonlijke leningen is niet fiscaal aftrekbaar in België, 
-                      behalve in specifieke gevallen zoals renovatieleningen.
-                    </p>
-                  </div>
-
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={persoonlijkeLeningBerekenenContent} faqTitle="Veelgestelde vragen over persoonlijke leningen" />
 
         </div>
       </section>

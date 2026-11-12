@@ -13,13 +13,19 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { roerendeVoorheffingCalculatorContent } from "@/seo/calculator-content/roerende-voorheffing-calculator";
 
 export default function RoerendeVoorheffingCalculator() {
   const seoConfig = getSeoConfig("roerende-voorheffing-calculator");
   useSeoTags("roerende-voorheffing-calculator");
   const [interestInkomsten, setInterestInkomsten] = useState<string>("1500");
   const [dividendInkomsten, setDividendInkomsten] = useState<string>("500");
-  const [belastingvrij] = useState<number>(980); // Belastingvrij bedrag 2026
+  // Vrijstelling spaarrente per persoon (inkomstenjaar 2026; bevroren op €1.020 tot en met 2030)
+  const [belastingvrij] = useState<number>(1020);
+  // 15% op interest van gereglementeerde spaarrekeningen boven de vrijstelling
+  const [roerendeVoorheffingSpaarrente] = useState<number>(15);
+  // 30% op dividenden en op interest van termijnrekeningen, kasbons en obligaties
   const [roerendeVoorheffingPercentage] = useState<number>(30);
   
   const berekenRoerendeVoorheffing = () => {
@@ -29,7 +35,7 @@ export default function RoerendeVoorheffingCalculator() {
     
     // Interest berekening
     const belastbareInterest = Math.max(0, totaleInterest - belastingvrij);
-    const voorheffingInterest = belastbareInterest * (roerendeVoorheffingPercentage / 100);
+    const voorheffingInterest = belastbareInterest * (roerendeVoorheffingSpaarrente / 100);
     const nettoInterest = totaleInterest - voorheffingInterest;
     
     // Dividend berekening (geen vrijstelling)
@@ -74,8 +80,8 @@ export default function RoerendeVoorheffingCalculator() {
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
             <p className="text-lg font-semibold mb-2">💰 Belastingtarieven 2026:</p>
             <ul className="space-y-1 text-sm opacity-90">
-              <li>• Spaarrente: €980 belastingvrij, daarna 30%</li>
-              <li>• Dividenden: 30% vanaf de eerste euro</li>
+              <li>• Spaarrente (gereglementeerde spaarrekening): €1.020 belastingvrij per persoon, daarna 15%</li>
+              <li>• Dividenden, termijnrekeningen, kasbons en obligaties: 30% vanaf de eerste euro</li>
               <li>• Automatische inhouding door bank/broker</li>
             </ul>
           </div>
@@ -110,7 +116,7 @@ export default function RoerendeVoorheffingCalculator() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div>
-                      <Label htmlFor="interest">Jaarlijkse interest inkomsten (€)</Label>
+                      <Label htmlFor="interest">Jaarlijkse interest op gereglementeerde spaarrekeningen (€)</Label>
                       <Input
                         id="interest"
                         type="number"
@@ -119,12 +125,12 @@ export default function RoerendeVoorheffingCalculator() {
                         placeholder="1500"
                       />
                       <p className="text-xs text-muted-foreground mt-1">
-                        Van spaarrekeningen, termijnrekeningen, obligaties
+                        Basisrente + getrouwheidspremie, alle spaarrekeningen samen (per persoon)
                       </p>
                     </div>
                     
                     <div>
-                      <Label htmlFor="dividend">Jaarlijkse dividend inkomsten (€)</Label>
+                      <Label htmlFor="dividend">Jaarlijkse dividenden en overige interest aan 30% (€)</Label>
                       <Input
                         id="dividend"
                         type="number"
@@ -133,7 +139,7 @@ export default function RoerendeVoorheffingCalculator() {
                         placeholder="500"
                       />
                       <p className="text-xs text-muted-foreground mt-1">
-                        Van aandelen, beleggingsfondsen, ETF's
+                        Dividenden van aandelen, fondsen en ETF's, plus interest van termijnrekeningen, kasbons en obligaties
                       </p>
                     </div>
                     
@@ -142,7 +148,7 @@ export default function RoerendeVoorheffingCalculator() {
                       <ul className="text-sm space-y-1">
                         <li>• Interest: Eerste €{belastingvrij.toLocaleString('nl-BE')} belastingvrij</li>
                         <li>• Dividenden: Geen vrijstelling</li>
-                        <li>• Tarief: {roerendeVoorheffingPercentage}% op belastbaar bedrag</li>
+                        <li>• Tarief: {roerendeVoorheffingSpaarrente}% op spaarrente boven de vrijstelling, {roerendeVoorheffingPercentage}% op dividenden</li>
                       </ul>
                     </div>
                   </div>
@@ -168,7 +174,7 @@ export default function RoerendeVoorheffingCalculator() {
                               <span>€{resultaat.belastbareInterest.toLocaleString('nl-BE')}</span>
                             </div>
                             <div className="flex justify-between">
-                              <span>Voorheffing 30%:</span>
+                              <span>Voorheffing {roerendeVoorheffingSpaarrente}%:</span>
                               <span className="text-red-600">-€{resultaat.voorheffingInterest.toLocaleString('nl-BE', {minimumFractionDigits: 2})}</span>
                             </div>
                             <div className="flex justify-between font-semibold">
@@ -178,7 +184,7 @@ export default function RoerendeVoorheffingCalculator() {
                           </div>
                           
                           <div className="border-t pt-2">
-                            <h4 className="font-semibold mb-2">Dividenden ({parseFloat(dividendInkomsten || "0").toLocaleString('nl-BE')}€):</h4>
+                            <h4 className="font-semibold mb-2">Dividenden &amp; overige inkomsten aan 30% ({parseFloat(dividendInkomsten || "0").toLocaleString('nl-BE')}€):</h4>
                             <div className="flex justify-between">
                               <span>Voorheffing 30%:</span>
                               <span className="text-red-600">-€{resultaat.voorheffingDividend.toLocaleString('nl-BE', {minimumFractionDigits: 2})}</span>
@@ -225,8 +231,8 @@ export default function RoerendeVoorheffingCalculator() {
                 
                 <h3>Belastingvrije Schijf Spaarrente 2026:</h3>
                 <ul>
-                  <li><strong>€980 per jaar:</strong> Volledig belastingvrij voor alle spaarders</li>
-                  <li><strong>30% roerende voorheffing:</strong> Op het bedrag boven €980</li>
+                  <li><strong>€1.020 per jaar (2026):</strong> belastingvrij per persoon op gereglementeerde spaarrekeningen; €2.040 voor gehuwden en wettelijk samenwonenden</li>
+                  <li><strong>15% roerende voorheffing:</strong> op de spaarrente boven €1.020 (30% op niet-gereglementeerde rekeningen)</li>
                   <li><strong>Per persoon:</strong> Elk gezinslid heeft eigen vrijstelling</li>
                   <li><strong>Automatisch toegepast:</strong> Door uw bank of financiële instelling</li>
                 </ul>
@@ -245,9 +251,9 @@ export default function RoerendeVoorheffingCalculator() {
                     <div>
                       <p><strong>€1.500 interest per jaar:</strong></p>
                       <ul className="ml-4">
-                        <li>• €156 roerende voorheffing (30% van €520)</li>
-                        <li>• €1.344 netto interest</li>
-                        <li>• €520 boven vrijstelling</li>
+                        <li>• €72 roerende voorheffing (15% van €480)</li>
+                        <li>• €1.428 netto interest</li>
+                        <li>• €480 boven vrijstelling</li>
                       </ul>
                     </div>
                   </div>
@@ -256,8 +262,8 @@ export default function RoerendeVoorheffingCalculator() {
                 <div className="bg-yellow-50 dark:bg-yellow-950 p-4 rounded-lg">
                   <h4 className="font-semibold mb-2">⚠️ Let op bij Echtparen:</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Elk gezinslid heeft eigen €980 vrijstelling</li>
-                    <li>• Spaarrekening op naam van beide partners: 2× €980 = €1.960</li>
+                    <li>• Elke partner heeft een eigen vrijstelling van €1.020</li>
+                    <li>• Gehuwden en wettelijk samenwonenden: 2× €1.020 = €2.040 op de gezamenlijke aangifte</li>
                     <li>• Verdeel spaargeld strategisch over verschillende rekeningen</li>
                     <li>• Kinderen hebben ook eigen vrijstelling vanaf 18 jaar</li>
                   </ul>
@@ -280,10 +286,10 @@ export default function RoerendeVoorheffingCalculator() {
                   <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
                     <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">💰 Interest Inkomsten</h4>
                     <ul className="text-sm space-y-1">
-                      <li>• €980 belastingvrij per jaar</li>
-                      <li>• 30% op bedrag boven vrijstelling</li>
-                      <li>• Spaarrekeningen, termijnrekeningen</li>
-                      <li>• Obligaties en staatsbon</li>
+                      <li>• Gereglementeerde spaarrekening: €1.020 belastingvrij per jaar</li>
+                      <li>• 15% op de spaarrente boven de vrijstelling</li>
+                      <li>• Termijnrekeningen, kasbons, obligaties: 30%, geen vrijstelling</li>
+                      <li>• Staatsbons: 30% (de staatsbon van september 2023 uitzonderlijk 15%)</li>
                     </ul>
                   </div>
                   
@@ -318,47 +324,8 @@ export default function RoerendeVoorheffingCalculator() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde Vragen - Roerende Voorheffing</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoeveel spaarrente is belastingvrij in België?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      In 2026 is €980 aan interest per jaar volledig belastingvrij. Dit geldt per persoon, 
-                      dus echtparen kunnen samen €1.960 belastingvrij ontvangen.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wanneer wordt roerende voorheffing automatisch ingehouden?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Uw bank houdt automatisch 30% roerende voorheffing in op interest boven €980 
-                      en op alle dividenden. Dit gebeurt op het moment van uitbetaling.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Moet ik roerende voorheffing aangeven in mijn belastingaangifte?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Voor gewone spaar- en beleggingsrekeningen is geen aangifte nodig. De roerende voorheffing 
-                      is definitief. Alleen bij professionele beleggingen moet u aangeven.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik roerende voorheffing terugkrijgen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      In principe niet, behalve bij incorrecte inhouding of bij specifieke gevallen 
-                      zoals buitenlandse bronheffing die hoger is dan 30%.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={roerendeVoorheffingCalculatorContent} faqTitle="Veelgestelde vragen over roerende voorheffing" />
 
         </div>
       </section>

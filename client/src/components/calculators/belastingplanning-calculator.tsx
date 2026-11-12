@@ -71,7 +71,8 @@ export default function BelastingplanningCalculator() {
   const calculateTaxOptimization = () => {
     // Calculate current tax burden
     const roerendeVoorheffing = dividenden * 0.30 + interest * 0.30;
-    const spaarrekeningBelasting = Math.max(0, (spaarrekening * 0.025 - getSpaarVrijstelling(burgerlijkeStaat)) * 0.30);
+    // Gereglementeerde spaarrekening: 15% roerende voorheffing boven de vrijstelling (€1.020 p.p. in 2026)
+    const spaarrekeningBelasting = Math.max(0, (spaarrekening * 0.025 - getSpaarVrijstelling(burgerlijkeStaat)) * 0.15);
     const currentTaxBurden = roerendeVoorheffing + spaarrekeningBelasting;
     
     // Calculate optimization strategies
@@ -254,10 +255,10 @@ export default function BelastingplanningCalculator() {
 
   const getSpaarVrijstelling = (status: string): number => {
     switch (status) {
-      case "alleenstaand": return 2290;
-      case "gehuwd": return 4580;
-      case "samenwonend": return 2290;
-      default: return 2290;
+      case "alleenstaand": return 1020;
+      case "gehuwd": return 2040;
+      case "samenwonend": return 1020;
+      default: return 1020;
     }
   };
 
@@ -769,7 +770,7 @@ export default function BelastingplanningCalculator() {
                         </li>
                         <li className="flex items-start">
                           <i className="fas fa-coins text-red-600 mr-2 mt-1"></i>
-                          <span><strong>Interest:</strong> 30% roerende voorheffing boven vrijstelling</span>
+                          <span><strong>Spaarrente:</strong> 15% roerende voorheffing boven de vrijstelling (30% op termijnrekeningen en kasbons)</span>
                         </li>
                         <li className="flex items-start">
                           <i className="fas fa-home text-red-600 mr-2 mt-1"></i>
@@ -791,7 +792,7 @@ export default function BelastingplanningCalculator() {
                         </li>
                         <li className="flex items-start">
                           <i className="fas fa-piggy-bank text-green-600 mr-2 mt-1"></i>
-                          <span><strong>Spaarbonus:</strong> €2.290 (alleenstaand) / €4.580 (gehuwd)</span>
+                          <span><strong>Spaarbonus:</strong> €1.020 (alleenstaand) / €2.040 (gehuwd)</span>
                         </li>
                         <li className="flex items-start">
                           <i className="fas fa-umbrella text-green-600 mr-2 mt-1"></i>

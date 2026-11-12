@@ -46,7 +46,8 @@ describe('CAL-158 duplicate-title prevention', () => {
   it('known canonical paths still resolve to their configured SEO titles', () => {
     const home = getSeoConfigForUrl('/');
     expect(home).not.toBeNull();
-    expect(home!.metaTitle).toMatch(/Hoogste Spaarrente/);
+    // Homepage is sinds 12 nov 2026 gepositioneerd rond interesten berekenen (wettelijke interest eerst).
+    expect(home!.metaTitle).toMatch(/^Interesten Berekenen België \d{4}: Wettelijke Interest/);
 
     const fire = getSeoConfigForUrl('/planning/fire-calculator');
     expect(fire).not.toBeNull();

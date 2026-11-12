@@ -81,6 +81,10 @@ export default function OverOns() {
                 , actief binnen de incasso- en kredietbeheerwereld. Die unieke combinatie van digitale knowhow 
                 en financiële praktijkervaring vormt de basis van alle tools en inzichten op dit platform.
               </p>
+              <p>
+                Voor de transparantie: Interesten.be en CollectPro.be hebben dezelfde eigenaar. Waar we op deze site
+                naar CollectPro verwijzen, vermelden we dat uitdrukkelijk. De rekentools en de uitleg zelf zijn en blijven neutraal.
+              </p>
             </CardContent>
           </Card>
 
@@ -115,6 +119,52 @@ export default function OverOns() {
                 Onze calculators en artikels worden ontwikkeld met oog voor nauwkeurigheid, transparantie 
                 en actuele Belgische regelgeving, en worden regelmatig bijgewerkt volgens de nieuwste rentes, 
                 fiscale regels en wetgeving. Zo ben je zeker dat je rekent op cijfers die kloppen — vandaag én morgen.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Methodology & Sources */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center">
+                <i className="fas fa-book mr-3 text-primary"></i>
+                Methodologie &amp; Bronnen
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <p>
+                Elke calculator vertrekt van de officiële cijfers en de wettelijke rekenregels, niet van schattingen.
+                De belangrijkste bronnen:
+              </p>
+              <ul>
+                <li><strong>Wettelijke interestvoet, interestvoet handelstransacties en fiscale interestvoeten:</strong> berichten van de FOD Financiën (Algemene Administratie van de Thesaurie) in het Belgisch Staatsblad.</li>
+                <li><strong>Onbetaalde facturen:</strong> wet van 2 augustus 2002 (betalingsachterstand bij handelstransacties) en Boek XIX van het Wetboek van Economisch Recht (FOD Economie).</li>
+                <li><strong>Roerende voorheffing en vrijstelling spaarrente:</strong> Wetboek van de Inkomstenbelastingen 1992 en de jaarlijkse bedragen van de FOD Financiën.</li>
+                <li><strong>Spaar- en kredietrentes:</strong> tarievenbladen van de banken, aangevuld met Wikifin (FSMA) en de Nationale Bank van België voor referentierentes (Euribor, ECB).</li>
+              </ul>
+              <p>
+                Rentevoeten die bij wet veranderen (januari en juli) werken we bij zodra ze in het Staatsblad verschijnen.
+                Spaartarieven controleren we periodiek. Elke pagina vermeldt het jaar of semester waarop de cijfers slaan.
+                Fout of verouderd cijfer gezien? Mail <a href="mailto:info@interesten.be" className="text-primary hover:underline">info@interesten.be</a>.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Disclaimer */}
+          <Card id="disclaimer">
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center">
+                <i className="fas fa-exclamation-triangle mr-3 text-primary"></i>
+                Disclaimer
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <p>
+                De informatie en berekeningen op Interesten.be zijn algemeen en informatief. Ze vormen geen financieel,
+                fiscaal, juridisch of beleggingsadvies en vervangen geen advies op maat van een bank, boekhouder, advocaat
+                of gerechtsdeurwaarder. Resultaten hangen af van de gegevens die u invoert; controleer ze vóór u beslissingen
+                neemt of bedragen aanrekent aan derden. Interesten.be is niet aansprakelijk voor schade die voortvloeit uit
+                het gebruik van de tools of de inhoud.
               </p>
             </CardContent>
           </Card>
@@ -169,7 +219,8 @@ export default function OverOns() {
               </p>
               <p>
                 <strong>Email:</strong> info@interesten.be<br />
-                <strong>Website:</strong> <a href="/" className="text-primary hover:underline">www.interesten.be</a>
+                <strong>Website:</strong> <a href="/" className="text-primary hover:underline">interesten.be</a><br />
+                <strong>Uitgever:</strong> Bart Deblock (Hazier.be), België
               </p>
             </CardContent>
           </Card>

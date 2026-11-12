@@ -329,7 +329,7 @@ export default function Sitemap() {
             <CardContent>
               <ul className="space-y-2">
                 <li>
-                  <a href="/wettelijke-rentevoet-belgie" className="text-primary hover:underline">
+                  <a href="/lenen/wettelijke-rentevoet-belgie" className="text-primary hover:underline">
                     Wettelijke Rentevoet België - Nalatigheidsinterest Berekenen
                   </a>
                 </li>

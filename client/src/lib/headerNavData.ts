@@ -6,16 +6,6 @@ export interface HeaderNavItem {
   metaDescription: string;
 }
 
-const months = [
-  "januari", "februari", "maart", "april", "mei", "juni",
-  "juli", "augustus", "september", "oktober", "november", "december",
-];
-
-function currentDateLabel(): string {
-  const now = new Date();
-  return `${months[now.getMonth()]} ${now.getFullYear()}`;
-}
-
 function currentYear(): number {
   return new Date().getFullYear();
 }
@@ -25,7 +15,7 @@ function currentYear(): number {
 // config into the eager bundle.
 export const headerNavData: Record<Exclude<SiloCategory, "Overige">, HeaderNavItem[]> = {
   Sparen: [
-    { slug: "hoogste-spaarrente-belgie", breadcrumbTitle: "Hoogste Spaarrente", metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update ${currentDateLabel()}.` },
+    { slug: "hoogste-spaarrente-belgie", breadcrumbTitle: "Hoogste Spaarrente", metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – actueel voor ${currentYear()}.` },
     { slug: "deposito-calculator", breadcrumbTitle: "Deposito Calculator", metaDescription: "Bereken uw deposito opbrengst in België. Vergelijk termijnrekening tarieven van 1,5% tot 3,5%. Inclusief roerende voorheffing berekening." },
     { slug: "samengestelde-interest-berekenen", breadcrumbTitle: "Samengestelde Interest", metaDescription: "Zie hoe rente-op-rente je spaargeld laat groeien. Bereken incl. roerende voorheffing – gratis compound interest tool." },
     { slug: "doelspaarcalculator", breadcrumbTitle: "Doelspaar Calculator", metaDescription: "Plan al uw spaardoelen tegelijk. Bereken hoeveel u maandelijks moet sparen voor auto, vakantie, noodfonds en meer. Smart goal planning." },
