@@ -39,7 +39,7 @@ console.log('[3/5] Setting up Build Output structure...');
 fs.writeFileSync(
   path.join(OUTPUT, 'functions', 'api.func', '.vc-config.json'),
   JSON.stringify({
-    runtime: 'nodejs20.x',
+    runtime: 'nodejs22.x',
     handler: 'index.mjs',
     launcherType: 'Nodejs',
     maxDuration: 30
