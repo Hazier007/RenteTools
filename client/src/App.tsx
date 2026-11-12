@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Redirect from "@/components/Redirect";
 import { usePageViewTracking } from "@/hooks/use-page-view-tracking";
+import { useConsentBridge } from "@/hooks/use-consent-bridge";
 
 // Eager: home and the 404 fallback. Home is the dominant entry point and
 // must render without an extra network round-trip.
@@ -40,6 +41,7 @@ function RouteFallback() {
 }
 
 function Router() {
+  useConsentBridge();
   usePageViewTracking();
   return (
     <Suspense fallback={<RouteFallback />}>
