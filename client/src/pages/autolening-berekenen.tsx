@@ -10,6 +10,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { autoleningBerekenenContent } from "@/seo/calculator-content/autolening-berekenen";
 
 export default function AutoleningBerekenen() {
   const seoConfig = getSeoConfig("autolening-berekenen");
@@ -155,49 +157,8 @@ export default function AutoleningBerekenen() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde vragen over autoleningen</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat is het verschil tussen JKP en rentevoet?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      De JKP (Jaarlijkse Kostenpercentage) is het totale kostenpercentage inclusief 
-                      alle kosten. De rentevoet is alleen de interest op de lening.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoeveel voorschot moet ik betalen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Er is geen verplicht minimum, maar 10-20% voorschot is gebruikelijk. 
-                      Meer voorschot betekent lagere maandlasten en vaak een betere rentevoet.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik mijn autolening vervroegd terugbetalen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, maar sommige banken rekenen vervroegde terugbetalingskosten. 
-                      Check dit vooraf in uw leningscontract.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat gebeurt er als ik mijn afbetalingen niet kan betalen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Neem direct contact op met uw bank voor een betalingsregeling. 
-                      Bij blijvende problemen kan de bank de auto terugvorderen.
-                    </p>
-                  </div>
-
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={autoleningBerekenenContent} faqTitle="Veelgestelde vragen over autoleningen" />
 
         </div>
       </section>

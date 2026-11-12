@@ -17,6 +17,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { hoogsteSpaarrenteBelgieContent } from "@/seo/calculator-content/hoogste-spaarrente-belgie";
 
 export default function HoogsteSpaarrenteBelgie() {
   const seoConfig = getSeoConfig("hoogste-spaarrente-belgie");
@@ -193,49 +195,8 @@ export default function HoogsteSpaarrenteBelgie() {
                 </CardContent>
               </Card>
 
-              {/* FAQ Section */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Veelgestelde vragen over spaarrente</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-6">
-                    
-                    <div>
-                      <h3 className="font-semibold mb-2">Hoeveel interest krijg ik op 10.000 euro?</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Met een gemiddelde spaarrente van 1,5% krijgt u jaarlijks 150 euro interest op 10.000 euro. 
-                        Met samengestelde interest groeit dit bedrag elk jaar. Na 10 jaar heeft u ongeveer 11.605 euro.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="font-semibold mb-2">Wat is de hoogste rente op een spaarboekje?</h3>
-                      <p className="text-sm text-muted-foreground">
-                        De hoogste gecombineerde rente (basisrente + getrouwheidspremie) ligt momenteel rond de 2,5% 
-                        voor nieuwe klanten. Let wel: dit geldt vaak alleen voor een beperkt bedrag en periode.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="font-semibold mb-2">Wanneer krijg ik de getrouwheidspremie?</h3>
-                      <p className="text-sm text-muted-foreground">
-                        De getrouwheidspremie krijgt u na 12 maanden trouw te zijn gebleven bij dezelfde bank. 
-                        Als u tussentijds van bank wisselt, verliest u de premie over dat jaar.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="font-semibold mb-2">Is spaarrente belastbaar in België?</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Ja, boven 1.020 euro interest per persoon per jaar (2026; 2.040 euro voor gehuwden en wettelijk samenwonenden)
-                        houdt de bank 15% roerende voorheffing in op een gereglementeerde spaarrekening. Tot dat bedrag is uw spaarrente belastingvrij.
-                      </p>
-                    </div>
-
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+              <EducationalSections content={hoogsteSpaarrenteBelgieContent} faqTitle="Veelgestelde vragen over spaarrente" />
 
               {/* Related Calculators */}
               <RelatedCalculators currentSlug="hoogste-spaarrente-belgie" />

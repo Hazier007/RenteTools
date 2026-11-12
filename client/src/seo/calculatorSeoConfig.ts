@@ -1,5 +1,15 @@
 import { getActueleRentevoeten, formatPercent } from "../../../shared/wettelijke-interest";
 import { wettelijkeRentevoetBelgieContent } from "./calculator-content/wettelijke-rentevoet-belgie";
+import { hoogsteSpaarrenteBelgieContent } from "./calculator-content/hoogste-spaarrente-belgie";
+import { depositoCalculatorContent } from "./calculator-content/deposito-calculator";
+import { samengesteldeInterestBerekenenContent } from "./calculator-content/samengestelde-interest-berekenen";
+import { roerendeVoorheffingCalculatorContent } from "./calculator-content/roerende-voorheffing-calculator";
+import { pensioensparenCalculatorContent } from "./calculator-content/pensioensparen-calculator";
+import { pensioenCalculatorContent } from "./calculator-content/pensioen-calculator";
+import { hypothecaireLeningBerekenenContent } from "./calculator-content/hypothecaire-lening-berekenen";
+import { leningHerfinancierenContent } from "./calculator-content/lening-herfinancieren";
+import { persoonlijkeLeningBerekenenContent } from "./calculator-content/persoonlijke-lening-berekenen";
+import { autoleningBerekenenContent } from "./calculator-content/autolening-berekenen";
 
 const wettelijkeActueel = getActueleRentevoeten();
 
@@ -155,10 +165,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "home": {
     slug: "home",
     category: "Overige",
-    pageTitle: `Hoogste Spaarrente België ${getCurrentYear()} + 70+ Gratis Calculators`,
+    pageTitle: "Interesten berekenen in België: wettelijke, nalatigheids- en spaarinteresten",
     breadcrumbTitle: "Home",
-    metaTitle: `Hoogste Spaarrente België ${getCurrentYear()} + 70+ Gratis Calculators`,
-    metaDescription: `Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België ${getCurrentYear()}.`,
+    metaTitle: `Interesten Berekenen België ${getCurrentYear()}: Wettelijke Interest & Spaarrente`,
+    metaDescription: "Bereken wettelijke interest en nalatigheidsinterest op onbetaalde facturen (incl. €40 forfait), spaarrente en leningen. Gratis Belgische calculators.",
     faqs: [],
     authorityLinks: []
   },
@@ -169,7 +179,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Hoogste Spaarrente",
     metaTitle: `Hoogste Spaarrente België ${getCurrentYear()}: Top Banken Vergeleken`,
     metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – actueel voor ${getCurrentYear()}.`,
-    faqs: defaultFaqsBySilo.Sparen,
+    faqs: hoogsteSpaarrenteBelgieContent.faqs,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "deposito-calculator": {
@@ -179,24 +189,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Deposito Calculator",
     metaTitle: "Deposito Calculator België - Termijnrekening Rente Berekenen",
     metaDescription: "Bereken uw deposito opbrengst in België. Vergelijk termijnrekening tarieven van 1,5% tot 3,5%. Inclusief roerende voorheffing berekening.",
-    faqs: [
-      {
-        question: "Wat is een termijnrekening of deposito?",
-        answer: "Een deposito is een spaarproduct waarbij u een bedrag vastzet voor een bepaalde periode (1-12 maanden). In ruil krijgt u een vaste, vaak hogere rente dan op een gewone spaarrekening."
-      },
-      {
-        question: "Hoeveel rente geeft een deposito?",
-        answer: "Depositotarieven variëren van 1,5% tot 3,5%, afhankelijk van het bedrag en de looptijd. Langere looptijden geven meestal hogere rentes."
-      },
-      {
-        question: "Kan ik tussentijds aan mijn geld?",
-        answer: "Nee, bij een deposito zit uw geld vast voor de gekozen periode. Vroegtijdig opnemen betekent vaak boetes en verlies van interest."
-      },
-      {
-        question: "Is een deposito belastbaar?",
-        answer: "Ja, u betaalt 30% roerende voorheffing op de interest vanaf de eerste euro. De vrijstelling van €1.020 per jaar (2026) en het tarief van 15% gelden alleen voor gereglementeerde spaarrekeningen."
-      }
-    ],
+    faqs: depositoCalculatorContent.faqs,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "samengestelde-interest-berekenen": {
@@ -206,7 +199,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Samengestelde Interest",
     metaTitle: `Samengestelde Interest Berekenen België ${getCurrentYear()}`,
     metaDescription: "Zie hoe rente-op-rente je spaargeld laat groeien. Bereken incl. roerende voorheffing – gratis compound interest tool.",
-    faqs: defaultFaqsBySilo.Sparen,
+    faqs: samengesteldeInterestBerekenenContent.faqs,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "doelspaarcalculator": {
@@ -313,7 +306,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Hypothecaire Lening",
     metaTitle: `Hypotheek Berekenen België ${getCurrentYear()}: Maandlasten & Kosten`,
     metaDescription: `Bereken je hypotheek maandlasten ${getCurrentYear()} incl. registratierechten, notaris & actuele rente. Maximale lening simuleren – gratis tool België.`,
-    faqs: defaultFaqsBySilo.Lenen,
+    faqs: hypothecaireLeningBerekenenContent.faqs,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "woningkrediet-simulator": {
@@ -333,7 +326,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Persoonlijke Lening",
     metaTitle: "Persoonlijke Lening Berekenen België - Consumentenkrediet",
     metaDescription: "Bereken uw persoonlijke lening kosten. Tarieven van 3-8% op consumptieleningen in België. Vergelijk maandlasten en totale kosten.",
-    faqs: defaultFaqsBySilo.Lenen,
+    faqs: persoonlijkeLeningBerekenenContent.faqs,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "autolening-berekenen": {
@@ -343,7 +336,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Autolening",
     metaTitle: "Autolening Berekenen België - Autokredieten Vergelijken",
     metaDescription: "Bereken uw autolening met rentes vanaf 2,9%. Vergelijk autokredieten en financieringsopties in België. Bereken maandlast en TAEG.",
-    faqs: defaultFaqsBySilo.Lenen,
+    faqs: autoleningBerekenenContent.faqs,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "lening-herfinancieren": {
@@ -353,7 +346,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Lening Herfinancieren",
     metaTitle: `Lening Herfinancieren België - Hypotheek Oversluiten ${getCurrentYear()}`,
     metaDescription: "Bereken of herfinancieren voordelig is. Vergelijk nieuwe rente met vervroegde terugbetalingskosten. Bespaar tot €10.000+ in België.",
-    faqs: defaultFaqsBySilo.Lenen,
+    faqs: leningHerfinancierenContent.faqs,
     authorityLinks: [defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "schuldenconsolidatie-calculator": {
@@ -616,7 +609,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Roerende Voorheffing",
     metaTitle: `Roerende Voorheffing Berekenen ${getCurrentYear()} België`,
     metaDescription: `Bereken je roerende voorheffing: 30% op dividenden en termijnrekeningen, 15% op spaarrente boven de vrijstelling van €1.020 (${getCurrentYear()}). Gratis tool voor België.`,
-    faqs: defaultFaqsBySilo.Beleggen,
+    faqs: roerendeVoorheffingCalculatorContent.faqs,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "crypto-belasting-calculator": {
@@ -711,7 +704,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Pensioensparen",
     metaTitle: `Pensioensparen Berekenen België ${getCurrentYear()}: Belastingvoordeel`,
     metaDescription: `Simuleer je pensioensparen voordeel (tot €337 terug) + eindkapitaal. Actueel voor ${getCurrentYear()} – gratis calculator.`,
-    faqs: defaultFaqsBySilo.Planning,
+    faqs: pensioensparenCalculatorContent.faqs,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
   "pensioen-calculator": {
@@ -721,7 +714,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     breadcrumbTitle: "Pensioen Calculator",
     metaTitle: "Pensioen Calculator België - Bereken Uw Pensioenkapitaal",
     metaDescription: "Bereken hoeveel u nodig heeft voor pensioen. 4%-regel en wettelijk pensioen in België. Plan uw financiële vrijheid vanaf 60-67 jaar.",
-    faqs: defaultFaqsBySilo.Planning,
+    faqs: pensioenCalculatorContent.faqs,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },
   "fire-calculator": {

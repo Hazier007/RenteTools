@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Trophy, Home as HomeIcon, Flame, TrendingUp, Shield, MapPin, Heart, ArrowRight } from "lucide-react";
+import { Scale, Receipt, Trophy, Home as HomeIcon, TrendingUp, Shield, MapPin, Heart, ArrowRight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -14,9 +14,16 @@ import {
 import { staggerChildren, fadeInUp } from "@/lib/animations";
 import heroBackgroundWebp from "@assets/hero-2026-lg.webp";
 import heroBackgroundAvif from "@assets/hero-2026-lg.avif";
+import { getActueleRentevoeten, formatPercent, B2B_FORFAIT_EUR } from "@shared/wettelijke-interest";
+import { calculatorRegistry, type CalculatorCategory } from "@shared/calculator-registry";
+import { homeContent } from "@/seo/calculator-content/home";
 
-const HOME_TITLE = `Hoogste Spaarrente België ${new Date().getFullYear()} + 70+ Gratis Calculators`;
-const HOME_DESCRIPTION = `Vind de hoogste spaarrente (tot ~2,85%), bereken je hypotheek of FIRE-doel. 70+ gratis tools voor sparen, lenen & beleggen – anoniem & actueel België ${new Date().getFullYear()}.`;
+// Zelfde H1 als de server-side HTML (server/seo-config.ts, entry "home").
+const HOME_H1 = "Interesten berekenen in België: wettelijke, nalatigheids- en spaarinteresten";
+const HOME_TITLE = `Interesten Berekenen België ${new Date().getFullYear()}: Wettelijke Interest & Spaarrente`;
+const HOME_DESCRIPTION = "Bereken wettelijke interest en nalatigheidsinterest op onbetaalde facturen (incl. €40 forfait), spaarrente en leningen. Gratis Belgische calculators.";
+const wettelijkeActueel = getActueleRentevoeten();
+const calculatorCategories: CalculatorCategory[] = ["Sparen", "Lenen", "Beleggen", "Planning"];
 
 export default function Home() {
   useEffect(() => {
@@ -34,31 +41,31 @@ export default function Home() {
 
   const featuredCalculators = [
     {
+      slug: "wettelijke-rentevoet-belgie",
+      icon: Scale,
+      title: `Wettelijke Interest & Nalatigheidsinterest ${wettelijkeActueel.jaar}`,
+      description: `Bereken de interest op een onbetaalde factuur of schuld: ${formatPercent(wettelijkeActueel.burgerlijk)} wettelijk, ${formatPercent(wettelijkeActueel.handelS1)} B2B (incl. €${B2B_FORFAIT_EUR} forfait), ${formatPercent(wettelijkeActueel.fiscaal)} fiscaal. Per jaar of semester, bron FOD Financiën.`,
+      category: "lenen"
+    },
+    {
       slug: "hoogste-spaarrente-belgie",
       icon: Trophy,
-      title: "Hoogste Spaarrente België 2026",
-      description: "Vergelijk actuele rentes (basis + getrouwheidspremie) van alle banken. Tot 2,85% mogelijk – bereken je opbrengst nu.",
+      title: "Spaarrente Berekenen",
+      description: "Bereken wat uw spaarrekening netto opbrengt: basisrente, getrouwheidspremie, de vrijstelling van €1.020 en 15% roerende voorheffing daarboven.",
       category: "sparen"
     },
     {
       slug: "hypothecaire-lening-berekenen",
       icon: HomeIcon,
       title: "Hypotheek Berekenen België",
-      description: "Bereken je maandlast, totale kosten en maximale lening. Inclusief registratierechten, notaris & actuele rente 2026.",
+      description: "Bereken uw maandlast, de totale interest en de aankoopkosten: registratierechten per gewest, notaris en hypothecaire inschrijving.",
       category: "lenen"
-    },
-    {
-      slug: "fire-calculator",
-      icon: Flame,
-      title: "FIRE Calculator",
-      description: "Bereken wanneer je financieel onafhankelijk bent (Lean, Regular of Fat FIRE). Specifiek voor Belgische fiscaliteit.",
-      category: "planning"
     },
     {
       slug: "samengestelde-interest-berekenen",
       icon: TrendingUp,
       title: "Samengestelde Interest Berekenen",
-      description: "Zie hoe je spaargeld exponentieel groeit met compound interest. Inclusief roerende voorheffing.",
+      description: "Zie hoe uw kapitaal groeit met rente op rente, en wat roerende voorheffing en inflatie daarvan afhalen.",
       category: "sparen"
     }
   ];
@@ -72,7 +79,7 @@ export default function Home() {
     {
       title: "Lenen",
       href: "/lenen",
-      items: ["Hypothecaire lening", "Persoonlijke & autolening", "Herfinancieren", "Kredietcapaciteit"]
+      items: ["Wettelijke interest & nalatigheidsinterest", "Hypothecaire lening", "Persoonlijke & autolening", "Herfinancieren"]
     },
     {
       title: "Beleggen",
@@ -90,7 +97,7 @@ export default function Home() {
     {
       icon: TrendingUp,
       title: "Actueel & betrouwbaar",
-      description: "Rentes en fiscaliteit altijd bijgewerkt voor 2026."
+      description: `Wettelijke interestvoeten en fiscaliteit bijgewerkt voor ${wettelijkeActueel.jaar}, met bronvermelding.`
     },
     {
       icon: Shield,
@@ -137,10 +144,10 @@ export default function Home() {
           <div className="space-y-6">
             <div className="inline-block bg-white/70 dark:bg-gray-900/70 backdrop-blur-md rounded-2xl px-6 py-4 md:px-10 md:py-6 shadow-lg border border-white/20 dark:border-white/10">
               <GradientText as="h1" className="text-3xl md:text-5xl lg:text-6xl leading-tight">
-                Hoogste Spaarrente België 2026 & 70+ Gratis Financiële Calculators
+                {HOME_H1}
               </GradientText>
               <p className="text-lg md:text-xl text-gray-800 dark:text-gray-200 max-w-3xl mx-auto mt-4" data-testid="hero-subtitle">
-                <strong>Krijg in 30 seconden duidelijkheid over je geldzaken.</strong> Van de actuele hoogste spaarrente vinden tot je hypotheek maandlast berekenen of wanneer je financieel onafhankelijk bent – alles gratis, anoniem en altijd up-to-date voor België.
+                <strong>Elke Belgische interest, correct berekend.</strong> Van de wettelijke interestvoet en de nalatigheidsinterest op een onbetaalde factuur tot uw spaarrente, roerende voorheffing of de maandlast van een lening. Gratis, anoniem en met vermelding van de officiële bronnen.
               </p>
             </div>
           </div>
@@ -225,6 +232,41 @@ export default function Home() {
               );
             })}
           </motion.div>
+        </div>
+      </section>
+
+      {/* B2B: onbetaalde facturen */}
+      <section className="py-12 px-4 relative" data-testid="b2b-section">
+        <div className="max-w-5xl mx-auto">
+          <GlassCard className="p-6 md:p-10">
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="p-4 rounded-xl bg-primary/10 text-primary shrink-0 self-start">
+                <Receipt className="w-10 h-10" />
+              </div>
+              <div className="flex-1 space-y-3">
+                <h2 className="text-2xl md:text-3xl font-bold">
+                  Onbetaalde factuur? Bereken de nalatigheidsinterest en het €{B2B_FORFAIT_EUR}-forfait
+                </h2>
+                <p className="text-muted-foreground">
+                  Betaalt een zakelijke klant te laat, dan mag u van rechtswege {formatPercent(wettelijkeActueel.handelS1)} interest
+                  aanrekenen vanaf de dag na de vervaldag (1e semester {wettelijkeActueel.jaar}), plus €{B2B_FORFAIT_EUR} forfaitaire
+                  schadevergoeding per factuur. Bereken het bedrag voor uw aanmaning in enkele seconden.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Blijft de factuur onbetaald?{" "}
+                  <a href="https://collectpro.be" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+                    CollectPro.be
+                  </a>{" "}
+                  neemt de minnelijke invordering voor kmo&apos;s over. Transparantie: CollectPro.be en Interesten.be hebben dezelfde oprichter.
+                </p>
+              </div>
+              <Link href="/lenen/wettelijke-rentevoet-belgie">
+                <Button size="lg" data-testid="button-b2b-nalatigheidsinterest">
+                  Nalatigheidsinterest berekenen <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </Link>
+            </div>
+          </GlassCard>
         </div>
       </section>
 
@@ -332,6 +374,50 @@ export default function Home() {
               </Button>
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Alle calculators: crawlbare lijst, ook in de server-side HTML */}
+      <section className="py-16 px-4 bg-muted/30 relative" data-testid="all-calculators-section">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">Alle calculators op Interesten.be</h2>
+          <nav aria-label="Alle calculators" className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {calculatorCategories.map((category) => (
+              <div key={category}>
+                <h3 className="font-bold mb-3">
+                  <Link href={`/${category.toLowerCase()}`} className="hover:text-primary transition-colors">
+                    {category}
+                  </Link>
+                </h3>
+                <ul className="space-y-1.5 text-sm text-muted-foreground">
+                  {calculatorRegistry
+                    .filter((calc) => calc.category === category)
+                    .map((calc) => (
+                      <li key={calc.slug}>
+                        <Link href={calc.url} className="hover:text-primary transition-colors">
+                          {calc.title}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        </div>
+      </section>
+
+      {/* FAQ: dezelfde vragen als in server/seo-config.ts (homeContent) */}
+      <section className="py-16 px-4 relative" data-testid="home-faq-section">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">Veelgestelde vragen over interesten berekenen</h2>
+          <div className="space-y-4">
+            {homeContent.faqs.map((faq) => (
+              <GlassCard key={faq.question} className="p-6">
+                <h3 className="font-bold mb-2">{faq.question}</h3>
+                <p className="text-sm text-muted-foreground">{faq.answer}</p>
+              </GlassCard>
+            ))}
+          </div>
         </div>
       </section>
 

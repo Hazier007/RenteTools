@@ -13,6 +13,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { roerendeVoorheffingCalculatorContent } from "@/seo/calculator-content/roerende-voorheffing-calculator";
 
 export default function RoerendeVoorheffingCalculator() {
   const seoConfig = getSeoConfig("roerende-voorheffing-calculator");
@@ -322,47 +324,8 @@ export default function RoerendeVoorheffingCalculator() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde Vragen - Roerende Voorheffing</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoeveel spaarrente is belastingvrij in België?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      In 2026 is €1.020 aan interest op gereglementeerde spaarrekeningen per persoon belastingvrij; het bedrag is bevroren tot en met 2030.
-                      Gehuwden en wettelijk samenwonenden hebben samen recht op €2.040. Daarboven geldt 15%, niet 30%.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wanneer wordt roerende voorheffing automatisch ingehouden?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Uw bank houdt automatisch 15% roerende voorheffing in op spaarrente boven €1.020, en 30% op alle dividenden
-                      en op interest van termijnrekeningen, kasbons en obligaties. Dit gebeurt op het moment van uitbetaling.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Moet ik roerende voorheffing aangeven in mijn belastingaangifte?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Voor gewone spaar- en beleggingsrekeningen is geen aangifte nodig. De roerende voorheffing 
-                      is definitief. Alleen bij professionele beleggingen moet u aangeven.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik roerende voorheffing terugkrijgen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      In principe niet, behalve bij incorrecte inhouding of bij specifieke gevallen 
-                      zoals buitenlandse bronheffing die hoger is dan 30%.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={roerendeVoorheffingCalculatorContent} faqTitle="Veelgestelde vragen over roerende voorheffing" />
 
         </div>
       </section>

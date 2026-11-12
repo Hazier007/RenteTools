@@ -9,6 +9,8 @@ import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { pensioensparenCalculatorContent } from "@/seo/calculator-content/pensioensparen-calculator";
 
 export default function PensioenspaarCalculatorPage() {
   const seoConfig = getSeoConfig("pensioensparen-calculator");
@@ -206,49 +208,8 @@ export default function PensioenspaarCalculatorPage() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde vragen over pensioensparen</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  
-                  <div>
-                    <h3 className="font-semibold mb-2">Wanneer kan ik mijn pensioensparen opnemen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Vanaf 60 jaar of bij vervroegd pensioen. U kunt ook vroeger opnemen, 
-                      maar dan betaalt u 16,5% in plaats van 8% uitkeringsbetaling.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik meer dan €1.310 per jaar inleggen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, maar alleen de eerste €1.310 geeft recht op belastingvoordeel. 
-                      Het surplus wordt wel belegd maar zonder fiscaal voordeel.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibild mb-2">Wat als ik een jaar niet inleg?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Geen probleem, pensioensparen is flexibel. U mist wel het belastingvoordeel 
-                      van dat jaar, maar uw bestaande kapitaal blijft groeien.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Is pensioensparen veiliger dan beleggen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Pensioenspaarfondsen beleggen ook, maar zijn vaak defensiever dan 
-                      vrij beleggen. Het belastingvoordeel compenseert vaak het lagere rendement.
-                    </p>
-                  </div>
-
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={pensioensparenCalculatorContent} faqTitle="Veelgestelde vragen over pensioensparen" />
 
             {/* Related Calculators */}
             <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

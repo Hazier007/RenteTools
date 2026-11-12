@@ -13,6 +13,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { leningHerfinancierenContent } from "@/seo/calculator-content/lening-herfinancieren";
 
 export default function LeningHerfinancieren() {
   const seoConfig = getSeoConfig("lening-herfinancieren");
@@ -398,47 +400,8 @@ export default function LeningHerfinancieren() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde Vragen - Lening Herfinancieren</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-semibold mb-2">Wanneer loont het om mijn hypotheek te herfinancieren?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Herfinanciering loont meestal als het renteverschil minstens 0,5% is en u nog minimaal 
-                      5 jaar looptijd heeft. Bereken altijd alle kosten mee in uw beslissing.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat zijn de kosten van herfinanciering in België?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Typische kosten zijn €1.500-€3.000 inclusief notaris, registratie en bankkosten. 
-                      Het exacte bedrag hangt af van uw leningbedrag en gekozen bank.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoe lang duurt het herfinanciering process?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Een herfinanciering duurt gemiddeld 6-8 weken van aanvraag tot ondertekening. 
-                      Dit hangt af van de complexiteit en snelheid van documentatie.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik meerdere leningen samenvoegen bij herfinanciering?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, u kunt vaak uw hypotheek, persoonlijke leningen en kredieten samenvoegen 
-                      in één nieuwe lening met mogelijk betere voorwaarden.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={leningHerfinancierenContent} faqTitle="Veelgestelde vragen over herfinancieren" />
 
         </div>
       </section>

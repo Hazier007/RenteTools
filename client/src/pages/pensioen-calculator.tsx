@@ -10,6 +10,8 @@ import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { pensioenCalculatorContent } from "@/seo/calculator-content/pensioen-calculator";
 
 export default function PensioenCalculatorPage() {
   const seoConfig = getSeoConfig("pensioen-calculator");
@@ -156,7 +158,7 @@ export default function PensioenCalculatorPage() {
                       </li>
                       <li className="flex items-start">
                         <i className="fas fa-check text-green-600 mr-2 mt-1"></i>
-                        Benut het maximale pensioensparen van €1.310 per jaar
+                        Benut het maximale pensioensparen van €1.050 (30%) of €1.350 (25%) per jaar
                       </li>
                       <li className="flex items-start">
                         <i className="fas fa-check text-green-600 mr-2 mt-1"></i>
@@ -194,6 +196,8 @@ export default function PensioenCalculatorPage() {
               </CardContent>
             </Card>
 
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={pensioenCalculatorContent} faqTitle="Veelgestelde vragen over pensioen" />
         </div>
       </section>
 

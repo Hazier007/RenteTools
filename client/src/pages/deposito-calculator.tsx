@@ -14,6 +14,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { depositoCalculatorContent } from "@/seo/calculator-content/deposito-calculator";
 
 export default function DepositoCalculatorPage() {
   const seoConfig = getSeoConfig("deposito-calculator");
@@ -209,49 +211,8 @@ export default function DepositoCalculatorPage() {
         </section>
       )}
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde vragen over deposito's</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat gebeurt er bij vervroegde opname?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      De meeste banken rekenen een boete van 3-6 maanden rente. 
-                      Sommige banken maken vervroegde opname helemaal onmogelijk.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Is mijn deposito veilig bij bankfaillissement?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, deposito's zijn beschermd door de Belgische depositorengarantie 
-                      tot €100.000 per bank per persoon.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat is het verschil met een spaarrekening?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Deposito's bieden hogere rente maar minder flexibiliteit. 
-                      Spaarrekeningen hebben lagere rente maar u kunt altijd bij uw geld.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Moet ik belasting betalen op deposito-interest?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, op een deposito of termijnrekening houdt de bank 30% roerende voorheffing in vanaf de eerste euro.
-                      De vrijstelling van €1.020 per jaar (2026) geldt enkel voor gereglementeerde spaarrekeningen.
-                    </p>
-                  </div>
-
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={depositoCalculatorContent} faqTitle="Veelgestelde vragen over deposito's en termijnrekeningen" />
 
         </div>
       </section>

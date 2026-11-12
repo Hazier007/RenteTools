@@ -11,6 +11,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { samengesteldeInterestBerekenenContent } from "@/seo/calculator-content/samengestelde-interest-berekenen";
 
 export default function SamengesteldeInterestBerekenen() {
   useCanonical();
@@ -184,49 +186,8 @@ export default function SamengesteldeInterestBerekenen() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde vragen over samengestelde interest</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoe vaak wordt rente samengesteld?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Dit hangt af van het product. Spaarrekeningen meestal jaarlijks, beleggingen 
-                      vaak maandelijks of dagelijks. Hoe vaker, hoe beter voor uw rendement.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Vanaf welk bedrag loont samengestelde interest?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Samengestelde interest werkt bij elk bedrag, maar het effect wordt groter 
-                      naarmate uw kapitaal groeit. Zelfs bij €100 ziet u het verschil na enkele jaren.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat is de regel van 72?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Deel 72 door het rentepercentage om te zien hoe lang het duurt voordat uw geld 
-                      verdubbelt. Bij 6% rente: 72 ÷ 6 = 12 jaar om te verdubbelen.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik samengestelde interest krijgen op spaarrekeningen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, als u de ontvangen interest op uw rekening laat staan, krijgt u volgend jaar 
-                      rente over het totale bedrag. Dit is automatisch samengestelde interest.
-                    </p>
-                  </div>
-
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={samengesteldeInterestBerekenenContent} faqTitle="Veelgestelde vragen over samengestelde interest" />
 
             {/* Related Calculators */}
             <RelatedCalculators currentSlug="samengestelde-interest-berekenen" />

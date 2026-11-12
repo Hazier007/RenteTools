@@ -16,6 +16,8 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import EducationalSections from "@/components/seo/EducationalSections";
+import { hypothecaireLeningBerekenenContent } from "@/seo/calculator-content/hypothecaire-lening-berekenen";
 
 export default function HypothecaireLningBerekenen() {
   useCanonical();
@@ -182,49 +184,8 @@ export default function HypothecaireLningBerekenen() {
               </CardContent>
             </Card>
 
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde vragen over hypotheken</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoeveel kan ik maximaal lenen voor een hypotheek?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      In België kunt u maximaal lenen tot 90% van de waarde van de woning (LTV). 
-                      Uw maandlast mag niet hoger zijn dan 33% van uw netto inkomen.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat is de laagste hypotheekrente in België?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      De laagste tarieven beginnen rond 2,5% voor korte looptijden en variabele rentes. 
-                      Voor vaste rentes van 20-25 jaar liggen de beste tarieven rond 2,8-3,2%.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik mijn hypotheek herfinancieren?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, herfinancieren kan voordeliger zijn als de rentes zijn gedaald. 
-                      Let wel op vervroegde terugbetalingskosten bij uw huidige bank.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wat is het verschil tussen annuïteiten en lineair aflossen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Bij annuïteiten betaalt u elke maand hetzelfde bedrag. Bij lineair aflossen 
-                      neemt uw maandlast af naarmate u meer heeft afgelost.
-                    </p>
-                  </div>
-
-                </div>
-              </CardContent>
-            </Card>
+            {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML (server/seo-config.ts) */}
+            <EducationalSections content={hypothecaireLeningBerekenenContent} faqTitle="Veelgestelde vragen over hypotheken" />
 
             {/* Related Calculators */}
             <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
