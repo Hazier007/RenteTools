@@ -18,6 +18,25 @@ import { blogAutomationService } from "./services/blog-automation";
 import { requireAdmin } from "./middleware/auth";
 import { generateCsrfToken, validateCsrfToken } from "./middleware/csrf";
 import { calculatorRegistry } from "../shared/calculator-registry";
+import { getResendConfig, voegContactToe, verstuurEmail } from "./services/resend";
+import { aanmaningLeadSchema, bouwDag0Mail } from "./services/aanmaning-mail";
+
+// Rate limiting for the public aanmaning-lead endpoint (per IP, sliding window)
+const leadAttempts = new Map<string, LoginAttempt>();
+const MAX_LEAD_ATTEMPTS = 10;
+const LEAD_RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 uur
+
+function checkLeadRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const attempt = leadAttempts.get(ip);
+  if (!attempt || now > attempt.resetTime) {
+    leadAttempts.set(ip, { count: 1, resetTime: now + LEAD_RATE_LIMIT_WINDOW });
+    return true;
+  }
+  if (attempt.count >= MAX_LEAD_ATTEMPTS) return false;
+  attempt.count++;
+  return true;
+}
 
 // Rate limiting for login endpoint
 interface LoginAttempt {
@@ -118,6 +137,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } else {
       res.json({ authenticated: false });
     }
+  });
+
+  // Aanmaningsgenerator: lead-capture + PDF per e-mail (Resend).
+  // Publieke route zonder sessie, dus bewust vóór de CSRF-middleware (net als
+  // /api/auth/login); beschermd met validatie, honeypot en rate limit.
+  // Zonder RESEND_API_KEY antwoordt de route 503 en blijft de PDF client-side
+  // downloadbaar (de browser heeft hem al vóór deze call).
+  app.post("/api/aanmaning-lead", async (req, res) => {
+    const ip = req.ip || req.socket.remoteAddress || "unknown";
+    if (!checkLeadRateLimit(ip)) {
+      return res.status(429).json({ ok: false, code: "RATE_LIMIT", message: "Te veel aanvragen. Probeer het later opnieuw." });
+    }
+
+    const parsed = aanmaningLeadSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({
+        ok: false,
+        code: "ONGELDIGE_INVOER",
+        message: "De aanvraag is onvolledig of ongeldig.",
+        details: parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`),
+      });
+    }
+    const lead = parsed.data;
+
+    const config = getResendConfig();
+    if (!config) {
+      console.warn("[aanmaning-lead] RESEND_API_KEY ontbreekt; lead niet opgeslagen", { email: lead.email, sjabloon: lead.sjabloon });
+      return res.status(503).json({
+        ok: false,
+        code: "RESEND_NIET_GECONFIGUREERD",
+        message: "E-mail versturen is momenteel niet beschikbaar. De PDF is wel lokaal gedownload.",
+      });
+    }
+
+    const contact = await voegContactToe(config, {
+      email: lead.email,
+      firstName: lead.bedrijfsnaam || undefined,
+      properties: {
+        type: lead.type,
+        regime: lead.regime,
+        sjabloon: lead.sjabloon,
+        bron: "aanmaning-pdf",
+      },
+    });
+    if (!contact.ok) {
+      console.error("[aanmaning-lead] contact toevoegen mislukt", contact.status, contact.error);
+    }
+
+    const mail = bouwDag0Mail(lead);
+    const verzonden = await verstuurEmail(config, {
+      to: lead.email,
+      subject: mail.subject,
+      html: mail.html,
+      text: mail.text,
+      attachments: [{ filename: lead.bestandsnaam, content: lead.pdfBase64, contentType: "application/pdf" }],
+      tags: [
+        { name: "flow", value: "aanmaning" },
+        { name: "sjabloon", value: lead.sjabloon },
+      ],
+    });
+    if (!verzonden.ok) {
+      console.error("[aanmaning-lead] e-mail versturen mislukt", verzonden.status, verzonden.error);
+      return res.status(502).json({
+        ok: false,
+        code: "EMAIL_MISLUKT",
+        message: "De e-mail kon niet verstuurd worden. De PDF is wel lokaal gedownload.",
+        contactToegevoegd: contact.ok,
+      });
+    }
+
+    return res.json({ ok: true, emailVerzonden: true, contactToegevoegd: contact.ok });
   });
 
   // CSRF protection

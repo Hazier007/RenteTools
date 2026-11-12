@@ -22,7 +22,7 @@ export default function Privacybeleid() {
           <Card>
             <CardContent className="prose prose-slate dark:prose-invert max-w-none pt-6">
               <p>
-                <strong>Laatst bijgewerkt:</strong> 24 april 2026
+                <strong>Laatst bijgewerkt:</strong> 12 november 2026
               </p>
               <p>
                 Dit privacybeleid beschrijft hoe persoonsgegevens worden verwerkt wanneer u Interesten.be
@@ -79,10 +79,18 @@ export default function Privacybeleid() {
                   <strong>Formulierinvoer:</strong> getallen die u invoert in onze rekentools worden
                   uitsluitend in uw browser verwerkt en niet naar onze servers verzonden.
                 </li>
+                <li>
+                  <strong>Aanmaningsgenerator (optioneel):</strong> vraagt u op de pagina wettelijke
+                  interestvoet een modelbrief (PDF) aan, dan verwerken wij uw e-mailadres, optioneel uw
+                  bedrijfsnaam en uw type (onderneming, zelfstandige of particulier), samen met de
+                  gegenereerde PDF en de kerncijfers van de berekening (soort brief, bedrag, aantal dagen).
+                  De brief zelf wordt in uw browser aangemaakt; de gegevens van uw klant die in de brief
+                  staan, slaan wij niet op in een database. Zie punt 3bis.
+                </li>
               </ul>
               <p>
-                Wij verzamelen <strong>geen</strong> namen, telefoonnummers of betaalgegevens.
-                Interesten.be vereist geen registratie of account.
+                Buiten de aanmaningsgenerator verzamelen wij <strong>geen</strong> namen, telefoonnummers of
+                betaalgegevens. Interesten.be vereist geen registratie of account.
               </p>
             </CardContent>
           </Card>
@@ -131,6 +139,48 @@ export default function Privacybeleid() {
 
           <Card>
             <CardHeader>
+              <CardTitle className="text-2xl">3bis. Aanmaningsgenerator en e-mails</CardTitle>
+            </CardHeader>
+            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <p>
+                Op <code>/lenen/wettelijke-rentevoet-belgie</code> kunt u een modelbrief (aanmaning,
+                ingebrekestelling of eerste herinnering) als PDF downloaden. Daarvoor vragen wij uw
+                e-mailadres.
+              </p>
+              <ul>
+                <li>
+                  <strong>Doel:</strong> u de PDF per e-mail bezorgen en u daarna maximaal drie praktische
+                  e-mails sturen over de opvolging van onbetaalde facturen, met daarin een verwijzing naar
+                  CollectPro.be (minnelijke invordering voor kmo&apos;s). CollectPro.be en Interesten.be
+                  hebben dezelfde oprichter, Bart Deblock; dat vermelden wij bij elke verwijzing.
+                </li>
+                <li>
+                  <strong>Rechtsgrond:</strong> uw toestemming (art. 6(1)(a) AVG), die u geeft door het
+                  vakje bij het formulier aan te vinken. U kunt ze op elk moment intrekken.
+                </li>
+                <li>
+                  <strong>Verwerker:</strong> de e-mails en de contactenlijst lopen via{" "}
+                  <strong>Resend, Inc.</strong> (2261 Market Street #5039, San Francisco, CA 94114,
+                  Verenigde Staten), gebonden door een verwerkersovereenkomst en gecertificeerd onder het
+                  EU-US Data Privacy Framework. De PDF wordt als bijlage via Resend verzonden en niet door
+                  ons bewaard.
+                </li>
+                <li>
+                  <strong>Bewaartermijn:</strong> tot u zich uitschrijft of uw toestemming intrekt, en in
+                  elk geval maximaal 24 maanden na uw laatste interactie.
+                </li>
+                <li>
+                  <strong>Uitschrijven:</strong> via de uitschrijflink onderaan elke e-mail, door te
+                  antwoorden op een van onze e-mails, of per mail aan{" "}
+                  <a href="mailto:info@hazier.be" className="text-primary hover:underline">info@hazier.be</a>.
+                  Uitschrijven heeft geen gevolgen voor de PDF die u al ontving.
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
               <CardTitle className="text-2xl">4. Cookies en Consent Mode v2</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-slate dark:prose-invert max-w-none">
@@ -157,7 +207,11 @@ export default function Privacybeleid() {
                   Barrow Street, Dublin 4, Ierland.
                 </li>
                 <li>
-                  <strong>Hostingprovider</strong> — voor opslag en serving van interesten.be.
+                  <strong>Hostingprovider</strong> (Vercel Inc.) — voor opslag en serving van interesten.be.
+                </li>
+                <li>
+                  <strong>Resend, Inc.</strong> — e-mailverzending en contactenlijst van de
+                  aanmaningsgenerator (zie punt 3bis), enkel wanneer u daar zelf om vraagt.
                 </li>
               </ul>
               <p>
@@ -172,7 +226,7 @@ export default function Privacybeleid() {
             </CardHeader>
             <CardContent className="prose prose-slate dark:prose-invert max-w-none">
               <p>
-                Enkele ontvangers (Google) kunnen gegevens verwerken buiten de EER, met name in de
+                Enkele ontvangers (Google, Vercel, Resend) kunnen gegevens verwerken buiten de EER, met name in de
                 Verenigde Staten. Deze doorgiften vinden plaats onder het <strong>EU-US Data Privacy
                 Framework</strong> (adequaatheidsbesluit van 10 juli 2023) en aanvullende Standard
                 Contractual Clauses, conform art. 45–46 AVG.
@@ -189,6 +243,10 @@ export default function Privacybeleid() {
                 <li>Technische logs: maximaal 30 dagen, daarna automatisch verwijderd.</li>
                 <li>Analytics-data: tot 14 maanden (GA4-standaard).</li>
                 <li>Cookie-consent: 13 maanden (conform GBA-richtlijn), daarna opnieuw gevraagd.</li>
+                <li>
+                  E-mailadres aanmaningsgenerator: tot uitschrijving of intrekking van uw toestemming, maximaal
+                  24 maanden na uw laatste interactie.
+                </li>
               </ul>
             </CardContent>
           </Card>

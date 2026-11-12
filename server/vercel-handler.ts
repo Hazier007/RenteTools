@@ -14,7 +14,8 @@ const __filename_esm = fileURLToPath(import.meta.url);
 const __dirname_esm = path.dirname(__filename_esm);
 
 const app = express();
-app.use(express.json());
+// 1 MB: de aanmaningsflow stuurt de gegenereerde PDF (base64) mee naar /api/aanmaning-lead.
+app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: false }));
 
 // Session configuration

@@ -300,3 +300,126 @@ export function berekenWettelijkeInterest(params: {
     maanden,
   };
 }
+
+// ---------------------------------------------------------------------------
+// Wettelijke vermeldingen: één bron van waarheid voor de uitleg op de site
+// (client/src/seo/calculator-content/wettelijke-rentevoet-belgie.ts) en de
+// briefsjablonen van de aanmaningsgenerator (client/src/lib/aanmaning).
+// Wijzig een tekst hier, en hij verandert op beide plaatsen.
+// ---------------------------------------------------------------------------
+
+export const WETTELIJKE_VERMELDINGEN = {
+  /** Wet 2 augustus 2002, art. 4: betalingstermijn tussen ondernemingen. */
+  b2bBetalingstermijn:
+    "Betalingstermijn: 30 kalenderdagen na ontvangst van de factuur als er niets is afgesproken. Contractueel mag de termijn maximaal 60 dagen bedragen (sinds 1 februari 2022); een langere termijn is nietig.",
+  /** Wet 2 augustus 2002, art. 5: interest van rechtswege. */
+  b2bInterestVanRechtswege:
+    "De interest loopt van rechtswege vanaf de dag na de vervaldag. Een ingebrekestelling is niet nodig, al is een herinnering in de praktijk wel aan te raden.",
+  /** Wet 2 augustus 2002, art. 6: forfait en redelijke invorderingskosten. */
+  b2bForfait: `Forfaitaire schadevergoeding: €${B2B_FORFAIT_EUR} per onbetaalde factuur, van rechtswege, bovenop de interest. Daarnaast kunt u een redelijke vergoeding vragen voor hogere invorderingskosten, zoals de kosten van een incassobureau of advocaat.`,
+  /** Boek XIX WER, art. XIX.2: kosteloze eerste herinnering en wachttermijn. */
+  consumentEersteHerinnering: `Verkoopt u aan particulieren, dan gelden sinds 1 september 2023 strengere regels. Eerst stuurt u een kosteloze eerste herinnering. Daarna krijgt de consument ${CONSUMENT_WACHTTERMIJN_DAGEN} kalenderdagen de tijd om te betalen. Die termijn start de derde werkdag na verzending per post, of de dag na verzending bij een elektronische herinnering. Pas daarna mogen interest en een schadebeding aangerekend worden, en alleen als uw algemene voorwaarden dat voorzien.`,
+  /** Boek XIX WER, art. XIX.4: plafond op interest plus kosten. */
+  consumentPlafond:
+    "Plafond op interest plus kosten samen: €20 bij een saldo tot en met €150; €30 plus 10% op de schijf van €150,01 tot €500; €65 plus 5% op het bedrag boven €500, met een absoluut maximum van €2.000.",
+  /** Boek XIX WER, art. XIX.8: sanctie bij ontbrekende of foute eerste herinnering. */
+  consumentGeenSchadebeding:
+    "Is de eerste herinnering niet of niet correct verstuurd, dan is geen enkel schadebeding verschuldigd (art. XIX.8 WER).",
+  /** Algemene disclaimer, letterlijk hergebruikt in de voettekst van elke modelbrief. */
+  disclaimer:
+    "Deze tool geeft algemene informatie en rekenhulp, geen juridisch advies: laat bij betwisting of grote bedragen uw berekening nakijken door een advocaat, gerechtsdeurwaarder of incassopartner.",
+} as const;
+
+/** Boek XIX WER, art. XIX.4: de verwijlinterest voor consumenten mag de referentievoet voor handelstransacties niet overschrijden. */
+export function consumentMaxVoetTekst(jaar: number, voet: number): string {
+  return `De verwijlinterest mag nooit hoger zijn dan de referentie-interestvoet voor handelstransacties (${formatPercent(voet)} in ${jaar}).`;
+}
+
+// ---------------------------------------------------------------------------
+// Wachttermijn na de eerste herinnering aan een consument (art. XIX.2 WER).
+// "Werkdag" volgens art. I.1 WER: alle kalenderdagen behalve zondagen en
+// wettelijke feestdagen (zaterdag telt dus wel als werkdag).
+// ---------------------------------------------------------------------------
+
+export type HerinneringKanaal = "post" | "elektronisch";
+
+function paasdatum(jaar: number): Date {
+  // Anoniem gregoriaans algoritme (Meeus/Jones/Butcher).
+  const a = jaar % 19;
+  const b = Math.floor(jaar / 100);
+  const c = jaar % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const maand = Math.floor((h + l - 7 * m + 114) / 31); // 3 = maart, 4 = april
+  const dag = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(jaar, maand - 1, dag);
+}
+
+function plusDagen(d: Date, n: number): Date {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+}
+
+function zelfdeDag(a: Date, b: Date): boolean {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+/** Belgische wettelijke feestdagen voor een jaar. */
+export function belgischeFeestdagen(jaar: number): Date[] {
+  const pasen = paasdatum(jaar);
+  return [
+    new Date(jaar, 0, 1), // Nieuwjaar
+    plusDagen(pasen, 1), // Paasmaandag
+    new Date(jaar, 4, 1), // Dag van de Arbeid
+    plusDagen(pasen, 39), // O.L.H. Hemelvaart
+    plusDagen(pasen, 50), // Pinkstermaandag
+    new Date(jaar, 6, 21), // Nationale feestdag
+    new Date(jaar, 7, 15), // O.L.V. Hemelvaart
+    new Date(jaar, 10, 1), // Allerheiligen
+    new Date(jaar, 10, 11), // Wapenstilstand
+    new Date(jaar, 11, 25), // Kerstmis
+  ];
+}
+
+export function isWerkdag(d: Date): boolean {
+  if (d.getDay() === 0) return false;
+  return !belgischeFeestdagen(d.getFullYear()).some((f) => zelfdeDag(f, d));
+}
+
+export interface ConsumentWachttermijn {
+  /** Eerste dag van de termijn van 14 kalenderdagen. */
+  start: Date;
+  /** Laatste dag waarop de consument nog kosteloos kan betalen (start + 14 dagen, dus ten minste 14 volle kalenderdagen). */
+  uiterlijkeBetaaldag: Date;
+  /** Eerste dag waarop interest en schadebeding mogen lopen (indien de voorwaarden dat voorzien). */
+  interestVanaf: Date;
+}
+
+/**
+ * Art. XIX.2 WER: de termijn van 14 kalenderdagen gaat in op de derde werkdag
+ * na verzending van de herinnering per post, of op de kalenderdag na een
+ * elektronische verzending.
+ */
+export function berekenConsumentWachttermijn(verzonden: Date, kanaal: HerinneringKanaal): ConsumentWachttermijn {
+  const basis = new Date(verzonden.getFullYear(), verzonden.getMonth(), verzonden.getDate());
+  let start: Date;
+  if (kanaal === "elektronisch") {
+    start = plusDagen(basis, 1);
+  } else {
+    let cursor = basis;
+    let werkdagen = 0;
+    while (werkdagen < 3) {
+      cursor = plusDagen(cursor, 1);
+      if (isWerkdag(cursor)) werkdagen++;
+    }
+    start = cursor;
+  }
+  const uiterlijkeBetaaldag = plusDagen(start, CONSUMENT_WACHTTERMIJN_DAGEN);
+  return { start, uiterlijkeBetaaldag, interestVanaf: plusDagen(uiterlijkeBetaaldag, 1) };
+}

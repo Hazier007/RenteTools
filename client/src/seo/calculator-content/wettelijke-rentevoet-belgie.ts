@@ -8,6 +8,8 @@ import {
   RSZ_INTERESTVOET,
   B2B_FORFAIT_EUR,
   BRON_LABEL,
+  WETTELIJKE_VERMELDINGEN,
+  consumentMaxVoetTekst,
   getActueleRentevoeten,
   formatPercent,
 } from "../../../../shared/wettelijke-interest";
@@ -102,9 +104,10 @@ export const wettelijkeRentevoetBelgieContent: CalculatorEducationalContent = {
         {
           kind: "ul",
           items: [
-            "Betalingstermijn: 30 kalenderdagen na ontvangst van de factuur als er niets is afgesproken. Contractueel mag de termijn maximaal 60 dagen bedragen (sinds 1 februari 2022); een langere termijn is nietig.",
-            "De interest loopt van rechtswege vanaf de dag na de vervaldag. Een ingebrekestelling is niet nodig, al is een herinnering in de praktijk wel aan te raden.",
-            `Forfaitaire schadevergoeding: €${B2B_FORFAIT_EUR} per onbetaalde factuur, van rechtswege, bovenop de interest. Daarnaast kunt u een redelijke vergoeding vragen voor hogere invorderingskosten, zoals de kosten van een incassobureau of advocaat.`,
+            // Letterlijk gedeeld met de briefsjablonen (shared/wettelijke-interest.ts).
+            WETTELIJKE_VERMELDINGEN.b2bBetalingstermijn,
+            WETTELIJKE_VERMELDINGEN.b2bInterestVanRechtswege,
+            WETTELIJKE_VERMELDINGEN.b2bForfait,
             `De voet wordt elk semester herzien: de ECB-referentievoet van 1 januari of 1 juli, plus 8 procentpunten, afgerond naar boven op een half procentpunt. In ${jaar} komt dat uit op ${formatPercent(actueel.handelS1)} en ${formatPercent(actueel.handelS2)}.`,
           ],
         },
@@ -115,14 +118,15 @@ export const wettelijkeRentevoetBelgieContent: CalculatorEducationalContent = {
       blocks: [
         {
           kind: "p",
-          text: "Verkoopt u aan particulieren, dan gelden sinds 1 september 2023 strengere regels. Eerst stuurt u een kosteloze eerste herinnering. Daarna krijgt de consument 14 kalenderdagen de tijd om te betalen. Die termijn start de derde werkdag na verzending per post, of de dag na verzending bij een elektronische herinnering. Pas daarna mogen interest en een schadebeding aangerekend worden, en alleen als uw algemene voorwaarden dat voorzien.",
+          // Letterlijk gedeeld met de consumentenherinnering (shared/wettelijke-interest.ts).
+          text: WETTELIJKE_VERMELDINGEN.consumentEersteHerinnering,
         },
         {
           kind: "ul",
           items: [
-            "Plafond op interest plus kosten samen: €20 bij een saldo tot en met €150; €30 plus 10% op de schijf van €150,01 tot €500; €65 plus 5% op het bedrag boven €500, met een absoluut maximum van €2.000.",
-            `De verwijlinterest mag nooit hoger zijn dan de referentie-interestvoet voor handelstransacties (${formatPercent(actueel.handelS1)} in ${jaar}).`,
-            "Is de eerste herinnering niet of niet correct verstuurd, dan is geen enkel schadebeding verschuldigd (art. XIX.8 WER).",
+            WETTELIJKE_VERMELDINGEN.consumentPlafond,
+            consumentMaxVoetTekst(jaar, actueel.handelS1),
+            WETTELIJKE_VERMELDINGEN.consumentGeenSchadebeding,
           ],
         },
       ],
@@ -154,7 +158,7 @@ export const wettelijkeRentevoetBelgieContent: CalculatorEducationalContent = {
       blocks: [
         {
           kind: "p",
-          text: `De cijfers op deze pagina komen uit de berichten van de ${BRON_LABEL}. De burgerlijke en fiscale voet verschijnen in januari, de voet voor handelstransacties in januari en juli. Zodra een nieuwe voet gepubliceerd is, wordt de rekenmotor van deze pagina bijgewerkt; de versie die u nu gebruikt bevat alle voeten tot en met ${actueel.handelS2 === actueel.handelS1 ? `het tweede semester van ${jaar}` : `${jaar}`}. Deze tool geeft algemene informatie en rekenhulp, geen juridisch advies: laat bij betwisting of grote bedragen uw berekening nakijken door een advocaat, gerechtsdeurwaarder of incassopartner.`,
+          text: `De cijfers op deze pagina komen uit de berichten van de ${BRON_LABEL}. De burgerlijke en fiscale voet verschijnen in januari, de voet voor handelstransacties in januari en juli. Zodra een nieuwe voet gepubliceerd is, wordt de rekenmotor van deze pagina bijgewerkt; de versie die u nu gebruikt bevat alle voeten tot en met ${actueel.handelS2 === actueel.handelS1 ? `het tweede semester van ${jaar}` : `${jaar}`}. ${WETTELIJKE_VERMELDINGEN.disclaimer}`,
         },
       ],
     },

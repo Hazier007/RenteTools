@@ -13,6 +13,7 @@ import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import { wettelijkeRentevoetBelgieContent } from "@/seo/calculator-content/wettelijke-rentevoet-belgie";
+import AanmaningGenerator from "@/components/aanmaning/AanmaningGenerator";
 import {
   berekenWettelijkeInterest,
   getActueleRentevoeten,
@@ -22,6 +23,12 @@ import {
   BRON_LABEL,
   type InterestRegime,
 } from "@shared/wettelijke-interest";
+import {
+  COLLECTPRO_CTA_LABEL,
+  COLLECTPRO_DISCLOSURE,
+  COLLECTPRO_URL,
+  collectProCtaVanToepassing,
+} from "@shared/collectpro";
 
 const SLUG = "wettelijke-rentevoet-belgie";
 
@@ -108,6 +115,11 @@ export default function WettelijkeRentevoetBelgie() {
   const plafondOverschreden =
     resultaat !== null && resultaat.plafond !== null && resultaat.interest > resultaat.plafond;
 
+  // Enkel B2B en enkel als bedrag of vertraging groot genoeg is (regel in shared/collectpro.ts).
+  const toonCollectProCta =
+    resultaat !== null &&
+    collectProCtaVanToepassing({ regime, hoofdsom: resultaat.hoofdsom, dagen: resultaat.dagen });
+
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
@@ -141,13 +153,8 @@ export default function WettelijkeRentevoetBelgie() {
         </div>
       </section>
 
-      {/* Top Banner Ad */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex justify-center">
-          <GoogleAdsense slot="banner" className="hidden lg:block" />
-          <GoogleAdsense slot="banner" className="lg:hidden" />
-        </div>
-      </section>
+      {/* Bewust geen advertentie boven de calculator: de CollectPro-CTA en de
+          aanmaningsgenerator zijn hier de conversie, niet AdSense. */}
 
       {/* Main Content */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -321,30 +328,34 @@ export default function WettelijkeRentevoetBelgie() {
                     </CardContent>
                   </Card>
 
-                  {regime === "handel" && resultaat && resultaat.dagen > 0 && (
-                    <div className="rounded-lg border border-border bg-muted/40 p-4" data-testid="cta-collectpro">
+                  {toonCollectProCta && resultaat && (
+                    <div className="rounded-lg border border-primary/30 bg-primary/5 p-4" data-testid="cta-collectpro">
                       <p className="font-semibold mb-1">Blijft de factuur onbetaald?</p>
-                      <p className="text-sm text-muted-foreground">
-                        Stuur eerst een aanmaning met deze berekening. Betaalt de klant dan nog niet, dan kan{" "}
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Bij {eur(resultaat.hoofdsom)} en {resultaat.dagen} dagen vertraging loont het om de invordering uit
+                        handen te geven. Stuur eerst de aanmaning hieronder; betaalt de klant dan nog niet, dan neemt
+                        CollectPro.be de minnelijke invordering voor kmo&apos;s over, no cure no pay.
+                      </p>
+                      <Button asChild className="w-full sm:w-auto">
                         <a
-                          href="https://collectpro.be"
+                          href={`${COLLECTPRO_URL}?utm_source=interesten&utm_medium=calculator&utm_campaign=wettelijke-rentevoet`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-primary hover:underline font-medium"
+                          data-testid="link-collectpro"
                         >
-                          CollectPro.be
-                        </a>{" "}
-                        de minnelijke invordering voor kmo&apos;s overnemen.
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-2">
-                        Transparantie: CollectPro.be en Interesten.be hebben dezelfde oprichter.
-                      </p>
+                          {COLLECTPRO_CTA_LABEL}
+                        </a>
+                      </Button>
+                      <p className="text-xs text-muted-foreground mt-3">{COLLECTPRO_DISCLOSURE}</p>
                     </div>
                   )}
                 </div>
               </div>
             </CardContent>
           </Card>
+
+          {/* Aanmaning downloaden (lead-capture); enkel voor B2B- en consumentenfacturen */}
+          <AanmaningGenerator regime={regime} berekening={resultaat} />
 
           {/* Ad After Calculator */}
           <div className="flex justify-center py-4">
