@@ -77,17 +77,27 @@ declare global {
   }
 }
 
-function pageViewAlMetToestemmingVerstuurd(): boolean {
-  // GA4 zet de parameters van losse events in de URL van de collect-call; een
-  // page_view die met toestemming vertrok draagt gcs=G1x1. Gebatchte events
-  // (zeldzaam bij de eerste hit) staan in de body en zijn hier onzichtbaar,
-  // wat hoogstens één dubbele page_view oplevert.
+/**
+ * Moet de brug de eerste page_view zelf opnieuw sturen?
+ * Enkel als gtag die al verstuurd heeft én ze cookieloos vertrok (gcs=G100).
+ * Is er nog geen page_view vertrokken (bv. terugkerend bezoek: de CMP meldt de
+ * bewaarde keuze vóór gtag.js geladen is), dan stuurt gtag ze straks zelf met
+ * toestemming en zou een herhaling een dubbele page_view geven.
+ * GA4 zet de parameters van losse events in de URL van de collect-call;
+ * gebatchte events staan in de body en zijn hier onzichtbaar.
+ */
+export function moetPageViewHerhalen(resourceUrls: string[]): boolean {
+  const pageViews = resourceUrls.filter((n) => /\/g\/collect\?/.test(n) && /[?&]en=page_view(&|$)/.test(n));
+  if (pageViews.length === 0) return false;
+  // gcs=G1xy: x = ad_storage, y = analytics_storage; y=0 betekent cookieloos voor GA4.
+  return pageViews.every((n) => /[?&]gcs=G1[01]0(&|$)/.test(n));
+}
+
+function resourceUrls(): string[] {
   try {
-    return performance
-      .getEntriesByType("resource")
-      .some((r) => /\/g\/collect\?/.test(r.name) && /[?&]en=page_view(&|$)/.test(r.name) && /[?&]gcs=G1/.test(r.name));
+    return performance.getEntriesByType("resource").map((r) => r.name);
   } catch {
-    return false;
+    return [];
   }
 }
 
@@ -132,7 +142,7 @@ export function installConsentBridge(): () => void {
 
       if (beslissing.analytics && !eerstePageViewHersteld) {
         eerstePageViewHersteld = true;
-        if (!pageViewAlMetToestemmingVerstuurd()) {
+        if (moetPageViewHerhalen(resourceUrls())) {
           window.gtag("event", "page_view", {
             page_location: window.location.href,
             page_path: window.location.pathname + window.location.search,
