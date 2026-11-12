@@ -1,5 +1,23 @@
 import { describe, it, expect } from "vitest";
-import { beslissingUitTcData, GOOGLE_VENDOR_ID, type TcDataLike } from "../consent-bridge";
+import { beslissingUitTcData, moetPageViewHerhalen, GOOGLE_VENDOR_ID, type TcDataLike } from "../consent-bridge";
+
+const COLLECT = "https://region1.google-analytics.com/g/collect?v=2&tid=G-P5BE4RN7QX";
+
+describe("moetPageViewHerhalen", () => {
+  it("nee zolang gtag nog geen page_view verstuurde (terugkerend bezoek: gtag stuurt ze straks zelf met toestemming)", () => {
+    expect(moetPageViewHerhalen([])).toBe(false);
+    expect(moetPageViewHerhalen([`${COLLECT}&en=scroll&gcs=G100`])).toBe(false);
+  });
+
+  it("ja als de eerste page_view cookieloos (gcs=G100) vertrok", () => {
+    expect(moetPageViewHerhalen([`${COLLECT}&en=page_view&gcs=G100`, `${COLLECT}&en=scroll&gcs=G100`])).toBe(true);
+  });
+
+  it("nee als er al een page_view met toestemming vertrok", () => {
+    expect(moetPageViewHerhalen([`${COLLECT}&en=page_view&gcs=G101`])).toBe(false);
+    expect(moetPageViewHerhalen([`${COLLECT}&en=page_view&gcs=G100`, `${COLLECT}&en=page_view&gcs=G111`])).toBe(false);
+  });
+});
 
 const volledig: TcDataLike = {
   eventStatus: "useractioncomplete",
