@@ -113,7 +113,10 @@
           loaded = true;
           injectScript('https://www.googletagmanager.com/gtag/js?id=G-P5BE4RN7QX', false);
           injectScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1772283634325864', true);
-          injectScript('https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1', true);
+          // Geen crossorigin=anonymous: Google's Funding Choices-endpoint stuurt geen
+          // Access-Control-Allow-Origin, dus met die vlag blokkeert de browser het script
+          // (CORS-fout in de console) en laadt de CMP enkel nog via de AdSense-omweg.
+          injectScript('https://fundingchoicesmessages.google.com/i/pub-1772283634325864?ers=1', false);
         }
         function schedule() {
           if ('requestIdleCallback' in window) {
