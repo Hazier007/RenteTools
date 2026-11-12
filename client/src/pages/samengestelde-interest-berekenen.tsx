@@ -85,7 +85,7 @@ export default function SamengesteldeInterestBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is samengestelde interest?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Samengestelde interest (compound interest) is interest die u ontvangt over uw 
                   oorspronkelijke kapitaal én over de eerder ontvangen interest. Dit zorgt voor 
@@ -135,7 +135,7 @@ export default function SamengesteldeInterestBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Hoeveel levert sparen op na 20 jaar?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   De opbrengst van sparen hangt sterk af van het rentepercentage en of u profiteert 
                   van samengestelde interest. Hier enkele voorbeelden:

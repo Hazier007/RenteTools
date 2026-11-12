@@ -20,7 +20,7 @@ export default function Privacybeleid() {
         <div className="space-y-8">
 
           <Card>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none pt-6">
+            <CardContent className="prose pt-6">
               <p>
                 <strong>Laatst bijgewerkt:</strong> 12 november 2026
               </p>
@@ -37,7 +37,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">1. Verwerkingsverantwoordelijke</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>Verantwoordelijke voor de verwerking van uw persoonsgegevens is:</p>
               <div className="bg-muted p-4 rounded-lg not-prose">
                 <p className="font-semibold">Hazier</p>
@@ -61,7 +61,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">2. Welke gegevens verzamelen we?</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <ul>
                 <li>
                   <strong>Technische loggegevens:</strong> IP-adres, browser, besturingssysteem, tijdstip
@@ -99,7 +99,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">3. Doeleinden en rechtsgrond</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <table className="not-prose w-full text-sm">
                 <thead>
                   <tr className="border-b border-border">
@@ -141,7 +141,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">3bis. Aanmaningsgenerator en e-mails</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Op <code>/lenen/wettelijke-rentevoet-belgie</code> kunt u een modelbrief (aanmaning,
                 ingebrekestelling of eerste herinnering) als PDF downloaden. Daarvoor vragen wij uw
@@ -183,7 +183,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">4. Cookies en Consent Mode v2</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Interesten.be gebruikt Google Consent Mode v2. Wanneer u onze site voor het eerst bezoekt
                 staan advertentie- en analytics-cookies standaard op <strong>geweigerd</strong>. Pas nadat
@@ -196,7 +196,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">5. Ontvangers van uw gegevens</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Wij delen uw gegevens alleen met verwerkers die contractueel gebonden zijn aan
                 AVG-verplichtingen:
@@ -224,7 +224,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">6. Internationale doorgifte</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Enkele ontvangers (Google, Vercel, Resend) kunnen gegevens verwerken buiten de EER, met name in de
                 Verenigde Staten. Deze doorgiften vinden plaats onder het <strong>EU-US Data Privacy
@@ -238,7 +238,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">7. Bewaartermijnen</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <ul>
                 <li>Technische logs: maximaal 30 dagen, daarna automatisch verwijderd.</li>
                 <li>Analytics-data: tot 14 maanden (GA4-standaard).</li>
@@ -255,7 +255,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">8. Uw rechten</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>Onder de AVG heeft u de volgende rechten:</p>
               <ul>
                 <li><strong>Inzage</strong> — een kopie van de gegevens die wij van u verwerken (art. 15).</li>
@@ -297,7 +297,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">9. Wijzigingen</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Dit beleid kan wijzigen, bijvoorbeeld bij nieuwe functionaliteit of gewijzigde regelgeving.
                 De laatste versie vindt u steeds op{" "}
@@ -311,7 +311,7 @@ export default function Privacybeleid() {
             <CardHeader>
               <CardTitle className="text-2xl">10. Contact</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Vragen of verzoeken? Mail ons op{" "}
                 <a href="mailto:info@hazier.be" className="text-primary hover:underline">info@hazier.be</a>.

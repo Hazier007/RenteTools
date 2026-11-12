@@ -402,7 +402,7 @@ export default function NoodfondsCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Waarom is een noodfonds zo belangrijk?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h3>🚨 Typische noodsituaties</h3>
@@ -466,7 +466,7 @@ export default function NoodfondsCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Noodfonds in detail — formule, fiscaliteit en FAQ</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-4">
+              <CardContent className="prose space-y-4">
                 <p>
                   De Noodfonds Calculator berekent hoe groot uw financiële buffer moet zijn om onverwachte tegenslagen op te vangen — werkverlies, ziekte, een defecte verwarmingsketel of onverwachte herstellingen. De tool houdt rekening met uw vaste maandelijkse uitgaven, gezinssituatie, werkzekerheid en inkomensbron (single, dubbel, freelance) en geeft u een persoonlijk aanbevolen spaarbedrag, plus een tijdslijn voor wanneer u dat doel haalt op basis van uw huidige spaartempo. Ideaal voor wie financiële gemoedsrust wil zonder te overdrijven met overbodig grote reserves.
                 </p>

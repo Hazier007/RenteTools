@@ -81,7 +81,7 @@ export default function InflatieCalculatorBelgie() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is inflatie en hoe beïnvloedt het uw geld?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Inflatie is de stijging van het algemene prijsniveau van goederen en diensten. 
                   Dit betekent dat uw geld minder koopkracht heeft - u kunt er minder mee kopen 
@@ -110,7 +110,7 @@ export default function InflatieCalculatorBelgie() {
               <CardHeader>
                 <CardTitle className="text-xl">Reële rente berekenen - Inflatie vs Spaarrente</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   De reële rente is uw werkelijke rendement na aftrek van inflatie. 
                   Dit geeft het echte beeld van hoe uw vermogen groeit of krimpt.
@@ -173,7 +173,7 @@ export default function InflatieCalculatorBelgie() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is mijn geld waard over 10 jaar?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Door inflatie daalt de waarde van geld over tijd. Wat u vandaag voor €100 kunt kopen, 
                   kost over 10 jaar meer. Hier enkele voorbeelden:

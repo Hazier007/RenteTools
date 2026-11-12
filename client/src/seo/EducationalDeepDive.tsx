@@ -18,7 +18,7 @@ export default function EducationalDeepDive({ title, content, related }: Props) 
       <CardHeader>
         <CardTitle className="text-xl">{title}</CardTitle>
       </CardHeader>
-      <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-4">
+      <CardContent className="prose space-y-4">
         {content.sections.map((section, i) => (
           <div key={i}>
             <h3>{section.heading}</h3>

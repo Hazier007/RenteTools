@@ -114,7 +114,7 @@ export default function DepositoCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is een deposito of termijnrekening?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Een deposito (termijnrekening) is een spaarproduct waarbij u uw geld 
                   voor een vaste periode wegzet tegen een vaste rente. U kunt het geld 
@@ -155,7 +155,7 @@ export default function DepositoCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Deposito vergelijken - Welke bank biedt het beste?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Bij het vergelijken van deposito's kijkt u niet alleen naar de rente, 
                   maar ook naar flexibiliteit, minimuminleg en uitkeringsopties.

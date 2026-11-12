@@ -379,7 +379,7 @@ export default function Sitemap() {
         </div>
 
         {/* SEO Text */}
-        <div className="mt-12 prose prose-slate dark:prose-invert max-w-none">
+        <div className="mt-12 prose">
           <h2>Over Interesten.be</h2>
           <p>
             Interesten.be is uw vertrouwde bron voor financiële calculators en tools 

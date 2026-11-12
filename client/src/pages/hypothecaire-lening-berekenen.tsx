@@ -123,7 +123,7 @@ export default function HypothecaireLningBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Hoe bereken ik mijn hypothecaire lening?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Een hypothecaire lening berekenen houdt rekening met verschillende factoren die uw 
                   maandlast en totale kosten bepalen. Onze simulator helpt u alle scenario's door te rekenen.
@@ -154,7 +154,7 @@ export default function HypothecaireLningBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Vaste vs Variabele rente - Wat is het beste?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
                     <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">✅ Vaste Rente</h4>

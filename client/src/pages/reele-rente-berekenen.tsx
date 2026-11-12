@@ -240,7 +240,7 @@ export default function ReeleRenteBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is Reële Rente? - Inflatie vs Spaarrente Uitleg</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   De reële rente is uw werkelijke rendement na aftrek van inflatie. Het toont 
                   of uw geld daadwerkelijk koopkracht wint of verliest in de tijd.
@@ -293,7 +293,7 @@ export default function ReeleRenteBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Koopkracht Sparen Berekenen - Strategieën tegen Inflatie</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Om uw koopkracht te beschermen tegen inflatie, moet uw rendement hoger zijn 
                   dan de inflatie. Hier zijn strategieën om dit te bereiken.
@@ -378,7 +378,7 @@ export default function ReeleRenteBerekenen() {
               <CardHeader>
                 <CardTitle className="text-xl">Reële rente in detail — Fisher-formule, fiscaliteit en FAQ</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-4">
+              <CardContent className="prose space-y-4">
                 <p>
                   De Reële Rente Calculator toont u de werkelijke koopkracht van uw spaargeld na inflatie. Een nominale spaarrente van 2,5% ziet er goed uit — maar bij 2,1% inflatie is uw reële rendement amper 0,4%. Bij hogere inflatie kan uw spaargeld zelfs koopkracht verliezen ondanks rentegroei. Deze tool berekent uw reële rente, projecteert hoe uw kapitaal in echte koopkracht evolueert over 1 tot 30 jaar, en helpt u beslissen of een spaarrekening volstaat of dat u moet beleggen om inflatie te verslaan.
                 </p>

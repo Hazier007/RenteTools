@@ -274,7 +274,7 @@ export default function StudieschuldCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Studieleningen in België: wat moet u weten?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   In België kunt u verschillende soorten studieleningen afsluiten om uw hogere studies te financieren. 
                   Elke vorm heeft zijn eigen voorwaarden en voordelen.

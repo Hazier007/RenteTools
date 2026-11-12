@@ -31,7 +31,7 @@ export default function Privacy() {
                 Privacy Overzicht
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p className="text-lg">
                 Bij Interesten.be respecteren wij uw privacy en zijn wij toegewijd aan het beschermen 
                 van uw persoonlijke gegevens. Dit privacy beleid legt uit hoe wij informatie verzamelen, 
@@ -51,7 +51,7 @@ export default function Privacy() {
                 Welke Gegevens Verzamelen Wij?
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <h3>Automatisch Verzamelde Gegevens</h3>
               <ul>
                 <li><strong>Website bezoek informatie:</strong> IP-adres, browsertype, besturingssysteem</li>
@@ -81,7 +81,7 @@ export default function Privacy() {
                 Hoe Gebruiken Wij Uw Gegevens?
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <div className="grid gap-6">
                 <div className="flex items-start">
                   <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
@@ -116,7 +116,7 @@ export default function Privacy() {
                 Cookies en Tracking
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p className="text-lg mb-6">
                 Onze website gebruikt cookies om uw ervaring te verbeteren en relevante advertenties te tonen. 
                 U kunt uw cookie voorkeuren beheren via de banner die verschijnt bij uw eerste bezoek.
@@ -206,7 +206,7 @@ export default function Privacy() {
                 Derde Partijen
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <h3>Google Services</h3>
               <ul>
                 <li><strong>Google Analytics:</strong> Voor website statistieken</li>
@@ -229,7 +229,7 @@ export default function Privacy() {
                 Gegevensbeveiliging
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold mb-2">Technische Maatregelen</h4>
@@ -259,7 +259,7 @@ export default function Privacy() {
                 Uw Rechten (AVG/GDPR)
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Onder de Algemene Verordening Gegevensbescherming (AVG/GDPR) heeft u de volgende rechten:
               </p>
@@ -286,7 +286,7 @@ export default function Privacy() {
                 Contact & Vragen
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Voor vragen over dit privacy beleid of uw gegevens kunt u contact met ons opnemen:
               </p>

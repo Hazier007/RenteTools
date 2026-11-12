@@ -319,7 +319,7 @@ export default function SpaarrekeningVergelijkerPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Hoe kiest u de beste spaarrekening?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h3>🎯 Belangrijkste factoren</h3>

@@ -64,7 +64,7 @@ export default function StakingApyCalculatorPage() {
                 Hoe werkt crypto staking?
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Crypto staking is het proces waarbij u uw cryptocurrency "vastzet" om het netwerk 
                 te ondersteunen en in ruil daarvoor beloningen ontvangt. Dit is mogelijk bij 
@@ -96,7 +96,7 @@ export default function StakingApyCalculatorPage() {
                 Lock-up periodes en flexibiliteit
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 Bij het staken van crypto moet u rekening houden met lock-up periodes. 
                 Dit is de tijd dat uw crypto vastzit en niet verhandeld kan worden.

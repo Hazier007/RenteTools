@@ -541,7 +541,7 @@ export default function EindejaarsbonosCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Eindejaarsbonus optimaal benutten</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h3>💰 Slimme strategieën</h3>

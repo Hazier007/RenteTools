@@ -184,17 +184,17 @@ export default function BlogDetailPage() {
       </div>
 
       {/* Article Content */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Top Banner Ad */}
         <div className="mb-8">
           <GoogleAdsense slot="banner" />
         </div>
 
         <header className="mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-6 text-gray-900 dark:text-white">
             {post.title}
           </h1>
-          <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl">
+          <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-8 max-w-[66ch]">
             {post.excerpt}
           </p>
           
@@ -224,16 +224,7 @@ export default function BlogDetailPage() {
 
         {/* Article Body */}
         <div 
-          className="prose max-w-none text-gray-800 dark:text-gray-200
-            prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
-            prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4 prose-h1:hidden
-            prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
-            prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
-            prose-p:mb-4 prose-p:leading-relaxed prose-p:text-base prose-p:text-gray-800 dark:prose-p:text-gray-200
-            prose-ul:my-4 prose-ul:space-y-2 prose-ul:list-disc prose-ul:pl-6
-            prose-li:text-gray-800 dark:prose-li:text-gray-200 prose-li:text-base
-            prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold
-            prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline"
+          className="prose prose-h1:hidden"
           dangerouslySetInnerHTML={{ __html: formatBlogContent(post.content) }}
         />
 

@@ -138,7 +138,7 @@ export default function HoogsteSpaarrenteBelgie() {
                 <CardHeader>
                   <CardTitle className="text-xl">Welke bank heeft de hoogste spaarrente in België?</CardTitle>
                 </CardHeader>
-                <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+                <CardContent className="prose">
                   <p>
                     De spaarrentemarkt in België bestaat uit twee componenten: de <strong>basisrente</strong> en de 
                     <strong>getrouwheidspremie</strong>. Veel banken adverteren met hoge percentages, maar dit zijn 
@@ -169,7 +169,7 @@ export default function HoogsteSpaarrenteBelgie() {
                 <CardHeader>
                   <CardTitle className="text-xl">Hoe vergelijkt u spaarrekeningen effectief?</CardTitle>
                 </CardHeader>
-                <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+                <CardContent className="prose">
                   <p>
                     Het vergelijken van spaarrekeningen gaat verder dan alleen naar het rentepercentage kijken. 
                     Hier zijn de belangrijkste factoren:

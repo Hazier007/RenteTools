@@ -163,7 +163,7 @@ export default function KasbonCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat zijn kasbons en hoe werken ze?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Kasbons zijn schuldbewijzen uitgegeven door banken, bedrijven of overheden. 
                   Als u een kasbon koopt, leent u geld uit tegen een vaste rente voor een bepaalde periode.
@@ -194,7 +194,7 @@ export default function KasbonCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Types kasbons in België</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
                     <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">🏛️ Staatskasbons</h4>

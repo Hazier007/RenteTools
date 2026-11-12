@@ -64,7 +64,7 @@ export default function CryptoBelastingCalculatorPage() {
                 Hoe bepaalt de fiscus uw classificatie?
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <p>
                 De Belgische belastingdienst (FOD Financiën) beoordeelt elke situatie individueel 
                 op basis van meerdere criteria. Er is geen vaste regel, maar de volgende factoren 
@@ -116,7 +116,7 @@ export default function CryptoBelastingCalculatorPage() {
                 Tips voor belastingoptimalisatie
               </CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+            <CardContent className="prose">
               <ol>
                 <li>
                   <strong>Documenteer uw strategie:</strong> Schrijf op dat u voor de lange termijn 

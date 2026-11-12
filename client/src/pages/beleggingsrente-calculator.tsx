@@ -81,7 +81,7 @@ export default function BeleggingsrenteCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Wat is beleggingsrendement?</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Beleggingsrendement is de winst die u behaalt op uw investeringen, 
                   uitgedrukt als percentage van uw inleg. Het bestaat uit twee componenten: 
@@ -119,7 +119,7 @@ export default function BeleggingsrenteCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Historische rendementen verschillende beleggingen</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Historische gegevens geven een indicatie van mogelijke toekomstige rendementen, 
                   maar zijn geen garantie. Diversificatie vermindert risico's.
@@ -187,7 +187,7 @@ export default function BeleggingsrenteCalculatorPage() {
               <CardHeader>
                 <CardTitle className="text-xl">Beleggingskosten en belastingen in België</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Kosten en belastingen kunnen uw rendement aanzienlijk beïnvloeden. 
                   Een goed begrip hiervan is essentieel voor realistische planning.

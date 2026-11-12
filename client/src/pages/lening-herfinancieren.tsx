@@ -295,7 +295,7 @@ export default function LeningHerfinancieren() {
               <CardHeader>
                 <CardTitle className="text-xl">Wanneer Loont Lening Herfinancieren? - Complete Gids</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Herfinancieren van uw hypotheek of lening kan duizenden euro's besparen, 
                   maar het heeft ook kosten. Een zorgvuldige berekening toont of het de moeite waard is.
@@ -348,7 +348,7 @@ export default function LeningHerfinancieren() {
               <CardHeader>
                 <CardTitle className="text-xl">Herfinanciering Hypotheek Calculator - Stap voor Stap Process</CardTitle>
               </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
+              <CardContent className="prose">
                 <p>
                   Het herfinancieren van een hypotheek vereist een gestructureerde aanpak. 
                   Volg deze stappen voor een succesvolle herfinanciering.
