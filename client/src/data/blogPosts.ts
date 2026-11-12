@@ -76,8 +76,8 @@ Voor geld dat u 1-5 jaar kunt missen, bieden deposito's vaak hogere rentes dan g
 ## 5. Let op de Roerende Voorheffing
 
 Vergeet niet dat u roerende voorheffing betaalt op spaarrente:
-- **30% roerende voorheffing** op interest
-- **Eerste €980 belastingvrij** (2026)
+- **15% roerende voorheffing** op spaarrente boven de vrijstelling (30% op termijnrekeningen en kasbons)
+- **Eerste €1.020 belastingvrij** per persoon (2026)
 
 ## 6. Gebruik Welkomstbonussen
 
@@ -373,26 +373,25 @@ Let op de **eindbelasting**:
 
 ### Hoe werkt het?
 
-Bij **geregelde spaarrekeningen** is de getrouwheidspremie belastingvrij, maar:
-- Maximum €15 per jaar belastingvrij
-- Rest valt onder 30% roerende voorheffing
+Bij **gereglementeerde spaarrekeningen** tellen basisrente en getrouwheidspremie samen mee voor de vrijstelling:
+- Eerste €1.020 interest per persoon (2026) belastingvrij
+- Daarboven 15% roerende voorheffing (geen 30%)
 
 **Voorbeeld:**
 - Basisrente: 1% op €50.000 = €500
 - Getrouwheidspremie: 0,5% = €250
-- Belastingvrij: €15 getrouwheidspremie
-- Belasting op: €500 + €235 = €735
-- Roerende voorheffing: €220,50
-- **Netto interest: €529,50**
+- Totale interest: €750, volledig onder de vrijstelling
+- Roerende voorheffing: €0
+- **Netto interest: €750**
 
-### De €980 Vrijstelling
+### De €1.020 Vrijstelling
 
-Sinds 2026 is **€980 aan spaarinterest belastingvrij**:
-- Eerste €980 aan interest = 0% belasting
-- Alles erboven = 30% roerende voorheffing
+In 2026 is **€1.020 aan spaarinterest per persoon belastingvrij** (€2.040 voor gehuwden en wettelijk samenwonenden); de indexering is bevroren tot en met inkomstenjaar 2030:
+- Eerste €1.020 aan interest = 0% belasting
+- Alles erboven = 15% roerende voorheffing op een gereglementeerde spaarrekening
 
 **Strategie:**
-Spreid €39.200 over meerdere spaarrekeningen à 2,5% om precies €980 belastingvrije interest te krijgen!
+Spreid €40.800 over meerdere spaarrekeningen à 2,5% om precies €1.020 belastingvrije interest te krijgen!
 
 ## 3. Beleggingen: Fiscale Optimalisatie
 
@@ -482,7 +481,7 @@ Let op de **beurstaks bij aan/verkoop**:
 
 ## 6. Veelgemaakte Fouten Vermijden
 
-### Fout 1: Niet Volledig Benutten van €980 Vrijstelling
+### Fout 1: Niet Volledig Benutten van €1.020 Vrijstelling
 
 **Oplossing:** Spreid spaarrekeningen om maximaal belastingvrij te genieten.
 
@@ -500,7 +499,7 @@ Let op de **beurstaks bij aan/verkoop**:
 
 ## Conclusie: Uw Fiscaal Optimale Plan
 
-1. **Benut €980 vrijstelling** voor spaarrente
+1. **Benut €1.020 vrijstelling** voor spaarrente
 2. **Maximaliseer pensioensparen** (€1.310 of €1.750)
 3. **Kies kapitaliserende fondsen** voor beleggen
 4. **Houd aandelen long-term** voor 0% meerwaarde belasting

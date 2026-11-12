@@ -19,7 +19,9 @@ export function FloatingNumber({
   const [displayValue, setDisplayValue] = useState(0);
   const numericValue = typeof value === 'string' ? parseFloat(value) || 0 : value;
   
-  const motionValue = useMotionValue(0);
+  // Start op de eindwaarde: crawlers en screenshots zien nooit '0+ Tools';
+  // de spring animeert enkel nog bij een latere waardewijziging.
+  const motionValue = useMotionValue(numericValue);
   const springValue = useSpring(motionValue, {
     damping: 60,
     stiffness: 100

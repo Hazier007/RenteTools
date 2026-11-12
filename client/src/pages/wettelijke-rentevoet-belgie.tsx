@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import GoogleAdsense from "@/components/ui/google-adsense";
@@ -12,56 +12,131 @@ import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
+import { wettelijkeRentevoetBelgieContent } from "@/seo/calculator-content/wettelijke-rentevoet-belgie";
+import {
+  berekenWettelijkeInterest,
+  getActueleRentevoeten,
+  formatPercent,
+  B2B_FORFAIT_EUR,
+  CONSUMENT_WACHTTERMIJN_DAGEN,
+  BRON_LABEL,
+  type InterestRegime,
+} from "@shared/wettelijke-interest";
+
+const SLUG = "wettelijke-rentevoet-belgie";
+
+interface RegimeOptie {
+  id: InterestRegime;
+  label: string;
+  toelichting: string;
+  startLabel: string;
+  startHint: string;
+}
+
+const REGIMES: RegimeOptie[] = [
+  {
+    id: "handel",
+    label: "Factuur aan een onderneming (B2B)",
+    toelichting: "Wet 2 augustus 2002 · voet per semester · + €40 forfait",
+    startLabel: "Startdatum interest (dag na de vervaldag)",
+    startHint: "De interest loopt van rechtswege vanaf de dag na de vervaldag, zonder ingebrekestelling.",
+  },
+  {
+    id: "consument",
+    label: "Factuur aan een consument",
+    toelichting: `Boek XIX WER · na gratis herinnering + ${CONSUMENT_WACHTTERMIJN_DAGEN} dagen · geplafonneerd`,
+    startLabel: `Startdatum interest (na herinnering + ${CONSUMENT_WACHTTERMIJN_DAGEN} kalenderdagen)`,
+    startHint: "Eerst een kosteloze eerste herinnering, dan 14 kalenderdagen wachten. Pas daarna mag interest lopen.",
+  },
+  {
+    id: "burgerlijk",
+    label: "Burgerlijke zaken (particulieren, huur, loon)",
+    toelichting: "Wettelijke interestvoet · vanaf de ingebrekestelling",
+    startLabel: "Datum ingebrekestelling (aanmaning)",
+    startHint: "Interest loopt in principe vanaf de ingebrekestelling, tenzij de wet of het contract anders bepaalt.",
+  },
+  {
+    id: "fiscaal",
+    label: "Belastingschuld (inkomstenbelastingen)",
+    toelichting: "Art. 414 WIB92 · per kalendermaand",
+    startLabel: "Vervaldag van de aanslag",
+    startHint: "Fiscale nalatigheidsinterest wordt per kalendermaand gerekend, niet per dag.",
+  },
+];
+
+function toISODate(d: Date): string {
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+function parseISODate(value: string): Date | null {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!m) return null;
+  const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+const eur = (n: number) => `€${n.toLocaleString("nl-BE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+const datum = (d: Date) => d.toLocaleDateString("nl-BE", { day: "2-digit", month: "2-digit", year: "numeric" });
 
 export default function WettelijkeRentevoetBelgie() {
-  const seoConfig = getSeoConfig("wettelijke-rentevoet-belgie");
-  useSeoTags("wettelijke-rentevoet-belgie");
+  const seoConfig = getSeoConfig(SLUG);
+  useSeoTags(SLUG);
+  const actueel = getActueleRentevoeten();
 
-  const [hoofdsom, setHoofdsom] = useState<string>("10000");
-  const [dagen, setDagen] = useState<string>("30");
-  const [rentevoet] = useState<string>("7"); // Actuele wettelijke rentevoet 2026
-  
-  const berekenWettelijkeRente = () => {
-    const bedrag = parseFloat(hoofdsom) || 0;
-    const aantalDagen = parseInt(dagen) || 0;
-    const rente = parseFloat(rentevoet) || 0;
-    
-    const jaarlijkseRente = (bedrag * rente) / 100;
-    const dagelijkseRente = jaarlijkseRente / 365;
-    const totaleRente = dagelijkseRente * aantalDagen;
-    
-    return {
-      dagelijks: dagelijkseRente,
-      totaal: totaleRente,
-      eindBedrag: bedrag + totaleRente
-    };
-  };
-  
-  const resultaat = berekenWettelijkeRente();
+  const [regime, setRegime] = useState<InterestRegime>("handel");
+  const [hoofdsom, setHoofdsom] = useState<string>("5000");
+  const [startDatum, setStartDatum] = useState<string>(() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 90);
+    return toISODate(d);
+  });
+  const [eindDatum, setEindDatum] = useState<string>(() => toISODate(new Date()));
+  const [metForfait, setMetForfait] = useState<boolean>(true);
+
+  const regimeInfo = REGIMES.find((r) => r.id === regime) ?? REGIMES[0];
+
+  const resultaat = useMemo(() => {
+    const van = parseISODate(startDatum);
+    const tot = parseISODate(eindDatum);
+    const bedrag = parseFloat(hoofdsom.replace(",", ".")) || 0;
+    if (!van || !tot) return null;
+    return berekenWettelijkeInterest({ hoofdsom: bedrag, van, tot, regime, metForfait });
+  }, [hoofdsom, startDatum, eindDatum, regime, metForfait]);
+
+  const plafondOverschreden =
+    resultaat !== null && resultaat.plafond !== null && resultaat.interest > resultaat.plafond;
 
   return (
     <div className="min-h-screen bg-background">
       {seoConfig && <FaqSchema faqs={seoConfig.faqs} />}
       <Header />
-      
+
       {/* SEO Hero Section */}
       <section className="gradient-bg text-primary-foreground py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {seoConfig && <PageBreadcrumb category={seoConfig.category} pageTitle={seoConfig.breadcrumbTitle} />}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Wettelijke Rentevoet België 2026 - Nalatigheidsinterest Berekenen
+            Wettelijke Interestvoet België {actueel.jaar}: nalatigheidsinterest berekenen
           </h1>
           <p className="text-xl mb-8 opacity-90">
-            Bereken wettelijke interest en nalatigheidsinterest volgens de actuele Belgische wetgeving. 
-            Ontdek de huidige rentevoet en bereken uw verschuldigde of ontvangen interest.
+            In {actueel.jaar} bedraagt de wettelijke interestvoet {formatPercent(actueel.burgerlijk)}. Voor facturen
+            tussen ondernemingen geldt {formatPercent(actueel.handelS1)} (1e semester) en {formatPercent(actueel.handelS2)}{" "}
+            (2e semester), voor belastingschulden {formatPercent(actueel.fiscaal)}. Kies hieronder uw situatie en bereken
+            de interest per periode, inclusief het forfait van €{B2B_FORFAIT_EUR} of het plafond voor consumenten.
           </p>
           <div className="bg-primary-foreground/10 backdrop-blur rounded-lg p-4 border border-primary-foreground/20">
-            <p className="text-lg font-semibold mb-2">⚖️ Actuele tarieven 2026:</p>
+            <p className="text-lg font-semibold mb-2">⚖️ Actuele interestvoeten {actueel.jaar}</p>
             <ul className="space-y-1 text-sm opacity-90">
-              <li>• Wettelijke rentevoet: 7,00% per jaar</li>
-              <li>• Gerechtelijke rentevoet: 7,00% per jaar</li>
-              <li>• BTW nalatigheidsinterest: 7,00% per jaar</li>
+              <li>• Burgerlijke en sociale zaken: {formatPercent(actueel.burgerlijk)} per jaar</li>
+              <li>
+                • Handelstransacties (B2B): {formatPercent(actueel.handelS1)} (1 jan – 30 jun) ·{" "}
+                {formatPercent(actueel.handelS2)} (1 jul – 31 dec)
+              </li>
+              <li>• Fiscale nalatigheidsinterest: {formatPercent(actueel.fiscaal)} per jaar</li>
             </ul>
+            <p className="text-xs opacity-80 mt-3">Bron: {BRON_LABEL}.</p>
           </div>
         </div>
       </section>
@@ -77,212 +152,249 @@ export default function WettelijkeRentevoetBelgie() {
       {/* Main Content */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
-            
-            {/* Calculator */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl">
-                  <i className="fas fa-gavel mr-3 text-primary"></i>
-                  Wettelijke Interest Calculator - Nalatigheidsrente Berekenen
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Bereken wettelijke interest volgens de Belgische wetgeving. Voor facturen, 
-                  contracten, BTW en andere wettelijke verplichtingen.
-                </p>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="hoofdsom">Hoofdsom (€)</Label>
-                      <Input
-                        id="hoofdsom"
-                        type="number"
-                        value={hoofdsom}
-                        onChange={(e) => setHoofdsom(e.target.value)}
-                        placeholder="10000"
-                      />
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="dagen">Aantal dagen vertraging</Label>
-                      <Input
-                        id="dagen"
-                        type="number"
-                        value={dagen}
-                        onChange={(e) => setDagen(e.target.value)}
-                        placeholder="30"
-                      />
-                    </div>
-                    
-                    <div>
-                      <Label>Wettelijke rentevoet 2026</Label>
-                      <Input
-                        value={`${rentevoet}% per jaar`}
-                        disabled
-                        className="bg-muted"
-                      />
-                    </div>
+          {/* Calculator */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl">
+                <i className="fas fa-gavel mr-3 text-primary"></i>
+                Nalatigheidsinterest berekenen
+              </CardTitle>
+              <p className="text-muted-foreground">
+                Kies de situatie, vul de hoofdsom en de data in. De calculator splitst de interest automatisch op per
+                jaar of per semester en rekent elke periode tegen de voet die toen gold.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <div className="grid sm:grid-cols-2 gap-3 mb-6" role="radiogroup" aria-label="Soort schuld">
+                {REGIMES.map((optie) => (
+                  <Button
+                    key={optie.id}
+                    type="button"
+                    role="radio"
+                    aria-checked={regime === optie.id}
+                    variant={regime === optie.id ? "default" : "outline"}
+                    className="h-auto flex-col items-start text-left py-3 whitespace-normal"
+                    onClick={() => setRegime(optie.id)}
+                    data-testid={`button-regime-${optie.id}`}
+                  >
+                    <span className="font-semibold">{optie.label}</span>
+                    <span className={`text-xs ${regime === optie.id ? "opacity-90" : "text-muted-foreground"}`}>
+                      {optie.toelichting}
+                    </span>
+                  </Button>
+                ))}
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="hoofdsom">Hoofdsom (€)</Label>
+                    <Input
+                      id="hoofdsom"
+                      type="number"
+                      inputMode="decimal"
+                      min="0"
+                      step="0.01"
+                      value={hoofdsom}
+                      onChange={(e) => setHoofdsom(e.target.value)}
+                      placeholder="5000"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Het openstaande bedrag, zonder eerder aangerekende interest.</p>
                   </div>
-                  
-                  <div className="space-y-4">
-                    <Card className="bg-primary/5">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold mb-4">Berekening Resultaat</h3>
-                        <div className="space-y-3">
+
+                  <div>
+                    <Label htmlFor="startdatum">{regimeInfo.startLabel}</Label>
+                    <Input id="startdatum" type="date" value={startDatum} onChange={(e) => setStartDatum(e.target.value)} />
+                    <p className="text-xs text-muted-foreground mt-1">{regimeInfo.startHint}</p>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="einddatum">Betaaldatum (of datum van vandaag)</Label>
+                    <Input id="einddatum" type="date" value={eindDatum} onChange={(e) => setEindDatum(e.target.value)} />
+                    <p className="text-xs text-muted-foreground mt-1">De betaaldag zelf wordt niet meegerekend.</p>
+                  </div>
+
+                  {regime === "handel" && (
+                    <label className="flex items-start gap-2 text-sm cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="mt-1 h-4 w-4"
+                        checked={metForfait}
+                        onChange={(e) => setMetForfait(e.target.checked)}
+                        data-testid="checkbox-forfait"
+                      />
+                      <span>
+                        Forfait van €{B2B_FORFAIT_EUR} per factuur meerekenen (wet 2 augustus 2002, art. 6; van rechtswege
+                        verschuldigd)
+                      </span>
+                    </label>
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  <Card className="bg-primary/5">
+                    <CardContent className="pt-6">
+                      <h3 className="font-semibold mb-4">Resultaat</h3>
+                      {!resultaat || resultaat.dagen <= 0 ? (
+                        <p className="text-sm text-muted-foreground">
+                          Kies een startdatum die vóór de betaaldatum ligt om de interest te berekenen.
+                        </p>
+                      ) : (
+                        <div className="space-y-3 text-sm">
                           <div className="flex justify-between">
-                            <span>Hoofdsom:</span>
-                            <span className="font-semibold">€{parseFloat(hoofdsom || "0").toLocaleString('nl-BE', {minimumFractionDigits: 2})}</span>
+                            <span>Hoofdsom</span>
+                            <span className="font-semibold">{eur(resultaat.hoofdsom)}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span>Interest per dag:</span>
-                            <span>€{resultaat.dagelijks.toLocaleString('nl-BE', {minimumFractionDigits: 2})}</span>
+                            <span>Periode</span>
+                            <span>
+                              {datum(resultaat.van)} – {datum(resultaat.tot)} (
+                              {regime === "fiscaal"
+                                ? `${resultaat.maanden ?? 0} volle maand${(resultaat.maanden ?? 0) === 1 ? "" : "en"}`
+                                : `${resultaat.dagen} dagen`}
+                              )
+                            </span>
                           </div>
-                          <div className="flex justify-between">
-                            <span>Totale interest:</span>
-                            <span className="font-semibold">€{resultaat.totaal.toLocaleString('nl-BE', {minimumFractionDigits: 2})}</span>
+
+                          {resultaat.periodes.length > 0 && (
+                            <table className="w-full text-xs border-t border-border mt-2" data-testid="table-periodes">
+                              <thead>
+                                <tr className="text-muted-foreground">
+                                  <th className="text-left py-1 font-medium">Periode</th>
+                                  <th className="text-right py-1 font-medium">{regime === "fiscaal" ? "Maand" : "Dagen"}</th>
+                                  <th className="text-right py-1 font-medium">Voet</th>
+                                  <th className="text-right py-1 font-medium">Interest</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {resultaat.periodes.map((periode, index) => (
+                                  <tr key={index} className="border-t border-border/50">
+                                    <td className="py-1">{periode.label}</td>
+                                    <td className="py-1 text-right">{regime === "fiscaal" ? 1 : periode.dagen}</td>
+                                    <td className="py-1 text-right">{formatPercent(periode.rentevoet)}</td>
+                                    <td className="py-1 text-right">{eur(periode.interest)}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          )}
+
+                          <div className="flex justify-between border-t pt-2">
+                            <span>Nalatigheidsinterest</span>
+                            <span className="font-semibold" data-testid="text-interest">
+                              {eur(resultaat.interest)}
+                            </span>
                           </div>
+                          {resultaat.forfait > 0 && (
+                            <div className="flex justify-between">
+                              <span>Forfaitaire schadevergoeding</span>
+                              <span className="font-semibold">{eur(resultaat.forfait)}</span>
+                            </div>
+                          )}
                           <div className="border-t pt-3">
                             <div className="flex justify-between text-lg">
-                              <span className="font-semibold">Totaal te betalen:</span>
-                              <span className="font-bold text-primary">€{resultaat.eindBedrag.toLocaleString('nl-BE', {minimumFractionDigits: 2})}</span>
+                              <span className="font-semibold">Totaal te betalen</span>
+                              <span className="font-bold text-primary" data-testid="text-totaal">
+                                {eur(resultaat.totaal)}
+                              </span>
                             </div>
                           </div>
+
+                          {resultaat.plafond !== null && (
+                            <div
+                              className={`rounded-md p-3 text-xs ${
+                                plafondOverschreden
+                                  ? "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-100"
+                                  : "bg-muted text-muted-foreground"
+                              }`}
+                              data-testid="text-plafond"
+                            >
+                              <strong>Boek XIX WER:</strong> interest en kosten samen mogen bij dit saldo maximaal{" "}
+                              {eur(resultaat.plafond)} bedragen.
+                              {plafondOverschreden
+                                ? " De berekende interest overschrijdt dat plafond: reken niet meer aan dan het plafond, en enkel als uw voorwaarden een schadebeding voorzien."
+                                : " Elk bijkomend schadebeding telt mee voor dit plafond."}
+                            </div>
+                          )}
                         </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                      )}
+                    </CardContent>
+                  </Card>
+
+                  {regime === "handel" && resultaat && resultaat.dagen > 0 && (
+                    <div className="rounded-lg border border-border bg-muted/40 p-4" data-testid="cta-collectpro">
+                      <p className="font-semibold mb-1">Blijft de factuur onbetaald?</p>
+                      <p className="text-sm text-muted-foreground">
+                        Stuur eerst een aanmaning met deze berekening. Betaalt de klant dan nog niet, dan kan{" "}
+                        <a
+                          href="https://collectpro.be"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline font-medium"
+                        >
+                          CollectPro.be
+                        </a>{" "}
+                        de minnelijke invordering voor kmo&apos;s overnemen.
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Transparantie: CollectPro.be en Interesten.be hebben dezelfde oprichter.
+                      </p>
+                    </div>
+                  )}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Ad After Calculator */}
-            <div className="flex justify-center py-4">
-              <GoogleAdsense slot="banner" />
-            </div>
+          {/* Ad After Calculator */}
+          <div className="flex justify-center py-4">
+            <GoogleAdsense slot="banner" />
+          </div>
 
-            {/* Content Sections */}
-            <Card>
+          {/* Uitleg: dezelfde inhoud als de server-side HTML */}
+          {wettelijkeRentevoetBelgieContent.sections.map((section) => (
+            <Card key={section.heading}>
               <CardHeader>
-                <CardTitle className="text-xl">Wat is de wettelijke rentevoet in België?</CardTitle>
+                <CardTitle className="text-xl">{section.heading}</CardTitle>
               </CardHeader>
               <CardContent className="prose prose-slate dark:prose-invert max-w-none">
-                <p>
-                  De wettelijke rentevoet in België is het percentage dat wettelijk wordt gehanteerd 
-                  voor het berekenen van nalatigheidsinterest bij te late betalingen. Deze rentevoet 
-                  wordt jaarlijks vastgesteld door de Minister van Financiën.
-                </p>
-                
-                <h3>Actuele Rentevoet België 2026:</h3>
-                <ul>
-                  <li><strong>7,00% per jaar:</strong> Voor alle wettelijke verplichtingen</li>
-                  <li><strong>Dagelijks samengesteld:</strong> Interest wordt dagelijks berekend</li>
-                  <li><strong>Vanaf vervaldatum:</strong> Telt vanaf de oorspronkelijke vervaldatum</li>
-                  <li><strong>Automatisch van toepassing:</strong> Geen formele ingebrekestelling nodig</li>
-                </ul>
-                
-                <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">📊 Historische Wettelijke Rentevoeten:</h4>
-                  <ul className="text-sm space-y-1">
-                    <li>• 2026: 7,00% (huidig tarief)</li>
-                    <li>• 2024: 7,00%</li>
-                    <li>• 2023: 7,00%</li>
-                    <li>• 2022: 7,00%</li>
-                  </ul>
-                </div>
+                {section.blocks.map((block, index) => {
+                  if (block.kind === "p") return <p key={index}>{block.text}</p>;
+                  if (block.kind === "formula") {
+                    return (
+                      <p key={index} className="bg-muted rounded-md px-4 py-3 font-mono text-sm">
+                        {block.text}
+                      </p>
+                    );
+                  }
+                  return (
+                    <ul key={index}>
+                      {block.items.map((item, itemIndex) => (
+                        <li key={itemIndex}>{item}</li>
+                      ))}
+                    </ul>
+                  );
+                })}
               </CardContent>
             </Card>
+          ))}
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Nalatigheidsinterest Berekenen - Praktische Toepassingen</CardTitle>
-              </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
-                <p>
-                  Nalatigheidsinterest is van toepassing in verschillende situaties waar betalingen 
-                  te laat gebeuren. De berekening volgt altijd dezelfde wettelijke regels.
-                </p>
-                
-                <h3>Wanneer geldt wettelijke interest?</h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-red-50 dark:bg-red-950 p-4 rounded-lg">
-                    <h4 className="font-semibold text-red-800 dark:text-red-200 mb-2">🧾 Commerciële Transacties</h4>
-                    <ul className="text-sm space-y-1">
-                      <li>• Te late factuurbetalingen</li>
-                      <li>• Leveranciersschulden</li>
-                      <li>• Contractuele verplichtingen</li>
-                      <li>• Schadevergoedingen</li>
-                    </ul>
+          {/* FAQ */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">Veelgestelde vragen over wettelijke interest</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                {wettelijkeRentevoetBelgieContent.faqs.map((faq) => (
+                  <div key={faq.question}>
+                    <h3 className="font-semibold mb-2">{faq.question}</h3>
+                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
                   </div>
-                  
-                  <div className="bg-orange-50 dark:bg-orange-950 p-4 rounded-lg">
-                    <h4 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">🏛️ Overheidsschulden</h4>
-                    <ul className="text-sm space-y-1">
-                      <li>• BTW achterstallige betalingen</li>
-                      <li>• Sociale zekerheidsbijdragen</li>
-                      <li>• Belastingschulden</li>
-                      <li>• Boetes en administratieve sancties</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">💡 Praktijkvoorbeeld Berekening:</h4>
-                  <div className="text-sm space-y-2">
-                    <p><strong>Factuur €5.000 - 60 dagen te laat betaald:</strong></p>
-                    <ul className="ml-4">
-                      <li>• Hoofdsom: €5.000</li>
-                      <li>• Rentevoet: 7,00% per jaar</li>
-                      <li>• Interest: €5.000 × 7% × 60/365 = €57,53</li>
-                      <li>• <strong>Totaal te betalen: €5.057,53</strong></li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Veelgestelde Vragen - Wettelijke Rentevoet</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-semibold mb-2">Hoe wordt wettelijke interest berekend in België?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Wettelijke interest wordt berekend als: (Hoofdsom × Rentevoet × Aantal dagen) ÷ 365. 
-                      De berekening start vanaf de vervaldatum van de betaling.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Wanneer start de wettelijke interest te lopen?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      De wettelijke interest start automatisch te lopen vanaf de vervaldatum, 
-                      ook zonder ingebrekestelling. Bij facturen geldt dit vanaf de betalingstermijn.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Kan ik wettelijke interest claimen op oude schulden?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Ja, wettelijke interest kan geclaimd worden vanaf de oorspronkelijke vervaldatum 
-                      tot de volledige betaling, mits binnen de verjaringstermijn.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold mb-2">Is BTW verschuldigd op wettelijke interest?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Nee, op wettelijke interest is geen BTW verschuldigd. Het is een wettelijke 
-                      vergoeding voor laattijdige betaling, geen dienstverlening.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
@@ -296,11 +408,11 @@ export default function WettelijkeRentevoetBelgie() {
 
       {/* Related Calculators */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <RelatedCalculators currentSlug="wettelijke-rentevoet-belgie" />
+        <RelatedCalculators currentSlug={SLUG} />
       </section>
 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} />}
+        {seoConfig && <AuthorityLinks links={seoConfig.authorityLinks} title="Officiële bronnen" />}
       </section>
 
       <Footer />

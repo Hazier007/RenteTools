@@ -1,8 +1,13 @@
 import { calculatorRegistry, type CalculatorCategory } from "../shared/calculator-registry";
+import { getActueleRentevoeten, formatPercent } from "../shared/wettelijke-interest";
+import { wettelijkeRentevoetBelgieContent } from "../client/src/seo/calculator-content/wettelijke-rentevoet-belgie";
+import { overOnsContent } from "../client/src/seo/calculator-content/over-ons";
 import { doelspaarcalculatorContent } from "../client/src/seo/calculator-content/doelspaarcalculator";
 import { noodfondsCalculatorContent } from "../client/src/seo/calculator-content/noodfonds-calculator";
 import { reeleRenteBerekenenContent } from "../client/src/seo/calculator-content/reele-rente-berekenen";
 import type { EducationalSection } from "../client/src/seo/calculator-content/types";
+
+const wettelijkeActueel = getActueleRentevoeten();
 
 export interface FaqItem {
   question: string;
@@ -20,17 +25,8 @@ export interface SeoConfig {
 
 export type SiloCategory = "Home" | "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
 
-function getCurrentMonth(): string {
-  const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
-  return months[new Date().getMonth()];
-}
-
 function getCurrentYear(): number {
   return new Date().getFullYear();
-}
-
-function getCurrentDateLabel(): string {
-  return `${getCurrentMonth()} ${getCurrentYear()}`;
 }
 
 function capitalizeFirst(str: string): string {
@@ -126,7 +122,7 @@ const categoryToPath: Record<SiloCategory, string> = {
 const defaultFaqs = {
   sparen: [
     { question: "Hoeveel interest krijg ik op een spaarrekening?", answer: "De gemiddelde spaarrente in België ligt rond 1,5-2,5%. Dit bestaat uit een basisrente en getrouwheidspremie. De getrouwheidspremie krijgt u na 12 maanden trouw blijven bij dezelfde bank." },
-    { question: "Tot welk bedrag is spaarrente belastingvrij?", answer: `In ${getCurrentYear()} is spaarrente belastingvrij tot 1.050 euro per jaar. Boven dit bedrag betaalt u 30% roerende voorheffing over het meerdere.` },
+    { question: "Tot welk bedrag is spaarrente belastingvrij?", answer: `Op een gereglementeerde spaarrekening is in ${getCurrentYear()} de eerste 1.020 euro interest per persoon belastingvrij (2.040 euro voor gehuwden en wettelijk samenwonenden). Boven dat bedrag houdt de bank 15% roerende voorheffing in. Op termijnrekeningen, kasbons en niet-gereglementeerde rekeningen geldt 30% vanaf de eerste euro.` },
     { question: "Wat is de hoogste spaarrente in België?", answer: "De hoogste gecombineerde rentes liggen momenteel tussen 2% en 2,85% voor spaarrekeningen. Let wel op voorwaarden zoals maximumbedragen en looptijden." }
   ],
   lenen: [
@@ -159,9 +155,9 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "hoogste-spaarrente-belgie": {
     slug: "hoogste-spaarrente-belgie",
-    pageTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}`,
-    metaTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}: Top Banken`,
-    metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update ${getCurrentDateLabel()}.`,
+    pageTitle: `Hoogste Spaarrente België ${getCurrentYear()}`,
+    metaTitle: `Hoogste Spaarrente België ${getCurrentYear()}: Top Banken Vergeleken`,
+    metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – actueel voor ${getCurrentYear()}.`,
     faqs: defaultFaqs.sparen
   },
   "deposito-calculator": {
@@ -206,7 +202,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "termijnrekening-calculator": {
     slug: "termijnrekening-calculator",
     metaTitle: `Termijnrekening Hoogste Rente België ${getCurrentYear()}`,
-    metaDescription: `Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool ${getCurrentDateLabel()}.`
+    metaDescription: `Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool ${getCurrentYear()}.`
   },
   "groepssparen-calculator": {
     slug: "groepssparen-calculator",
@@ -297,8 +293,11 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "wettelijke-rentevoet-belgie": {
     slug: "wettelijke-rentevoet-belgie",
-    metaTitle: `Wettelijke Rentevoet België ${getCurrentYear()} - Actuele Tarieven NBB`,
-    metaDescription: `Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven ${getCurrentYear()}.`
+    pageTitle: `Wettelijke Interestvoet België ${wettelijkeActueel.jaar}: nalatigheidsinterest berekenen`,
+    metaTitle: `Wettelijke Interestvoet ${wettelijkeActueel.jaar}: ${formatPercent(wettelijkeActueel.burgerlijk)} - Nalatigheidsinterest Berekenen`,
+    metaDescription: `Wettelijke interestvoet ${wettelijkeActueel.jaar}: ${formatPercent(wettelijkeActueel.burgerlijk)} burgerlijk, ${formatPercent(wettelijkeActueel.handelS1)} B2B-facturen, ${formatPercent(wettelijkeActueel.fiscaal)} fiscaal. Bereken nalatigheidsinterest per periode, incl. €40 forfait. Bron: FOD Financiën/Staatsblad.`,
+    faqs: wettelijkeRentevoetBelgieContent.faqs,
+    educationalSections: wettelijkeRentevoetBelgieContent.sections
   },
   "beleggingsrente-calculator": {
     slug: "beleggingsrente-calculator",
@@ -371,7 +370,7 @@ export const seoConfigs: Record<string, SeoConfig> = {
   "roerende-voorheffing-calculator": {
     slug: "roerende-voorheffing-calculator",
     metaTitle: `Roerende Voorheffing Berekenen ${getCurrentYear()} België`,
-    metaDescription: "Bereken je roerende voorheffing op interest/dividenden + vrijstelling tot €1050. Tips om belasting te minimaliseren – gratis tool."
+    metaDescription: `Bereken je roerende voorheffing: 30% op dividenden en termijnrekeningen, 15% op spaarrente boven de vrijstelling van €1.020 (${getCurrentYear()}). Gratis tool voor België.`
   },
   "pensioensparen-calculator": {
     slug: "pensioensparen-calculator",
@@ -445,14 +444,17 @@ export const seoConfigs: Record<string, SeoConfig> = {
   },
   "over-ons": {
     slug: "over-ons",
-    metaTitle: "Over Interesten.be - Financiële Calculators België",
-    metaDescription: "Interesten.be helpt u slimme financiële beslissingen nemen met gratis calculators voor sparen, lenen, beleggen en planning in België."
+    pageTitle: "Over Interesten.be",
+    metaTitle: "Over Interesten.be - Wie, Methodologie, Bronnen & Disclaimer",
+    metaDescription: "Wie maakt Interesten.be, welke officiële bronnen gebruiken we (FOD Financiën, Belgisch Staatsblad, FOD Economie), hoe vaak werken we cijfers bij en wat de tools wel en niet zijn.",
+    educationalSections: overOnsContent.sections
   },
   "contact": {
     slug: "contact",
     pageTitle: "Contact - Interesten.be",
     metaTitle: "Contact Interesten.be - Vragen, Feedback & Samenwerking",
-    metaDescription: "Neem contact op met Interesten.be. Stuur uw vraag, feedback of samenwerkingsvoorstel naar info@interesten.be. Wij beantwoorden alle berichten binnen 2 werkdagen."
+    metaDescription: "Neem contact op met Interesten.be. Stuur uw vraag, feedback of samenwerkingsvoorstel naar info@interesten.be. Wij beantwoorden alle berichten binnen 2 werkdagen.",
+    educationalSections: overOnsContent.sections
   },
   "privacy": {
     slug: "privacy",
@@ -597,6 +599,11 @@ const KNOWN_SEO_PATHS = new Set<string>([
   '/planning/rentevoet-vergelijker',
 ]);
 
+// Pagina's zonder interactieve calculator: hier hoort geen 'calculator laadt'-regel in de SSR-HTML.
+const STATIC_PAGE_SLUGS = new Set<string>([
+  'over-ons', 'contact', 'privacy', 'privacybeleid', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'overige',
+]);
+
 function normalizeUrlPath(url: string): string {
   const cleanUrl = url.split('?')[0].split('#')[0];
   if (cleanUrl === '' || cleanUrl === '/') return '/';
@@ -737,7 +744,7 @@ function generateCalculatorSchema(seoConfig: SeoConfig, url: string): object | n
   const slug = seoConfig.slug;
   const category = slugToCategory[slug];
   
-  const nonCalculatorSlugs = ['home', 'over-ons', 'privacy', 'privacybeleid', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'sparen', 'lenen', 'beleggen', 'planning', 'overige'];
+  const nonCalculatorSlugs = ['home', 'over-ons', 'contact', 'privacy', 'privacybeleid', 'voorwaarden', 'sitemap', 'blog', 'nieuws', 'sparen', 'lenen', 'beleggen', 'planning', 'overige'];
   if (!category || nonCalculatorSlugs.includes(slug)) {
     return null;
   }
@@ -866,6 +873,13 @@ export function injectSeoMeta(html: string, url: string): string {
     );
   }
   
+  const ogUrlRegex = /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/i;
+  if (ogUrlRegex.test(result)) {
+    result = result.replace(ogUrlRegex, `<meta property="og:url" content="${canonicalUrl}" />`);
+  } else if (result.includes('</head>')) {
+    result = result.replace('</head>', `<meta property="og:url" content="${canonicalUrl}" />\n  </head>`);
+  }
+
   // Hero LCP preload — only on `/`, where the hero <picture> is SSR'd. The
   // CSS background variant we replaced couldn't carry fetchpriority; pairing a
   // preload hint with the new <img fetchPriority="high"> moves the AVIF off
@@ -952,6 +966,16 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
   // Main heading from meta title
   const h1Title = seoConfig.pageTitle || seoConfig.metaTitle.split(' - ')[0].split(' | ')[0];
   
+  // Hubpagina's krijgen een crawlbare calculatorlijst, statische pagina's hun eigen
+  // inhoud; enkel echte calculatorpagina's krijgen de korte regel dat de
+  // interactieve tool client-side laadt (de uitleg en cijfers staan er wél in).
+  const isHub = slug === 'home';
+  const isCategoryHub = (['sparen', 'lenen', 'beleggen', 'planning'] as const).includes(slug as any);
+  const isStaticPage = STATIC_PAGE_SLUGS.has(slug);
+  const calculatorNoteHtml = (!isHub && !isCategoryHub && !isStaticPage)
+    ? '<p style="color:#666;">De interactieve calculator wordt geladen zodra de pagina klaar is. Hieronder leest u hoe de berekening werkt, met de actuele Belgische cijfers.</p>'
+    : '';
+
   // Build static content shell
   let content = `
     <div style="max-width:1200px;margin:0 auto;padding:2rem;font-family:system-ui,-apple-system,sans-serif;">
@@ -960,14 +984,10 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
         <h1 style="font-size:2rem;font-weight:700;color:#1a1a1a;margin-bottom:1rem;">${escapeHtmlAttribute(h1Title)}</h1>
         <p style="font-size:1.125rem;color:#4a4a4a;line-height:1.6;">${escapeHtmlAttribute(seoConfig.metaDescription)}</p>
       </header>
-      <main>
-        <p style="color:#666;">Loading calculator...</p>
-      </main>`;
+      <main>${calculatorNoteHtml}</main>`;
 
   // Home + category pages: render a crawlable nav with links to each sub-calculator
   // so the raw HTML satisfies the SEO acceptance criterion (links before JS runs).
-  const isHub = slug === 'home';
-  const isCategoryHub = (['sparen', 'lenen', 'beleggen', 'planning'] as const).includes(slug as any);
   if (isHub || isCategoryHub) {
     const categoriesToRender: CalculatorCategory[] = isHub
       ? ['Sparen', 'Lenen', 'Beleggen', 'Planning']
@@ -1045,6 +1065,7 @@ function generateSSRContent(seoConfig: SeoConfig, url: string): string {
   content += `
       <footer style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e5e5;color:#666;font-size:0.875rem;">
         <p>&copy; ${getCurrentYear()} Interesten.be - Gratis Belgische financiële calculators</p>
+        <p>Interesten.be geeft algemene informatie en rekenhulp, geen financieel, fiscaal of juridisch advies. <a href="/over-ons" style="color:#2563eb;">Over ons &amp; disclaimer</a> · <a href="/contact" style="color:#2563eb;">Contact</a></p>
       </footer>
     </div>`;
   

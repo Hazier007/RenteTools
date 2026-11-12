@@ -163,8 +163,8 @@ export default function Home() {
               <p className="text-xs md:text-sm text-muted-foreground">Altijd toegankelijk</p>
             </GlassCard>
             <GlassCard className="p-4 md:p-6">
-              <FloatingNumber value={10} suffix="K+" className="text-2xl md:text-4xl block mb-1" />
-              <p className="text-xs md:text-sm text-muted-foreground">Belgische bezoekers</p>
+              <FloatingNumber value={100} suffix="% Belgisch" className="text-2xl md:text-4xl block mb-1" />
+              <p className="text-xs md:text-sm text-muted-foreground">Wetgeving &amp; fiscaliteit {new Date().getFullYear()}</p>
             </GlassCard>
             <GlassCard className="p-4 md:p-6">
               <FloatingNumber value={100} suffix="% Privacy" className="text-2xl md:text-4xl block mb-1" />
@@ -286,7 +286,7 @@ export default function Home() {
             className="text-center mb-12"
           >
             <GradientText as="h2" className="text-2xl md:text-4xl mb-4">
-              Waarom tienduizenden Belgen Interesten.be vertrouwen
+              Waarom Belgen op Interesten.be rekenen
             </GradientText>
           </motion.div>
 

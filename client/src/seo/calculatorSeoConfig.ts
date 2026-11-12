@@ -1,3 +1,8 @@
+import { getActueleRentevoeten, formatPercent } from "../../../shared/wettelijke-interest";
+import { wettelijkeRentevoetBelgieContent } from "./calculator-content/wettelijke-rentevoet-belgie";
+
+const wettelijkeActueel = getActueleRentevoeten();
+
 export type SiloCategory = "Sparen" | "Lenen" | "Beleggen" | "Planning" | "Overige";
 
 export interface FaqItem {
@@ -23,17 +28,8 @@ export interface CalculatorSeoConfig {
   previewImage?: string;
 }
 
-function getCurrentMonth(): string {
-  const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
-  return months[new Date().getMonth()];
-}
-
 function getCurrentYear(): number {
   return new Date().getFullYear();
-}
-
-function getCurrentDateLabel(): string {
-  return `${getCurrentMonth()} ${getCurrentYear()}`;
 }
 
 function capitalizeFirst(str: string): string {
@@ -56,6 +52,21 @@ const defaultAuthorityLinks = {
     url: "https://financien.belgium.be",
     description: "Belastinginformatie en fiscale regelgeving"
   },
+  fodThesaurie: {
+    title: "FOD Financiën – Algemene Administratie van de Thesaurie",
+    url: "https://financien.belgium.be/nl/over_de_fod/structuur_en_diensten/algemene_administraties/thesaurie",
+    description: "Bekendmaking van de wettelijke interestvoet en de interestvoet voor betalingsachterstand bij handelstransacties"
+  },
+  staatsblad: {
+    title: "Belgisch Staatsblad",
+    url: "https://www.ejustice.just.fgov.be/cgi/welcome.pl",
+    description: "Officiële publicatie van de jaarlijkse en semestriële berichten over de interestvoeten"
+  },
+  fodEconomie: {
+    title: "FOD Economie – Consumentenbescherming (Boek XIX WER)",
+    url: "https://economie.fgov.be/nl/themas/consumentenbescherming",
+    description: "Regels voor de eerste herinnering, de wachttermijn en de plafonds bij onbetaalde consumentenfacturen"
+  },
   testAankoop: {
     title: "Test-Aankoop Vergelijker",
     url: "https://www.test-aankoop.be/invest",
@@ -72,7 +83,8 @@ const defaultFaqsBySilo: Record<SiloCategory, FaqItem[]> = {
     },
     {
       question: "Tot welk bedrag is spaarrente belastingvrij?",
-      answer: `In ${getCurrentYear()} is spaarrente belastingvrij tot 980 euro per jaar. Boven dit bedrag betaalt u 30% roerende voorheffing over het meerdere.`
+      // Vrijstelling bevroren op €1.020 tot en met inkomstenjaar 2030 (geen indexering).
+      answer: `Op een gereglementeerde spaarrekening is in ${getCurrentYear()} de eerste 1.020 euro interest per persoon belastingvrij (2.040 euro voor gehuwden en wettelijk samenwonenden). Boven dat bedrag houdt de bank 15% roerende voorheffing in. Op termijnrekeningen, kasbons en niet-gereglementeerde rekeningen geldt 30% vanaf de eerste euro.`
     },
     {
       question: "Wat is de hoogste spaarrente in België?",
@@ -153,10 +165,10 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "hoogste-spaarrente-belgie": {
     slug: "hoogste-spaarrente-belgie",
     category: "Sparen",
-    pageTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}`,
+    pageTitle: `Hoogste Spaarrente België ${getCurrentYear()}`,
     breadcrumbTitle: "Hoogste Spaarrente",
-    metaTitle: `Hoogste Spaarrente België ${capitalizeFirst(getCurrentDateLabel())}: Top Banken`,
-    metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – update ${getCurrentDateLabel()}.`,
+    metaTitle: `Hoogste Spaarrente België ${getCurrentYear()}: Top Banken Vergeleken`,
+    metaDescription: `Vergelijk actuele hoogste spaarrentes (basis + getrouwheidspremie tot 2,85%). Bereken je opbrengst gratis & anoniem – actueel voor ${getCurrentYear()}.`,
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
   },
@@ -182,7 +194,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
       },
       {
         question: "Is een deposito belastbaar?",
-        answer: "Ja, u betaalt 30% roerende voorheffing op de interest. De vrijstelling van €980 per jaar geldt alleen voor gewone spaarrekeningen."
+        answer: "Ja, u betaalt 30% roerende voorheffing op de interest vanaf de eerste euro. De vrijstelling van €1.020 per jaar (2026) en het tarief van 15% gelden alleen voor gereglementeerde spaarrekeningen."
       }
     ],
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fsma, defaultAuthorityLinks.testAankoop]
@@ -260,7 +272,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     pageTitle: `Termijnrekening Hoogste Rente België ${getCurrentYear()}`,
     breadcrumbTitle: "Termijnrekening",
     metaTitle: `Termijnrekening Hoogste Rente België ${getCurrentYear()}`,
-    metaDescription: `Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool ${getCurrentDateLabel()}.`,
+    metaDescription: `Vergelijk hoogste rente op deposito/termijnrekeningen. Bereken opbrengst na belasting – gratis tool ${getCurrentYear()}.`,
     faqs: defaultFaqsBySilo.Sparen,
     authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.testAankoop]
   },
@@ -500,12 +512,12 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
   "wettelijke-rentevoet-belgie": {
     slug: "wettelijke-rentevoet-belgie",
     category: "Lenen",
-    pageTitle: "Wettelijke Rentevoet België",
-    breadcrumbTitle: "Wettelijke Rentevoet",
-    metaTitle: `Wettelijke Rentevoet België ${getCurrentYear()} - Actuele Tarieven NBB`,
-    metaDescription: `Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven ${getCurrentYear()}.`,
-    faqs: defaultFaqsBySilo.Lenen,
-    authorityLinks: [defaultAuthorityLinks.nbb, defaultAuthorityLinks.fodFinancien]
+    pageTitle: `Wettelijke Interestvoet België ${wettelijkeActueel.jaar}: nalatigheidsinterest berekenen`,
+    breadcrumbTitle: "Wettelijke Interest",
+    metaTitle: `Wettelijke Interestvoet ${wettelijkeActueel.jaar}: ${formatPercent(wettelijkeActueel.burgerlijk)} - Nalatigheidsinterest Berekenen`,
+    metaDescription: `Wettelijke interestvoet ${wettelijkeActueel.jaar}: ${formatPercent(wettelijkeActueel.burgerlijk)} burgerlijk, ${formatPercent(wettelijkeActueel.handelS1)} B2B-facturen, ${formatPercent(wettelijkeActueel.fiscaal)} fiscaal. Bereken nalatigheidsinterest per periode, incl. €40 forfait. Bron: FOD Financiën/Staatsblad.`,
+    faqs: wettelijkeRentevoetBelgieContent.faqs,
+    authorityLinks: [defaultAuthorityLinks.fodThesaurie, defaultAuthorityLinks.staatsblad, defaultAuthorityLinks.fodEconomie]
   },
   "beleggingsrente-calculator": {
     slug: "beleggingsrente-calculator",
@@ -603,7 +615,7 @@ export const calculatorSeoConfigs: Record<string, CalculatorSeoConfig> = {
     pageTitle: `Roerende Voorheffing Berekenen ${getCurrentYear()} België`,
     breadcrumbTitle: "Roerende Voorheffing",
     metaTitle: `Roerende Voorheffing Berekenen ${getCurrentYear()} België`,
-    metaDescription: "Bereken je roerende voorheffing op interest/dividenden + vrijstelling tot €1050. Tips om belasting te minimaliseren – gratis tool.",
+    metaDescription: `Bereken je roerende voorheffing: 30% op dividenden en termijnrekeningen, 15% op spaarrente boven de vrijstelling van €1.020 (${getCurrentYear()}). Gratis tool voor België.`,
     faqs: defaultFaqsBySilo.Beleggen,
     authorityLinks: [defaultAuthorityLinks.fodFinancien, defaultAuthorityLinks.fsma]
   },

@@ -244,8 +244,8 @@ export default function DepositoCalculatorPage() {
                   <div>
                     <h3 className="font-semibold mb-2">Moet ik belasting betalen op deposito-interest?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Ja, 30% roerende voorheffing wordt automatisch ingehouden. 
-                      Tot €980 per jaar (2026) is uw interest belastingvrij.
+                      Ja, op een deposito of termijnrekening houdt de bank 30% roerende voorheffing in vanaf de eerste euro.
+                      De vrijstelling van €1.020 per jaar (2026) geldt enkel voor gereglementeerde spaarrekeningen.
                     </p>
                   </div>
 

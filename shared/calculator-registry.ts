@@ -1,3 +1,5 @@
+import { getActueleRentevoeten, formatPercent } from "./wettelijke-interest";
+
 export type CalculatorCategory = "Sparen" | "Lenen" | "Beleggen" | "Planning";
 
 export interface Calculator {
@@ -35,6 +37,9 @@ function extractKeywords(title: string, description: string): string[] {
 
   return Array.from(new Set(words));
 }
+
+const wettelijkeActueel = getActueleRentevoeten();
+const wettelijkeInterestDescription = `Bereken wettelijke interest en nalatigheidsinterest op facturen: ${formatPercent(wettelijkeActueel.burgerlijk)} burgerlijk, ${formatPercent(wettelijkeActueel.handelS1)} handelstransacties, ${formatPercent(wettelijkeActueel.fiscaal)} fiscaal (${wettelijkeActueel.jaar}), met €40 forfait. Bron: FOD Financiën / Belgisch Staatsblad.`;
 
 export const calculatorRegistry: Calculator[] = [
   {
@@ -314,13 +319,13 @@ export const calculatorRegistry: Calculator[] = [
   },
   {
     slug: "wettelijke-rentevoet-belgie",
-    title: "Wettelijke Rentevoet België",
-    description: "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2026.",
+    title: "Wettelijke Interest Berekenen",
+    description: wettelijkeInterestDescription,
     category: "Lenen",
     url: "/lenen/wettelijke-rentevoet-belgie",
     keywords: extractKeywords(
-      "Wettelijke Rentevoet België",
-      "Actuele wettelijke interest in België. Bereken vertragingsinterest op facturen en schulden. Officiële NBB tarieven 2026."
+      "Wettelijke Interest Berekenen Nalatigheidsinterest Verwijlinterest Wettelijke Rentevoet België",
+      wettelijkeInterestDescription
     )
   },
   {
@@ -458,12 +463,12 @@ export const calculatorRegistry: Calculator[] = [
   {
     slug: "roerende-voorheffing-calculator",
     title: "Roerende Voorheffing Calculator",
-    description: "Bereken roerende voorheffing op dividenden en interest. 30% belasting op beleggingsinkomsten in België. Vrijstelling €980 spaarrente.",
+    description: "Bereken roerende voorheffing op dividenden en interest: 30% op beleggingsinkomsten, 15% op spaarrente boven de vrijstelling van €1.020 (2026).",
     category: "Beleggen",
     url: "/beleggen/roerende-voorheffing-calculator",
     keywords: extractKeywords(
       "Roerende Voorheffing Calculator",
-      "Bereken roerende voorheffing op dividenden en interest. 30% belasting op beleggingsinkomsten in België. Vrijstelling €980 spaarrente."
+      "Bereken roerende voorheffing op dividenden en interest: 30% op beleggingsinkomsten, 15% op spaarrente boven de vrijstelling van €1.020 (2026)."
     )
   },
   {

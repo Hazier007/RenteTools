@@ -79,6 +79,8 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="/over-ons" className="hover:text-primary transition-colors">Over Ons</a></li>
+              <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="/over-ons#disclaimer" className="hover:text-primary transition-colors">Disclaimer</a></li>
               <li><a href="/privacy" className="hover:text-primary transition-colors">Privacy</a></li>
               <li><a href="/voorwaarden" className="hover:text-primary transition-colors">Voorwaarden</a></li>
               <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
@@ -94,8 +96,12 @@ export default function Footer() {
             Interesten.be
           </div>
           <p className="text-sm text-muted-foreground">
-            Professionele financiële calculators voor de Belgische markt.
-            Bereken spaarrente, samengestelde interest en hypothecaire leningen.
+            Gratis financiële calculators voor de Belgische markt.
+            Bereken wettelijke interest op facturen, spaarrente, samengestelde interest en leningen.
+          </p>
+          <p className="text-xs text-muted-foreground mt-3 max-w-2xl mx-auto">
+            Interesten.be geeft algemene informatie en rekenhulp, geen financieel, fiscaal of juridisch advies.
+            Controleer belangrijke bedragen bij uw bank, boekhouder of advocaat.
           </p>
         </div>
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">

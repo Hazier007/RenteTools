@@ -228,8 +228,8 @@ export default function HoogsteSpaarrenteBelgie() {
                     <div>
                       <h3 className="font-semibold mb-2">Is spaarrente belastbaar in België?</h3>
                       <p className="text-sm text-muted-foreground">
-                        Ja, vanaf 980 euro interest per jaar (2026) betaalt u 30% roerende voorheffing. 
-                        Tot dit bedrag is uw spaarrente belastingvrij.
+                        Ja, boven 1.020 euro interest per persoon per jaar (2026; 2.040 euro voor gehuwden en wettelijk samenwonenden)
+                        houdt de bank 15% roerende voorheffing in op een gereglementeerde spaarrekening. Tot dat bedrag is uw spaarrente belastingvrij.
                       </p>
                     </div>
 

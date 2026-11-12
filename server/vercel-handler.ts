@@ -36,6 +36,7 @@ const legacyRedirects: Record<string, string> = {
   '/intresten-rekening-courant.html': '/sparen/samengestelde-interest-berekenen',
   '/welke-interesten-krijg-ik-op-mijn-spaarrekeningen.html': '/sparen/hoogste-spaarrente-belgie',
   '/wettelijke-interesten.html': '/lenen/wettelijke-rentevoet-belgie',
+  '/wat-zijn-gerechtelijke-interesten.html': '/lenen/wettelijke-rentevoet-belgie',
   '/looif.html': '/',
 };
 
@@ -62,12 +63,12 @@ app.use((req, res, next) => {
   }
 
   if (urlPath.endsWith('.html') && urlPath.match(/^\/[a-z0-9-]+\.html$/)) {
-    return res.status(404).send(`
+    return res.status(410).send(`
       <!DOCTYPE html>
       <html lang="nl">
       <head>
         <meta charset="UTF-8">
-        <title>Pagina niet gevonden - Interesten.be</title>
+        <title>Pagina verwijderd - Interesten.be</title>
         <meta name="robots" content="noindex">
         <style>
           body { font-family: system-ui; text-align: center; padding: 50px; }
@@ -76,8 +77,8 @@ app.use((req, res, next) => {
         </style>
       </head>
       <body>
-        <h1>404 - Pagina niet gevonden</h1>
-        <p>De pagina die u zoekt bestaat niet of is verplaatst.</p>
+        <h1>410 - Deze pagina bestaat niet meer</h1>
+        <p>Deze oude pagina is definitief verwijderd. Op zoek naar wettelijke interesten? Ga naar <a href="/lenen/wettelijke-rentevoet-belgie">wettelijke interest berekenen</a>.</p>
         <p><a href="/">Ga naar de homepage</a></p>
       </body>
       </html>
