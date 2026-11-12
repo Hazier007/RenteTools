@@ -248,6 +248,13 @@ export default function CryptoBelastingCalculator() {
     setResult(calculationResult);
   };
 
+  // Eerste berekening met de standaardwaarden, zodat het resultaatpaneel
+  // nooit als leeg blok verschijnt; daarna rekent form.watch live door.
+  useEffect(() => {
+    onSubmit(form.getValues());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const subscription = form.watch((data) => {
       if (data.aankoopbedrag !== undefined && data.verkoopbedrag !== undefined) {
@@ -503,7 +510,7 @@ export default function CryptoBelastingCalculator() {
             Belgische Crypto Belasting Regels
           </CardTitle>
         </CardHeader>
-        <CardContent className="prose prose-sm max-w-none text-muted-foreground space-y-4">
+        <CardContent className="prose prose-sm space-y-4">
           <div>
             <h4 className="font-semibold text-foreground">Goede Huisvader Principe (Belastingvrij)</h4>
             <p>

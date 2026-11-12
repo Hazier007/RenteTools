@@ -30,7 +30,7 @@ export default function CalculationResult({
         <div className="text-sm text-muted-foreground">{label}</div>
         <div 
           className={cn(
-            "text-2xl font-bold",
+            "text-2xl font-bold tabular-nums break-words",
             variantStyles[variant],
             className
           )}

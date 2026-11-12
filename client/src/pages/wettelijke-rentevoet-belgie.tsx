@@ -10,6 +10,7 @@ import FaqSchema from "@/components/seo/FaqSchema";
 import AuthorityLinks from "@/components/seo/AuthorityLinks";
 import RelatedCalculators from "@/components/seo/RelatedCalculators";
 import PageBreadcrumb from "@/components/seo/PageBreadcrumb";
+import EducationalSections from "@/components/seo/EducationalSections";
 import { getSeoConfig } from "@/seo/calculatorSeoConfig";
 import { useSeoTags } from "@/hooks/use-seo-tags";
 import { wettelijkeRentevoetBelgieContent } from "@/seo/calculator-content/wettelijke-rentevoet-belgie";
@@ -206,19 +207,19 @@ export default function WettelijkeRentevoetBelgie() {
                       onChange={(e) => setHoofdsom(e.target.value)}
                       placeholder="5000"
                     />
-                    <p className="text-xs text-muted-foreground mt-1">Het openstaande bedrag, zonder eerder aangerekende interest.</p>
+                    <p className="text-sm text-muted-foreground mt-1">Het openstaande bedrag, zonder eerder aangerekende interest.</p>
                   </div>
 
                   <div>
                     <Label htmlFor="startdatum">{regimeInfo.startLabel}</Label>
                     <Input id="startdatum" type="date" value={startDatum} onChange={(e) => setStartDatum(e.target.value)} />
-                    <p className="text-xs text-muted-foreground mt-1">{regimeInfo.startHint}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{regimeInfo.startHint}</p>
                   </div>
 
                   <div>
                     <Label htmlFor="einddatum">Betaaldatum (of datum van vandaag)</Label>
                     <Input id="einddatum" type="date" value={eindDatum} onChange={(e) => setEindDatum(e.target.value)} />
-                    <p className="text-xs text-muted-foreground mt-1">De betaaldag zelf wordt niet meegerekend.</p>
+                    <p className="text-sm text-muted-foreground mt-1">De betaaldag zelf wordt niet meegerekend.</p>
                   </div>
 
                   {regime === "handel" && (
@@ -336,7 +337,7 @@ export default function WettelijkeRentevoetBelgie() {
                         handen te geven. Stuur eerst de aanmaning hieronder; betaalt de klant dan nog niet, dan neemt
                         CollectPro.be de minnelijke invordering voor kmo&apos;s over, no cure no pay.
                       </p>
-                      <Button asChild className="w-full sm:w-auto">
+                      <Button asChild className="w-full sm:w-auto h-auto min-h-10 whitespace-normal text-center">
                         <a
                           href={`${COLLECTPRO_URL}?utm_source=interesten&utm_medium=calculator&utm_campaign=wettelijke-rentevoet`}
                           target="_blank"
@@ -362,50 +363,11 @@ export default function WettelijkeRentevoetBelgie() {
             <GoogleAdsense slot="banner" />
           </div>
 
-          {/* Uitleg: dezelfde inhoud als de server-side HTML */}
-          {wettelijkeRentevoetBelgieContent.sections.map((section) => (
-            <Card key={section.heading}>
-              <CardHeader>
-                <CardTitle className="text-xl">{section.heading}</CardTitle>
-              </CardHeader>
-              <CardContent className="prose prose-slate dark:prose-invert max-w-none">
-                {section.blocks.map((block, index) => {
-                  if (block.kind === "p") return <p key={index}>{block.text}</p>;
-                  if (block.kind === "formula") {
-                    return (
-                      <p key={index} className="bg-muted rounded-md px-4 py-3 font-mono text-sm">
-                        {block.text}
-                      </p>
-                    );
-                  }
-                  return (
-                    <ul key={index}>
-                      {block.items.map((item, itemIndex) => (
-                        <li key={itemIndex}>{item}</li>
-                      ))}
-                    </ul>
-                  );
-                })}
-              </CardContent>
-            </Card>
-          ))}
-
-          {/* FAQ */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl">Veelgestelde vragen over wettelijke interest</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                {wettelijkeRentevoetBelgieContent.faqs.map((faq) => (
-                  <div key={faq.question}>
-                    <h3 className="font-semibold mb-2">{faq.question}</h3>
-                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          {/* Uitleg en FAQ: dezelfde inhoud als de server-side HTML, via de gedeelde component */}
+          <EducationalSections
+            content={wettelijkeRentevoetBelgieContent}
+            faqTitle="Veelgestelde vragen over wettelijke interest"
+          />
         </div>
       </section>
 

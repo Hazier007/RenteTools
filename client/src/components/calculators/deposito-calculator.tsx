@@ -84,6 +84,13 @@ export default function DepositoCalculator() {
     setResult(calculationResult);
   };
 
+  // Eerste berekening met de standaardwaarden, zodat het resultaatpaneel
+  // nooit als leeg blok verschijnt; daarna rekent form.watch live door.
+  useEffect(() => {
+    onSubmit(form.getValues());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Real-time calculation
   useEffect(() => {
     const subscription = form.watch((data) => {
@@ -101,7 +108,7 @@ export default function DepositoCalculator() {
         <CardHeader className="bg-gradient-to-r from-secondary to-primary text-secondary-foreground">
           <CardTitle className="text-2xl font-bold">
             <i className="fas fa-university mr-3"></i>
-            Deposito/Termijnrekening Calculator
+            Deposito- of Termijnrekening Calculator
           </CardTitle>
           <p className="opacity-90">Bereken het rendement van uw deposito of termijnrekening</p>
         </CardHeader>
